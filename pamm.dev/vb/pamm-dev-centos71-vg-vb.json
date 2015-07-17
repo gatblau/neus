@@ -30,7 +30,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "output/adam-dev-centos71-{{.Provider}}.box"
+      "output": "output/pamm-dev-centos71-{{.Provider}}.box"
     }
   ],
   "builders": [
