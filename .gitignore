@@ -1,0 +1,6 @@
+.idea/
+pamm.dev/vb/.vagrant
+pamm.dev/vb/output
+pamm.dev/vb/packer_cache
+pamm.dev/files/*.rpm
+*.iml

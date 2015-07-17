@@ -1,0 +1,2 @@
+# used by packer
+pamm ansible_connection=local
