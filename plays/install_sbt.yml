@@ -1,0 +1,9 @@
+---
+  - include: install_tool.yml
+    vars:
+      tool_name : SBT
+      folder_name : sbt-0.13.8
+      zip_filename: sbt-0.13.8.zip
+      add_version_to_folder : true
+      zip_has_folder : true
+      has_bin_folder : true

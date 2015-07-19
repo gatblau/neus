@@ -1,0 +1,9 @@
+---
+- name: Copying the VAGRANT RPM file to the host
+  copy: src={{vagrant_rpm_filename}} dest=/tmp/{{vagrant_rpm_filename}} owner=root
+
+- name: Installing the VAGRANT RPM file
+  yum: name=/tmp/{{vagrant_rpm_filename}} state=present
+
+- name: Removing the VAGRANT RPM file
+  file: name=/tmp/{{vagrant_rpm_filename}} state=absent

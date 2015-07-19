@@ -1,0 +1,12 @@
+---
+  - include: install_tool.yml
+    vars:
+      tool_name : Packer
+      folder_name : packer_0.8.2
+      zip_filename: packer_0.8.2_linux_amd64.zip
+      zip_has_folder : false
+      add_version_to_folder : false
+      has_bin_folder : false
+
+  - name: renaming PACKER to PACKR avoid naming collisions
+    command: "mv /usr/local/packer/default/packer /usr/local/packer/default/packr"

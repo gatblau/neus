@@ -1,0 +1,4 @@
+---
+  - name: Installing Unzip command
+    yum: name=unzip state=present
+

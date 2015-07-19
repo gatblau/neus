@@ -1,9 +1,0 @@
----
-- name: Copying the JDK RPM file to the remote host
-  copy: src={{jdk_rpm_filename}} dest=/tmp/{{jdk_rpm_filename}} owner=root
-
-- name: Installing the JDK RPM file
-  yum: name=/tmp/{{jdk_rpm_filename}} state=present
-
-- name: Removing the JDK RPM file
-  file: name=/tmp/{{jdk_rpm_filename}} state=absent

@@ -1,6 +1,8 @@
 .idea/
-pamm.dev/vb/.vagrant
-pamm.dev/vb/output
-pamm.dev/vb/packer_cache
-pamm.dev/files/*.rpm
+pamm/vbox/.vagrant
+pamm/vbox/out*
+pamm/vbox/packer_cache
+files/*.rpm
+files/*.zip
+files/*.gz
 *.iml
