@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
   config.vm.hostname = "pamm"
   config.vm.define :pamm do |pamm| end
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "../../plays/book-pamm-dev.yml"
+    ansible.playbook = "../../plays/book-pamm-dev-gui.yml"
     ansible.inventory_path = "../inventory-remote.txt"
     ansible.sudo = true
     ansible.verbose = "vv"

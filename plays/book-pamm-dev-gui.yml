@@ -16,9 +16,14 @@
     - name: Configuring Java Alternative
       command: "alternatives --set java /usr/java/default/bin/java"
     - include: install_ruby.yml
-    - include: install_vagrant.yml
+    - include: install_rpm.yml
       vars:
-        vagrant_rpm_filename : vagrant_1.7.3_x86_64.rpm
+        rpm_app_name: Vagrant
+        rpm_filename : vagrant_1.7.3_x86_64.rpm
+    - include: install_rpm.yml
+      vars:
+        rpm_app_name: "Chrome Browser"
+        rpm_filename : google-chrome-stable_current_x86_64.rpm
     - include: install_sbt.yml
     - include: install_gradle.yml
     - include: install_maven.yml
