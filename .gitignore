@@ -1,7 +1,7 @@
 .idea/
-pamm/vbox/.vagrant
-pamm/vbox/out*
-pamm/vbox/packer_cache
+pamm/.vagrant
+pamm/out*
+pamm/packer_cache
 files/*.rpm
 files/*.zip
 files/*.gz

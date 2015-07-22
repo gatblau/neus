@@ -4,45 +4,39 @@
       "type": "shell",
       "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'",
       "scripts": [
-        "../../scripts/centos71/vagrant_keys.sh",
-        "../../scripts/centos71/virtualbox.sh",
-        "../../scripts/centos71/ansible.sh",
-        "../../scripts/centos71/cleanup_tty.sh",
-        "../../scripts/centos71/zerodisk.sh"
+        "../scripts/centos71/vagrant_keys.sh",
+        "../scripts/centos71/virtualbox.sh",
+        "../scripts/centos71/ansible.sh",
+        "../scripts/centos71/cleanup_gui.sh",
+        "../scripts/centos71/zerodisk.sh"
       ]
     },
     {
       "type": "file",
-      "source": "../../files",
+      "source": "../files",
       "destination": "{{user `ansible_staging_directory`}}/"
     },
     {
       "type": "ansible-local",
-      "playbook_file": "../../plays/book-pamm-dev-tty.yml",
-      "inventory_file": "../inventory-local.txt",
-      "playbook_dir": "../../plays",
+      "playbook_file": "../plays/book-pamm-dev-gui.yml",
+      "inventory_file": "inventory-local.txt",
+      "playbook_dir": "../plays",
       "only": ["virtualbox-iso"]
     }
   ],
   "variables": {
     "ansible_staging_directory": "/tmp/packer-provisioner-ansible-local"
   },
-  "post-processors": [
-    {
-      "type": "vagrant",
-      "output": "out-dev-tty-vbox-vg/pamm-dev-vbox-vg.box"
-    }
-  ],
   "builders": [
     {
       "type": "virtualbox-iso",
       "boot_command": [
-        "<tab> text ks=http://{{.HTTPIP}}:{{.HTTPPort}}/centos71-tty-ks.cfg<enter><wait>"
+        "<tab> text ks=http://{{.HTTPIP}}:{{.HTTPPort}}/centos71-gui-ks.cfg<enter><wait>"
       ],
       "boot_wait": "10s",
       "disk_size": 20480,
       "guest_os_type": "RedHat_64",
-      "http_directory": "../..",
+      "http_directory": "..",
       "iso_checksum": "d07ab3e615c66a8b2e9a50f4852e6a77",
       "iso_checksum_type": "md5",
       "iso_url": "http://centos.mirrors.hoobly.com/7.1.1503/isos/x86_64/CentOS-7-x86_64-Minimal-1503-01.iso",
@@ -54,6 +48,7 @@
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "vm_name": "pamm-dev",
       "virtualbox_version_file": ".vbox_version",
+      "output_directory": "out-dev-gui-vbox",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "1024" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "2" ]
