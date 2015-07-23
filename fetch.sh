@@ -31,6 +31,13 @@ download() {
     fi
 }
 
+# download from URI but assign different filename
+download_() {
+    if [[ ! -e $ROOT$2 ]]; then
+        wget -O $ROOT$2 $1
+    fi
+}
+
 # download the following files to the root folder if they do not exist
 download "http://download.oracle.com/otn-pub/java/jdk/8u51-b16/" "jdk-8u51-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"
 download "https://services.gradle.org/distributions/" "gradle-2.5-bin.zip"
@@ -45,3 +52,7 @@ download "http://dev.mysql.com/get/Downloads/MySQLGUITools/" "mysql-workbench-co
 download "http://robomongo.org/files/linux/" "robomongo-0.8.5-x86_64.rpm"
 download "http://downloads.typesafe.com/scalaide-pack/4.1.0-vfinal-luna-211-20150704/" "scala-SDK-4.1.0-vfinal-2.11-linux.gtk.x86_64.tar.gz"
 download "https://dl.bintray.com/mitchellh/vagrant/" "vagrant_1.7.3_x86_64.rpm"
+download "http://gogs.dn.qbox.me/" "gogs_v0.6.1_linux_amd64.zip"
+download "http://pkg.jenkins-ci.org/redhat/" "jenkins-1.620-1.1.noarch.rpm"
+download "http://downloads.sonarsource.com/sonarqube/" "sonarqube-5.1.1.zip"
+download_ "http://bit.ly/Hqvfi9" "artifactory.rpm"
