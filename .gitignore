@@ -5,7 +5,5 @@ pamm/packer_cache
 ci-compact/.vagrant
 ci-compact/out*
 ci-compact/packer_cache
-files/*.rpm
-files/*.zip
-files/*.gz
+files/cache/
 *.iml

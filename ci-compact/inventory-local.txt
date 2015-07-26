@@ -1,0 +1,2 @@
+# used by packer
+cicompact ansible_connection=local
