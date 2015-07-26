@@ -11,6 +11,7 @@
       vars:
         rpm_app_name: "Java JDK 8u51-x64"
         rpm_filename : jdk-8u51-linux-x64.rpm
+    - include: install_activator.yml
     - include: install_mongo.yml
       vars:
         repo: mongo-db.repo
