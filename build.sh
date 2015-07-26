@@ -5,28 +5,30 @@ menu() {
     echo "NEUS Project - Virtual Development Environments"
     echo "-----------------------------------------------"
     echo "Which image would you like to build?\n"
-    echo "  [a] PAMM Development Vagrant Base Box - No UI"
-    echo "  [b] PAMM Development Virtual Box - Desktop UI"
-    echo "  [c] PAMM Development VMWare - Desktop UI"
+    echo "  [a] PAMM Development (Virtual Box) Vagrant Base Box - No UI"
+    echo "  [b] PAMM Development (Virtual Box) - Desktop UI"
+    echo "  [c] PAMM Development (VMWare) - Desktop UI"
+    echo "  [d] CI Compact (VMWare) - No UI"
     echo "  [x] Refresh downloaded packages"
     echo "  [q] Quit Menu"
 
     read answer
     case $answer in
-        a|A)    build pamm-dev-tty-vbox-vg.json;;
-        b|B)    build pamm-dev-gui-vbox.json;;
-        c|C)    not_implemented;;
-        x|X)    refreshing_cache;;
-        q|Q)    exit;;
+        a|A) build pamm pamm-dev-tty-vbox-vg.json;;
+        b|B) build pamm pamm-dev-gui-vbox.json;;
+        c|C) not_implemented;;
+        d|D) build ci-compact ci-compact-vmware.json;;
+        x|X) refreshing_cache;;
+        q|Q) exit;;
     esac
 }
 
 build() {
     clear
-    echo "Starting build process => $1\n"
+    echo "Starting build process => $2\n"
     sh fetch.sh
-    cd pamm
-    packer build $1
+    cd $1
+    packer build $2
     cd ..
     menu
 }

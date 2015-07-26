@@ -2,7 +2,7 @@
 
 # fetches all required packages and copies them to the ROOT folder
 
-ROOT='files/'
+ROOT='files/cache/'
 
 # creates the root folder if it does not exist
 if [[ ! -e $ROOT ]]; then
@@ -15,6 +15,7 @@ if [[ $1 == "clean" ]]; then
     rm $ROOT*.rpm
     rm $ROOT*.zip
     rm $ROOT*.gz
+    rm $ROOT*.jar
 fi
 
 download() {
@@ -38,6 +39,17 @@ download_() {
     fi
 }
 
+# download and unzips the mysql connector jar
+download_mysql_connector() {
+    CONNECTOR_FILE=mysql-connector-java-5.1.36.tar.gz
+    if [[ ! -e $ROOT$CONNECTOR_FILE ]]; then
+        wget -O $ROOT$CONNECTOR_FILE "http://dev.mysql.com/get/Downloads/Connector-J/$CONNECTOR_FILE"
+        tar -zxf $ROOT$CONNECTOR_FILE -C $ROOT *.jar
+        mv $ROOT'mysql-connector-java-5.1.36/mysql-connector-java-5.1.36-bin.jar' $ROOT
+        rm -r $ROOT'mysql-connector-java-5.1.36'
+    fi
+}
+
 # download the following files to the root folder if they do not exist
 download "http://download.oracle.com/otn-pub/java/jdk/8u51-b16/" "jdk-8u51-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"
 download "https://services.gradle.org/distributions/" "gradle-2.5-bin.zip"
@@ -54,5 +66,6 @@ download "http://downloads.typesafe.com/scalaide-pack/4.1.0-vfinal-luna-211-2015
 download "https://dl.bintray.com/mitchellh/vagrant/" "vagrant_1.7.3_x86_64.rpm"
 download "http://gogs.dn.qbox.me/" "gogs_v0.6.1_linux_amd64.zip"
 download "http://pkg.jenkins-ci.org/redhat/" "jenkins-1.620-1.1.noarch.rpm"
-download "http://downloads.sonarsource.com/sonarqube/" "sonarqube-5.1.1.zip"
+download_ "http://sourceforge.net/projects/sonar-pkg/files/rpm/noarch/sonar-5.1.1-1.noarch.rpm/download" "sonar-5.1.1-1.noarch.rpm"
 download_ "http://bit.ly/Hqvfi9" "artifactory.rpm"
+download_mysql_connector

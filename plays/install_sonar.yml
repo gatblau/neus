@@ -1,0 +1,16 @@
+---
+  - include: install_rpm.yml
+    vars:
+      rpm_app_name: SONAR
+      rpm_filename : sonar-5.1.1-1.noarch.rpm
+
+  - name: Copying SONAR configuration
+    copy: src=sonar.properties dest=/opt/sonar/conf/sonar.properties
+
+  - name: Creating the SONAR database
+    mysql_db: name=sonar state=present
+
+  - name: Starting the SONAR service
+    service: name=sonar state=started enabled=yes
+
+
