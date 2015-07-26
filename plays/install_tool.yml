@@ -3,7 +3,7 @@
     file: path=/usr/local/{{tool_name|lower}} state=directory mode=0755
 
   - name: Copying the {{tool_name|capitalize}} installation package to the Host
-    copy: src={{zip_filename}} dest=/tmp/{{zip_filename}} owner=root
+    copy: src=cache/{{zip_filename}} dest=/tmp/{{zip_filename}} owner=root
 
   - name: Unzipping {{tool_name|capitalize}}
     unarchive: src=/tmp/{{zip_filename}} dest=/usr/local/{{tool_name|lower}} copy=no
