@@ -3,7 +3,7 @@
     file: path=/usr/local/eclipse state=directory mode=0755
 
   - name: Copying Scala IDE to the host
-    copy: src={{zip_filename}} dest=/tmp/{{zip_filename}}
+    copy: src=cache/{{zip_filename}} dest=/tmp/{{zip_filename}}
 
   - name: Unarchiving Scala IDE
     unarchive: src=/tmp/{{zip_filename}} dest=/usr/local copy=no
