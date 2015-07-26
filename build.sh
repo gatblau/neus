@@ -7,8 +7,9 @@ menu() {
     echo "Which image would you like to build?\n"
     echo "  [a] PAMM Development (Virtual Box) Vagrant Base Box - No UI"
     echo "  [b] PAMM Development (Virtual Box) - Desktop UI"
-    echo "  [c] PAMM Development (VMWare) - No UI"
-    echo "  [d] CI Compact (VMWare) - No UI"
+    echo "  [c] PAMM Development (VMWare) - CI"
+    echo "  [d] PAMM Development (VMWare) - Server UI"
+    echo "  [e] CI Compact (VMWare) - No UI"
     echo "  [x] Refresh downloaded packages"
     echo "  [q] Quit Menu"
 
@@ -17,7 +18,8 @@ menu() {
         a|A) build pamm pamm-dev-tty-vbox-vg.json;;
         b|B) build pamm pamm-dev-gui-vbox.json;;
         c|C) build pamm pamm-dev-vmware.json;;
-        d|D) build ci-compact ci-compact-vmware.json;;
+        d|D) build pamm pamm-dev-gui-vmware.json;;
+        e|E) build ci-compact ci-compact-vmware.json;;
         x|X) refreshing_cache;;
         q|Q) exit;;
     esac
