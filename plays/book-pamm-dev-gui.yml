@@ -30,6 +30,7 @@
     - include: install_packer.yml
     - include: install_activator.yml
     - include: install_git.yml
+    - include: install_groovy.yml
     - include: install_intellij.yml
     - include: install_scalaide.yml
       vars:

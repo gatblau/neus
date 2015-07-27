@@ -12,6 +12,8 @@
         rpm_app_name: "Java JDK 8u51-x64"
         rpm_filename : jdk-8u51-linux-x64.rpm
 
+    - install: install_groovy.yml
+
     - include: install_jenkins.yml
 
     - include: install_mariadb.yml
@@ -21,6 +23,7 @@
         repo: mariadb_10.repo
 
     - include: install_git.yml
+
     - include: install_artifactory.yml
 
     - include: install_sonar.yml

@@ -8,5 +8,5 @@
       add_version_to_folder : false
       has_bin_folder : false
 
-  - name: renaming PACKER to PACKR avoid naming collisions
+  - name: renaming PACKER to PACKR to avoid naming collisions
     command: "mv /usr/local/packer/default/packer /usr/local/packer/default/packr"

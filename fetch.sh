@@ -66,6 +66,7 @@ download "http://downloads.typesafe.com/scalaide-pack/4.1.0-vfinal-luna-211-2015
 download "https://dl.bintray.com/mitchellh/vagrant/" "vagrant_1.7.3_x86_64.rpm"
 download "http://gogs.dn.qbox.me/" "gogs_v0.6.1_linux_amd64.zip"
 download "http://pkg.jenkins-ci.org/redhat/" "jenkins-1.620-1.1.noarch.rpm"
+download "https://bintray.com/artifact/download/groovy/maven/" "apache-groovy-binary-2.4.4.zip"
 download_ "http://sourceforge.net/projects/sonar-pkg/files/rpm/noarch/sonar-5.1.1-1.noarch.rpm/download" "sonar-5.1.1-1.noarch.rpm"
 download_ "http://bit.ly/Hqvfi9" "artifactory.rpm"
 download_mysql_connector
