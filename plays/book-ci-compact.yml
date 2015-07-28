@@ -14,6 +14,12 @@
 
     - include: install_groovy.yml
 
+    - include: install_sbt.yml
+
+    - include: install_gradle.yml
+
+    - include: install_maven.yml
+
     - include: install_jenkins.yml
 
     - include: install_mariadb.yml
