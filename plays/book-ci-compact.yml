@@ -37,3 +37,4 @@
     - include: install_gogs.yml
       vars:
         zip_filename: gogs_v0.6.1_linux_amd64.zip
+        config_filename: app.ini
