@@ -5,5 +5,7 @@ pamm/packer_cache
 ci-compact/.vagrant
 ci-compact/out*
 ci-compact/packer_cache
+docker-registry/.vagrant
 files/cache/
+files/docker/certs
 *.iml

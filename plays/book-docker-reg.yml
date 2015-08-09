@@ -1,0 +1,105 @@
+---
+- name: Configuring the Docker Registry
+  hosts: dockerregistry
+  sudo: yes
+  remote_user: root
+
+  tasks:
+    - include: install_rpm.yml
+      vars:
+        rpm_app_name: "EPEL YUM Repository"
+        rpm_filename : epel-release-7-5.noarch.rpm
+
+    - include: install_git.yml
+
+    - include: install_golang.yml
+
+    - include: install_docker.yml
+
+    - include: install_rpm.yml
+      vars:
+        rpm_app_name: HTTPD TOOLS
+        rpm_filename: httpd-tools-2.4.6-31.el7.centos.x86_64.rpm
+
+    - include: install_nginx.yml
+
+    - name: Copying the TLS certificate
+      copy:
+        src=../files/docker/certs/gatblau.org.crt
+        dest=/etc/nginx/conf.d/gatblau.org.crt
+        owner=root
+
+    - name: Copying the TLS key
+      copy:
+        src=../files/docker/certs/gatblau.org.key
+        dest=/etc/nginx/conf.d/gatblau.org.key
+        owner=root
+
+    - name: Creating Sites-Available / Enabled NGINX folders
+      file:
+        path=/etc/nginx/{{item}}
+        state=directory
+        mode=0755
+      with_items:
+        - sites-available
+        - sites-enabled
+
+    - name: Copying NGINX configuration for the Docker Registry to sites-available folder
+      copy:
+        src=../files/docker/registry-nginx.conf
+        dest=/etc/nginx/sites-available/secure.gatblau.org
+        owner=root
+
+    - name: Sym-Linking sites-available to sites-enabled
+      file:
+        src=/etc/nginx/sites-available/secure.gatblau.org
+        path=/etc/nginx/sites-enabled/secure.gatblau.org
+        state=link
+        force=yes
+
+    - name: Creating a password for NGINX to access the Docker Registry
+      command: "htpasswd -cbB /etc/nginx/conf.d/registry.password vagrant Passw0rd!"
+
+    - name: Creating the Docker registry folder
+      file:
+        path=/usr/local/docker-registry
+        state=directory
+        mode=0755
+
+    - name: Copying Docker Registry build script to the host
+      copy:
+        src=../files/docker/build-registry.sh
+        dest=/usr/local/docker-registry
+        owner=root
+
+    - name: Compiling the Docker Registry on the host, please wait, it can take a bit!
+      command: "sh build-registry.sh"
+      args:
+        chdir: "/usr/local/docker-registry"
+
+    - name: Copying registry configuration to the host
+      copy:
+        src=../files/docker/registry-config.yml
+        dest=/usr/local/docker-registry/registry-config.yml
+        owner=root
+
+    - name: Creating the Docker registry storage folder
+      file:
+        path=/var/lib/docker-registry
+        state=directory
+        mode=0755
+
+    - name: Copying the Docker-Registry Systemd service unit file to the host
+      copy:
+        src=../files/docker/docker-registry.service
+        dest=/etc/systemd/system/docker-registry.service
+        mode=0755
+
+    - name: Starting the Docker-Registry service
+      service:
+        name=docker-registry
+        state=started
+        enabled=yes
+
+# http://www.dropbit.ch/private-docker-registry-with-nginx-on-centos-7/
+# https://github.com/docker/distribution/blob/master/docs/authentication.md
