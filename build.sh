@@ -15,7 +15,7 @@ menu() {
 
     read answer
     case $answer in
-        a|A) build pamm pamm-dev-tty-vbox-vg.json;;
+        a|A) build pamm pamm-dev-txt-vbox-vg.json;;
         b|B) build pamm pamm-dev-gui-vbox.json;;
         c|C) build pamm pamm-dev-vmware.json;;
         d|D) build pamm pamm-dev-gui-vmware.json;;
