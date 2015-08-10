@@ -6,7 +6,7 @@
 
   - name: Copying SONAR configuration
     copy:
-      src=sonar.properties
+      src=files/sonar/sonar.properties
       dest=/opt/sonar/conf/sonar.properties
 
   - name: Creating the SONAR database

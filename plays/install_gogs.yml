@@ -3,7 +3,7 @@
     file: path=/usr/local/gogs state=directory owner=vagrant mode=0777
 
   - name: Copying GOGS to the host machine
-    copy: src=cache/{{zip_filename}} dest=/tmp/{{zip_filename}}
+    copy: src=files/cache/{{zip_filename}} dest=/tmp/{{zip_filename}}
 
   - name: Unzipping the GOGS archive
     unarchive: src=/tmp/{{zip_filename}} dest=/usr/local copy=no
@@ -21,7 +21,7 @@
     mysql_db: state=import name=mysql target=/usr/local/gogs/etc/mysql.sql
 
   - name: Installing GOGS service
-    copy: src=gogs.service dest=/etc/systemd/system/gogs.service mode=0755
+    copy: src=files/gogs/gogs.service dest=/etc/systemd/system/gogs.service mode=0755
 
   - name: Starting the GOGS service
     service: name=gogs state=started enabled=yes

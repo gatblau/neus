@@ -4,23 +4,23 @@
       "type": "shell",
       "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'",
       "scripts": [
-        "../scripts/centos71/vagrant_keys.sh",
-        "../scripts/centos71/vmware.sh",
-        "../scripts/centos71/ansible.sh",
-        "../scripts/centos71/cleanup_gui.sh",
-        "../scripts/centos71/zerodisk.sh"
+        "../../scripts/centos71/vagrant_keys.sh",
+        "../../scripts/centos71/vmware.sh",
+        "../../scripts/centos71/ansible.sh",
+        "../../scripts/centos71/cleanup_txt.sh",
+        "../../scripts/centos71/zerodisk.sh"
       ]
     },
     {
       "type": "file",
-      "source": "../files",
+      "source": "../../plays/files",
       "destination": "{{user `ansible_staging_directory`}}/"
     },
     {
       "type": "ansible-local",
-      "playbook_file": "../plays/book-pamm-dev-gui.yml",
-      "inventory_file": "inventory-local.txt",
-      "playbook_dir": "../plays",
+      "playbook_file": "../../plays/book-pamm-dev-txt.yml",
+      "inventory_file": "./inventory-local.txt",
+      "playbook_dir": "../../plays",
       "only": ["vmware-iso"]
     }
   ],
@@ -31,7 +31,7 @@
     {
       "type": "vmware-iso",
       "boot_command": [
-        "<tab> text ks=http://{{.HTTPIP}}:{{.HTTPPort}}/centos71-gui-ks.cfg<enter><wait>"
+        "<tab> text ks=http://{{.HTTPIP}}:{{.HTTPPort}}/centos71-txt-ks.cfg<enter><wait>"
       ],
       "boot_wait": "10s",
       "disk_size": 20480,
@@ -46,7 +46,7 @@
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo '/sbin/halt -h -p' > /tmp/shutdown.sh; echo 'vagrant'|sudo -S sh '/tmp/shutdown.sh'",
       "tools_upload_flavor": "linux",
-      "vm_name": "pamm-dev-gui",
+      "vm_name": "pamm-dev",
       "vmx_data": {
         "memsize": "1024",
         "numvcpus": "2",

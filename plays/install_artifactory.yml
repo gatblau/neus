@@ -5,17 +5,17 @@
       rpm_filename: artifactory.rpm
 
   - name: Copying Artifactory configuration
-    copy: src=artifactory.mysql.properties dest=/var/opt/jfrog/artifactory/etc/storage.properties
+    copy: src=files/artifactory/artifactory.mysql.properties dest=/var/opt/jfrog/artifactory/etc/storage.properties
 
   - name: Copying the Artifactory database script to the host
-    copy: src=artifactory.createdb.sql dest=/tmp/artifactory.createdb.sql
+    copy: src=files/artifactory/artifactory.createdb.sql dest=/tmp/artifactory.createdb.sql
 
   - name: Creating the Artifactory database
     mysql_db: state=import name=mysql target=/tmp/artifactory.createdb.sql
 
   - name: Deploying the MySQL connector to the Artifactory web server
     copy:
-      src=cache/mysql-connector-java-5.1.36-bin.jar
+      src=files/cache/mysql-connector-java-5.1.36-bin.jar
       dest=/var/opt/jfrog/artifactory/tomcat/lib/mysql-connector-java-5.1.36-bin.jar
       mode=0775
 

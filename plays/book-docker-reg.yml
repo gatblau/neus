@@ -25,13 +25,13 @@
 
     - name: Copying the TLS certificate
       copy:
-        src=../files/docker/certs/gatblau.org.crt
+        src=files/docker/certs/gatblau.org.crt
         dest=/etc/nginx/conf.d/gatblau.org.crt
         owner=root
 
     - name: Copying the TLS key
       copy:
-        src=../files/docker/certs/gatblau.org.key
+        src=files/docker/certs/gatblau.org.key
         dest=/etc/nginx/conf.d/gatblau.org.key
         owner=root
 
@@ -46,7 +46,7 @@
 
     - name: Copying NGINX configuration for the Docker Registry to sites-available folder
       copy:
-        src=../files/docker/registry-nginx.conf
+        src=files/docker/registry-nginx.conf
         dest=/etc/nginx/sites-available/secure.gatblau.org
         owner=root
 
@@ -68,7 +68,7 @@
 
     - name: Copying Docker Registry build script to the host
       copy:
-        src=../files/docker/build-registry.sh
+        src=files/docker/build-registry.sh
         dest=/usr/local/docker-registry
         owner=root
 
@@ -79,7 +79,7 @@
 
     - name: Copying registry configuration to the host
       copy:
-        src=../files/docker/registry-config.yml
+        src=files/docker/registry-config.yml
         dest=/usr/local/docker-registry/registry-config.yml
         owner=root
 
@@ -91,7 +91,7 @@
 
     - name: Copying the Docker-Registry Systemd service unit file to the host
       copy:
-        src=../files/docker/docker-registry.service
+        src=files/docker/docker-registry.service
         dest=/etc/systemd/system/docker-registry.service
         mode=0755
 

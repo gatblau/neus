@@ -2,7 +2,7 @@
 
 # fetches all required packages and copies them to the ROOT folder
 
-ROOT='files/cache/'
+ROOT='plays/files/cache/'
 
 # creates the root folder if it does not exist
 if [[ ! -e $ROOT ]]; then

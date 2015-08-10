@@ -4,23 +4,23 @@
       "type": "shell",
       "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'",
       "scripts": [
-        "../scripts/centos71/vagrant_keys.sh",
-        "../scripts/centos71/vmware.sh",
-        "../scripts/centos71/ansible.sh",
-        "../scripts/centos71/cleanup_tty.sh",
-        "../scripts/centos71/zerodisk.sh"
+        "../../scripts/centos71/vagrant_keys.sh",
+        "../../scripts/centos71/vmware.sh",
+        "../../scripts/centos71/ansible.sh",
+        "../../scripts/centos71/cleanup_tty.sh",
+        "../../scripts/centos71/zerodisk.sh"
       ]
     },
     {
       "type": "file",
-      "source": "../files",
+      "source": "../../plays/files",
       "destination": "{{user `ansible_staging_directory`}}/"
     },
     {
       "type": "ansible-local",
-      "playbook_file": "../plays/book-ci-compact.yml",
-      "inventory_file": "inventory-local.txt",
-      "playbook_dir": "../plays",
+      "playbook_file": "../../plays/book-ci-compact.yml",
+      "inventory_file": "./inventory-local.txt",
+      "playbook_dir": "../../plays",
       "only": ["vmware-iso"]
     }
   ],

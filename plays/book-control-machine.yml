@@ -1,21 +1,21 @@
 ---
-- name: Configuring the Docker Registry Test Client
-  hosts: testclient
+- name: Configuring Control Machine
+  hosts: controlmachine
   sudo: yes
   remote_user: root
 
   tasks:
-    - include: ../../plays/install_docker.yml
+    - include: install_docker.yml
 
     - name: Copying the TLS certificate
       copy:
-        src=../../files/docker/certs/gatblau.org.crt
+        src=files/docker/certs/gatblau.org.crt
         dest=/tmp/gatblau.org.crt
         owner=root
 
     - name: Copying the script to trust the Docker Registry to the host
       copy:
-        src=../../files/docker/trust-registry.sh
+        src=files/docker/trust-registry.sh
         dest=/tmp/trust-registry.sh
         owner=root
 

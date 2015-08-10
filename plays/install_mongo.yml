@@ -1,6 +1,6 @@
 ---
   - name: Installing the MongoDB YUM repository file
-    copy: src={{repo}} dest=/etc/yum.repos.d/{{repo}}
+    copy: src=files/mongodb/{{repo}} dest=/etc/yum.repos.d/{{repo}}
 
   - name: Installing MongoDB
     yum: name=mongodb-org-server state=present
