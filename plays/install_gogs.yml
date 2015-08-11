@@ -11,7 +11,10 @@
   - name: Creating the GOGS "custom/conf" folder
     file: path=/usr/local/gogs/custom/conf state=directory owner=vagrant mode=0777
 
-  - name: Creating the GOGS "log" folder
+  - name: Copying GOGS custom configuration file
+    copy: src=cache/{{config_filename}} dest=/usr/local/gogs/custom/conf/{{config_filename}}
+
+    - name: Creating the GOGS "log" folder
     file: path=/usr/local/gogs/log state=directory owner=vagrant mode=0777
 
   - name: Removing the GOGS archive
