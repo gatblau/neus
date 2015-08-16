@@ -75,6 +75,8 @@ download "http://mirror.centos.org/centos/7.1.1503/os/x86_64/Packages/" "perl-5.
 download "http://opensource.wandisco.com/centos/7/git/x86_64/" "wandisco-git-release-7-1.noarch.rpm"
 download "http://opensource.wandisco.com/centos/7/git/x86_64/" "git-2.4.1-1.WANdisco.259.x86_64.rpm"
 download "http://opensource.wandisco.com/centos/7/git/x86_64/" "perl-Git-2.4.1-1.WANdisco.259.noarch.rpm"
+download "https://bitbucket.org/rhiokim/haroopad-download/downloads/" "haroopad-v0.13.1-x64.tar.gz"
+download "http://ftp.fau.de/eclipse/technology/epp/downloads/release/luna/SR2/" "eclipse-jee-luna-SR2-linux-gtk-x86_64.tar.gz"
 download_ "http://sourceforge.net/projects/sonar-pkg/files/rpm/noarch/sonar-5.1.1-1.noarch.rpm/download" "sonar-5.1.1-1.noarch.rpm"
 download_ "http://bit.ly/Hqvfi9" "artifactory.rpm"
 download_mysql_connector

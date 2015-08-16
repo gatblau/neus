@@ -1,9 +1,13 @@
 ---
   - name: Installing the MongoDB YUM repository file
-    copy: src=files/mongodb/{{repo}} dest=/etc/yum.repos.d/{{repo}}
+    copy:
+      src=files/mongodb/{{repo}}
+      dest=/etc/yum.repos.d/{{repo}}
 
   - name: Installing MongoDB
-    yum: name=mongodb-org-server state=present
+    yum:
+      name=mongodb-org-server
+      state=present
 
   - name: Changing MongoDB's IP binding setting to listen on all interfaces
     lineinfile:
@@ -13,4 +17,7 @@
       backrefs=yes
 
   - name: Starting the MongoDB service
-    service: name=mongod state=started enabled=yes
+    service:
+      name=mongod
+      state=started
+      enabled=yes

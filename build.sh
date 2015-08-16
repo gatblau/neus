@@ -29,9 +29,9 @@ build() {
     clear
     echo "Starting build process => $2\n"
     sh fetch.sh
-    cd $1
+    cd ./envs/$1
     packer build $2
-    cd ..
+    cd ../..
     menu
 }
 

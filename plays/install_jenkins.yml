@@ -5,4 +5,7 @@
       rpm_filename: jenkins-1.620-1.1.noarch.rpm
 
   - name: Starting the Jenkins Service
-    service: name=jenkins state=started enabled=yes
+    service:
+      name=jenkins
+      state=started
+      enabled=yes

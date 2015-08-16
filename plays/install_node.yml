@@ -3,7 +3,9 @@
     script: files/nodejs/setup_nodesource_repo.sh
 
   - name: Installing NodeJS
-    yum: name=nodejs state=present
+    yum:
+      name=nodejs
+      state=present
 
   - name: Installing Bower
     command: "npm install -g bower"

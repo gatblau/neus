@@ -7,3 +7,15 @@
     add_version_to_folder : false
     zip_has_folder : true
     has_bin_folder : true
+
+- name: Creating Desktop Icon folder
+  file:
+    path=/usr/share/applications
+    state=directory
+    mode=0755
+
+- name: Copying IntelliJ Desktop Icon
+  copy:
+    src=files/intellij/intellij.desktop
+    dest=dest=/usr/share/applications/intellij.desktop
+  ignore_errors: yes
