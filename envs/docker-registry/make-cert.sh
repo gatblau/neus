@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# creates self-signed TLS certificates for the registry
+# creates self-signed TLS certificates for the docker registry
 
 # pass the certificate domain as script parameter
 DOMAIN=$1
@@ -20,7 +20,7 @@ commands=(openssl); checkcmds commands[@];
 
 if [[ -z $DOMAIN ]]; then
    # sets default value
-   DOMAIN="gatblau.org"
+   DOMAIN="registry"
 fi
 
 if [[ -z $DATA ]]; then

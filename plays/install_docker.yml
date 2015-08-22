@@ -2,4 +2,10 @@
   - include: install_rpm.yml
     vars:
       rpm_app_name: DOCKER
-      rpm_filename: docker-1.6.2-14.el7.centos.x86_64.rpm
+      rpm_filename: docker-1.7.1-108.el7.centos.x86_64.rpm
+
+  - name: Starting the Docker daemon
+    service:
+      name=docker
+      state=started
+      enabled=yes

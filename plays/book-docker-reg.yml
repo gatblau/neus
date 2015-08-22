@@ -21,44 +21,8 @@
         rpm_app_name: HTTPD TOOLS
         rpm_filename: httpd-tools-2.4.6-31.el7.centos.x86_64.rpm
 
-    - include: install_nginx.yml
-
-    - name: Copying the TLS certificate
-      copy:
-        src=files/docker/certs/gatblau.org.crt
-        dest=/etc/nginx/conf.d/gatblau.org.crt
-        owner=root
-
-    - name: Copying the TLS key
-      copy:
-        src=files/docker/certs/gatblau.org.key
-        dest=/etc/nginx/conf.d/gatblau.org.key
-        owner=root
-
-    - name: Creating Sites-Available / Enabled NGINX folders
-      file:
-        path=/etc/nginx/{{item}}
-        state=directory
-        mode=0755
-      with_items:
-        - sites-available
-        - sites-enabled
-
-    - name: Copying NGINX configuration for the Docker Registry to sites-available folder
-      copy:
-        src=files/docker/registry-nginx.conf
-        dest=/etc/nginx/sites-available/secure.gatblau.org
-        owner=root
-
-    - name: Sym-Linking sites-available to sites-enabled
-      file:
-        src=/etc/nginx/sites-available/secure.gatblau.org
-        path=/etc/nginx/sites-enabled/secure.gatblau.org
-        state=link
-        force=yes
-
-    - name: Creating a password for NGINX to access the Docker Registry
-      command: "htpasswd -cbB /etc/nginx/conf.d/registry.password vagrant Passw0rd!"
+    - name: Creating a password for access to the Docker Registry
+      command: "htpasswd -cbB /usr/local/docker-registry/ reguser Passw0rd!"
 
     - name: Creating the Docker registry folder
       file:
@@ -83,6 +47,18 @@
         dest=/usr/local/docker-registry/registry-config.yml
         owner=root
 
+    - name: Copying the registry certificate to the host
+      copy:
+        src=files/docker/certs/registry.crt
+        dest=/usr/local/docker-registry/registry.crt
+        owner=root
+
+    - name: Copying the registry key to the host
+      copy:
+        src=files/docker/certs/registry.key
+        dest=/usr/local/docker-registry/registry.key
+        owner=root
+
     - name: Creating the Docker registry storage folder
       file:
         path=/var/lib/docker-registry
@@ -100,6 +76,3 @@
         name=docker-registry
         state=started
         enabled=yes
-
-# http://www.dropbit.ch/private-docker-registry-with-nginx-on-centos-7/
-# https://github.com/docker/distribution/blob/master/docs/authentication.md
