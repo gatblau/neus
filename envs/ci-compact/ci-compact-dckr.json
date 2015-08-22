@@ -1,0 +1,35 @@
+{
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "sh '{{.Path}}'",
+      "scripts": [
+        "../../scripts/centos71/sudo.sh",
+        "../../scripts/centos71/passwd.sh",
+        "../../scripts/centos71/create_vagrant_user.sh",
+        "../../scripts/centos71/ansible.sh"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "../../plays/files",
+      "destination": "{{user `ansible_staging_directory`}}/"
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "../../plays/book-ci-compact-dckr.yml",
+      "inventory_file": "./inventory-local.txt",
+      "playbook_dir": "../../plays"
+    }
+  ],
+  "variables": {
+    "ansible_staging_directory": "/tmp"
+  },
+  "builders": [
+    {
+      "type": "docker",
+      "image": "centos:centos7.1.1503",
+      "pull": true
+    }
+  ]
+}
