@@ -2,7 +2,7 @@
   - include: install_rpm.yml
     vars:
       rpm_app_name: Jenkins
-      rpm_filename: jenkins-1.620-1.1.noarch.rpm
+      rpm_filename: jenkins-1.625-1.1.noarch.rpm
 
   - name: Starting the Jenkins Service
     service:

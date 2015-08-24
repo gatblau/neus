@@ -15,7 +15,7 @@
 
   - name: Deploying the MySQL connector to the Artifactory web server
     copy:
-      src=files/cache/mysql-connector-java-5.1.36-bin.jar
+      src=cache/mysql-connector-java-5.1.36-bin.jar
       dest=/var/opt/jfrog/artifactory/tomcat/lib/mysql-connector-java-5.1.36-bin.jar
       mode=0775
 

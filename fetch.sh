@@ -51,7 +51,7 @@ download_mysql_connector() {
 }
 
 # download the following files to the root folder if they do not exist
-download "http://download.oracle.com/otn-pub/java/jdk/8u51-b16/" "jdk-8u51-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"
+download "http://download.oracle.com/otn-pub/java/jdk/8u51-b16/" "jdk-8u60-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"
 download "https://services.gradle.org/distributions/" "gradle-2.5-bin.zip"
 download "https://dl.bintray.com/sbt/native-packages/sbt/0.13.8/" "sbt-0.13.8.zip"
 download "http://mirrors.muzzy.org.uk/apache/maven/maven-3/3.3.3/binaries/" "apache-maven-3.3.3-bin.zip"
@@ -63,9 +63,9 @@ download "http://dl.fedoraproject.org/pub/epel/7/x86_64/e/" "epel-release-7-5.no
 download "http://dev.mysql.com/get/Downloads/MySQLGUITools/" "mysql-workbench-community-6.3.4-1.el7.x86_64.rpm"
 download "http://robomongo.org/files/linux/" "robomongo-0.8.5-x86_64.rpm"
 download "http://downloads.typesafe.com/scalaide-pack/4.1.0-vfinal-luna-211-20150704/" "scala-SDK-4.1.0-vfinal-2.11-linux.gtk.x86_64.tar.gz"
-download "https://dl.bintray.com/mitchellh/vagrant/" "vagrant_1.7.3_x86_64.rpm"
+download "https://dl.bintray.com/mitchellh/vagrant/" "vagrant_1.7.4_x86_64.rpm"
 download "http://gogs.dn.qbox.me/" "gogs_v0.6.1_linux_amd64.zip"
-download "http://pkg.jenkins-ci.org/redhat/" "jenkins-1.620-1.1.noarch.rpm"
+download "http://pkg.jenkins-ci.org/redhat/" "jenkins-1.625-1.1.noarch.rpm"
 download "https://bintray.com/artifact/download/groovy/maven/" "apache-groovy-binary-2.4.4.zip"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-1.6.3-6.el7.x86_64.rpm"
 download "http://mirror.centos.org/centos/7.1.1503/extras/x86_64/Packages/" "docker-1.7.1-108.el7.centos.x86_64.rpm"
