@@ -1,0 +1,37 @@
+---
+  - include: install_rpm.yml
+    vars:
+      rpm_app_name: httpd
+      rpm_filename: httpd-2.4.6-31.el7.centos.x86_64.rpm
+
+  - name: Install proxy settings
+    copy:
+      src=proxy/httpd.conf 
+      dest=/etc/httpd/conf 
+      owner=root 
+      mode=644
+
+  - name: Create Jenkins proxy
+    copy:
+      src=files/proxy/jenkins
+      dest=/etc/sysconfig
+      owner=root
+      mode=600
+
+  - name: Create GOGS proxy
+    copy:
+      src=files/proxy/app.ini
+      dest=/usr/local/gogs/custom/conf
+      owner=vagrant
+      mode=0777
+
+  - name: Create SONAR proxy
+    copy:
+      src=files/proxy/sonar.properties
+      dest=/opt/sonar/conf/sonar.properties
+
+  - name: Starting HTTPD Service
+    service:
+      name=httpd 
+      state=started 
+      enabled=yes

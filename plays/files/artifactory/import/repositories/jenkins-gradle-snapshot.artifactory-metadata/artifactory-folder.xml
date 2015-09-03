@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<artifactory-folder>
+  <repoPath>
+    <repoKey>jenkins-gradle-snapshot</repoKey>
+    <path></path>
+    <folder>true</folder>
+  </repoPath>
+  <name></name>
+  <created>1439556412495</created>
+  <lastModified>1439556412495</lastModified>
+  <additionalInfo>
+    <lastUpdated>1439556412495</lastUpdated>
+  </additionalInfo>
+</artifactory-folder>

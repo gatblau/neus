@@ -2,10 +2,43 @@
   - include: install_rpm.yml
     vars:
       rpm_app_name: Jenkins
-      rpm_filename: jenkins-1.620-1.1.noarch.rpm
+      rpm_filename: jenkins-1.627-1.1.noarch.rpm
+
+  - name: Copying Jenkins plugins to the host
+    copy:
+      src={{ item }}
+      dest=/var/lib/jenkins/plugins/ 
+      owner=jenkins 
+      group=jenkins
+    with_fileglob:
+      - files/cache/*.hpi
+
+  - name: Create Jenkins users
+    copy:
+      src=jenkins/users 
+      dest=/var/lib/jenkins 
+      owner=jenkins 
+      group=jenkins
+
+  - name: Set up Jenkins configuration
+    copy:
+      src={{ item }} 
+      dest=/var/lib/jenkins 
+      owner=jenkins 
+      group=jenkins
+    with_fileglob:
+      - files/jenkins/config/*.xml
+
+  - name: Create Jenkins build jobs
+    copy:
+      src=jenkins/jobs 
+      dest=/var/lib/jenkins 
+      owner=jenkins 
+      group=jenkins
+
 
   - name: Starting the Jenkins Service
     service:
-      name=jenkins
-      state=started
+      name=jenkins 
+      state=started 
       enabled=yes

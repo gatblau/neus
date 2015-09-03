@@ -9,8 +9,8 @@
 
     - include: install_rpm.yml
       vars:
-        rpm_app_name: "Java JDK 8u51-x64"
-        rpm_filename : jdk-8u51-linux-x64.rpm
+        rpm_app_name: "Java JDK 8u60-x64"
+        rpm_filename : jdk-8u60-linux-x64.rpm
 
     - include: install_groovy.yml
 
@@ -34,6 +34,12 @@
 
     - include: install_sonar.yml
 
+    - include: install_sonar_runner.yml
+
     - include: install_gogs.yml
       vars:
-        zip_filename: gogs_v0.6.1_linux_amd64.zip
+        zip_filename: gogs_v0.6.5_linux_amd64.zip
+        config_filename: app.ini
+
+    - include: install_proxy.yml
+

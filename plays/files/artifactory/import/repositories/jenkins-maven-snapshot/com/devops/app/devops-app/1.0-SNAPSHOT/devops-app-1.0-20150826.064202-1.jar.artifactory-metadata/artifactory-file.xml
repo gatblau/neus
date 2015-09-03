@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<artifactory-file>
+  <repoPath>
+    <repoKey>jenkins-maven-snapshot</repoKey>
+    <path>com/devops/app/devops-app/1.0-SNAPSHOT/devops-app-1.0-20150826.064202-1.jar</path>
+    <folder>false</folder>
+  </repoPath>
+  <name>devops-app-1.0-20150826.064202-1.jar</name>
+  <created>1440571495523</created>
+  <lastModified>1440571490364</lastModified>
+  <size>2262</size>
+  <additionalInfo>
+    <createdBy>vagrant</createdBy>
+    <modifiedBy>vagrant</modifiedBy>
+    <lastUpdated>1440571490364</lastUpdated>
+    <checksumsInfo>
+      <checksums>
+        <checksum>
+          <type>md5</type>
+          <original>7dc6bcd42bc22d778b99349fe17343fd</original>
+          <actual>7dc6bcd42bc22d778b99349fe17343fd</actual>
+        </checksum>
+        <checksum>
+          <type>sha1</type>
+          <original>a7bfeae0ceacdd42ccaf555d4ccc705542169bdf</original>
+          <actual>a7bfeae0ceacdd42ccaf555d4ccc705542169bdf</actual>
+        </checksum>
+      </checksums>
+    </checksumsInfo>
+  </additionalInfo>
+</artifactory-file>

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<artifactory-folder>
+  <repoPath>
+    <repoKey>jenkins-maven-snapshot</repoKey>
+    <path>com/devops/app/devops-app</path>
+    <folder>true</folder>
+  </repoPath>
+  <name>devops-app</name>
+  <created>1440571495517</created>
+  <lastModified>1440571495517</lastModified>
+  <additionalInfo>
+    <createdBy>vagrant</createdBy>
+    <modifiedBy>vagrant</modifiedBy>
+    <lastUpdated>1440571495517</lastUpdated>
+  </additionalInfo>
+</artifactory-folder>

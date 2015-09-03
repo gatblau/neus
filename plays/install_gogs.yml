@@ -49,7 +49,47 @@
       mode=0755
 
   - name: Starting the GOGS service
-    service:
+    service: 
       name=gogs
       state=started
       enabled=yes
+
+  - name: Copying the GOGS user database script to the host
+    copy: 
+      src=files/gogs/gogs-create-user.sql 
+      dest=/tmp/gogs-create-user.sql
+
+#  - name: Creating the GOGS user
+#    mysql_db: 
+#      state=import 
+#      name=mysql 
+#      target=/tmp/gogs-create-user.sql
+
+  - name: Removing the GOGS user database script from the host
+    file: 
+      path=/tmp/gogs-create-user.sql 
+      state=absent
+
+  - name: Copying example repositories to the host
+    copy: 
+      src=gogs/repositories 
+      dest=/home/vagrant 
+      owner=vagrant
+
+  - name: Copying the devops repository migrate script to the host
+    copy: 
+      src=gogs/migrate-repo.sh 
+      dest=/home/vagrant 
+      owner=vagrant 
+      mode=755
+
+#  - name: Migrating example repositories to GOGS
+#    shell:
+#      /home/vagrant/migrate-repo.sh
+
+  - name: Removing GOGS repository from the host
+    file: path=/tmp/devops-repo/ state=absent
+
+  - name: Removing the GOGS repository migrate script from the host
+    file: path=/tmp/migrate-repo.sh state=absent
+

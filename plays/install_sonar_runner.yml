@@ -1,0 +1,9 @@
+---
+  - include: install_tool.yml
+    vars:
+      tool_name : sonar-runner
+      folder_name : sonar-runner-2.4
+      zip_filename: sonar-runner-dist-2.4.zip
+      zip_has_folder : true
+      add_version_to_folder : false
+      has_bin_folder : true

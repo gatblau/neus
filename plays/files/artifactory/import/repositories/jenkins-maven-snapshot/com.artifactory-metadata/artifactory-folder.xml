@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<artifactory-folder>
+  <repoPath>
+    <repoKey>jenkins-maven-snapshot</repoKey>
+    <path>com</path>
+    <folder>true</folder>
+  </repoPath>
+  <name>com</name>
+  <created>1440571493709</created>
+  <lastModified>1440571493709</lastModified>
+  <additionalInfo>
+    <createdBy>vagrant</createdBy>
+    <modifiedBy>vagrant</modifiedBy>
+    <lastUpdated>1440571493709</lastUpdated>
+  </additionalInfo>
+</artifactory-folder>
