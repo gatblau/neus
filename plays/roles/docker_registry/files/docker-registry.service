@@ -1,0 +1,11 @@
+[Unit]
+Description=Docker Registry 2.0
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/local/docker-registry/registry /usr/local/docker-registry/registry-config.yml
+
+[Install]
+WantedBy=multi-user.target

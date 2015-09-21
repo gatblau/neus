@@ -1,0 +1,8 @@
+---
+  - name: Installing Ruby
+    yum:
+      name=ruby
+      state=present
+
+  - name: Updating gems
+    command: "gem update --system"

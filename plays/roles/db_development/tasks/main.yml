@@ -1,0 +1,6 @@
+---
+    - include: install_mongo.yml
+
+    - include: install_mysql_workbench.yml
+
+    - include: install_robomongo.yml
