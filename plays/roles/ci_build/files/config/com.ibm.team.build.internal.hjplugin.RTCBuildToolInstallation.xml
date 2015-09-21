@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<com.ibm.team.build.internal.hjplugin.RTCBuildToolInstallation_-DescriptorImpl plugin="teamconcert@1.1.9.5">
+  <installations>
+    <com.ibm.team.build.internal.hjplugin.RTCBuildToolInstallation>
+      <name></name>
+      <home></home>
+      <properties/>
+    </com.ibm.team.build.internal.hjplugin.RTCBuildToolInstallation>
+  </installations>
+</com.ibm.team.build.internal.hjplugin.RTCBuildToolInstallation_-DescriptorImpl>

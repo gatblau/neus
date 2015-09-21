@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=IntelliJ IDEA
-Comment=Java, Groovy, Scala and Android applications development
-Exec=/usr/local/intellij/default/bin/idea.sh
-Terminal=false
-Icon=/usr/local/intellij/default/bin/idea.png
-Type=Application
-Categories=Development;IDE;Java;Scala;

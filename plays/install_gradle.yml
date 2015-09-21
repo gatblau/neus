@@ -1,9 +1,0 @@
----
-  - include: install_tool.yml
-    vars:
-      tool_name : Gradle
-      folder_name : gradle-2.6
-      zip_filename: gradle-2.6-bin.zip
-      add_version_to_folder : false
-      zip_has_folder : true
-      has_bin_folder : true
