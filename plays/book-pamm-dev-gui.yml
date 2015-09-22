@@ -12,7 +12,6 @@
       - dev_tools
       - node_js
       - packer
-      - activator
       - vagrant
     sudo: yes
     remote_user: root
