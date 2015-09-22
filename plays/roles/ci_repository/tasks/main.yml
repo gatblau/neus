@@ -46,7 +46,7 @@
     mysql_db:
       state=import
       name=mysql
-      target=/usr/local/gogs/etc/mysql.sql
+      target=/usr/local/gogs/scripts/mysql.sql
 
   - name: Installing GOGS service
     copy:
