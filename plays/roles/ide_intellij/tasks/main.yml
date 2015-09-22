@@ -17,6 +17,6 @@
 
   - name: Copying IntelliJ Desktop Icon
     copy:
-      src=intellij/intellij.desktop
+      src=intellij.desktop
       dest=dest=/usr/share/applications/intellij.desktop
     ignore_errors: yes

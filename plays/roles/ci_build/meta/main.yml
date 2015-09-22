@@ -5,4 +5,6 @@
 #            instead of using the port number <server-ip-address>:8080
 
    dependencies:
+     - { role: common }
      - { role: ci_proxy_nginx }
+

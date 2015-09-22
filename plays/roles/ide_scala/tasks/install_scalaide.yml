@@ -26,7 +26,7 @@
 
   - name: Copying ScalaIDE's GNOME Desktop file
     copy:
-      src=scalaide/scalaide.desktop
+      src=scalaide.desktop
       dest=/usr/share/applications/scalaide.desktop
     ignore_errors: yes
 

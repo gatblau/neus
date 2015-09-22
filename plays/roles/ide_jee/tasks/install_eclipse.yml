@@ -18,7 +18,7 @@
 
   - name: Copying Eclipse's GNOME Desktop file
     copy:
-      src=eclipse/eclipse.desktop
+      src=eclipse.desktop
       dest=/usr/share/applications/eclipse.desktop
 
   - name: Removing Eclipse IDE installation package from the host
