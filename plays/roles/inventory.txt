@@ -1,0 +1,6 @@
+[cicompact]
+
+cibuild  ansible_ssh_host=xx.xx.xx.xx ansible_ssh_port=22
+cideploy ansible_ssh_host=xx.xx.xx.xx ansible_ssh_port=22
+ciqual   ansible_ssh_host=xx.xx.xx.xx ansible_ssh_port=22
+cirepo   ansible_ssh_host=xx.xx.xx.xx ansible_ssh_port=22

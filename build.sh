@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Set common Packer cache directory for all environments
+export PACKER_CACHE_DIR=../packer_cache
+
 menu() {
     clear
     echo "NEUS Project - Virtual Development Environments"

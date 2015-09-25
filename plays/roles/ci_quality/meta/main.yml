@@ -1,0 +1,8 @@
+---
+# Sonar depends on the ci_proxy role for access using a web browser
+
+   dependencies:
+     - { role: common }
+     - { role: db_mysql }
+     - { role: ci_proxy_nginx }
+

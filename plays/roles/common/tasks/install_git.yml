@@ -1,0 +1,20 @@
+---
+  - include: ../../../install_rpm.yml
+    vars:
+      rpm_app_name: PERL
+      rpm_filename: "{{ perl_rpm }}"
+
+  - include: ../../../install_rpm.yml
+    vars:
+      rpm_app_name: GIT yum repository
+      rpm_filename: "{{ git_wandisco_rpm }}"
+
+  - include: ../../../install_rpm.yml
+    vars:
+      rpm_app_name: GIT_PERL
+      rpm_filename: "{{ git_perl_rpm }}"
+
+  - include: ../../../install_rpm.yml
+    vars:
+      rpm_app_name: GIT_SCM
+      rpm_filename: "{{ git_scm_rpm }}"

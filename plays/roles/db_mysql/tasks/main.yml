@@ -1,0 +1,40 @@
+---
+  - name: Installing the MariaDB YUM repository file
+    copy:
+      src="{{ mariadb_repo }}
+      dest=/etc/yum.repos.d/"{{ mariadb_repo }}
+
+  - name: Installing MariaDB
+    yum:
+      name={{item}}
+      state=present
+    with_items:
+      - MariaDB-server
+      - MySQL-python
+
+  - name: Starting the MariaDB Server
+    service:
+      name=mysql
+      state=started
+      enabled=yes
+
+  - name: Creating a read and write user to access the server remotely
+    mysql_user:
+      name={{db_user}}
+      host="%"
+      password={{db_pwd}}
+      priv=*.*:ALL
+      state=present
+
+  - name: Creating a read and write user to access the server locally (via the loopback interface)
+    mysql_user:
+      name={{db_user}}
+      host="localhost"
+      password={{db_pwd}}
+      priv=*.*:ALL
+      state=present
+
+  - name: Deleting the Test Database
+    mysql_db:
+      name=test
+      state=absent

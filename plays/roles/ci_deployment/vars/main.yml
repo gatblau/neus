@@ -1,0 +1,5 @@
+---
+# This play contains variables for the ci_deployment role
+
+  mysql_connector: mysql-connector-java-5.1.36-bin.jar
+
