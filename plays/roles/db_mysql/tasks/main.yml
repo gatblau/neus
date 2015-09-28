@@ -2,7 +2,7 @@
   - name: Installing the MariaDB YUM repository file
     copy:
       src="{{ mariadb_repo }}"
-      dest=/etc/yum.repos.d/"{{ mariadb_repo }}"
+      dest=/etc/yum.repos.d/{{ mariadb_repo }}
 
   - name: Installing MariaDB
     yum:
