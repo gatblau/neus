@@ -15,11 +15,3 @@ chmod 0440 /etc/sudoers.d/vagrant
 yum install epel-release
 yum install ansible
 yum install sshpass
-
-# Clone NEUS from GitHub
-cd /data
-git clone http:/github.com/iturner/neus
-
-# Fetch files for deployment
-cd /data/neus
-sh ./fetch.sh
