@@ -1,0 +1,6 @@
+---
+# Artifactory requires MySQL database to be installed and a reverse proxy server
+
+   dependencies:
+     - { role: db_mysql }
+     - { role: ci_proxy_nginx }

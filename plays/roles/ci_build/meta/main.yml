@@ -1,0 +1,10 @@
+---
+# Jenkins depends on the ci_proxy_httpd role for access using a web browser
+#
+# The proxy allows Jenkins to be access using <server-ip-address>/jenkins
+#            instead of using the port number <server-ip-address>:8080
+
+   dependencies:
+     - { role: common }
+     - { role: ci_proxy_nginx }
+

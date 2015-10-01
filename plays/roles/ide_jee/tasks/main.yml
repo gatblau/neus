@@ -1,0 +1,8 @@
+---
+# This play file installs the Eclipse JEE IDE
+
+    # Eclipse Java SE
+    - include: install_eclipse.yml
+      vars:
+        zip_filename: "{{ eclipse_jee_zip }}"
+

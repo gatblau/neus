@@ -1,0 +1,7 @@
+---
+# This role depends upon the EPEL Yum Repository and Java SDK roles.
+
+   dependencies:
+     - { role: baseline }
+     - { role: java_sdk }
+

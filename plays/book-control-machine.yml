@@ -1,32 +1,9 @@
 ---
 - name: Configuring Control Machine
   hosts: controlmachine
+  roles:
+    - docker
+    - docker_certificate
   sudo: yes
   remote_user: root
 
-  tasks:
-    - include: install_docker.yml
-
-    - name: Copying the TLS certificate
-      copy:
-        src=files/docker/certs/registry.crt
-        dest=/tmp/registry.crt
-        owner=root
-
-    - name: Copying the script to trust the Docker Registry to the host
-      copy:
-        src=files/docker/trust-registry.sh
-        dest=/tmp/trust-registry.sh
-        owner=root
-
-    - name: Configuring client to trust the Docker Registry
-      command: "sh trust-registry.sh"
-      args:
-        chdir: "/tmp"
-
-    - name: Adding 'registry' to hosts file
-      lineinfile:
-        dest=/etc/hosts
-        regexp=''
-        insertafter=EOF
-        line='192.168.50.10   registry'

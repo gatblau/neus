@@ -1,0 +1,8 @@
+---
+# This play installs Jenkins and Sonar Runner
+#
+# This role depends upon the ci_proxy_nginx role (see meat/main.yml)
+
+  - include: install_jenkins.yml
+
+  - include: install_sonar_runner.yml
