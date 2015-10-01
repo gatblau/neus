@@ -1,21 +1,8 @@
 ---
-  - include: ../../../install_rpm.yml
-    vars:
-      rpm_app_name: NGINX
-      rpm_filename: "{{ nginx_rpm }}"
+  - name: Check Nginx installed
+    stat: path=/etc/nginx
+    register: nginx_exists
 
-  - name: Create proxy settings
-    copy:
-      src=nginx.conf
-      dest=/etc/nginx 
+  - include: install_nginx.yml
+    when: nginx_exists.stat.exists == false
 
-  - name: Create custom proxy settings
-    copy:
-      src=v.hosts
-      dest=/etc/nginx 
-
-  - name: Starting the NGINX Service
-    service:
-      name=nginx
-      state=started
-      enabled=yes

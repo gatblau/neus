@@ -1,0 +1,44 @@
+---
+  - name: Installing the MariaDB YUM repository file
+    copy:
+      src="{{ mariadb_repo }}"
+      dest=/etc/yum.repos.d/{{ mariadb_repo }}
+
+  - name: Installing MariaDB
+    yum:
+      name={{item}}
+      state=present
+    with_items:
+      - MariaDB-server
+      - MySQL-python
+
+  - name: Setting MySQL port number
+    template: src=server.cnf.j2
+              dest=/etc/my.cnf.d/server.cnf
+
+  - name: Starting the MariaDB Server
+    service:
+      name=mysql
+      state=started
+      enabled=yes
+
+  - name: Creating a read and write user to access the server remotely
+    mysql_user:
+      name={{mysql_username}}
+      host="%"
+      password={{mysql_password}}
+      priv=*.*:ALL
+      state=present
+
+  - name: Creating a read and write user to access the server locally (via the loopback interface)
+    mysql_user:
+      name={{mysql_username}}
+      host="localhost"
+      password={{mysql_password}}
+      priv=*.*:ALL
+      state=present
+
+  - name: Deleting the Test Database
+    mysql_db:
+      name=test
+      state=absent

@@ -1,5 +1,5 @@
 ---
     - include: ../../../install_rpm.yml
       vars:
-        rpm_app_name: "{{ java_name }}"
-        rpm_filename: "{{ java_rpm }}"
+        rpm_app_name: "{{ java_sdk_name }}"
+        rpm_filename: "{{ java_sdk_rpm }}"

@@ -1,7 +1,11 @@
 ---
   - name: Configuring the compact Continuous Integration environment
     hosts: cicompact
-    include: roles/site.yml
+    roles:
+      - ci_build
+      - ci_deployment
+      - ci_quality
+      - ci_repository
     sudo: yes
     remote_user: root
 

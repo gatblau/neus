@@ -29,6 +29,10 @@
     with_fileglob:
       - config/*.xml
 
+  - name: Set up Jenkins to Sonar configuration
+    template: src=hudson.plugins.sonar.SonarPublisher.xml.j2
+              dest=/var/lib/jenkins/hudson.plugins.sonar.SonarPublisher.xml
+
   - name: Create Jenkins build jobs
     copy:
       src=jobs 

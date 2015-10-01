@@ -22,8 +22,13 @@
   <markupFormatter class="hudson.markup.EscapedMarkupFormatter"/>
   <jdks>
     <jdk>
-      <name>JDK1.8.0_60</name>
-      <home>/usr/java/jdk1.8.0_60</home>
+      <name>Default JDK</name>
+      <home>/usr/java/default</home>
+      <properties/>
+    </jdk>
+    <jdk>
+      <name>Latest JDK</name>
+      <home>/usr/java/latest</home>
       <properties/>
     </jdk>
   </jdks>

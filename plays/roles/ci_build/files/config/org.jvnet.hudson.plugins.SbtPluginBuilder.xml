@@ -3,7 +3,7 @@
   <installations>
     <org.jvnet.hudson.plugins.SbtPluginBuilder_-SbtInstallation>
       <name>SBT</name>
-      <home>/usr/local/sbt/default/bin</home>
+      <home>/usr/local/sbt/default/bin/sbt-launch.jar</home>
       <properties/>
       <sbtArguments></sbtArguments>
     </org.jvnet.hudson.plugins.SbtPluginBuilder_-SbtInstallation>

@@ -16,6 +16,7 @@ if [[ $1 == "clean" ]]; then
     rm $ROOT*.zip
     rm $ROOT*.gz
     rm $ROOT*.jar
+    rm $ROOT*.hpi
 fi
 
 download() {
@@ -65,7 +66,7 @@ download "http://robomongo.org/files/linux/" "robomongo-0.8.5-x86_64.rpm"
 download "http://downloads.typesafe.com/scalaide-pack/4.1.0-vfinal-luna-211-20150704/" "scala-SDK-4.1.0-vfinal-2.11-linux.gtk.x86_64.tar.gz"
 download "https://dl.bintray.com/mitchellh/vagrant/" "vagrant_1.7.4_x86_64.rpm"
 download "http://gogs.dn.qbox.me/" "gogs_v0.6.9_linux_amd64.zip"
-download "http://pkg.jenkins-ci.org/redhat/" "jenkins-1.630-1.1.noarch.rpm"
+download "http://pkg.jenkins-ci.org/redhat/" "jenkins-1.631-1.1.noarch.rpm"
 download "https://bintray.com/artifact/download/groovy/maven/" "apache-groovy-binary-2.4.4.zip"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-1.6.3-6.el7.x86_64.rpm"
 download "http://mirror.centos.org/centos/7.1.1503/extras/x86_64/Packages/" "docker-1.7.1-108.el7.centos.x86_64.rpm"

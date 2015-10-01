@@ -3,13 +3,43 @@
 #
 # It depends on the baseline and java_sdk roles (see meta/main.yml)
 
+    # Install Groovy
+    - name: Check Groovy installed
+      stat: path=/usr/local/groovy
+      register: groovy_exists
+
     - include: install_groovy.yml
+      when: groovy_exists.stat.exists == false
+
+    # Install SBT
+    - name: Check SBT installed
+      stat: path=/usr/local/sbt
+      register: sbt_exists
 
     - include: install_sbt.yml
+      when: sbt_exists.stat.exists == false
+
+    # Install Gradle
+    - name: Check Gradle installed
+      stat: path=/usr/local/gradle
+      register: gradle_exists
 
     - include: install_gradle.yml
+      when: gradle_exists.stat.exists == false
+
+    # Install Mavne
+    - name: Check Maven installed
+      stat: path=/usr/local/maven
+      register: maven_exists
 
     - include: install_maven.yml
+      when: maven_exists.stat.exists == false
+
+    # Install Git
+    - name: Check Git installed
+      stat: path=/usr/local/git
+      register: git_exists
 
     - include: install_git.yml
+      when: git_exists.stat.exists == false
 

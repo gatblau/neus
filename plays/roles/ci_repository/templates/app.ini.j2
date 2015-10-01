@@ -3,10 +3,10 @@ RUN_MODE = prod
 
 [database]
 DB_TYPE = mysql
-HOST = 127.0.0.1:3306
+HOST = 127.0.0.1:{{ mysql_port | default(3306) }}
 NAME = gogs
-USER = admin
-PASSWD = Passw0rd!
+USER = {{mysql_username | default(admin)}}
+PASSWD = {{mysql_password | default('Passw0rd!')}}
 SSL_MODE = disable
 PATH = data/gogs.db
 

@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.plugins.sonar.SonarPublisher_-DescriptorImpl plugin="sonar@2.2.1">
+  <installations>
+    <hudson.plugins.sonar.SonarInstallation>
+      <name>SonarQube</name>
+      <disabled>false</disabled>
+      <serverUrl>http://localhost:9000/sonar</serverUrl>
+      <mojoVersion></mojoVersion>
+      <databaseUrl>jdbc:mysql://localhost:{{ mysql_port | default(3306) }}/sonar</databaseUrl>
+      <databaseLogin>admin</databaseLogin>
+      <additionalProperties></additionalProperties>
+      <triggers>
+        <skipScmCause>false</skipScmCause>
+        <skipUpstreamCause>false</skipUpstreamCause>
+        <envVar></envVar>
+      </triggers>
+      <sonarLogin>admin</sonarLogin>
+      <databaseSecret>/Kqhjh3bcBm/JNRBo7PiWg0vKK67F4XzdG+8rdSi3i163OzVJGAp/bOHwuGmhTned8l/ENBSuUiTBwPMg2ohTQ==</databaseSecret>
+      <sonarSecret>tZIWEGarInVvGQqjXbzX81hmOpgnMZJWLoRRZX/BFEkwsJO+Vc0M9jDrh1tOfiL0d8l/ENBSuUiTBwPMg2ohTQ==</sonarSecret>
+    </hudson.plugins.sonar.SonarInstallation>
+  </installations>
+</hudson.plugins.sonar.SonarPublisher_-DescriptorImpl>
