@@ -1,78 +1,12 @@
 ---
 - name: Configuring the Docker Registry
   hosts: dockerregistry
+  roles:
+    - baseline
+    - httpd_tools
+    - golang
+    - docker
+    - docker_registry
   sudo: yes
   remote_user: root
 
-  tasks:
-    - include: install_rpm.yml
-      vars:
-        rpm_app_name: "EPEL YUM Repository"
-        rpm_filename : epel-release-7-5.noarch.rpm
-
-    - include: install_git.yml
-
-    - include: install_golang.yml
-
-    - include: install_docker.yml
-
-    - include: install_rpm.yml
-      vars:
-        rpm_app_name: HTTPD TOOLS
-        rpm_filename: httpd-tools-2.4.6-31.el7.centos.x86_64.rpm
-
-    - name: Creating a password for access to the Docker Registry
-      command: "htpasswd -cbB /usr/local/docker-registry/ reguser Passw0rd!"
-
-    - name: Creating the Docker registry folder
-      file:
-        path=/usr/local/docker-registry
-        state=directory
-        mode=0755
-
-    - name: Copying Docker Registry build script to the host
-      copy:
-        src=files/docker/build-registry.sh
-        dest=/usr/local/docker-registry
-        owner=root
-
-    - name: Compiling the Docker Registry on the host, please wait, it can take a bit!
-      command: "sh build-registry.sh"
-      args:
-        chdir: "/usr/local/docker-registry"
-
-    - name: Copying registry configuration to the host
-      copy:
-        src=files/docker/registry-config.yml
-        dest=/usr/local/docker-registry/registry-config.yml
-        owner=root
-
-    - name: Copying the registry certificate to the host
-      copy:
-        src=files/docker/certs/registry.crt
-        dest=/usr/local/docker-registry/registry.crt
-        owner=root
-
-    - name: Copying the registry key to the host
-      copy:
-        src=files/docker/certs/registry.key
-        dest=/usr/local/docker-registry/registry.key
-        owner=root
-
-    - name: Creating the Docker registry storage folder
-      file:
-        path=/var/lib/docker-registry
-        state=directory
-        mode=0755
-
-    - name: Copying the Docker-Registry Systemd service unit file to the host
-      copy:
-        src=files/docker/docker-registry.service
-        dest=/etc/systemd/system/docker-registry.service
-        mode=0755
-
-    - name: Starting the Docker-Registry service
-      service:
-        name=docker-registry
-        state=started
-        enabled=yes

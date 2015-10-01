@@ -1,0 +1,4 @@
+---
+# This play contains variables for the ci_repository role
+
+  gogs_zipfile: gogs_v0.6.9_linux_amd64.zip

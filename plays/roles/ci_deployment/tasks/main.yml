@@ -1,0 +1,13 @@
+---
+# This play installs Artifactory - binary repository and deployment tool
+#
+# This role depends on the db_mysql role (see meta/main.yml)
+
+  - name: Check Artifactory installed
+    stat: path=/var/opt/jfrog/artifactory
+    register: artifactory_exists
+
+  - include: install_artifactory.yml
+    when: artifactory_exists.stat.exists == false
+
+

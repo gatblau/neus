@@ -1,0 +1,9 @@
+---
+# The CI Repository Server contains GOGS 
+  - name: Configuring the Continuous Integration Repository Server environment
+    hosts: cirepo
+    roles:
+      - ci_repository
+    sudo: yes
+    remote_user: root
+

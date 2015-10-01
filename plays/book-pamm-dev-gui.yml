@@ -1,54 +1,18 @@
 ---
-- name: Configuring PAMM's environment for GUI
-  hosts: pamm
-  sudo: yes
-  remote_user: root
+  - name: Configuring PAMM's environment for GUI
+    hosts: pamm
+    roles:
+      - common
+      - java_alt
+      - db_mysql
+      - db_development
+      - ide_intellij
+      - ide_jee
+      - ide_scala
+      - dev_tools
+      - node_js
+      - packer
+      - vagrant
+    sudo: yes
+    remote_user: root
 
-  tasks:
-    - include: baseline.yml
-    - include: install_node.yml
-    - include: install_rpm.yml
-      vars:
-        rpm_app_name: "Java JDK 8u51-x64"
-        rpm_filename : jdk-8u51-linux-x64.rpm
-    - name: Installing Java Alternative
-      command: "alternatives --install /usr/bin/java java /usr/java/default/bin/java 1"
-    - name: Configuring Java Alternative
-      command: "alternatives --set java /usr/java/default/bin/java"
-    - include: install_ruby.yml
-    - include: install_rpm.yml
-      vars:
-        rpm_app_name: Vagrant
-        rpm_filename : vagrant_1.7.3_x86_64.rpm
-    - include: install_rpm.yml
-      vars:
-        rpm_app_name: "Chrome Browser"
-        rpm_filename : google-chrome-stable_current_x86_64.rpm
-    - include: install_sbt.yml
-    - include: install_gradle.yml
-    - include: install_maven.yml
-    - include: install_packer.yml
-    - include: install_activator.yml
-    - include: install_git.yml
-    - include: install_groovy.yml
-    - include: install_intellij.yml
-    - include: install_scalaide.yml
-      vars:
-        zip_filename: scala-SDK-4.1.0-vfinal-2.11-linux.gtk.x86_64.tar.gz
-    - include: install_mongo.yml
-      vars:
-        repo: mongo-db.repo
-    - include: install_mariadb.yml
-      vars:
-        db_user: admin
-        db_pwd: Passw0rd!
-        repo: mariadb_10.repo
-    - include: install_rpm.yml
-      vars:
-        rpm_app_name: "My SQL Workbench"
-        rpm_filename: mysql-workbench-community-6.3.4-1.el7.x86_64.rpm
-
-    - include: install_rpm.yml
-      vars:
-        rpm_app_name: "Robo Mongo"
-        rpm_filename: robomongo-0.8.5-x86_64.rpm

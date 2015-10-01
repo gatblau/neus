@@ -1,0 +1,7 @@
+---
+# This play contains variables for the java_sdk role
+
+  # Java SDK variables
+  java_sdk_name: "Java JDK 8u60-x64"
+  java_sdk_rpm: jdk-8u60-linux-x64.rpm
+

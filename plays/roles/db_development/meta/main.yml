@@ -1,0 +1,5 @@
+---
+# This role also includes the db_mongo role
+
+   dependencies:
+     - { role: db_mongo }

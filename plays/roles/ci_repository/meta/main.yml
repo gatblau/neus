@@ -1,0 +1,7 @@
+---
+# GOGS depends on the ci_proxy and db_mysql roles
+
+   dependencies:
+     - { role: baseline }
+     - { role: db_mysql }
+     - { role: ci_proxy_nginx }

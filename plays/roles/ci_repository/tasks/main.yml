@@ -1,0 +1,12 @@
+---
+# This play installs GOGS - source code repository tool
+#
+# This role depends on the baseline, db_mysql and ci_proxy_nginx roles (see meta/main.yml)
+
+  - name: Check GOGS installed
+    stat: path=/usr/local/gogs
+    register: gogs_exists
+
+  - include: install_gogs.yml
+    when: gogs_exists.stat.exists == false
+

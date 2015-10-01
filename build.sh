@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Set common Packer cache directory for all environments
+export PACKER_CACHE_DIR=../packer_cache
+
 menu() {
     clear
     echo "NEUS Project - Virtual Development Environments"
@@ -9,7 +12,8 @@ menu() {
     echo "  [b] PAMM Development (Virtual Box) - Desktop UI"
     echo "  [c] PAMM Development (VMWare) - CI"
     echo "  [d] PAMM Development (VMWare) - Server UI"
-    echo "  [e] CI Compact (VMWare) - No UI"
+    echo "  [e] Europa Development (Virtual Box) - Desktop UI"
+    echo "  [f] CI Compact (VMWare) - No UI"
     echo "  [x] Refresh downloaded packages"
     echo "  [q] Quit Menu"
 
@@ -19,7 +23,8 @@ menu() {
         b|B) build pamm pamm-dev-gui-vbox.json;;
         c|C) build pamm pamm-dev-vmware.json;;
         d|D) build pamm pamm-dev-gui-vmware.json;;
-        e|E) build ci-compact ci-compact-vmware.json;;
+        e|E) build europa europa-vbox.json;;
+        f|F) build ci-compact ci-compact-vmware.json;;
         x|X) refreshing_cache;;
         q|Q) exit;;
     esac

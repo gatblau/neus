@@ -1,0 +1,5 @@
+---
+# This play contains variables for the db_mysql role
+
+  mariadb_repo: mariadb_10.repo
+

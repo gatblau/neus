@@ -1,0 +1,7 @@
+---
+# This play contains variables for the ci_build role
+
+  jenkins_rpm: jenkins-1.631-1.1.noarch.rpm
+  sonar_runner_folder: sonar-runner-2.4
+  sonar_runner_zipfile: sonar-runner-dist-2.4.zip
+
