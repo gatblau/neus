@@ -1,0 +1,4 @@
+---
+# This play contains variables for the ci_quality role
+
+  sonar_rpm: sonar-5.1.1-1.noarch.rpm

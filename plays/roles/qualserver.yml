@@ -1,0 +1,9 @@
+---
+# The CI Quality Server contains Sonar (ci_quality role)
+
+  - name: Configuring the Continuous Integration Quality Server environment
+    hosts: ciqual
+    roles:
+      - ci_quality
+    sudo: yes
+    remote_user: root

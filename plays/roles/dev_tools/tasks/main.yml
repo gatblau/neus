@@ -1,0 +1,32 @@
+---
+# This play file installs the PAMM development environment tools
+
+  # Desktop background
+  - include: install_background.yml
+
+  # Chrome browser
+  - include: ../../../install_rpm.yml
+    vars:
+      rpm_app_name: "Chrome Browser"
+      rpm_filename : google-chrome-stable_current_x86_64.rpm
+
+  # Activator application template
+  - include: install_activator.yml
+
+  # Docker
+  - include: install_docker.yml
+
+  # Groovy development kit
+  - include: install_groovy.yml
+
+  # Markdown editor
+  - include: install_haroopad.yml
+    vars:
+      tool_name: HarooPad
+      zip_filename: "{{ haroopad_zip }}"
+
+  # NodeJS
+  - include: install_node.yml
+
+  # Ruby development kit
+  - include: install_ruby.yml

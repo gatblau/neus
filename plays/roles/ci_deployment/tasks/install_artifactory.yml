@@ -1,0 +1,41 @@
+---
+# This play installs Artifactory - binary repository and deployment tool
+#
+# This role depends on the db_mysql role (see meta/main.yml)
+
+  - include: ../../../install_rpm.yml
+    vars:
+      rpm_app_name: Artifactory
+      rpm_filename: artifactory.rpm
+
+  - name: Copying Artifactory configuration
+    template: 
+      src=artifactory.mysql.properties.j2 
+      dest=/var/opt/jfrog/artifactory/etc/storage.properties
+
+  - name: Copying the Artifactory database script to the host
+    copy: 
+      src=artifactory.createdb.sql 
+      dest=/tmp/artifactory.createdb.sql
+
+  - name: Creating the Artifactory database
+    mysql_db: 
+      state=import name=mysql 
+      target=/tmp/artifactory.createdb.sql
+
+  - name: Deploying the MySQL connector to the Artifactory web server
+    copy:
+      src=../../../files/cache/{{ mysql_connector }}
+      dest=/var/opt/jfrog/artifactory/tomcat/lib/{{ mysql_connector }}
+      mode=0775
+
+  - name: Removing the Artifactory database script from the host
+    file: 
+      path=/tmp/artifactory.createdb.sql state=absent
+
+  - name: Starting the Artifactory Service
+    service: 
+      name=artifactory 
+      state=started 
+      enabled=yes
+

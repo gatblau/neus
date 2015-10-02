@@ -1,0 +1,12 @@
+---
+  - include: ../../../install_tool.yml
+    vars:
+      tool_name : Packer
+      folder_name : "{{ packer_folder }}"
+      zip_filename: "{{ packer_zipfile }}"
+      zip_has_folder : false
+      add_version_to_folder : false
+      has_bin_folder : false
+
+  - name: renaming PACKER to PACKR to avoid naming collisions
+    command: "mv /usr/local/packer/default/packer /usr/local/packer/default/packr"

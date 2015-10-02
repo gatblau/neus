@@ -1,0 +1,9 @@
+---
+    # Install MariaDB
+    - name: Check MariaDB installed
+      stat: path=/etc/yum.repos.d/{{ mariadb_repo }}
+      register: mysql_exists
+
+    - include: install_mysql.yml
+      when: mysql_exists.stat.exists == false
+
