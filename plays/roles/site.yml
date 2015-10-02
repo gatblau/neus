@@ -1,0 +1,6 @@
+---
+# This file builds the Continuous Integration Compact Environment
+  - include: bldserver.yml
+  - include: deployserver.yml
+  - include: qualserver.yml
+  - include: reposerver.yml

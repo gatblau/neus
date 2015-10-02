@@ -1,0 +1,35 @@
+---
+# Install NGINX as reverse proxy
+
+  - name: Starting the firewall Service
+    service:
+      name=firewalld
+      state=started
+      enabled=yes
+
+  - name: Open port 80
+    command: 'firewall-cmd --permanent --add-port=80/tcp'
+
+  - name: Reload firewall
+    command: 'firewall-cmd --reload'
+
+  - include: ../../../install_rpm.yml
+    vars:
+      rpm_app_name: NGINX
+      rpm_filename: "{{ nginx_rpm }}"
+
+  - name: Create proxy settings
+    copy:
+      src=nginx.conf
+      dest=/etc/nginx 
+
+  - name: Create custom proxy settings
+    copy:
+      src=v.hosts
+      dest=/etc/nginx 
+
+  - name: Starting the NGINX Service
+    service:
+      name=nginx
+      state=started
+      enabled=yes

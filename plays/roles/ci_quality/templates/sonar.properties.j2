@@ -1,0 +1,12 @@
+# User used by SONAR to connect to the database
+sonar.jdbc.username={{ mysql_username | default(admin) }}
+sonar.jdbc.password={{ mysql_password | default('Passw0rd!') }}
+sonar.jdbc.url=jdbc:mysql://localhost:{{ mysql_port | default(3306) }}/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance
+
+# bind to any IP
+#sonar.web.host=0.0.0.0
+sonar.web.host=localhost
+sonar.web.context=/sonar
+
+# port for incoming http requests
+

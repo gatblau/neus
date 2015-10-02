@@ -1,0 +1,6 @@
+---
+# This play file installs the Eclipse Scala IDE
+
+    - include: install_scalaide.yml
+      vars:
+        zip_filename: "{{ scala_ide_zip }}"

@@ -1,0 +1,6 @@
+---
+  # MySQL variables
+  mysql_port: 5904
+  mysql_username: admin
+  mysql_password: Passw0rd!
+

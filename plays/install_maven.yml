@@ -1,9 +1,0 @@
----
-  - include: install_tool.yml
-    vars:
-      tool_name : Maven
-      folder_name : apache-maven-3.3.3
-      zip_filename: apache-maven-3.3.3-bin.zip
-      add_version_to_folder : false
-      zip_has_folder : true
-      has_bin_folder : true
