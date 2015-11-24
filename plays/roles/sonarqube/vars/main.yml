@@ -3,4 +3,4 @@
 
   sonar_user: sonar
   sonar_password: $6$rounds=656000$dCljFa3mpnaMQgzz$zHdLdm0wby6FMu4ISH0hFeoSecn/DH.E82yv8WLoGCb.8.Fw.pmiWVghMKliICh8PKCdYx1lCQvYyzb6I2VF10
-  sonar_rpm: sonar-5.1.1-1.noarch.rpm
+  sonar_rpm: sonar-5.2-1.noarch.rpm

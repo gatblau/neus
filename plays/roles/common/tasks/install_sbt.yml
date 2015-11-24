@@ -1,5 +1,6 @@
 ---
-  - include: "{{plays_folder}}/install_tool.yml"
+  - name: Install Simple Build Tool (SBT)
+    include: "{{plays_folder}}/install_tool.yml"
     vars:
       tool_name : SBT
       folder_name : "{{ sbt_folder }}"

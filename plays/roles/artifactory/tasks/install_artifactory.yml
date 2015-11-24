@@ -11,7 +11,7 @@
   - include: "{{plays_folder}}/install_rpm.yml"
     vars:
       rpm_app_name: Artifactory
-      rpm_filename: artifactory.rpm
+      rpm_filename: "{{artifactory_rpm}}"
 
   - name: Copying Artifactory configuration
     template: 

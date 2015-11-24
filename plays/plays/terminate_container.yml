@@ -16,14 +16,6 @@
 # This play is called from the target_host_n.yml playbook.
 #
 ---
-
-# Set the startup_script variable in your run.yml play file.
-#- name: Copying start up script to the container
-#  copy:
-#    src=scripts/startup.sh
-#    dest=/usr/startup.sh
-#    mode=755
-
 - name: Stopping the '{{target}}' container
   docker:
     name: "{{target}}"

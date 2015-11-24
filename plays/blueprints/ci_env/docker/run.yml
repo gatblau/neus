@@ -12,4 +12,3 @@
     platform: docker
     artifactory_ipaddress: localhost
     sonarqube_ipaddress: localhost
-    proxy_url: "{{ lookup('env','http_proxy') }}"

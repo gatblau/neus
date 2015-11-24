@@ -1,9 +1,4 @@
 ---
-  # Install Tool Play File:
-  #   Parameters:
-  #     tool_name - passed by calling play file
-  #     user - defined in group_vars/all/main.yml
-
   - name: Creating the {{tool_name|capitalize}} installation folder
     file:
       path=/usr/local/{{tool_name|lower}}
