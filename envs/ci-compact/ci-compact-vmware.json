@@ -31,7 +31,7 @@
     {
       "type": "vmware-iso",
       "boot_command": [
-        "<tab> text ks=http://{{.HTTPIP}}:{{.HTTPPort}}/centos71-tty-ks.cfg<enter><wait>"
+        "<tab> text ks=http://{{.HTTPIP}}:{{.HTTPPort}}/centos71-txt-ks.cfg<enter><wait>"
       ],
       "boot_wait": "10s",
       "disk_size": 20480,
@@ -46,7 +46,7 @@
       "ssh_wait_timeout": "10000s",
       "shutdown_command": "echo '/sbin/halt -h -p' > /tmp/shutdown.sh; echo 'vagrant'|sudo -S sh '/tmp/shutdown.sh'",
       "tools_upload_flavor": "linux",
-      "vm_name": "ci-compact",
+      "vm_name": "ci-bronze",
       "vmx_data": {
         "memsize": "1024",
         "numvcpus": "2",

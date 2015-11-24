@@ -1,0 +1,6 @@
+---
+  - name: Installing Unzip command
+    yum: name=unzip state=latest
+
+  - name: Install EPEL Yum Repository
+    yum: name=epel-release.noarch state=latest

@@ -1,0 +1,6 @@
+---
+# This play contains variables for the ci_proxy_nginx role
+
+  nginx_user: nginx
+  nginx_password: $6$rounds=656000$ICkIO6tKirLGiZex$w4HVQvwgGTl79je1eGG69z2VLKAochBeiPjMQ5F4x4Jq/0Jru3GAKm7/TWmZaRFHkpELCDAnass9ami/NQzfT.
+  nginx_rpm: nginx-1.6.3-6.el7.x86_64.rpm

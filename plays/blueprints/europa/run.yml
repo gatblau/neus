@@ -1,0 +1,8 @@
+---
+- name: Deploy Europa Environment
+  include: target_host1.yml
+  vars:
+    cache : cache
+    group : europa
+    user  : europa
+    environment: europa

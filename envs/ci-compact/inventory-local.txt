@@ -1,2 +1,2 @@
 # used by packer
-cicompact ansible_connection=local
+cibronze ansible_connection=local platform=centos_vm

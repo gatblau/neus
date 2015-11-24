@@ -6,7 +6,7 @@ ROOT='plays/files/cache/'
 
 # creates the root folder if it does not exist
 if [[ ! -e $ROOT ]]; then
-    mkdir $ROOT
+    mkdir -p $ROOT
 fi
 
 # removes rpms, zips and gz files from the root folder if 'clean' is passed as parameter to the shell script
@@ -16,6 +16,7 @@ if [[ $1 == "clean" ]]; then
     rm $ROOT*.zip
     rm $ROOT*.gz
     rm $ROOT*.jar
+    rm $ROOT*.hpi
 fi
 
 download() {
@@ -51,23 +52,22 @@ download_mysql_connector() {
 }
 
 # download the following files to the root folder if they do not exist
-download "http://download.oracle.com/otn-pub/java/jdk/8u51-b16/" "jdk-8u51-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"
-download "https://services.gradle.org/distributions/" "gradle-2.5-bin.zip"
+download "http://download.oracle.com/otn-pub/java/jdk/8u66-b17/" "jdk-8u66-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"
+download "https://services.gradle.org/distributions/" "gradle-2.7-bin.zip"
 download "https://dl.bintray.com/sbt/native-packages/sbt/0.13.8/" "sbt-0.13.8.zip"
 download "http://mirrors.muzzy.org.uk/apache/maven/maven-3/3.3.3/binaries/" "apache-maven-3.3.3-bin.zip"
 download "http://download.jetbrains.com/idea/" "ideaIU-14.1.4.tar.gz"
 download "https://dl.bintray.com/mitchellh/packer/" "packer_0.8.2_linux_amd64.zip"
 download "http://downloads.typesafe.com/typesafe-activator/1.3.5/" "typesafe-activator-1.3.5.zip"
 download "https://dl.google.com/linux/direct/" "google-chrome-stable_current_x86_64.rpm"
-download "http://dl.fedoraproject.org/pub/epel/7/x86_64/e/" "epel-release-7-5.noarch.rpm"
 download "http://dev.mysql.com/get/Downloads/MySQLGUITools/" "mysql-workbench-community-6.3.4-1.el7.x86_64.rpm"
 download "http://robomongo.org/files/linux/" "robomongo-0.8.5-x86_64.rpm"
 download "http://downloads.typesafe.com/scalaide-pack/4.1.0-vfinal-luna-211-20150704/" "scala-SDK-4.1.0-vfinal-2.11-linux.gtk.x86_64.tar.gz"
-download "https://dl.bintray.com/mitchellh/vagrant/" "vagrant_1.7.3_x86_64.rpm"
-download "http://gogs.dn.qbox.me/" "gogs_v0.6.1_linux_amd64.zip"
-download "http://pkg.jenkins-ci.org/redhat/" "jenkins-1.620-1.1.noarch.rpm"
+download "https://dl.bintray.com/mitchellh/vagrant/" "vagrant_1.7.4_x86_64.rpm"
+download "http://gogs.dn.qbox.me/" "gogs_v0.7.0_linux_amd64.zip"
+download "http://pkg.jenkins-ci.org/redhat/" "jenkins-1.638-1.1.noarch.rpm"
 download "https://bintray.com/artifact/download/groovy/maven/" "apache-groovy-binary-2.4.4.zip"
-download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-1.6.3-6.el7.x86_64.rpm"
+download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-1.6.3-7.el7.x86_64.rpm"
 download "http://mirror.centos.org/centos/7.1.1503/extras/x86_64/Packages/" "docker-1.7.1-108.el7.centos.x86_64.rpm"
 download "http://mirror.centos.org/centos/7.1.1503/extras/x86_64/Packages/" "golang-1.4.2-1.el7.centos.x86_64.rpm"
 download "http://mirror.centos.org/centos/7.1.1503/os/x86_64/Packages/" "httpd-tools-2.4.6-31.el7.centos.x86_64.rpm"
@@ -80,3 +80,29 @@ download "http://ftp.fau.de/eclipse/technology/epp/downloads/release/luna/SR2/" 
 download_ "http://sourceforge.net/projects/sonar-pkg/files/rpm/noarch/sonar-5.1.1-1.noarch.rpm/download" "sonar-5.1.1-1.noarch.rpm"
 download_ "http://bit.ly/Hqvfi9" "artifactory.rpm"
 download_mysql_connector
+download "http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/2.4/" "sonar-runner-dist-2.4.zip"
+download "http://updates.jenkins-ci.org/latest/" "artifactory.hpi"
+download "http://updates.jenkins-ci.org/latest/" "ansible.hpi"
+download "http://updates.jenkins-ci.org/latest/" "credentials.hpi"
+download "http://updates.jenkins-ci.org/latest/" "email-ext.hpi"
+download "http://updates.jenkins-ci.org/latest/" "envinject.hpi"
+download "http://updates.jenkins-ci.org/latest/" "git.hpi"
+download "http://updates.jenkins-ci.org/latest/" "git-client.hpi"
+download "http://updates.jenkins-ci.org/latest/" "git-server.hpi"
+download "http://updates.jenkins-ci.org/latest/" "gradle.hpi"
+download "http://updates.jenkins-ci.org/latest/" "sbt.hpi"
+download "http://updates.jenkins-ci.org/latest/" "sonar.hpi"
+download "http://updates.jenkins-ci.org/latest/" "ssh-credentials.hpi"
+download "http://updates.jenkins-ci.org/latest/" "ssh-slaves.hpi"
+download "http://updates.jenkins-ci.org/latest/" "teamconcert.hpi"
+download "http://updates.jenkins-ci.org/latest/" "workflow-aggregator.hpi"
+download "http://updates.jenkins-ci.org/latest/" "workflow-job.hpi"
+download "http://updates.jenkins-ci.org/latest/" "workflow-step-api.hpi"
+download "http://updates.jenkins-ci.org/latest/" "workflow-cps.hpi"
+download "http://updates.jenkins-ci.org/latest/" "workflow-support.hpi"
+download "http://updates.jenkins-ci.org/latest/" "workflow-durable-task-step.hpi"
+download "http://updates.jenkins-ci.org/latest/" "workflow-basic-steps.hpi"
+download "http://updates.jenkins-ci.org/latest/" "workflow-scm-step.hpi"
+download "http://updates.jenkins-ci.org/latest/" "workflow-api.hpi"
+download "http://updates.jenkins-ci.org/latest/" "workflow-cps-global-lib.hpi"
+download "http://updates.jenkins-ci.org/latest/" "ws-cleanup.hpi"

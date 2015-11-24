@@ -1,0 +1,7 @@
+---
+# This play contains variables for the gogs role
+
+  gogs_path: /usr/local/gogs
+  gogs_user: gogs
+  gogs_password: $6$rounds=656000$/zfzOaTk0fdU73Mk$Iy36e.eY2nOjLfIwX7ocCrhHvbxKz5wARnJoHnoJcjKoS.iobDp0SDWWKNbbUmoQ6i2A1UxI59LkImbLG9wwJ/
+  gogs_zipfile: gogs_v0.7.0_linux_amd64.zip

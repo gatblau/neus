@@ -1,0 +1,13 @@
+---
+# This play installs GOGS - source code repository tool
+#
+# See meta/main.yml for dependent roles
+
+  - name: Check GOGS installed
+    stat: path=/usr/local/gogs
+    register: gogs_exists
+    changed_when: no
+
+  - include: install_gogs.yml
+    when: gogs_exists.stat.exists == false
+

@@ -1,0 +1,94 @@
+---
+  - name: Create user for GOGS
+    user:
+      name="{{gogs_user}}"
+      password="{{gogs_password}}"
+      state=present
+
+  - name: Creating the GOGS installation folder
+    file:
+      path="{{gogs_path}}"
+      state=directory
+      owner="{{gogs_user}}"
+      mode=0777
+
+  - name: Copying GOGS to the host machine
+    copy:
+      src=cache/{{gogs_zipfile}}
+      dest=/tmp/{{gogs_zipfile}}
+
+  - name: Unzipping the GOGS archive
+    unarchive:
+      src=/tmp/{{gogs_zipfile}}
+      dest=/usr/local
+      owner={{gogs_user}}
+      copy=no
+
+  - name: Creating the GOGS custom configuration folder
+    file:
+      path="{{gogs_path}}/custom/conf"
+      state=directory
+      owner="{{gogs_user}}"
+      mode=0777
+
+  - name: Copying GOGS custom configuration file
+    template:
+      src=app.ini.j2
+      dest="{{gogs_path}}/custom/conf/app.ini"
+      owner="{{gogs_user}}"
+      mode=0755
+
+  - name: Creating the GOGS "log" folder
+    file:
+      path="{{gogs_path}}/log"
+      state=directory
+      owner="{{gogs_user}}"
+      mode=0777
+
+  - name: Removing the GOGS archive
+    file:
+      path=/tmp/{{gogs_zipfile}}
+      state=absent
+
+  - name: Copy database initilisation script
+    copy:
+      src=import.sql
+      dest="{{gogs_path}}/scripts/initialise.sql"
+      owner="{{gogs_user}}"
+      mode=0755
+
+  - name: Creating the GOGS database
+    mysql_db:
+      state=import
+      name=mysql
+      target="{{gogs_path}}/scripts/initialise.sql"
+
+  - name: Installing GOGS service
+    copy:
+      src=gogs.service
+      dest=/etc/systemd/system/gogs.service
+      mode=0755
+
+  - name: Starting the GOGS service
+    service: 
+      name=gogs
+      state=started
+      enabled=yes
+    when: platform == "centos_vm"
+
+  - name: Copying GOGS repositories to the host
+    copy: 
+      src=gogs-repositories.zip 
+      dest=/tmp
+
+  - name: Unzipping GOGS repositories
+    unarchive:
+      src=/tmp/gogs-repositories.zip
+      dest=/home/{{gogs_user}}/
+      owner="{{gogs_user}}"
+      copy=no
+
+  - name: Removing GOGS repositories from the host
+    file:
+      path=/tmp/gogs-repositories.zip
+      state=absent

@@ -1,0 +1,31 @@
+---
+# This play file installs the Europa development environment tools
+  - name: Creating the "{{group}}|capitalize" user group
+    group: name="{{group}}" state=present
+
+  - name: Creating the "{{user}}|capitalize" user
+    user: name="{{user}}" group="{{group}}" password="{{password}}"
+
+  - name: Creating the user bash profile file
+    file: path=/home/{{user}}/.bash_profile src=file owner="{{user}}" state=touch
+
+  # Bower
+  - include: install_bower.yml
+
+  # Desktop background
+  - include: install_background.yml
+
+  # Chrome browser
+  - include: "{{plays_folder}}/install_rpm.yml"
+    vars:
+      rpm_app_name: "Chrome Browser"
+      rpm_filename : google-chrome-stable_current_x86_64.rpm
+
+  # Activator application template
+  - include: install_activator.yml
+
+  # HarooPad markdown editor
+  - include: install_haroopad.yml
+    vars:
+      tool_name: HarooPad
+      zip_filename: "{{ haroopad_zip }}"

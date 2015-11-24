@@ -1,0 +1,23 @@
+---
+# This play installs Jenkins and Sonar Runner
+#
+# This role depends upon the ci_proxy_nginx role (see meat/main.yml)
+
+  # Install Jenkins
+  - name: Check Jenkins installed
+    stat: path=/var/lib/jenkins
+    register: jenkins_exists
+
+  - include: install_jenkins.yml
+    when: jenkins_exists.stat.exists == false
+
+  # Install Sonar Runner
+  - name: Check Sonar Runner installed
+    stat: path=/usr/local/sonar_runner
+    register: sonarrunner_exists
+    changed_when: no
+
+  - include: install_sonar_runner.yml
+    when: sonarrunner_exists.stat.exists == false
+
+

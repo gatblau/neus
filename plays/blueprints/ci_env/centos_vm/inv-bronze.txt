@@ -1,0 +1,14 @@
+# CI Compact Environment - Bronze Standard
+
+[cibronze]
+cibuild
+cideploy
+ciqual
+cirepo
+
+[cibronze:vars]
+ansible_ssh_host  : 192.168.125.129
+ansible_ssh_port  : 22
+mariadb_port      : 5000
+environment       : centos_vm
+

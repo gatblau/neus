@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Set common Packer cache directory for all environments
+export PACKER_CACHE_DIR=../packer_cache
+
 menu() {
     clear
     echo "NEUS Project - Virtual Development Environments"
@@ -28,7 +31,7 @@ menu() {
 build() {
     clear
     echo "Starting build process => $2\n"
-    sh fetch.sh
+    bash fetch.sh
     cd ./envs/$1
     packer build $2
     cd ../..
@@ -44,7 +47,7 @@ not_implemented() {
 
 refreshing_cache() {
     clear;
-    sh fetch.sh "clean";
+    bash fetch.sh "clean";
     menu;
 }
 
