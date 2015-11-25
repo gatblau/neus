@@ -6,6 +6,20 @@
   - name: Creating the "{{user}}|capitalize" user
     user: name="{{user}}" group="{{group}}" password="{{password}}"
 
+  - name: Copying proxy management functions to host
+    copy:
+      src=shell/proxy.sh
+      dest=/tmp/proxy.sh
+
+  - name: Adding proxy management functions to the shell
+    shell: cat /tmp/proxy.sh >> .bashrc
+    args:
+      chdir: /home/{{user}}/
+
+  - name: Configuring terminal
+    include: terminal.yml
+    when: test is not defined
+
   - name: Creating the user bash profile file
     file: path=/home/{{user}}/.bash_profile src=file owner="{{user}}" state=touch
 
@@ -21,7 +35,7 @@
       rpm_app_name: "Chrome Browser"
       rpm_filename : google-chrome-stable_current_x86_64.rpm
 
-  # Activator application template
+  # Typesafe Activator application template
   - include: install_activator.yml
 
   # HarooPad markdown editor

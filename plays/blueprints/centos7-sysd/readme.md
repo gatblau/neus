@@ -22,7 +22,7 @@ The following files are used to create the image:
 
 #### Configuring the playbook to use the image
 
-After building the image, tell the [runner](../../provision/run.yml) to use the image by updating the **"container_image"** variable of the [target_host_n](../../provision/target_host1.yml) to the name of the CentOS 7 image with systemd: **"gatblau/centos7d:centos7d"**.
+After building the image, tell the [runner](../ci_env/docker/run.yml) to use the image by updating the **"container_image"** variable of the [target_host_n](../ci_env/docker/target_host1.yml) to the name of the CentOS 7 image with systemd: **"gatblau/centos7d:centos7d"**.
 
 
 

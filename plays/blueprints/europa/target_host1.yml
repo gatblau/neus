@@ -4,16 +4,7 @@
     vars:
       platform: europa
     roles:
-      - common
-      - db_development
       - europa
-      - docker
-      - node_js
-      - java_alt
-      - intellij_idea
-      - eclipse_jee
-      - eclipse_scala
-      - mysql_workbench
-      - robo_mongo
+
     sudo: yes
     remote_user: root
