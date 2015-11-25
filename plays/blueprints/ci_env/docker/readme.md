@@ -6,6 +6,8 @@ This folder contains the files to create a CI Bronze Docker image.  Note: the ce
 
 The following details how to build the Docker CI Bronze image using IntelliJ Idea 15 using the Europa VM (which can be found [here](http://github.com/gatblau/europa)).  For Docker Support in IntelliJ Idea, click [here](https://blog.jetbrains.com/idea/2015/03/docker-support-in-intellij-idea-14-1/).
 
+Download and install the **Docker integration** and **BashSupport** plugins (IntelliJ will need to be restarted).
+
 ### Docker Connection
 
 Open a terminal and run the following command: `sudo chmod 0666 /var/run/docker.sock` to allow access to the Docker socket.  
@@ -14,7 +16,7 @@ If using Europa then place this command in .bash_profile so that it is run each 
 
 **Using IntelliJ Idea:**
 
-Select Files -> Settings
+Select File -> Settings
 
 Search for Clouds, click the + sign, add new Docker deployment and set the following:
 

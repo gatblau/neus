@@ -4,15 +4,17 @@
 
 - Build CI Bronze Docker image
 
+Run `build.sh` which will download required installation files and then run the following Ansible command:
+
 `ansible-playbook run.yml`
 
-- Create CI Compact Docker container
+- Create CI Bronze Docker container
 
 `docker run --name cidocker -d -p 80:80 -p 3306:3306 gatblau/cidocker:1.0 /usr/startup.sh` 
 
-- Connect to running CI Compact Docker container
+- Connect to running CI Bronze Docker container
 
-`docker exec -i -t cibronze bash`
+`docker exec -i -t cidocker bash`
 
 
 ## Encrypt Passwords
