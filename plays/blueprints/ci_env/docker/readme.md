@@ -1,6 +1,6 @@
 ## CI Docker Image
 
-This folder contains the files to create a CI Bronze Docker image.  Note: the centos7-sysd Docker image must be created before building the CI Docker contanier.
+This folder contains the files to create a CI Bronze Docker image.  Note: the centos7-sysd Docker image must be created before building the CI Docker container.
 
 ## IntelliJ Idea
 
