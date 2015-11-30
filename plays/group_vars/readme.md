@@ -7,12 +7,10 @@ This folder contains variables that apply to more than one group; click [here](h
 
 This folder contains variables that apply to all groups, see table below:
 
-| Variable | Description |
-|--------|--------|
-| java_sdk_name | The Java SDK name |
-| mariadb_port | Port to use for MySQL database access |
-| db_user | Username for access to MySQL database |
-| db_pwd | Password for access to MySQL database |
+- Proxy Port Number
+- Java SDK details
+- MariaDB port, user name and password
+- Plays and cache folder locations
 
 ## Europa Variables
 

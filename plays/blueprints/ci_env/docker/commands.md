@@ -1,43 +1,19 @@
 ## Commands
 
-### CI Bronze Docker Container
+### CI Docker Container
 
-- Build CI Bronze Docker image
+The following commands will build a CI Docker image and create a CI Docker container from the command line.
+
+- Build CI Docker image
 
 Run `build.sh` which will download required installation files and then run the following Ansible command:
 
 `ansible-playbook run.yml`
 
-- Create CI Bronze Docker container
+- Create CI Docker container
 
 `docker run --name cidocker -d -p 80:80 -p 3306:3306 gatblau/cidocker:1.0 /usr/startup.sh` 
 
-- Connect to running CI Bronze Docker container
+- Connect to running CI Docker container
 
 `docker exec -i -t cidocker bash`
-
-
-## Encrypt Passwords
-
-Install Passlib hashing library:
-`pip install passlib` 
-
-Following command will prompt for a password then print the encrypted hash:
-`python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_crypt.encrypt(getpass.getpass())"`
-
-
-## Export and Import MySQL Databases
-
-backup: # mysqldump --database gogs > gogs-export.sql
-sudo docker cp cibronze:/gogs-export.sql gogs-export.sql
-
-backup: # mysqldump --database artifactory > art-export.sql
-sudo docker cp cibronze:/art-export.sql art-export.sql
-
-restore:# mysql -u admin -p Passw0rd! gogs < import.sql
-restore:# mysql -u admin -p Passw0rd! artifactory < import.sql
-
-
-## Copy Files from Docker Container
-
-`docker cp <containerId>:/file/path/within/container /host/path/target`
