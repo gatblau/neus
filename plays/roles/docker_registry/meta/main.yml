@@ -1,5 +1,0 @@
----
-# This play depends on the Docker role which installs Docker first
-
-   dependencies:
-     - { role: docker }

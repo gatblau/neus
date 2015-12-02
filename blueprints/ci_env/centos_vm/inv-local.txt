@@ -1,0 +1,17 @@
+[local]
+localhost
+
+[localhost]
+cibuild
+cideploy
+ciqual
+cirepo
+
+[localhost:vars]
+ansible_host=localhost
+ansible_ssh_port=22
+mariadb_port=5000
+platform=centos_vm
+artifactory_ipaddress=localhost
+gogs_ipaddress=localhost
+sonarqube_ipaddress=localhost

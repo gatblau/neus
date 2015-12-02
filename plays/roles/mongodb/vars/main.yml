@@ -1,4 +1,0 @@
----
-# This play contains variables for the mongodb role
-
-  mongo_repo: mongo-db.repo

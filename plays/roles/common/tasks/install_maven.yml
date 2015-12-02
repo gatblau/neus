@@ -1,9 +1,0 @@
----
-  - include: "{{plays_folder}}/install_tool.yml"
-    vars:
-      tool_name : Maven
-      folder_name : "{{ maven_folder }}"
-      zip_filename: "{{ maven_zipfile }}"
-      add_version_to_folder : false
-      zip_has_folder : true
-      has_bin_folder : true

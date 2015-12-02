@@ -1,2 +1,0 @@
-# used by packer
-cibronze ansible_connection=local platform=centos_vm

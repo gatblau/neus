@@ -1,9 +1,0 @@
----
-# The CI Build Server contains Jenkins 
-  - name: Configuring the Continuous Integration Build Server environment
-    hosts: cibuild
-    roles:
-      - jenkins
-    sudo: yes
-    remote_user: root
-

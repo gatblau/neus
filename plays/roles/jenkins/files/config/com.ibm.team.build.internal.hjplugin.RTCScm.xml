@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<com.ibm.team.build.internal.hjplugin.RTCScm_-DescriptorImpl plugin="teamconcert@1.1.9.7">
-  <generation>1</generation>
-  <globalServerURI>https://localhost:9443/ccm</globalServerURI>
-  <globalTimeout>480</globalTimeout>
-  <globalPassword>du9+Qvn5czVoE0bkEelGNE7YPLE8d+9oDqrTuIqgGF8=</globalPassword>
-  <globalAvoidUsingToolkit>false</globalAvoidUsingToolkit>
-</com.ibm.team.build.internal.hjplugin.RTCScm_-DescriptorImpl>

@@ -1,8 +1,0 @@
----
-# The CI Quality Server contains SonarQube
-  - name: Configuring the Continuous Integration Quality Server environment
-    hosts: ciqual
-    roles:
-      - sonarqube
-    sudo: yes
-    remote_user: root
