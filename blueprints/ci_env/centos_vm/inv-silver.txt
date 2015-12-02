@@ -1,0 +1,15 @@
+# CI Environment - Silver Standard
+
+[cisilver]
+cibuild   ansible_host=192.168.50.10
+cideploy  ansible_host=192.168.50.11
+ciqual    ansible_host=192.168.50.12
+cirepo    ansible_host=192.168.50.13
+
+[cisilver:vars]
+ansible_ssh_port=22
+mariadb_port=5000
+platform=centos_vm
+artifactory_ipaddress="{{hostvars['cideploy']['ansible_host']}}"
+gogs_ipaddress="{{hostvars['cirepo']['ansible_host']}}"
+sonarqube_ipaddress="{{hostvars['ciqual']['ansible_host']}}"

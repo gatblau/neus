@@ -1,0 +1,11 @@
+---
+# This play installs Artifactory - binary repository and deployment tool
+#
+# See meta/main.yml for role dependencies
+
+  - name: Check if Artifactory installed
+    stat: path=/var/opt/jfrog/artifactory
+    register: artifactory_exists
+
+  - include: install_artifactory.yml
+    when: artifactory_exists.stat.exists == false

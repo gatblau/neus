@@ -1,0 +1,9 @@
+---
+- name: Configuring Control Machine
+  hosts: controlmachine
+  roles:
+    - docker
+    - docker_certificate
+  sudo: yes
+  remote_user: root
+

@@ -8,6 +8,6 @@ envs/docker-registry/.vagrant
 envs/europa/.vagrant
 envs/europa/out-*
 plays/.vagrant
-plays/files/cache/
+files/cache/
 *.iml
 *~

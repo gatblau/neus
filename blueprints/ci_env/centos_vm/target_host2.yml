@@ -1,0 +1,8 @@
+---
+# The CI Deployment Server contains Artifactory 
+  - name: Configuring the Continuous Integration Deployment Server environment
+    hosts: cideploy
+    roles:
+      - artifactory
+    sudo: yes
+    remote_user: root

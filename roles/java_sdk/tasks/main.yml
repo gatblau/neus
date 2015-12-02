@@ -1,0 +1,10 @@
+---
+  - name: Check if Java installed
+    stat: path=/usr/java/default
+    register: java_exists
+
+  - include: "{{plays_folder}}/install_rpm.yml"
+    vars:
+      rpm_app_name: "{{ java_sdk_name }}"
+      rpm_filename: "{{ java_sdk_rpm }}"
+    when: java_exists.stat.exists == false

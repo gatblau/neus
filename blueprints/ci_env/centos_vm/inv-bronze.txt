@@ -1,0 +1,16 @@
+# CI Environment - Bronze Standard
+
+[cibronze]
+cibuild
+cideploy
+ciqual
+cirepo
+
+[cibronze:vars]
+ansible_host=192.168.50.10
+ansible_ssh_port=22
+mariadb_port=5000
+platform=centos_vm
+artifactory_ipaddress=localhost
+gogs_ipaddress=localhost
+sonarqube_ipaddress=localhost
