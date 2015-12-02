@@ -9,24 +9,25 @@ Where two or more roles depends on a role, the dependant role will be installed 
 
 | Role | Description |
 |--------|--------|
-|artifactory | This role installs the Artifactory repository tool.  It depends upon the mariadb and nginx roles. |
+|artifactory | This role installs the Artifactory repository tool. |
 |baseline | This role installs unzip and the EPEL repository. |
 |common| This role installs the following common tools: Git, Gradle, Groovy, Maven and SBT (Scala Build Tool)|
 |docker| This role installs Docker.|
 |docker_certificate| This role install the Docker certificate.|
 |docker_registry| This role installs the Docker registry.|
-|gogs| This role installs GOGS as a locally hosted Git repository.  It depends upon the baseline, mariadb and nginx roles.|
-|golang| This tool installs Golang.|
-|httpd_tools| This role installs HTTPD tools.|
-|java_sdk| This role installs the Java SDK.|
-|jenkins | This role installs the Jenkins build tool.  It depends upon the common and ci_proxy_nginx roles, which will be installed first.|
-|mariadb| This role installs MariaDB (MySQL).|
-|mongodb| This role installs RoboMongo.|
-|nginx| This role installs NGINX as a reverse proxy for Jenkins, GOGS, SonarQube and Artifactory.|
-|node_js| This role installs Node JS.|
-|packer| This role installs Packer.|
-|robo_mongo| This role installs the RoboMongo database|
-|sonarqube| This role installs the SonarQube code quality tool.  It depends upon the common, mariadb and nginx roles.|
+|gogs| This role installs GOGS as a locally hosted Git repository. |
+|golang| This tool installs Golang. |
+|httpd_tools| This role installs HTTPD tools. |
+|java_sdk| This role installs the Java SDK. |
+|jenkins | This role installs the Jenkins build server. |
+|mariadb| This role installs MariaDB (MySQL). |
+|mongodb| This role installs RoboMongo. |
+|nginx| This role installs NGINX as a reverse proxy for Jenkins, GOGS, SonarQube and Artifactory. |
+|node_js| This role installs Node JS. |
+|packer| This role installs Packer. |
+|robo_mongo| This role installs the RoboMongo database. |
+|sonarqube| This role installs the SonarQube code quality tool. |
+
 
 ###Role Variables
 
