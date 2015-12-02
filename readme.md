@@ -1,23 +1,29 @@
-##Role Based Play Files
+## Continuous Integration Environment
 
-For a description of [Ansible roles](http://docs.ansible.com/ansible/playbooks_roles.html) click on the link.
+The Continuous Integration (CI) environment provides the following tools:
 
-Roles are used to group together tools required to fulfil a function.  The Jenkins role
-(jenkins) depends upon other tools being installed, for example a Java SDK (java_sdk) and build tools (common role).  These dependencies are stored in meta/main.yml.
+- Build server - [Jenkins](https://jenkins-ci.org/)
+- Source repository - [GOGS](https://gogs.io/)
+- Artefact repository - [Artifactory](https://www.jfrog.com/open-source/#os-arti)
+- Code quality tool - [SonarQube](http://www.sonarqube.org/)
+- Database - [MariaDB](https://mariadb.org/)
 
-The example, the CI environment uses the following roles:
+Currently, the CI environment is available in two variants
 
-- artifactory (artefact repository)
-- gogs (source repository)
-- jenkins (build tool)
-- sonarqube (code quality)
+- Bronze - one platform (CentOS VM or Docker container)
+- Silver - two or more virtual machines
+
+There are two more variants planned.
+
+- Gold
+- Platinum
 
 
-The following describes the folders:
+### Folders
 
 | Folder | Description |
 |--------|--------|
-| blueprints |This folder contains the blueprints for each environment (play and inventory files). |
+| blueprints |This folder contains the blueprints to build each environment (play and inventory files). |
 | files |This folder contains the cache folder for installation files (created by build scripts). |
 | group_vars |This folder contains variables assigned to particular groups. |
 | plays | This folder contains common play files used by roles. |
