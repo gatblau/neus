@@ -24,8 +24,4 @@ fi
 bash ../fetch.sh
 
 # build CI environment
-if [[ "$1" ]]; then
-  ansible-playbook run.yml -i $1 -c local
-else
-  echo Usage: bash build.sh inventory-file
-fi
+ansible-playbook run.yml -i inv-local.txt -c local
