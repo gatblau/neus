@@ -12,5 +12,5 @@ ansible_ssh_port=22
 mariadb_port=5000
 platform=centos_vm
 artifactory_ipaddress="{{hostvars['cideploy']['ansible_ssh_host']}}"
-gogs_ipaddress="{{hostvars['cirepo']['ansible_ssh_host']}}"
+gogs_ipaddress="{{hostvars['cirepo']['ansible_ssh_host']}}/git"
 sonarqube_ipaddress="{{hostvars['ciqual']['ansible_ssh_host']}}"
