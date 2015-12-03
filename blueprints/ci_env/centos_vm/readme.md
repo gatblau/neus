@@ -30,8 +30,6 @@ Logon to the CI environment and carry out the following:
 
 - Clone the Neus repository to the Europa environment `git clone http://github.com/gatblau/neus /home/europa/neus`
 
-- Ensure *sshpass* is installed `sudo yum sshpass install -y`
-
 - Change to *centos_vm* folder `cd ~/neus/blueprints/ci_env/centos_vm`
 
 - Run the build `bash build-local.sh`
