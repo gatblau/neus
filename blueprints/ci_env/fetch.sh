@@ -56,6 +56,7 @@ download "http://download.oracle.com/otn-pub/java/jdk/8u66-b17/" "jdk-8u66-linux
 download "https://services.gradle.org/distributions/" "gradle-2.7-bin.zip"
 download "https://dl.bintray.com/sbt/native-packages/sbt/0.13.8/" "sbt-0.13.8.zip"
 download "http://mirrors.muzzy.org.uk/apache/maven/maven-3/3.3.3/binaries/" "apache-maven-3.3.3-bin.zip"
+download "http://dl.fedoraproject.org/pub/epel/7/x86_64/e/" "epel-release-7-5.noarch.rpm"
 download "http://robomongo.org/files/linux/" "robomongo-0.8.5-x86_64.rpm"
 download "http://gogs.dn.qbox.me/" "gogs_v0.7.22_linux_amd64.zip"
 download "http://pkg.jenkins-ci.org/redhat/" "jenkins-1.639-1.1.noarch.rpm"

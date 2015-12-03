@@ -18,8 +18,8 @@ Open a terminal windows and carry out the following:
 
 Update the appropriate inventory file for the environment level ([inv-bronze.txt](inv-bronze.txt) or [inv-silver.txt](inv-silver.txt)) with the IP address(es) of the VMs.  A bronze environment has only one IP address, while a silver environment can have two, three or four IP address.
 
-- Run the build (bronze) `build.sh inv-bronze.txt`
+- Run the build (bronze) `sh build.sh inv-bronze.txt`
 
-- Run the build (silver) `build.sh inv-silver.txt`
+- Run the build (silver) `sh build.sh inv-silver.txt`
 
-The build process will fetch installation files for the build and then install the CI environment.  Once the build has completed, follow the instructions for setting up the environment contained in the CI environment [readme.md](../readme.md).
+The build process will fetch installation files for the build and then install the CI environment.  Once the build has completed, follow the instructions for setting up the environment contained in the CI environment [readme](../readme.md).

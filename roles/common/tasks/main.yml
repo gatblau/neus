@@ -1,7 +1,7 @@
 ---
 # This play contains common plays that will run on all nodes
 #
-# It depends on the baseline and java_sdk roles (see meta/main.yml)
+# See meta/main.yml for dependent roles
 
     # Install Groovy
     - name: Check if Groovy installed

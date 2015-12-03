@@ -2,3 +2,7 @@
 # This play contains variables for the baseline role
 
   epel_rpm: epel-release-7-5.noarch.rpm
+
+  # Location of cache files and common play files
+  cache_folder: ../../../files/cache
+  plays_folder: ../../../plays

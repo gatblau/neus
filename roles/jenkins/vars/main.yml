@@ -20,6 +20,10 @@
   # gogs_ipaddress        - set in the inventory file
   # sonarqube_ipaddress   - set in the inventory file
 
+  # Location of cache files and common play files
+  cache_folder: ../../../files/cache
+  plays_folder: ../../../plays
+
   # Jenkins Plugins
   jenkins_plugins:
     [

@@ -19,3 +19,7 @@
 
   sbt_folder: sbt-0.13.8
   sbt_zipfile: sbt-0.13.8.zip
+
+  # Location of cache files and common play files
+  cache_folder: ../../../files/cache
+  plays_folder: ../../../plays

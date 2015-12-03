@@ -24,4 +24,4 @@ fi
 bash fetch.sh
 
 # build docker images
-ansible-playbook run.yml
+ansible-playbook run.yml -i inventory.txt -u root -k

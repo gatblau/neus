@@ -40,6 +40,7 @@ download_() {
 }
 
 # download the following files to the root folder if they do not exist
+download "http://dl.fedoraproject.org/pub/epel/7/x86_64/e/" "epel-release-7-5.noarch.rpm"
 download "http://mirror.centos.org/centos/7.1.1503/extras/x86_64/Packages/" "docker-1.7.1-108.el7.centos.x86_64.rpm"
 download "http://mirror.centos.org/centos/7.1.1503/extras/x86_64/Packages/" "golang-1.4.2-1.el7.centos.x86_64.rpm"
 download "http://mirror.centos.org/centos/7.1.1503/os/x86_64/Packages/" "httpd-tools-2.4.6-31.el7.centos.x86_64.rpm"

@@ -21,7 +21,7 @@
       - MariaDB-server
       - MySQL-python
 
-  - name: Setting MariaDB port number to {{mariadb_port | default(3306)}}
+  - name: Setting MariaDB port number to {{mariadb_port}}
     template: src=server.cnf.j2
               dest=/etc/my.cnf.d/server.cnf
               owner={{mariadb_user}}

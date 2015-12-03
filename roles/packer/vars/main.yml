@@ -1,7 +1,6 @@
 ---
-# This play contains variables for the docker role
-
-  docker_rpm: docker-1.7.1-108.el7.centos.x86_64.rpm
+  packer_folder:  packer_0.8.2
+  packer_zipfile: packer_0.8.2_linux_amd64.zip
 
   # Location of cache files and common play files
   cache_folder: ../../../files/cache
