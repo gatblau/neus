@@ -14,7 +14,7 @@
 
   - name: Copying GOGS to the host machine
     copy:
-      src=cache/{{gogs_zipfile}}
+      src=files/cache/{{gogs_zipfile}}
       dest=/tmp/{{gogs_zipfile}}
 
   - name: Unzipping the GOGS archive
