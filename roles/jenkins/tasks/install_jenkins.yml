@@ -58,14 +58,14 @@
       owner="{{jenkins_user}}"
       copy=no
 
+  - name: Removing Jenkins jobs from the host
+    file: path=/tmp/jobs.zip state=absent
+
   - name: Configure Smoke Test Build
     template:
       src=smoke_test_config.xml.j2
-      dest="{{jenkins_home}}/jobs/smoke_test"
+      dest="{{jenkins_home}}/jobs/smoke_test/config.xml"
       owner="{{jenkins_user}}"
-
-  - name: Removing Jenkins jobs from the host
-    file: path=/tmp/jobs.zip state=absent
 
   - name: Jenkins service setup
     template:
