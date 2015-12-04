@@ -26,9 +26,11 @@ The build process will fetch installation files for the build and then install t
 
 ## CI Environment Build on Local VM Using Command Line
 
-Logon to the CI environment and carry out the following:
+Logon to the CI environment as root and carry out the following:
 
-- Clone the Neus repository to the Europa environment `git clone http://github.com/gatblau/neus /home/europa/neus`
+- Clone the Neus repository to the CI environment `git clone http://github.com/gatblau/neus ~/neus`
+
+- Ensure Ansible is installed `ansible --version` if not then install it `bash ~/neus/scripts/pre-build.sh`
 
 - Change to *centos_vm* folder `cd ~/neus/blueprints/ci_env/centos_vm`
 
