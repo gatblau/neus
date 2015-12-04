@@ -10,6 +10,7 @@
     image_version: 1.0
     startup_script: scripts/startup.sh
     platform: docker
-    artifactory_ipaddress: localhost
-    gogs_ipaddress: localhost
-    sonarqube_ipaddress: localhost
+    mariadb_port: 3306
+    artifactory_ipaddress: localhost:8081
+    gogs_ipaddress:        localhost:3000
+    sonarqube_ipaddress:   localhost:9000
