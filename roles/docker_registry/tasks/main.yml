@@ -1,14 +1,17 @@
 ---
 # This play configures the Docker registry
 
-    - name: Creating a password for access to the Docker Registry
-      command: "htpasswd -cbB /usr/local/docker-registry/ reguser Passw0rd!"
+    - name: Install Git
+      yum: name=git state=latest
 
     - name: Creating the Docker registry folder
       file:
         path=/usr/local/docker-registry
         state=directory
         mode=0755
+
+    - name: Creating a password for access to the Docker Registry
+      command: "htpasswd -cbB /usr/local/docker-registry/docker-registry.htpasswd reguser Passw0rd!"
 
     - name: Copying Docker Registry build script to the host
       copy:
