@@ -1,0 +1,5 @@
+---
+   dependencies:
+     - { role: java_sdk }
+     - { role: mariadb }
+     - { role: nginx }

@@ -1,0 +1,13 @@
+---
+# This play installs SonarQube - source code quality tool
+#
+# See meta/main.yml for role dependencies
+
+  - name: Check Sonar installed
+    stat: path=/opt/sonar
+    register: sonar_exists
+
+  - include: install_sonar.yml
+    when: sonar_exists.stat.exists == false
+
+

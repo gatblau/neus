@@ -1,0 +1,26 @@
+---
+- name: Creating a '{{container_name}}' Docker image, please wait...
+  hosts: localhost
+  tasks:
+  - include: plays/util_initialise.yml
+    vars:
+      target: "{{container_name}}"
+      image: "{{container_image}}"
+      expose: "{{container_port}}"
+
+- name: Provisioning the '{{container_name}}' container host
+  hosts: "{{container_name}}"
+  connection: docker
+  roles:
+    - mariadb
+
+- name: Finalising the build
+  hosts: localhost
+  tasks:
+    - include: plays/util_terminate.yml
+      vars:
+        target: "{{container_name}}"
+        image: "{{container_image}}"
+        author: "{{image_author}}"
+        repository: "{{image_repository}}"
+        version: "{{image_version}}"

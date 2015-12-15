@@ -1,0 +1,16 @@
+---
+- name: Deploy CI Bronze Environment
+  include: target_host1.yml
+  vars:
+    container_image: centos:centos7
+    container_name: cidocker
+    container_ports: [ "{{proxy_port|default(80)}}", "{{mysql_port | default(3306)}}", 27017 ]
+    image_author: gatblau.org
+    image_repository: gatblau
+    image_version: 1.0
+    startup_script: scripts/startup.sh
+    platform: docker
+    mariadb_port: 3306
+    artifactory_ipaddress: localhost:8081
+    gogs_ipaddress:        localhost:3000
+    sonarqube_ipaddress:   localhost:9000

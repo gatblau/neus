@@ -1,0 +1,11 @@
+---
+# This play contains variables for the artifactory role
+
+  artifactory_rpm: artifactory.rpm
+  artifactory_user: artifactory
+  artifactory_password: $6$rounds=656000$a0cdQA2qcvoNad4l$5pVXnsluHxJcYDB1g2b7aRFs4zsQ0SUbN3YeD.k3GIDZHwxLJEJ6mfDqEbO.46VJx/dY.UFJ12jbELRUY/i2..
+  mysql_connector: mysql-connector-java-5.1.36-bin.jar
+
+  # Location of cache files and common play files
+  cache_folder: ../../../files/cache
+  plays_folder: ../../../plays

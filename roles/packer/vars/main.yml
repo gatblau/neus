@@ -1,0 +1,7 @@
+---
+  packer_folder:  packer_0.8.2
+  packer_zipfile: packer_0.8.2_linux_amd64.zip
+
+  # Location of cache files and common play files
+  cache_folder: ../../../files/cache
+  plays_folder: ../../../plays
