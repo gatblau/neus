@@ -2,8 +2,8 @@
 
 # fetches all required packages and copies them to the ROOT folder
 # this file is run by the build script, if run in on its own then change
-# the ROOT folder to ../files/cache
-ROOT='files/cache/'
+# the ROOT folder to ../../files/cache
+ROOT='../../../files/cache/'
 
 # creates the root folder if it does not exist
 if [[ ! -e $ROOT ]]; then
