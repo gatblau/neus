@@ -1,0 +1,61 @@
+---
+# This play configures the Docker registry
+
+    - name: Install Git
+      yum: name=git state=latest
+
+    - name: Creating the Docker registry folder
+      file:
+        path=/usr/local/docker-registry
+        state=directory
+        mode=0755
+
+    - name: Creating a password for access to the Docker Registry
+      command: "htpasswd -cbB /usr/local/docker-registry/docker-registry.htpasswd reguser Passw0rd!"
+
+    - name: Copying Docker Registry build script to the host
+      copy:
+        src=build-registry.sh
+        dest=/usr/local/docker-registry
+        owner=root
+
+    - name: Compiling the Docker Registry on the host, please wait, it can take a bit!
+      command: "sh build-registry.sh"
+      args:
+        chdir: "/usr/local/docker-registry"
+
+    - name: Copying registry configuration to the host
+      copy:
+        src=registry-config.yml
+        dest=/usr/local/docker-registry/registry-config.yml
+        owner=root
+
+    - name: Copying the registry certificate to the host
+      copy:
+        src=certs/registry.crt
+        dest=/usr/local/docker-registry/registry.crt
+        owner=root
+
+    - name: Copying the registry key to the host
+      copy:
+        src=certs/registry.key
+        dest=/usr/local/docker-registry/registry.key
+        owner=root
+
+    - name: Creating the Docker registry storage folder
+      file:
+        path=/var/lib/docker-registry
+        state=directory
+        mode=0755
+
+    - name: Copying the Docker-Registry Systemd service unit file to the host
+      copy:
+        src=docker-registry.service
+        dest=/etc/systemd/system/docker-registry.service
+        mode=0755
+
+    - name: Starting the Docker-Registry service
+      service:
+        name=docker-registry
+        state=started
+        enabled=yes

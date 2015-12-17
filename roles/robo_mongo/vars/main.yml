@@ -1,0 +1,6 @@
+---
+  robomongo_rpm: robomongo-0.8.5-x86_64.rpm
+
+  # Location of cache files and common play files
+  cache_folder: ../../../files/cache
+  plays_folder: ../../../plays

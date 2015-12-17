@@ -1,0 +1,6 @@
+---
+  golang_rpm: golang-1.4.2-1.el7.centos.x86_64.rpm
+
+  # Location of cache files and common play files
+  cache_folder: ../../../files/cache
+  plays_folder: ../../../plays

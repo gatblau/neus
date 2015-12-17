@@ -1,0 +1,9 @@
+---
+# This handler starts the NGINX service
+  - name: Starting the NGINX Service
+    service:
+      name=nginx
+      state=started
+      enabled=yes
+    when: platform == "centos_vm"
+

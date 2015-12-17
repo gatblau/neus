@@ -1,0 +1,12 @@
+---
+  # Proxy Port variable
+  proxy_port: 80
+
+  # Java SDK variables
+  java_sdk_name: "Java JDK 8u66-x64"
+  java_sdk_rpm: jdk-8u66-linux-x64.rpm
+
+  # MariaDB variables
+  # mariadb_port : 3306 - must be set in the inventory file
+  db_user      : admin
+  db_pwd       : Passw0rd!

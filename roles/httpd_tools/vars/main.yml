@@ -1,0 +1,6 @@
+---
+  httpd_tools_rpm: httpd-tools-2.4.6-31.el7.centos.x86_64.rpm
+
+  # Location of cache files and common play files
+  cache_folder: ../../../files/cache
+  plays_folder: ../../../plays
