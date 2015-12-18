@@ -1,0 +1,15 @@
+{
+  "AttachStdin" : false,
+  "Volumes" : { },
+  "ExposedPorts" : { },
+  "HostConfig" : {
+    "Binds" : [ ],
+    "PortBindings" : {
+      "3306/tcp" : [ {
+        "HostIp" : "",
+        "HostPort" : "3306"
+      } ]
+    },
+    "Privileged" : true
+  }
+}

@@ -21,3 +21,4 @@
       name=mongod
       state=started
       enabled=yes
+    when: platform == "centos_vm"

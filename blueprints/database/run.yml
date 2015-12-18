@@ -7,6 +7,8 @@
     image_author: gatblau.org
     image_repository: gatblau
     image_version: 1.0
+    platform: docker
+    mariadb_port: 3306
   tags:
     - database
 
@@ -18,5 +20,7 @@
     image_author: gatblau.org
     image_repository: gatblau
     image_version: 1.0
+    platform: docker
+    mariadb_port: 3306
   tags:
     - web
