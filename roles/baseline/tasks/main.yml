@@ -7,3 +7,6 @@
     vars:
       rpm_app_name: "EPEL YUM Repository"
       rpm_filename : epel-release-7-5.noarch.rpm
+
+  - name: Install which command
+    yum: name=which state=latest
