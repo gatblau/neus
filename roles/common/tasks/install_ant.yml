@@ -1,0 +1,3 @@
+---
+  - name: Install Ant
+    yum: name=ant state=latest

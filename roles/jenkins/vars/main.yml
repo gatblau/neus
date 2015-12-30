@@ -1,0 +1,56 @@
+---
+# This play contains variables for the jenkins role
+
+  # Jenkins RPM
+  jenkins_rpm: jenkins-1.643-1.1.noarch.rpm
+
+  # Jenkins folders
+  jenkins_home: /home/jenkins/.jenkins
+
+  # Jenkins username and password
+  jenkins_user: jenkins
+  jenkins_password: $6$rounds=656000$vEwfQFfx8of8GbEK$.Ib42z9muqnJxiuQL/fw7JomQ5VXAPNBIWCQsQIm1nBIa/Jy17dXT3mxzwiI.BJ4mVdzJ2COlhlXmgn0EIaEz1
+
+  # Sonar Runner
+  sonar_runner_folder: sonar-runner-2.4
+  sonar_runner_zipfile: sonar-runner-dist-2.4.zip
+
+  # IP Addresses
+  # artifactory_ipaddress - set in the inventory file
+  # gogs_ipaddress        - set in the inventory file
+  # sonarqube_ipaddress   - set in the inventory file
+
+  # Location of cache files and common play files
+  cache_folder: ../../../files/cache
+  plays_folder: ../../../plays
+
+  # Jenkins Plugins
+  jenkins_plugins:
+    [
+      'ansible.hpi',
+      'artifactory.hpi',
+      'credentials.hpi',
+      'email-ext.hpi',
+      'envinject.hpi',
+      'git.hpi',
+      'git-client.hpi',
+      'git-server.hpi',
+      'gradle.hpi',
+      'sbt.hpi',
+      'sonar.hpi',
+      'ssh-credentials.hpi',
+      'ssh-slaves.hpi',
+      'teamconcert.hpi',
+      'ws-cleanup.hpi',
+      'workflow-aggregator.hpi',
+      'workflow-job.hpi',
+      'workflow-step-api.hpi',
+      'workflow-cps.hpi',
+      'workflow-support.hpi',
+      'workflow-durable-task-step.hpi',
+      'workflow-basic-steps.hpi',
+      'workflow-support.hpi',
+      'workflow-scm-step.hpi',
+      'workflow-api.hpi',
+      'workflow-cps-global-lib.hpi'
+    ]

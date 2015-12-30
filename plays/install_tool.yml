@@ -48,23 +48,24 @@
 
   - name: Creating {{tool_name|upper}}_HOME variable
     lineinfile:
-      dest=/home/vagrant/.bash_profile
+      dest=/home/{{user}}/.bash_profile
       insertafter="# User specific.*"
       line="{{tool_name|upper}}_HOME=/usr/local/{{tool_name|lower}}/default"
+    when: platform == "centos_vm" and user is defined
 
   - name: Adding {{tool_name|upper}}_HOME to the PATH with /bin
     lineinfile:
-      dest=/home/vagrant/.bash_profile
+      dest=/home/{{user}}/.bash_profile
       insertafter="PATH.*bin"
       line="PATH=$PATH:${{tool_name|upper}}_HOME/bin"
-    when: has_bin_folder == true
+    when: has_bin_folder == true and platform == "centos_vm" and user is defined
 
   - name: Adding {{tool_name|upper}}_HOME to the PATH without /bin
     lineinfile:
-      dest=/home/vagrant/.bash_profile
+      dest=/home/{{user}}/.bash_profile
       insertafter="PATH.*bin"
       line="PATH=$PATH:${{tool_name|upper}}_HOME"
-    when: has_bin_folder == false
+    when: has_bin_folder == true and platform == "centos_vm" and user is defined
 
   - name: Removing {{tool_name|capitalize}} installation package from the host
     file:

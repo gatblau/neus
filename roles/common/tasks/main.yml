@@ -1,0 +1,52 @@
+---
+# This play contains common plays that will run on all nodes
+#
+# See meta/main.yml for dependent roles
+
+    # Install Groovy
+    - name: Check if Groovy installed
+      stat: path=/usr/local/groovy
+      register: groovy_exists
+
+    - name: Install Groovy
+      include: install_groovy.yml
+      when: groovy_exists.stat.exists == false
+
+    # Install SBT
+    - name: Check if SBT installed
+      stat: path=/usr/local/sbt
+      register: sbt_exists
+
+    - name: Install SBT
+      include: install_sbt.yml
+      when: sbt_exists.stat.exists == false
+
+    # Install Gradle
+    - name: Check if Gradle installed
+      stat: path=/usr/local/gradle
+      register: gradle_exists
+
+    - name: Install Gradle
+      include: install_gradle.yml
+      when: gradle_exists.stat.exists == false
+
+    # Install Maven
+    - name: Check if Maven installed
+      stat: path=/usr/local/maven
+      register: maven_exists
+
+    - name: Install Maven
+      include: install_maven.yml
+      when: maven_exists.stat.exists == false
+
+    # Install Git
+    - name: Check if Git installed
+      stat: path=/bin/git
+      register: git_exists
+
+    - name: Install Git
+      include: install_git.yml
+      when: git_exists.stat.exists == false
+
+#    - name: Install Ant
+#      include: install_ant.yml

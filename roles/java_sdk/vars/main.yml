@@ -1,0 +1,10 @@
+---
+# This play contains variables for the java_sdk role
+
+  # Java SDK variables
+  # java_sdk_name - see group_vars/all/main.yml
+  # java_sdk_rpm  - see group_vars/all/main.yml
+
+  # Location of cache files and common play files
+  cache_folder: ../../../files/cache
+  plays_folder: ../../../plays

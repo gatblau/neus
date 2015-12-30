@@ -1,0 +1,35 @@
+---
+  - name: Creating a '{{container_name}}' Docker image, please wait...
+    hosts: localhost
+    tasks:
+    - include: plays/initialise_container.yml
+      vars:
+        target: "{{container_name}}"
+        image: "{{container_image}}"
+        expose: "{{container_ports}}"
+
+  - name: Provisioning the '{{container_name}}' container host
+    hosts: "{{container_name}}"
+    connection: docker
+    roles:
+      - artifactory
+      - gogs
+      - jenkins
+      - sonarqube
+
+    tasks:
+    - copy:
+        src=scripts/startup.sh
+        dest=/usr/startup.sh
+        mode=0777
+
+  - name: Finalising the build
+    hosts: localhost
+    tasks:
+    - include: plays/terminate_container.yml
+      vars:
+        target: "{{container_name}}"
+        image: "{{container_image}}"
+        author: "{{image_author}}"
+        repository: "{{image_repository}}"
+        version: "{{image_version}}"

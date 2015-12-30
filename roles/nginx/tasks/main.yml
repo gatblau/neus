@@ -1,0 +1,8 @@
+---
+  - name: Check Nginx installed
+    stat: path=/etc/nginx
+    register: nginx_exists
+
+  - include: install_nginx.yml
+    when: nginx_exists.stat.exists == false
+
