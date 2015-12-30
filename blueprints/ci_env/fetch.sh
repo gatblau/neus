@@ -60,7 +60,7 @@ download "http://mirrors.muzzy.org.uk/apache/maven/maven-3/3.3.3/binaries/" "apa
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/e/" "epel-release-7-5.noarch.rpm"
 download "http://robomongo.org/files/linux/" "robomongo-0.8.5-x86_64.rpm"
 download "http://gogs.dn.qbox.me/" "gogs_v0.7.22_linux_amd64.zip"
-download "http://pkg.jenkins-ci.org/redhat/" "jenkins-1.642-1.1.noarch.rpm"
+download "http://pkg.jenkins-ci.org/redhat/" "jenkins-1.643-1.1.noarch.rpm"
 download "https://bintray.com/artifact/download/groovy/maven/" "apache-groovy-binary-2.4.4.zip"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-1.6.3-7.el7.x86_64.rpm"
 download "http://mirror.centos.org/centos/7.1.1503/os/x86_64/Packages/" "perl-5.16.3-285.el7.x86_64.rpm"
