@@ -1,13 +1,2 @@
 .idea/
-envs/pamm/.vagrant
-envs/pamm/out*
-envs/pamm/packer_cache
-envs/ci-compact/.vagrant
-envs/ci-compact/out*
-envs/ci-compact/packer_cache
-envs/docker-registry/.vagrant
-envs/europa/.vagrant
-envs/europa/packer_cache
-envs/europa/out-*
-plays/files/cache/
 *.iml
