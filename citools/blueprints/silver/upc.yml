@@ -1,0 +1,33 @@
+---
+- name: Starting up the host ci-a
+  docker:
+    image: gatblau/centos7d
+    name: ci-a
+    pull: missing
+    detach: yes
+    tty: yes
+    expose: [ 8080, 8081 ]
+    command: sleep infinity
+    state: started
+
+- name: Starting up the host ci-b
+  docker:
+    image: gatblau/centos7d
+    name: ci-b
+    pull: missing
+    detach: yes
+    tty: yes
+    expose: [ 3000, 9000 ]
+    command: sleep infinity
+    state: started
+
+- name: Starting up the host ci-c
+  docker:
+    image: gatblau/centos7d
+    name: ci-c
+    pull: missing
+    detach: yes
+    tty: yes
+    expose: [ 3000, 9000 ]
+    command: sleep infinity
+    state: started

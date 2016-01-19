@@ -1,0 +1,12 @@
+---
+- name: Installing the Unzip command
+  include: plays/install_rpm.yml
+  vars:
+    rpm_app_name: "EPEL YUM Repository"
+    rpm_filename : "{{unzip_rpm}}"
+
+- name: Installing EPEL Yum Repository
+  include: plays/install_rpm.yml
+  vars:
+    rpm_app_name: "EPEL YUM Repository"
+    rpm_filename : "{{epel_rpm}}"

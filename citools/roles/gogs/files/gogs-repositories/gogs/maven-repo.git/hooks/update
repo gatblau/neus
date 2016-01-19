@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+"/usr/local/gogs/gogs" update $1 $2 $3 --config='/usr/local/gogs/custom/conf/app.ini'

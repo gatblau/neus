@@ -1,0 +1,70 @@
+#
+# Copyright (c) 2016 GATBLAU - www.gatblau.org
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Manages the execution of roles on a docker container.
+# The only part of this playbook that needs changing is the list of roles as described below.
+# The name of the playbook should be updated to reflect the host name - e.g. database.yml
+#
+
+#
+# Ansible inventory for the bronze-level CI Tools blueprint
+#
+# To provision to Virtual Machines change the following variables:
+#  - become: determines if sudo is used
+#  - connection: determines the connection plugin to be used (e.g. docker or ssh)
+#  - ansible_ssh_port: the ssh port to use if connection is set to 'ssh'
+#  - ansible_ssh_host: the IP address of the Virtual Machines to provision if connection is set to 'ssh'
+#
+# NOTE: so that it is possible to use docker and ssh interchangeably, this inventory does not contain information
+#   on which roles are deployed to which hosts, only host and variable definitions.
+#   The mapping between roles and hosts is done in the main playbook file.
+#
+
+[local]
+localhost
+
+[local:vars]
+# sets the connection plugin to use, it can be either:
+#   a) docker: uses the ansible docker plugin - use for testing VM blueprints on docker or for creating docker images.
+#   b) ssh: uses the ansible SSH plugin - use to deploy to actual VMs
+connection=docker
+
+[ci]
+# uncomment the ansible_ssh_host variables when using connection=ssh above.
+ci-a # ansible_ssh_host=192.168.10.50
+ci-b # ansible_ssh_host=192.168.10.60
+
+[ci:vars]
+# flags the type of blueprint for plays to decide how to configure accordingly.
+blueprint=bronze
+
+# flags the end target for deployment, being either:
+#  a) 'vm': to deploy on actual VMs or emulated via privileged containers
+#  b) 'container': to deploy on container engines.
+#      If container is selected certain services are not deployed as they should be managed by the orchestration engine.
+host_type=vm
+
+# Settings for Docker local provisioning
+become=no
+
+# Settings for VM remote provisioning
+# become=yes
+# ansible_ssh_port=22
+
+# role variables
+artefact_repository_uri="{{hostvars['artefact_repository']['ansible_ssh_host']}}"
+database_port=5000
+source_control_uri="{{hostvars['source_control']['ansible_ssh_host']}}/git"
+code_quality_uri="{{hostvars['code_quality']['ansible_ssh_host']}}"

@@ -1,0 +1,77 @@
+---
+- name: Starting up the host ci-jenkins-master
+  docker:
+    image: gatblau/centos7d
+    name: ci-jenkins-master
+    pull: missing
+    detach: yes
+    tty: yes
+    expose: [ 8080, 8081 ]
+    command: sleep infinity
+    state: started
+
+- name: Starting up the host ci-jenkins-slave
+  docker:
+    image: gatblau/centos7d
+    name: ci-jenkins-slave
+    pull: missing
+    detach: yes
+    tty: yes
+    expose: [ 8080 ]
+    command: sleep infinity
+    state: started
+
+- name: Starting up the host ci-nexus
+  docker:
+    image: gatblau/centos7d
+    name: ci-nexus
+    pull: missing
+    detach: yes
+    tty: yes
+    expose: [ 3000, 9000 ]
+    command: sleep infinity
+    state: started
+
+- name: Starting up the host ci-gerrit
+  docker:
+    image: gatblau/centos7d
+    name: ci-gerrit
+    pull: missing
+    detach: yes
+    tty: yes
+    expose: [ 3000, 9000 ]
+    command: sleep infinity
+    state: started
+
+- name: Starting up the host ci-gogs
+  docker:
+    image: gatblau/centos7d
+    name: ci-gogs
+    pull: missing
+    detach: yes
+    tty: yes
+    expose: [ 3000, 9000 ]
+    command: sleep infinity
+    state: started
+
+- name: Starting up the host ci-sonar
+  docker:
+    image: gatblau/centos7d
+    name: ci-sonar
+    pull: missing
+    detach: yes
+    tty: yes
+    expose: [ 3000, 9000 ]
+    command: sleep infinity
+    state: started
+
+- name: Starting up the host ci-mariadb
+  docker:
+    image: gatblau/centos7d
+    name: ci-mariadb
+    pull: missing
+    detach: yes
+    tty: yes
+    expose: [ 3000, 9000 ]
+    command: sleep infinity
+    state: started

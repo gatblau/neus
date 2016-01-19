@@ -1,2 +1,0 @@
-# used by packer
-europa ansible_connection=local

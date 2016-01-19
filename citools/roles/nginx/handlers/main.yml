@@ -1,0 +1,13 @@
+---
+# using default port 80, otherwise pass "proxy_port" as vars
+- name: Opening the NGINX proxy port
+  include: plays/open_port.yml
+  when: host_type == "vm"
+
+# starts the NGINX service
+- name: Starting the NGINX Service
+  service:
+    name=nginx
+    state=started
+    enabled=yes
+  when: host_type == "vm"

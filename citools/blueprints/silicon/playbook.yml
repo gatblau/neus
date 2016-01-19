@@ -1,0 +1,76 @@
+#
+# Copyright (c) 2016 GATBLAU - www.gatblau.org
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Manages the execution of roles on a docker container.
+# The only part of this playbook that needs changing is the list of roles as described below.
+# The name of the playbook should be updated to reflect the host name - e.g. database.yml
+#
+
+#
+# The playbook to deploy the Contnuous Integrations Tools Silicon blueprint
+#
+---
+- include: "plays/up_host.yml"
+  vars:
+    blueprint: silicon
+
+- name: Provisioning host ci-jenkins-master
+  hosts: ci-jenkins-master
+  connection: "{{connection}}"
+  become: "{{become}}"
+  roles:
+    - jenkins_master
+
+- name: Provisioning host ci-jenkins-slave
+  hosts: ci-jenkins-slave
+  connection: "{{connection}}"
+  become: "{{become}}"
+  roles:
+    - jenkins_slave
+
+- name: Provisioning host ci-nexus
+  hosts: ci-nexus
+  connection: "{{connection}}"
+  become: "{{become}}"
+  roles:
+    - nexus
+
+- name: Provisioning host ci-gogs
+  hosts: ci-gogs
+  connection: "{{connection}}"
+  become: "{{become}}"
+  roles:
+    - gogs
+
+- name: Provisioning host ci-gerrit
+  hosts: ci-gerrit
+  connection: "{{connection}}"
+  become: "{{become}}"
+  roles:
+    - gerrit
+
+- name: Provisioning host ci-sonar
+  hosts: ci-sonar
+  connection: "{{connection}}"
+  become: "{{become}}"
+  roles:
+    - sonar
+
+- name: Provisioning host ci-mariadb
+  hosts: ci-mariadb
+  connection: "{{connection}}"
+  become: "{{become}}"
+  roles:
+    - mariadb
