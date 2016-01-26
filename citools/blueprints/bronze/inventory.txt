@@ -13,21 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Manages the execution of roles on a docker container.
-# The only part of this playbook that needs changing is the list of roles as described below.
-# The name of the playbook should be updated to reflect the host name - e.g. database.yml
+# Ansible inventory for the BRONZE level CI Tools blueprint
 #
-
+# NOTE:
+#   This blueprint is meant for deployment ONLY on Virtual Machines using the SSH connection plugin.
+#   For development purposes, Privileged Docker Containers are used to simulate virtual machine targets in a linux
+#   environment using the Docker connection plugin.
 #
-# Ansible inventory for the bronze-level CI Tools blueprint
-#
-# To provision to Virtual Machines change the following variables:
-#  - become: determines if sudo is used
-#  - connection: determines the connection plugin to be used (e.g. docker or ssh)
-#  - ansible_ssh_port: the ssh port to use if connection is set to 'ssh'
-#  - ansible_ssh_host: the IP address of the Virtual Machines to provision if connection is set to 'ssh'
-#
-# NOTE: so that it is possible to use docker and ssh interchangeably, this inventory does not contain information
+#   So that it is possible to use docker and ssh interchangeably, this inventory does not contain information
 #   on which roles are deployed to which hosts, only host and variable definitions.
 #   The mapping between roles and hosts is done in the main playbook file.
 #
@@ -49,14 +42,12 @@ ci-b # ansible_ssh_host=192.168.10.60
 [ci:vars]
 # flags the type of blueprint for plays to decide how to configure accordingly.
 blueprint=bronze
+# flags the type of source control to use:
+#   - gogs: for local Go Git Repository
+#   - rtc: for an external connection to Rational Team Concert
+scm=gogs
 
-# flags the end target for deployment, being either:
-#  a) 'vm': to deploy on actual VMs or emulated via privileged containers
-#  b) 'container': to deploy on container engines.
-#      If container is selected certain services are not deployed as they should be managed by the orchestration engine.
-host_type=vm
-
-# Settings for Docker local provisioning
+# Settings for development only
 become=no
 
 # Settings for VM remote provisioning
@@ -64,7 +55,10 @@ become=no
 # ansible_ssh_port=22
 
 # role variables
-artefact_repository_uri="{{hostvars['artefact_repository']['ansible_ssh_host']}}"
+artefact_repository_uri="{{hostvars['ci-a']['ansible_ssh_host']}}"
 database_port=5000
-source_control_uri="{{hostvars['source_control']['ansible_ssh_host']}}/git"
-code_quality_uri="{{hostvars['code_quality']['ansible_ssh_host']}}"
+
+# change below if scm=rtc
+source_control_uri="{{hostvars['ci-b']['ansible_ssh_host']}}/git"
+
+code_quality_uri="{{hostvars['ci-b']['ansible_ssh_host']}}"

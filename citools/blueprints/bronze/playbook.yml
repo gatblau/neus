@@ -19,14 +19,14 @@
 #
 
 #
-# The playbook to deploy the Contnuous Integrations Tools Bronze blueprint
+# The playbook to deploy the Continuous Integrations Tools BRONZE level blueprint
 #
 ---
 - include: "plays/up_host.yml"
   vars:
     blueprint: bronze
 
-- name: Provisioning host ci-a
+- name: Provisioning host A: Build Server and Artefact Repository
   hosts: ci-a
   connection: "{{connection}}"
   become: "{{become}}"
@@ -35,7 +35,7 @@
     - jenkins_master
     - nexus
 
-- name: Provisioning host ci-b
+- name: Provisioning host B: Source Control, Source Review and Code Quality
   hosts: ci-b
   connection: "{{connection}}"
   become: "{{become}}"
