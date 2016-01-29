@@ -42,7 +42,7 @@ if [[ $1 == "clean" ]]; then
 fi
 
 # download the following files to the root folder if they do not exist
-download "ftp://ftp.muug.mb.ca/mirror/centos/7.1.1503/os/x86_64/Packages/" "unzip-6.0-13.el7.x86_64.rpm"
+download "ftp://ftp.muug.mb.ca/mirror/centos/7/os/x86_64/Packages/" "unzip-6.0-13.el7.x86_64.rpm"
 download "https://sonatype-download.global.ssl.fastly.net/nexus/oss/" "nexus-2.11.4-01-bundle.zip"
 download "http://download.oracle.com/otn-pub/java/jdk/8u66-b17/" "jdk-8u66-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"
 download "https://services.gradle.org/distributions/" "gradle-2.7-bin.zip"
