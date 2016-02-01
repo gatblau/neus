@@ -1,7 +1,7 @@
 ---
 - name: Starting up the host ci-a for build master and artefact repository
   docker:
-    image: gatblau/centos7d
+    image: gatblau.org:centos7d
     name: ci-a
     pull: missing
     detach: yes
@@ -12,7 +12,7 @@
 
 - name: Starting up the host ci-b for build slaves
   docker:
-    image: gatblau/centos7d
+    image: gatblau.org:centos7d
     name: ci-b
     pull: missing
     detach: yes
@@ -23,7 +23,7 @@
 
 - name: Starting up the host ci-c for build slaves
   docker:
-    image: gatblau/centos7d
+    image: gatblau.org:centos7d
     name: ci-c
     pull: missing
     detach: yes
@@ -34,7 +34,7 @@
 
 - name: Starting up the host ci-d for SCM and Code review
   docker:
-    image: gatblau/centos7d
+    image: gatblau.org:centos7d
     name: ci-d
     pull: missing
     detach: yes
@@ -45,7 +45,7 @@
 
 - name: Starting up the host ci-e for Code Quality
   docker:
-    image: gatblau/centos7d
+    image: gatblau.org:centos7d
     name: ci-e
     pull: missing
     detach: yes
@@ -56,7 +56,7 @@
 
 - name: Starting up the host ci-f for Code Quality
   docker:
-    image: gatblau/centos7d
+    image: gatblau.org:centos7d
     name: ci-f
     pull: missing
     detach: yes
@@ -67,7 +67,7 @@
 
 - name: Starting up the host ci-g for Code Quality
   docker:
-    image: gatblau/centos7d
+    image: gatblau.org:centos7d
     name: ci-g
     pull: missing
     detach: yes

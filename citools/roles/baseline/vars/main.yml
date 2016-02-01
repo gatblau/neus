@@ -1,4 +1,4 @@
 ---
 # This play contains variables for the baseline role
 epel_rpm: epel-release-7-5.noarch.rpm
-unzip_rpm: unzip-6.0-13.el7.x86_64.rpm
+unzip_rpm: unzip-6.0-15.el7.x86_64.rpm

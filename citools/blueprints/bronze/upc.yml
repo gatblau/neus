@@ -24,7 +24,7 @@
 ---
 - name: Starting up the host ci-a
   docker:
-    image: gatblau/centos7d
+    image: gatblau.org/centos:7d
     name: ci-a
     pull: missing
     detach: yes
@@ -36,7 +36,7 @@
 
 - name: Starting up the host ci-b
   docker:
-    image: gatblau/centos7d
+    image: gatblau.org/centos:7d
     name: ci-b
     pull: missing
     detach: yes

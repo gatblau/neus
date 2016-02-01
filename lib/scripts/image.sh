@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #
 # Copyright (c) 2016 GATBLAU - www.gatblau.org
 #
@@ -17,31 +18,24 @@
 # The only part of this playbook that needs changing is the list of roles as described below.
 # The name of the playbook should be updated to reflect the host name - e.g. database.yml
 #
+# A library for building docker images
+# source image.sh
+#
 
 #
-# The playbook to deploy the Continuous Integrations Tools BRONZE level blueprint
+# Builds a docker image if it is not in the local docker registry
+# Usage:
+#    build_image $1 $2
+#      where:
+#        $1 : relative directory where the docker file to build the image is located
+#        $2 : image repository
+#        $3 : image tag
+#    e.g.: build_image ../lib/images/centos7d gatblau.org centos7d
 #
----
-- include: "plays/up_host.yml"
-  vars:
-    blueprint: bronze
-
-- name: Provisioning host A Build Server and Artefact Repository
-  hosts: ci-a
-  connection: "{{connection}}"
-  become: "{{become}}"
-  roles:
-    - nginx
-    - jenkins_master
-    - nexus
-
-- name: Provisioning host B Source Control, Source Review and Code Quality
-  hosts: ci-b
-  connection: "{{connection}}"
-  become: "{{become}}"
-  roles:
-    - nginx
-    - gogs
-    - gerrit
-    - sonar
-    - mariadb
+build_image() {
+    # if docker image $1 does not exist in the local registry
+    if [ "$(echo $(docker images) | grep -c "$2.*$3")" != '1' ]; then
+      echo "Could not find image '$2:$3', starting build process using docker file in directory '$1'."
+      docker build --rm -t $2:$3 $1
+    fi
+}

@@ -28,18 +28,20 @@
 [local]
 localhost
 
+[ci]
+# uncomment the ansible_ssh_host variables when using connection=ssh above.
+ci-a # ansible_ssh_host=192.168.10.50
+ci-b # ansible_ssh_host=192.168.10.60
+
 [local:vars]
 # sets the connection plugin to use, it can be either:
 #   a) docker: uses the ansible docker plugin - use for testing VM blueprints on docker or for creating docker images.
 #   b) ssh: uses the ansible SSH plugin - use to deploy to actual VMs
 connection=docker
 
-[ci]
-# uncomment the ansible_ssh_host variables when using connection=ssh above.
-ci-a # ansible_ssh_host=192.168.10.50
-ci-b # ansible_ssh_host=192.168.10.60
-
 [ci:vars]
+connection=docker
+
 # flags the type of blueprint for plays to decide how to configure accordingly.
 blueprint=bronze
 # flags the type of source control to use:

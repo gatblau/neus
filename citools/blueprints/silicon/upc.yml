@@ -1,7 +1,7 @@
 ---
 - name: Starting up the host ci-jenkins-master
   docker:
-    image: gatblau/centos7d
+    image: docker.io/centos:7
     name: ci-jenkins-master
     pull: missing
     detach: yes
@@ -12,7 +12,7 @@
 
 - name: Starting up the host ci-jenkins-slave
   docker:
-    image: gatblau/centos7d
+    image: docker.io/centos:7
     name: ci-jenkins-slave
     pull: missing
     detach: yes
@@ -23,7 +23,7 @@
 
 - name: Starting up the host ci-nexus
   docker:
-    image: gatblau/centos7d
+    image: docker.io/centos:7
     name: ci-nexus
     pull: missing
     detach: yes
@@ -34,7 +34,7 @@
 
 - name: Starting up the host ci-gerrit
   docker:
-    image: gatblau/centos7d
+    image: docker.io/centos:7
     name: ci-gerrit
     pull: missing
     detach: yes
@@ -45,7 +45,7 @@
 
 - name: Starting up the host ci-gogs
   docker:
-    image: gatblau/centos7d
+    image: docker.io/centos:7
     name: ci-gogs
     pull: missing
     detach: yes
@@ -56,7 +56,7 @@
 
 - name: Starting up the host ci-sonar
   docker:
-    image: gatblau/centos7d
+    image: docker.io/centos:7
     name: ci-sonar
     pull: missing
     detach: yes
@@ -67,7 +67,7 @@
 
 - name: Starting up the host ci-mariadb
   docker:
-    image: gatblau/centos7d
+    image: docker.io/centos:7
     name: ci-mariadb
     pull: missing
     detach: yes

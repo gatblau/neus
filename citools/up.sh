@@ -35,8 +35,12 @@ if [[ -z $1 ]]; then
    exit
 fi
 
-# load libraries
+# load shell libraries
 source scripts/remove.sh
+source scripts/image.sh
+
+# build the centos7 systemd image if not in the local registry
+build_image ../lib/images/centos7d gatblau.org/centos 7d
 
 # check if existing containers exist and removes them
 remove_by_name ci-
