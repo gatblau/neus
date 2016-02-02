@@ -6,7 +6,7 @@
       state=present
 
   - name: Install Jenkins rpm
-    include: "{{plays_folder}}/install_rpm.yml"
+    include: "plays/install_rpm.yml"
     vars:
       rpm_app_name: Jenkins
       rpm_filename: "{{ jenkins_rpm }}"
@@ -28,17 +28,14 @@
     with_fileglob:
       - config/*.xml
 
-  - name: "Set up Java SDK name: {{java_sdk_name}}"
+  - name: Copy Jenkins configuration file
     template: 
       src=jenkins_config.xml.j2
       dest="{{jenkins_home}}/config.xml"
       owner="{{jenkins_user}}"
 
-  - name: Set up Jenkins to Artifactory configuration
-    template: 
-      src=org.jfrog.hudson.ArtifactoryBuilder.xml.j2
-      dest="{{jenkins_home}}/org.jfrog.hudson.ArtifactoryBuilder.xml"
-      owner="{{jenkins_user}}"
+  - debug:
+      msg="COPY NEXUS CONFIGURATION HERE"
 
   - name: Set up Jenkins to Sonar configuration
     template: 

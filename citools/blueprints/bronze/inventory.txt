@@ -57,10 +57,10 @@ become=no
 # ansible_ssh_port=22
 
 # role variables
-artefact_repository_uri="{{hostvars['ci-a']['ansible_ssh_host']}}"
 database_port=5000
 
 # change below if scm=rtc
-source_control_uri="{{hostvars['ci-b']['ansible_ssh_host']}}/git"
 
-code_quality_uri="{{hostvars['ci-b']['ansible_ssh_host']}}"
+# ip addresses from ssh host dont work when using docker connection plugin
+source_control_uri=#"{{hostvars['ci-b']['ansible_ssh_host']}}/git"
+sonarqube_ipaddress=#"{{hostvars['ci-b']['ansible_ssh_host']}}/sonar"
