@@ -6,7 +6,7 @@
       state=present
 
   - include: open_dbport.yml
-    when: platform == "centos_vm"
+    when: connection == "ssh"
 
   - name: Installing the MariaDB YUM repository file
     copy:
@@ -21,7 +21,7 @@
       - MariaDB-server
       - MySQL-python
 
-  - name: Setting MariaDB port number to {{mariadb_port}}
+  - name: Setting MariaDB port number to {{database_port}}
     template: src=server.cnf.j2
               dest=/etc/my.cnf.d/server.cnf
               owner={{mariadb_user}}

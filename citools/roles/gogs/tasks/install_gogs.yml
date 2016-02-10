@@ -14,7 +14,7 @@
 
   - name: Copying GOGS to the host machine
     copy:
-      src=files/cache/{{gogs_zipfile}}
+      src=cache/{{gogs_zipfile}}
       dest=/tmp/{{gogs_zipfile}}
 
   - name: Unzipping the GOGS archive
@@ -74,7 +74,7 @@
       name=gogs
       state=started
       enabled=yes
-    when: platform == "centos_vm"
+    when: connection == "ssh"
 
   - name: Copying GOGS repositories to the host
     copy: 

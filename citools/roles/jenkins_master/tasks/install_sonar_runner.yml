@@ -1,5 +1,5 @@
 ---
-  - include: "{{plays_folder}}/install_tool.yml"
+  - include: "plays/install_tool.yml"
     vars:
       tool_name : sonar-runner
       folder_name : "{{ sonar_runner_folder }}"

@@ -1,5 +1,0 @@
----
-   dependencies:
-     - { role: baseline }
-     - { role: mariadb }
-     - { role: nginx }

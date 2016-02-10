@@ -31,17 +31,19 @@
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
+    - baseline
     - nginx
     - jenkins_master
-    - nexus
+#    - nexus
 
 - name: Provisioning host B Source Control, Source Review and Code Quality
   hosts: ci-b
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
+    - baseline
     - nginx
-    - gogs
-    - gerrit
-    - sonar
     - mariadb
+    - gogs
+#    - gerrit
+    - sonar
