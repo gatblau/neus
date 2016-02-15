@@ -1,13 +1,13 @@
 # PAMM Application Environments
 
-This solution presents various different topologies of environments (blueprints) to deploy a [PAMM application](https://www.github.com/gatblau/pamm-seed). 
+This solution presents various different topologies of environments (blueprints) to deploy a [PAMM application](https://www.github.com/gatblau/pamm.seed). 
 The blueprints can be automatically deployed on Virtual Machine infrastructure (bronze to platinum) or Container Management Infrastructure (silicon).
 
 The various services deployed are as follows:
 
 - **HA Proxy**: used as TCP/HTTP Load Balancer in front of PAMM web application instances.
 - **Reverse Proxy**: [NGINX](https://www.nginx.com/resources/wiki/) is used as a reverse proxy server running only on Virtual Machine configurations. The proxy is used to map incoming requests to the various service URI/Ports within the virtual machine.
-- **PAMM Application**: the [PAMM](https://www.github.com/gatblau/pamm-seed) web application running in Play's own built-in HTTP server.
+- **PAMM Application**: the [PAMM](https://www.github.com/gatblau/pamm.seed) web application running in Play's own built-in HTTP server.
 - **MariaDB**: the relational database management system.
 - **MongoDB**: the No-SQL document based database.
 
