@@ -56,12 +56,14 @@
     when: git_exists.stat.exists == false
 
 ### Install Jenkins
-
   - name: Check Jenkins installed
     stat: path="{{jenkins_home}}"
     register: jenkins_exists
 
   - include: install_jenkins.yml
+    vars:
+      sonarqube_uri: "{{ lookup('file', 'cache/ci_b_ip.txt') }}"
+      gogs_uri:      "{{ lookup('file', 'cache/ci_b_ip.txt') }}"
     when: jenkins_exists.stat.exists == false
 
 ### Install Sonar Runner

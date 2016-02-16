@@ -46,3 +46,10 @@
     state: started
     privileged: yes
 
+- name: Get ci-b ip address
+  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-b"
+  register: ci_b_ip
+
+- debug: msg="ci-b ip address is {{ci_b_ip.stdout}}"
+
+- local_action: copy content={{ci_b_ip.stdout}} dest=./cache/ci_b_ip.txt

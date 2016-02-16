@@ -4,9 +4,9 @@
     <hudson.plugins.sonar.SonarInstallation>
       <name>SonarQube</name>
       <disabled>false</disabled>
-      <serverUrl>http://{{sonarqube_ipaddress}}/sonar</serverUrl>
+      <serverUrl>http://{{sonarqube_uri}}/sonar</serverUrl>
       <mojoVersion></mojoVersion>
-      <databaseUrl>jdbc:mysql://{{sonarqube_ipaddress}}:{{ database_port }}/sonar</databaseUrl>
+      <databaseUrl>jdbc:mysql://{{sonarqube_uri}}:{{ database_port }}/sonar</databaseUrl>
       <databaseLogin>admin</databaseLogin>
       <additionalProperties></additionalProperties>
       <additionalAnalysisProperties></additionalAnalysisProperties>
