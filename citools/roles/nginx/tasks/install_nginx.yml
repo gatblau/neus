@@ -25,3 +25,14 @@
   copy:
     src={{blueprint}}/{{inventory_hostname}}/v.hosts
     dest=/etc/nginx
+
+- name: Starting the NGINX Service
+  service:
+    name=nginx
+    state=started
+    enabled=yes
+  when: blueprint != "silicon"
+
+- name: Start NGINX
+  shell: "/sbin/nginx &"
+  when: blueprint == "silicon"
