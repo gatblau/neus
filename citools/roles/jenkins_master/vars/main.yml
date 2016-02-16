@@ -30,6 +30,8 @@
       'ansible.hpi',
       'artifactory.hpi',
       'credentials.hpi',
+      'docker-build-step.hpi',
+      'docker-commons.hpi',
       'email-ext.hpi',
       'envinject.hpi',
       'git.hpi',

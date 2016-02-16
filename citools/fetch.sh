@@ -69,6 +69,8 @@ download "http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-d
 download "http://updates.jenkins-ci.org/latest/" "artifactory.hpi"
 download "http://updates.jenkins-ci.org/latest/" "ansible.hpi"
 download "http://updates.jenkins-ci.org/latest/" "credentials.hpi"
+download "http://updates.jenkins-ci.org/latest/" "docker-build-step.hpi"
+download "http://updates.jenkins-ci.org/latest/" "docker-commons.hpi"
 download "http://updates.jenkins-ci.org/latest/" "email-ext.hpi"
 download "http://updates.jenkins-ci.org/latest/" "envinject.hpi"
 download "http://updates.jenkins-ci.org/latest/" "git.hpi"
