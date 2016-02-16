@@ -74,7 +74,12 @@
       name=gogs
       state=started
       enabled=yes
-    when: connection == "ssh"
+    when: blueprint != "silicon"
+
+  - name: Start GOGS
+    become_user: gogs
+    shell: "/usr/local/gogs/gogs web &"
+    when: blueprint == "silicon"
 
   - name: Copying GOGS repositories to the host
     copy: 
