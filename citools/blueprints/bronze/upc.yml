@@ -29,8 +29,8 @@
     pull: missing
     detach: yes
     tty: yes
-    expose: [ 8080, 8081 ]
-    command: sleep infinity
+    expose: [ 80 ]
+    command: "/usr/sbin/init"
     state: started
     privileged: yes
 
@@ -41,8 +41,8 @@
     pull: missing
     detach: yes
     tty: yes
-    expose: [ 3000, 9000 ]
-    command: sleep infinity
+    expose: [ 80, 5000 ]
+    command: "/usr/sbin/init"
     state: started
     privileged: yes
 
