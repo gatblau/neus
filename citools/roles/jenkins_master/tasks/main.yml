@@ -1,19 +1,76 @@
 ---
-# This play installs Jenkins and Sonar Runner
+# This play installs Jenkins and build tools
 
-# Install Jenkins
-- name: Check Jenkins installed
-  stat: path="{{jenkins_home}}"
-  register: jenkins_exists
+###  Install Build Tools
+  # Install Java SDK
+  - name: Check if Java installed
+    stat: path=/usr/java/default
+    register: java_exists
 
-- include: install_jenkins.yml
-  when: jenkins_exists.stat.exists == false
+  - include: install_java_sdk.yml
+    when: java_exists.stat.exists == false
 
-# Install Sonar Runner
-- name: Check Sonar Runner installed
-  stat: path=/usr/local/sonar_runner
-  register: sonarrunner_exists
-  changed_when: no
+  # Install Groovy
+  - name: Check if Groovy installed
+    stat: path=/usr/local/groovy
+    register: groovy_exists
 
-- include: install_sonar_runner.yml
-  when: sonarrunner_exists.stat.exists == false
+  - name: Install Groovy
+    include: install_groovy.yml
+    when: groovy_exists.stat.exists == false
+
+  # Install SBT
+  - name: Check if SBT installed
+    stat: path=/usr/local/sbt
+    register: sbt_exists
+
+  - name: Install SBT
+    include: install_sbt.yml
+    when: sbt_exists.stat.exists == false
+
+  # Install Gradle
+  - name: Check if Gradle installed
+    stat: path=/usr/local/gradle
+    register: gradle_exists
+
+  - name: Install Gradle
+    include: install_gradle.yml
+    when: gradle_exists.stat.exists == false
+
+  # Install Maven
+  - name: Check if Maven installed
+    stat: path=/usr/local/maven
+    register: maven_exists
+
+  - name: Install Maven
+    include: install_maven.yml
+    when: maven_exists.stat.exists == false
+
+  # Install Git
+  - name: Check if Git installed
+    stat: path=/bin/git
+    register: git_exists
+
+  - name: Install Git
+    include: install_git.yml
+    when: git_exists.stat.exists == false
+
+### Install Jenkins
+  - name: Check Jenkins installed
+    stat: path="{{jenkins_home}}"
+    register: jenkins_exists
+
+  - include: install_jenkins.yml
+    vars:
+      sonarqube_uri: "{{ lookup('file', 'cache/ci_b_ip.txt') }}"
+      gogs_uri:      "{{ lookup('file', 'cache/ci_b_ip.txt') }}"
+    when: jenkins_exists.stat.exists == false
+
+### Install Sonar Runner
+  - name: Check Sonar Runner installed
+    stat: path=/usr/local/sonar_runner
+    register: sonarrunner_exists
+    changed_when: no
+
+  - include: install_sonar_runner.yml
+    when: sonarrunner_exists.stat.exists == false

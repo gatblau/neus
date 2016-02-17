@@ -1,8 +1,18 @@
 ---
 # This play installs GOGS - source code repository tool
 #
-# See meta/main.yml for dependent roles
 
+### Install Git (GOGS)
+  # Check if GIT has been installed
+  - name: Check if Git installed
+    stat: path=/bin/git
+    register: git_exists
+
+  - name: Install Git
+    include: install_git.yml
+    when: git_exists.stat.exists == false
+
+### Install GOGS
   - name: Check GOGS installed
     stat: path=/usr/local/gogs
     register: gogs_exists

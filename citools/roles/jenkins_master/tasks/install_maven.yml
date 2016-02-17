@@ -1,0 +1,16 @@
+---
+  - include: "plays/install_tool.yml"
+    vars:
+      tool_name : Maven
+      folder_name : "{{ maven_folder }}"
+      zip_filename: "{{ maven_zip }}"
+      add_version_to_folder : false
+      zip_has_folder : true
+      has_bin_folder : true
+
+  - name: Create Maven symbolic link
+    file:
+      src=/usr/local/maven/default/bin/mvn
+      dest=/bin/mvn
+      state=link
+      mode=0755

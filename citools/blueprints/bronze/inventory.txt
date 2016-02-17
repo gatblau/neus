@@ -62,9 +62,5 @@ database_port=5000
 # change below if scm=rtc
 
 # ip addresses from ssh host dont work when using docker connection plugin
-source_control_uri=#"{{hostvars['ci-b']['ansible_host']}}/git"
+source_control_uri=#"{{hostvars['ci-b']['ansible_host']}}"
 
-# IP Addresses for Jenkins connectivity
-
-gogs_ipaddress="0.0.0.0/git"
-sonarqube_ipaddress="0.0.0.0"
