@@ -5,4 +5,5 @@ The NEUS project is an environment automation library aimed at defining, standar
 ## Automated Environments
 
 - [CI-TOOLS](citools/readme.md): provides a pre-defined and ready to deploy set of Continuous Integration tools following pre-defined configurations.
-- [PAMM](pamm/readme.md): provides the automation scripts to deploy different  environments to run applications built on the PAMM stack (Play/AngularJS/MariaDB/MongoDB).
+- [PAMM](pamm/readme.md): provides the automation scripts to deploy different  environments to run applications built on the PAMM stack for web development (Play/AngularJS/MariaDB/MongoDB).
+- [JAMM](jamm/readme.md): provides the automation scripts to deploy different  environments to run applications built on the JAMM stack for enterprise integration (JBoss Fuse/ActiveMQ/MariaDB/MongoDB).
