@@ -46,7 +46,7 @@ find $ROOT. -size 0c -delete
 
 # download the following files to the root folder if they do not exist
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "unzip-6.0-15.el7.x86_64.rpm"
-download "https://sonatype-download.global.ssl.fastly.net/nexus/oss/" "nexus-2.11.4-01-bundle.zip"
+download "https://sonatype-download.global.ssl.fastly.net/nexus/oss/" "nexus-2.12.0-01-bundle.zip"
 download "http://download.oracle.com/otn-pub/java/jdk/8u74-b02/" "jdk-8u74-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"
 download "https://services.gradle.org/distributions/" "gradle-2.7-bin.zip"
 download "https://dl.bintray.com/sbt/native-packages/sbt/0.13.8/" "sbt-0.13.8.zip"
