@@ -3,6 +3,12 @@
 # builds a docker image which replaces the fake systemd in the centos base image with the real systemd
 # Use for emulating Virtual machines running CentOS 7 or RHEL 7 for testing playbooks.
 #
+# Additional packages:
+#
+# NetworkManager - required for systemctl
+# pam.i686 - required for GOGS
+# glibc.i386 - required for GOGS
+#
 FROM centos:7
 MAINTAINER "gatblau" <admin@gatblau.org>
 ENV container docker
@@ -16,7 +22,8 @@ rm -f /lib/systemd/system/basic.target.wants/*; \
 rm -f /lib/systemd/system/anaconda.target.wants/*;
 RUN yum update -y; \
     yum install -y NetworkManager; \
-
+    yum install -y pam.i686; \
+    yum install -y glibc.i686; \
     yum clean all
 VOLUME [ "/sys/fs/cgroup" ]
 CMD ["/usr/sbin/init"]
