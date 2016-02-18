@@ -1,0 +1,8 @@
+---
+  # Nexus user and password
+  nexus_user: nexus
+  nexus_group: nexus
+  nexus_password: $6$rounds=656000$KXkw0YjoTkl9Wlmo$RYlQDd4S4Nrn.Gszq18p.Kv6oeVQF7JHlFmZ5XCCPxC62XosR1ATMalyZC.4JFVaugsbpE3/0FCKPTaq3ZRu6/
+
+  nexus_folder: nexus-2.11.4-01
+  nexus_zip: nexus-2.11.4-01-bundle.zip
