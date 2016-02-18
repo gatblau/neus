@@ -6,7 +6,7 @@
   gogs_user: gogs
   gogs_group: gogs
   gogs_password: $6$rounds=656000$/zfzOaTk0fdU73Mk$Iy36e.eY2nOjLfIwX7ocCrhHvbxKz5wARnJoHnoJcjKoS.iobDp0SDWWKNbbUmoQ6i2A1UxI59LkImbLG9wwJ/
-  gogs_zipfile: gogs_v0.8.10_linux_386.zip
+  gogs_zipfile: gogs_v0.8.25_linux_386.zip
 
   # Git variables
   git_perl_rpm: perl-Git-2.4.1-1.WANdisco.259.noarch.rpm
