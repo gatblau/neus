@@ -1,8 +1,14 @@
 ---
+  - name: Create group for Jenkins user
+    user:
+      name="{{jenkins_group}}"
+      state=present
+
   - name: Create user for Jenkins
     user:
-      name={{jenkins_user}}
-      password={{jenkins_password}}
+      name="{{jenkins_user}}"
+      password="{{jenkins_password}}"
+      group="{{jenkins_group}}"
       state=present
 
   - name: Install Jenkins rpm
@@ -19,12 +25,14 @@
       src=users
       dest="{{jenkins_home}}"
       owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
 
   - name: Copy Jenkins configuration files
     copy:
       src="{{ item }}"
       dest="{{jenkins_home}}"
       owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
     with_fileglob:
       - config/*.xml
 
@@ -33,6 +41,7 @@
       src=jenkins_config.xml.j2
       dest="{{jenkins_home}}/config.xml"
       owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
 
   - debug:
       msg="COPY NEXUS CONFIGURATION HERE"
@@ -42,6 +51,7 @@
       src=hudson.plugins.sonar.SonarPublisher.xml.j2
       dest="{{jenkins_home}}/hudson.plugins.sonar.SonarPublisher.xml"
       owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
 
   - name: Copying Jenkins build jobs to the host
     copy:
@@ -53,6 +63,7 @@
       src=/tmp/jobs.zip
       dest="{{jenkins_home}}"
       owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
       copy=no
 
   - name: Removing Jenkins jobs from the host
@@ -63,6 +74,7 @@
       src=smoke_test_config.xml.j2
       dest="{{jenkins_home}}/jobs/smoke_test/config.xml"
       owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
 
   - name: Jenkins service setup
     template:
