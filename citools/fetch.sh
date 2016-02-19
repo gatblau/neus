@@ -53,7 +53,7 @@ download "https://dl.bintray.com/sbt/native-packages/sbt/0.13.8/" "sbt-0.13.8.zi
 download "http://mirrors.ukfast.co.uk/sites/ftp.apache.org/maven/maven-3/3.3.9/binaries/" "apache-maven-3.3.9-bin.zip"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/e/" "epel-release-7-5.noarch.rpm"
 download "http://7d9nal.com2.z0.glb.qiniucdn.com/" "gogs_v0.8.25_linux_386.zip"
-download "http://pkg.jenkins-ci.org/redhat/" "jenkins-1.647-1.1.noarch.rpm"
+download "http://pkg.jenkins-ci.org/redhat/" "jenkins-1.648-1.1.noarch.rpm"
 download "https://bintray.com/artifact/download/groovy/maven/" "apache-groovy-binary-2.4.4.zip"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-1.6.3-8.el7.x86_64.rpm"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-filesystem-1.6.3-8.el7.noarch.rpm"
