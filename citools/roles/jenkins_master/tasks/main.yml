@@ -2,12 +2,12 @@
 # This play installs Jenkins and build tools
 
 ###  Install Build Tools
-  # Install Java SDK
+  # Install JDK (JDK variables are set in group_vars/all/main.yml)
   - name: Check if Java installed
     stat: path=/usr/java/default
     register: java_exists
 
-  - include: install_java_sdk.yml
+  - include: "plays/install_jdk.yml"
     when: java_exists.stat.exists == false
 
   # Install Groovy

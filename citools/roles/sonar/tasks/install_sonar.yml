@@ -5,6 +5,17 @@
       password={{sonar_password}}
       state=present
 
+  - name: Set Nexus user environment variables
+    blockinfile:
+      dest: "/home/sonar/.bashrc"
+      insertafter: "# User specific aliases and functions"
+      marker: "# {mark} Sonar Environment Variables"
+      block:  "export JAVA_HOME=/usr/java/default
+
+export PATH=$PATH:$JAVA_HOME/bin
+
+"
+
   - include: "plays/install_rpm.yml"
     vars:
       rpm_app_name: SONAR
@@ -25,5 +36,8 @@
       name=sonar
       state=started
       enabled=yes
-    when: connection == "ssh"
+    when: blueprint != "silicon"
 
+  - name: Starting Sonar
+    shell: "su -c \"/opt/sonar/bin/linux-x86-64/sonar.sh start &\" - sonar"
+    when: blueprint == "silicon"

@@ -1,4 +1,9 @@
 ---
+  - name: Create group for GOGS user
+    user:
+      name="{{gogs_group}}"
+      state=present
+
   - name: Create user for GOGS
     user:
       name="{{gogs_user}}"
@@ -10,7 +15,8 @@
       path="{{gogs_path}}"
       state=directory
       owner="{{gogs_user}}"
-      mode=0777
+      group="{{gogs_group}}"
+      mode=0755
 
   - name: Copying GOGS to the host machine
     copy:
@@ -22,6 +28,7 @@
       src=/tmp/{{gogs_zipfile}}
       dest=/usr/local
       owner={{gogs_user}}
+      group="{{gogs_group}}"
       copy=no
 
   - name: Creating the GOGS custom configuration folder
@@ -29,6 +36,7 @@
       path="{{gogs_path}}/custom/conf"
       state=directory
       owner="{{gogs_user}}"
+      group="{{gogs_group}}"
       mode=0777
 
   - name: Copying GOGS custom configuration file
@@ -36,6 +44,7 @@
       src=app.ini.j2
       dest="{{gogs_path}}/custom/conf/app.ini"
       owner="{{gogs_user}}"
+      group="{{gogs_group}}"
       mode=0755
 
   - name: Creating the GOGS "log" folder
@@ -43,6 +52,7 @@
       path="{{gogs_path}}/log"
       state=directory
       owner="{{gogs_user}}"
+      group="{{gogs_group}}"
       mode=0777
 
   - name: Removing the GOGS archive
@@ -55,6 +65,7 @@
       src=import.sql
       dest="{{gogs_path}}/scripts/initialise.sql"
       owner="{{gogs_user}}"
+      group="{{gogs_group}}"
       mode=0755
 
   - name: Creating the GOGS database
@@ -77,8 +88,7 @@
     when: blueprint != "silicon"
 
   - name: Start GOGS
-    become_user: gogs
-    shell: "/usr/local/gogs/gogs web &"
+    shell: "su -c \"/usr/local/gogs/gogs web &\" - gogs"
     when: blueprint == "silicon"
 
   - name: Copying GOGS repositories to the host
@@ -91,6 +101,7 @@
       src=/tmp/gogs-repositories.zip
       dest=/home/{{gogs_user}}/
       owner="{{gogs_user}}"
+      group="{{gogs_group}}"
       copy=no
 
   - name: Removing GOGS repositories from the host

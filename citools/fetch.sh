@@ -46,14 +46,14 @@ find $ROOT. -size 0c -delete
 
 # download the following files to the root folder if they do not exist
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "unzip-6.0-15.el7.x86_64.rpm"
-download "https://sonatype-download.global.ssl.fastly.net/nexus/oss/" "nexus-2.11.4-01-bundle.zip"
+download "https://sonatype-download.global.ssl.fastly.net/nexus/oss/" "nexus-2.12.0-01-bundle.zip"
 download "http://download.oracle.com/otn-pub/java/jdk/8u74-b02/" "jdk-8u74-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"
 download "https://services.gradle.org/distributions/" "gradle-2.7-bin.zip"
 download "https://dl.bintray.com/sbt/native-packages/sbt/0.13.8/" "sbt-0.13.8.zip"
 download "http://mirrors.ukfast.co.uk/sites/ftp.apache.org/maven/maven-3/3.3.9/binaries/" "apache-maven-3.3.9-bin.zip"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/e/" "epel-release-7-5.noarch.rpm"
-download "http://7d9nal.com2.z0.glb.qiniucdn.com/" "gogs_v0.8.10_linux_386.zip"
-download "http://pkg.jenkins-ci.org/redhat/" "jenkins-1.647-1.1.noarch.rpm"
+download "http://7d9nal.com2.z0.glb.qiniucdn.com/" "gogs_v0.8.25_linux_386.zip"
+download "http://pkg.jenkins-ci.org/redhat/" "jenkins-1.648-1.1.noarch.rpm"
 download "https://bintray.com/artifact/download/groovy/maven/" "apache-groovy-binary-2.4.4.zip"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-1.6.3-8.el7.x86_64.rpm"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-filesystem-1.6.3-8.el7.noarch.rpm"
@@ -62,7 +62,6 @@ download "http://opensource.wandisco.com/centos/7/git/x86_64/" "wandisco-git-rel
 download "http://opensource.wandisco.com/centos/7/git/x86_64/" "git-2.4.1-1.WANdisco.259.x86_64.rpm"
 download "http://opensource.wandisco.com/centos/7/git/x86_64/" "perl-Git-2.4.1-1.WANdisco.259.noarch.rpm"
 download_as "http://sourceforge.net/projects/sonar-pkg/files/rpm/noarch/sonar-5.2-1.noarch.rpm/download" "sonar-5.2-1.noarch.rpm"
-download_as "http://bit.ly/Hqvfi9" "artifactory.rpm"
 download_mysql_connector $ROOT mysql-connector-java-5.1.36
 download "http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/2.4/" "sonar-runner-dist-2.4.zip"
 download "http://updates.jenkins-ci.org/latest/" "artifactory.hpi"

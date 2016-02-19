@@ -4,12 +4,13 @@
       dest="{{jenkins_home}}/plugins"
       state=directory
       owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
 
   - name: Copying Jenkins plugins to the host
     copy:
       src="cache/{{ item }}"
       dest="{{jenkins_home}}/plugins"
-      owner=jenkins
-      group=jenkins
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
     with_items:
       - "{{jenkins_plugins}}"
