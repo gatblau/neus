@@ -94,10 +94,15 @@ export PATH=$PATH:$JAVA_HOME/bin
       dest=/etc/sysconfig/jenkins
       owner=root
       mode=600
+    when: blueprint != "silicon"
 
   - name: Starting the Jenkins Service
     service:
       name=jenkins
       state=started
       enabled=yes
-    when: connection == "ssh"
+    when: blueprint != "silicon"
+
+  - name: Start Jenkins
+    shell: "su -c \"java -jar /usr/lib/jenkins/jenkins.war --prefix=/jenkins &\" - jenkins"
+    when: blueprint == "silicon"
