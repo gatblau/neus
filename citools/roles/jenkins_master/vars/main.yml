@@ -51,9 +51,6 @@
     ]
 
 ### Build tools variables
-  java_sdk_name: "Java JDK 8u74-x64"
-  java_sdk_rpm: jdk-8u74-linux-x64.rpm
-
   git_perl_rpm: perl-Git-2.4.1-1.WANdisco.259.noarch.rpm
   git_scm_rpm: git-2.4.1-1.WANdisco.259.x86_64.rpm
   git_wandisco_rpm: wandisco-git-release-7-1.noarch.rpm
