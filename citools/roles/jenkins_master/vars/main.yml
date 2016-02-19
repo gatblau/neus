@@ -5,7 +5,8 @@
   jenkins_rpm: jenkins-1.648-1.1.noarch.rpm
 
   # Jenkins folders
-  jenkins_home: /home/jenkins/.jenkins
+  jenkins_user_home: /home/jenkins
+  jenkins_home: "{{jenkins_user_home}}/.jenkins"
 
   # Jenkins username and password
   jenkins_user: jenkins

@@ -11,6 +11,18 @@
       group="{{jenkins_group}}"
       state=present
 
+  - name: Set Jenkins user environment variables
+    blockinfile:
+      dest: "{{jenkins_user_home}}/.bashrc"
+      insertafter: "# User specific aliases and functions"
+      marker: "# {mark} Jenkins Environment Variables"
+      block:  "export JAVA_HOME=/usr/java/default
+
+export JENKINS_HOME={{jenkins_home}}
+
+export PATH=$PATH:$JAVA_HOME/bin
+
+"
   - name: Install Jenkins rpm
     include: "plays/install_rpm.yml"
     vars:
