@@ -15,15 +15,6 @@
   sonar_runner_folder: sonar-runner-2.4
   sonar_runner_zipfile: sonar-runner-dist-2.4.zip
 
-  # IP Addresses
-  # artifactory_ipaddress - set in the inventory file
-  # gogs_ipaddress        - set in the inventory file
-  # sonarqube_ipaddress   - set in the inventory file
-
-  # Location of cache files and common play files
-  cache_folder: ../../../cache
-  plays_folder: ../../../plays
-
   # Jenkins Plugins
   jenkins_plugins:
     [
