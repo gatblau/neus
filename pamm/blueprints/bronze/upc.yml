@@ -40,7 +40,7 @@
 
 - debug: msg="pamm-a ip address is {{pamm_a_ip.stdout}}"
 
-- local_action: copy content={{pamm_a_ip.stdout}} dest=./cache/ip.txt
+- local_action: copy content={{pamm_a_ip.stdout}} dest=./cache/pamm_a_ip.txt
 
 - name: Starting up the host pamm-b
   docker:
@@ -60,4 +60,4 @@
 
 - debug: msg="pamm-b ip address is {{pamm_b_ip.stdout}}"
 
-- local_action: copy content={{pamm_b_ip.stdout}} dest=./cache/ip.txt
+- local_action: copy content={{pamm_b_ip.stdout}} dest=./cache/pamm_b_ip.txt

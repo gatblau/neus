@@ -26,16 +26,20 @@
   vars:
     blueprint: bronze
 
-- name: Provisioning host A Play Application
-  hosts: ci-a
+- name: Provisioning PAMM-A Play Application
+  hosts: pamm-a
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
-    - mariadb
+    - nginx
+    - play
 
-- name: Provisioning host B Databases
-  hosts: ci-b
+- name: Provisioning PAMM-B Databases
+  hosts: pamm-b
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
+    - nginx
+    - mariadb
+    - mongodb
 

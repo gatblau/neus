@@ -1,0 +1,5 @@
+---
+- include: "plays/install_rpm.yml"
+  vars:
+    rpm_app_name: "Java Development Kit"
+    rpm_filename: "{{ jdk_rpm }}"

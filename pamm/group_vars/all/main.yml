@@ -1,8 +1,2 @@
 ---
-  jdk_rpm: jdk-8u74-linux-x64.rpm
   unzip_rpm : unzip-6.0-15.el7.x86_64.rpm
-  mariadb_server_rpm: MariaDB-10.1.11-centos7-x86_64-server.rpm
-  mysql_python: python27-MySQL-python-1.2.3-10.el7.centos.x86_64.rpm
-  db_user: pamm
-  db_pwd: n3us
-  db_root_pwd: Passw0rd!

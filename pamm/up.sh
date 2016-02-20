@@ -36,6 +36,11 @@ source scripts/image.sh
 # build the centos7 systemd image if not in the local registry
 build_image ../lib/images/centos7d gatblau.org/centos 7d
 
+# hack to relase handle on containers
+echo restarting the docker daemon service, please wait!!!
+sudo systemctl restart docker
+source ~/.bash_profile
+
 # check if existing containers exist and removes them
 remove_by_name pamm-
 
@@ -43,4 +48,4 @@ remove_by_name pamm-
 source ./fetch.sh
 
 # starts the deployment using the specified inventory
-ansible-playbook -i blueprints/$1/inventory.txt blueprints/$1/playbook.yml
+ansible-playbook -vvvv -i blueprints/$1/inventory.txt blueprints/$1/playbook.yml
