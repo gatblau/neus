@@ -45,3 +45,7 @@ fi
 find $ROOT. -size 0c -delete
 
 # download the following files to the root folder if they do not exist
+download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "unzip-6.0-15.el7.x86_64.rpm"
+download "https://www.softwarecollections.org/repos/rhscl/python27/epel-7-x86_64/python27-MySQL-python-1.2.3-10.el7/" "python27-MySQL-python-1.2.3-10.el7.centos.x86_64.rpm"
+download "http://lon1.mirrors.digitalocean.com/mariadb/mariadb-10.1.11/yum/centos7-amd64/rpms/" "MariaDB-10.1.11-centos7-x86_64-server.rpm"
+download "https://pypi.python.org/packages/source/M/MySQL-python/" "MySQL-python-1.2.5.zip"
