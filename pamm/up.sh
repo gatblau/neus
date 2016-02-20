@@ -36,10 +36,9 @@ source scripts/image.sh
 # build the centos7 systemd image if not in the local registry
 build_image ../lib/images/centos7d gatblau.org/centos 7d
 
-# hack to relase handle on containers
+# hack to release the network handles created by the containers
 echo restarting the docker daemon service, please wait!!!
-sudo systemctl restart docker
-source ~/.bash_profile
+sudo systemctl restart docker && source ~/.bash_profile
 
 # check if existing containers exist and removes them
 remove_by_name pamm-
