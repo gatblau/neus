@@ -24,7 +24,7 @@
     state=started
     enabled=yes
 
-- name: Creating a read and write user to access the server remotely
+- name: Creating account "{{db_user}}" to access the server remotely
   mysql_user:
     name={{ db_user }}
     host={{ item }}
@@ -35,16 +35,27 @@
     - "localhost"
     - "%"
 
+- name: Removing the Anonymous account
+  mysql_user:
+    name=""
+    host={{ item }}
+    state=absent
+  with_items:
+   - "{{ ansible_hostname }}"
+   - 127.0.0.1
+   - ::1
+   - localhost
+
 - name: Updating MariaDB root password for all root accounts
   mysql_user:
-    name=root host={{ item }}
+    name=root
+    host={{ item }}
     password={{ db_root_pwd }}
   with_items:
    - "{{ ansible_hostname }}"
    - 127.0.0.1
    - ::1
    - localhost
-  when: ansible_hostname != 'localhost'
 
 - name: Deleting the Test Database
   mysql_db:
