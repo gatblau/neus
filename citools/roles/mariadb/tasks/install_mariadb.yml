@@ -5,7 +5,9 @@
       password={{ mariadb_password }}
       state=present
 
-  - include: open_dbport.yml
+  - include: "plays/open_port.yml"
+    vars:
+      - port_number: "{{database_port}}"
     when: connection == "ssh"
 
   - name: Installing the MariaDB YUM repository file
