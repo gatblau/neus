@@ -5,6 +5,11 @@
     password={{nginx_password}}
     state=present
 
+- include: "plays/open_port.yml"
+  vars:
+    - port_number: "{{proxy_port}}"
+  when: connection == "ssh"
+
 - include: plays/install_rpm.yml
   vars:
     rpm_app_name: NGINX File System
