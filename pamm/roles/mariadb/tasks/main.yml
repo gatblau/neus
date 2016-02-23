@@ -30,7 +30,7 @@
 - name: Setting MariaDB port number to {{database_port}}
   template: src=server.cnf.j2
             dest=/etc/my.cnf.d/server.cnf
-            owner={{db_user}}
+            owner={{mariadb_user}}
 
 - name: Starting the MariaDB Server
   service:
