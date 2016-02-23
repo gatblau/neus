@@ -1,4 +1,14 @@
 ---
+  - name: Install glibc libraries
+    yum:
+      name=glibc.i686
+      state=latest
+
+  - name: Install pam libraries
+    yum:
+      name=pam.i686
+      state=latest
+
   - name: Create group for GOGS user
     user:
       name="{{gogs_group}}"
