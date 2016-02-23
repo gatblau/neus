@@ -1,8 +1,8 @@
 ---
   - name: Create user for MariaDB
     user:
-      name={{mariadb_user}}
-      password={{mariadb_password}}
+      name={{ mariadb_user }}
+      password={{ mariadb_password }}
       state=present
 
   - include: open_dbport.yml
