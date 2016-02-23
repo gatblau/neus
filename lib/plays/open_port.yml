@@ -13,9 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Manages the execution of roles on a docker container.
-# The only part of this playbook that needs changing is the list of roles as described below.
-# The name of the playbook should be updated to reflect the host name - e.g. database.yml
+# Manages the opening of ports on the target.
 #
 ---
 - name: Starting the firewall Service
@@ -24,8 +22,8 @@
     state=started
     enabled=yes
 
-- name: Opening the port "{{proxy_port}}"
-  command: 'firewall-cmd --permanent --add-port={{proxy_port | default(80)}}/tcp'
+- name: Opening port "{{port_number}}"
+  command: 'firewall-cmd --permanent --add-port={{port_number}}/tcp'
 
 - name: Reloading the firewall settings
   command: 'firewall-cmd --reload'
