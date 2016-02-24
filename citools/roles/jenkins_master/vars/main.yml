@@ -49,7 +49,6 @@
       'workflow-support.hpi',
       'workflow-durable-task-step.hpi',
       'workflow-basic-steps.hpi',
-      'workflow-support.hpi',
       'workflow-scm-step.hpi',
       'workflow-api.hpi',
       'workflow-cps-global-lib.hpi'
