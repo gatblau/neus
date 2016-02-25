@@ -1,33 +1,52 @@
 ---
 - name: Starting up the host ci-a
   docker:
-    image: gatblau/centos7d
+    image: gatblau.org/centos:7d
     name: ci-a
     pull: missing
     detach: yes
     tty: yes
-    expose: [ 8080, 8081 ]
-    command: sleep infinity
+    expose: [ 80 ]
+    command: "/usr/sbin/init"
     state: started
+    privileged: yes
 
 - name: Starting up the host ci-b
   docker:
-    image: gatblau/centos7d
+    image: gatblau.org/centos:7d
     name: ci-b
     pull: missing
     detach: yes
     tty: yes
-    expose: [ 3000, 9000 ]
-    command: sleep infinity
+    expose: [ 80 ]
+    command: "/usr/sbin/init"
     state: started
+    privileged: yes
 
 - name: Starting up the host ci-c
   docker:
-    image: gatblau/centos7d
+    image: gatblau.org/centos:7d
     name: ci-c
     pull: missing
     detach: yes
     tty: yes
-    expose: [ 3000, 9000 ]
-    command: sleep infinity
+    expose: [ 80, 5000 ]
+    command: "/usr/sbin/init"
     state: started
+    privileged: yes
+
+- name: Get ci-b ip address
+  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-b"
+  register: ci_b_ip
+
+- debug: msg="ci-b ip address is {{ci_b_ip.stdout}}"
+
+- local_action: copy content={{ci_b_ip.stdout}} dest=./cache/ci-b-ip.txt
+
+- name: Get ci-c ip address
+  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-c"
+  register: ci_c_ip
+
+- debug: msg="ci-c ip address is {{ci_c_ip.stdout}}"
+
+- local_action: copy content={{ci_c_ip.stdout}} dest=./cache/ci-c-ip.txt
