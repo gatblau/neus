@@ -55,6 +55,19 @@
     include: install_git.yml
     when: git_exists.stat.exists == false
 
+  # Install NodeJS
+  - name: Setting up NodeSource YUM repository
+    script: setup_nodesource_repo.sh
+
+  - name: Installing NodeJS
+    yum:
+      name=nodejs
+      state=present
+
+  # Install Bower (npm)
+  - name: Installing Bower
+    command: "npm install -g bower"
+
 ### Install Jenkins
   - name: Check Jenkins installed
     stat: path="{{jenkins_home}}"
