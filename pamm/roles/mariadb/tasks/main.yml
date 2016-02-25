@@ -10,6 +10,15 @@
     src=mariadb.repo
     dest=/etc/yum.repos.d/mariadb.repo
 
+- name: Create user for MariaDB
+  user:
+    name={{ mariadb_user }}
+    password={{ mariadb_password }}
+    state=present
+
+- include: open_dbport.yml
+  when: connection == "ssh"
+
 - name: Installing MariaDB
   yum:
     name={{item}}
@@ -17,6 +26,11 @@
   with_items:
     - MariaDB-server
     - MySQL-python
+
+- name: Setting MariaDB port number to {{database_port}}
+  template: src=server.cnf.j2
+            dest=/etc/my.cnf.d/server.cnf
+            owner={{mariadb_user}}
 
 - name: Starting the MariaDB Server
   service:

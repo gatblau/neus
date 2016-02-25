@@ -31,6 +31,7 @@
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
+    - baseline
     - nginx
     - jenkins_master
     - nexus
@@ -40,16 +41,18 @@
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
+    - baseline
     - nginx
-    - jenkins_slave
+#    - jenkins_slave
 
 - name: Provisioning host ci-c
   hosts: ci-c
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
+    - baseline
     - nginx
-    - gogs
-    - gerrit
-    - sonar
     - mariadb
+    - gogs
+#    - gerrit
+    - sonar

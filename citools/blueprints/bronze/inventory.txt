@@ -64,3 +64,6 @@ database_port=5000
 # ip addresses from ssh host dont work when using docker connection plugin
 source_control_uri=#"{{hostvars['ci-b']['ansible_host']}}"
 
+# Location of CI tools
+gogs_host=ci-b
+sonar_host=ci-b

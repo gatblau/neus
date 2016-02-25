@@ -31,7 +31,6 @@
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
-#    - nginx
     - play
 
 - name: Provisioning PAMM-B Databases
@@ -40,5 +39,5 @@
   become: "{{become}}"
   roles:
     - mariadb
-    - mongodb
+#    - mongodb
 

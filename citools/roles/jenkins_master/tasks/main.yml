@@ -62,8 +62,8 @@
 
   - include: install_jenkins.yml
     vars:
-      sonarqube_uri: "{{ lookup('file', 'cache/ci_b_ip.txt') }}"
-      gogs_uri:      "{{ lookup('file', 'cache/ci_b_ip.txt') }}"
+      sonarqube_uri: "{{ lookup('file', 'cache/{{sonar_host}}-ip.txt') }}"
+      gogs_uri:      "{{ lookup('file', 'cache/{{gogs_host}}-ip.txt') }}"
     when: jenkins_exists.stat.exists == false
 
 ### Install Sonar Runner

@@ -1,0 +1,4 @@
+---
+  - debug: msg="ci-b ip address is {{hostvars['ci-b']['ansible_host']}}"
+
+  - local_action: copy content={{hostvars['ci-b']['ansible_host']}} dest=./cache/ci_b_ip.txt
