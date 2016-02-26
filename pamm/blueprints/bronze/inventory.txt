@@ -31,7 +31,6 @@ localhost
 [pamm]
 # uncomment the ansible_host variables when using connection=ssh below.
 pamm-a # ansible_host=192.168.10.50
-pamm-b # ansible_host=192.168.10.60
 
 [local:vars]
 # sets the connection plugin to use, it can be either:

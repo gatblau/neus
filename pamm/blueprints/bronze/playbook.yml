@@ -32,12 +32,6 @@
   become: "{{become}}"
   roles:
     - play
-
-- name: Provisioning PAMM-B Databases
-  hosts: pamm-b
-  connection: "{{connection}}"
-  become: "{{become}}"
-  roles:
     - mariadb
 #    - mongodb
 
