@@ -23,6 +23,10 @@ export JENKINS_HOME={{jenkins_home}}
 export PATH=$PATH:$JAVA_HOME/bin
 
 "
+
+  - name: Generate ssh keys for Jenkins
+    include: generate_ssh_keys.yml
+
   - name: Install Jenkins rpm
     include: "plays/install_rpm.yml"
     vars:
