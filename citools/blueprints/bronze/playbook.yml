@@ -45,5 +45,4 @@
     - nginx
     - mariadb
     - gogs
-#    - gerrit
     - sonar
