@@ -34,30 +34,3 @@
     state: started
     privileged: yes
 
-- name: Get pamm-a ip address
-  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} pamm-a"
-  register: pamm_a_ip
-
-- debug: msg="pamm-a ip address is {{pamm_a_ip.stdout}}"
-
-- local_action: copy content={{pamm_a_ip.stdout}} dest=./cache/pamm_a_ip.txt
-
-- name: Starting up the host pamm-b
-  docker:
-    image: gatblau.org/centos:7d
-    name: pamm-b
-    pull: missing
-    detach: yes
-    tty: yes
-    expose: [ 80, 5000 ]
-    command: "/usr/sbin/init"
-    state: started
-    privileged: yes
-
-- name: Get pamm-b ip address
-  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} pamm-b"
-  register: pamm_b_ip
-
-- debug: msg="pamm-b ip address is {{pamm_b_ip.stdout}}"
-
-- local_action: copy content={{pamm_b_ip.stdout}} dest=./cache/pamm_b_ip.txt
