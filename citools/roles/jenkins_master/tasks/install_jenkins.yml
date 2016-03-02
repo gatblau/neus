@@ -59,6 +59,13 @@ export PATH=$PATH:$JAVA_HOME/bin
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
+  - name: Copy Jenkins credentials file
+    template:
+      src=credentials.xml.j2
+      dest="{{jenkins_home}}/credentials.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+
   - debug:
       msg="COPY NEXUS CONFIGURATION HERE"
 
