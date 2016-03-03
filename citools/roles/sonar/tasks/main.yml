@@ -6,7 +6,7 @@
     stat: path=/usr/java/default
     register: java_exists
 
-  - include: "plays/install_jdk.yml"
+  - include: install_jdk.yml
     when: java_exists.stat.exists == false
 
 ### Install SonarQube
