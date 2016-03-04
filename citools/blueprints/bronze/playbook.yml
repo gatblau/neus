@@ -46,3 +46,12 @@
     - mariadb
     - gogs
     - sonar
+
+- name: Provisioning host DIT Jenkins connection
+  hosts: ci-dit
+  connection: "{{connection}}"
+  become: "{{become}}"
+  roles:
+    - connect
+
+
