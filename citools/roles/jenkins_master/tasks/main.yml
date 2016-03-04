@@ -72,6 +72,15 @@
   - name: Installing Bower
     command: "npm install -g bower"
 
+  # Install Sonar Runner
+  - name: Check Sonar Runner installed
+    stat: path=/usr/local/sonar_runner
+    register: sonarrunner_exists
+    changed_when: no
+
+#  - include: install_sonar_runner.yml
+#    when: sonarrunner_exists.stat.exists == false
+
 ### Install Jenkins
   - name: Check Jenkins installed
     stat: path="{{jenkins_home}}"
@@ -79,15 +88,23 @@
 
   - include: install_jenkins.yml
     vars:
-      sonarqube_uri: "{{ lookup('file', 'cache/{{sonar_host}}-ip.txt') }}"
       gogs_uri:      "{{ lookup('file', 'cache/{{gogs_host}}-ip.txt') }}"
+      sonarqube_uri: "{{ lookup('file', 'cache/{{sonar_host}}-ip.txt') }}"
     when: jenkins_exists.stat.exists == false
 
-### Install Sonar Runner
-  - name: Check Sonar Runner installed
-    stat: path=/usr/local/sonar_runner
-    register: sonarrunner_exists
-    changed_when: no
+### Setup Jenkins to remote connectivity
+  - name: Fetch Jenkins public key and save in temporary folcer
+    fetch:
+      src="{{jenkins_user_home}}/.ssh/id_rsa.pub"
+      dest=cache/authorized_keys
+      flat=yes
 
-  - include: install_sonar_runner.yml
-    when: sonarrunner_exists.stat.exists == false
+  - name: Jenkins publish over ssh settings
+    template:
+      src=jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml.j2
+      dest="{{jenkins_home}}/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+    vars:
+      gogs_uri: "{{ lookup('file', 'cache/ci-dit-ip.txt') }}"
+
