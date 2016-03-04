@@ -24,7 +24,7 @@
 ---
 - name: Starting up the host ci-a
   docker:
-    image: gatblau.org/centos:7d
+    image: gatblau.org/centos:7ds
     name: ci-a
     pull: missing
     detach: yes
@@ -46,7 +46,20 @@
     state: started
     privileged: yes
 
-- name: Get ci-b ip address
+- name: Starting up the host ci-dit
+  docker:
+    image: gatblau.org/centos:7ds
+    name: ci-dit
+    pull: missing
+    detach: yes
+    tty: yes
+    expose: "[ {{ansible_port}} ]"
+    command: "/usr/sbin/init"
+    state: started
+    privileged: yes
+
+# Obtain IP addresses of ci-b and ci-dit containers for Jenkins
+- name: Get ci-b IP address
   shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-b"
   register: ci_b_ip
 
