@@ -24,24 +24,34 @@
 #   on which roles are deployed to which hosts, only host and variable definitions.
 #   The mapping between roles and hosts is done in the main playbook file.
 #
-
-[local]
+[global]
 localhost
+ci-a
+ci-b
+ci-dit
 
-[ci]
-# uncomment the ansible_host variables when using connection=ssh below.
-ci-a # ansible_host=192.168.10.50
-ci-b # ansible_host=192.168.10.60
-
-[local:vars]
+[global:vars]
 # sets the connection plugin to use, it can be either:
 #   a) docker: uses the ansible docker plugin - use for testing VM blueprints on docker or for creating docker images.
 #   b) ssh: uses the ansible SSH plugin - use to deploy to actual VMs
 connection=docker
 
-[ci:vars]
-connection=docker
+# port numbers
+ansible_port=22
+database_port=5000
 
+
+[local]
+localhost
+
+
+[ci]
+# uncomment the ansible_host variables when using connection=ssh.
+ci-a    # ansible_host=192.168.110.160
+ci-b    # ansible_host=192.168.110.161
+ci-dit  # ansible_host=192.168.110.165
+
+[ci:vars]
 # flags the type of blueprint for plays to decide how to configure accordingly.
 blueprint=bronze
 # flags the type of source control to use:
@@ -53,17 +63,13 @@ scm=gogs
 become=no
 
 # Settings for VM remote provisioning
-# become=yes
-# ansible_ssh_port=22
-
-# role variables
-database_port=5000
+#become=yes
 
 # change below if scm=rtc
 
 # ip addresses from ssh host dont work when using docker connection plugin
 source_control_uri=#"{{hostvars['ci-b']['ansible_host']}}"
 
-# Location of CI tools
+# Location of CI tools for Jenkins
 gogs_host=ci-b
 sonar_host=ci-b
