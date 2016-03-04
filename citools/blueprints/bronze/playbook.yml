@@ -54,4 +54,11 @@
   roles:
     - connect
 
+- name: Post build removing temporary files
+  hosts: localhost
+  connection: local
+  become: no
+  tasks:
+    - file: path=cache/ci-b-ip.txt state=absent
+    - file: path=cache/ci-dit-ip.txt state=absent
 

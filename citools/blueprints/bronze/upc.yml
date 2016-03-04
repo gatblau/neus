@@ -63,6 +63,11 @@
   shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-b"
   register: ci_b_ip
 
-- debug: msg="ci-b ip address is {{ci_b_ip.stdout}}"
-
 - local_action: copy content={{ci_b_ip.stdout}} dest=./cache/ci-b-ip.txt
+
+- name: Get ci-dit IP address
+  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-dit"
+  register: ci_dit_ip
+
+- local_action: copy content={{ci_dit_ip.stdout}} dest=./cache/ci-dit-ip.txt
+
