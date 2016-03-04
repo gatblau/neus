@@ -29,7 +29,7 @@
     pull: missing
     detach: yes
     tty: yes
-    expose: [ 80 ]
+    expose: "[ {{jenkins_port}}, {{nexus_port}} ]"
     command: "/usr/sbin/init"
     state: started
     privileged: yes
@@ -41,7 +41,7 @@
     pull: missing
     detach: yes
     tty: yes
-    expose: [ 80, 5000 ]
+    expose: "[ {{database_port}}, {{gogs_port}}, {{sonar_port}}  ]"
     command: "/usr/sbin/init"
     state: started
     privileged: yes
