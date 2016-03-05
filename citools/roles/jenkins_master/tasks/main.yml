@@ -78,8 +78,8 @@
     register: sonarrunner_exists
     changed_when: no
 
-#  - include: install_sonar_runner.yml
-#    when: sonarrunner_exists.stat.exists == false
+  - include: install_sonar_runner.yml
+    when: sonarrunner_exists.stat.exists == false
 
 ### Install Jenkins
   - name: Check Jenkins installed
