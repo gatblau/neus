@@ -30,3 +30,10 @@
     local_action: file
       path=cache/authorized_keys
       state=absent
+
+  - name: Remove nologin file
+    file:
+      path=/run/nologin
+      state=absent
+    when: connection == "docker"
+    
