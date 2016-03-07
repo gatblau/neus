@@ -1,4 +1,5 @@
 ---
-  - debug: msg="ci-b ip address is {{hostvars['ci-b']['ansible_host']}}"
+  # Store IP addresses for use by Jenkins role on ci-a
+  - copy: content={{hostvars['ci-b']['ansible_host']}} dest=cache/ci-b-ip.txt
 
-  - local_action: copy content={{hostvars['ci-b']['ansible_host']}} dest=./cache/ci_b_ip.txt
+  - copy: content={{hostvars['ci-dit']['ansible_host']}} dest=cache/ci-dit-ip.txt
