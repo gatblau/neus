@@ -99,6 +99,13 @@ export PATH=$PATH:$JAVA_HOME/bin
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
+  - name: Configure PAMM seed Build
+    template:
+      src=pamm_seed_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pamm_seed/config.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+
   - name: Jenkins service setup
     template:
       src=jenkins.j2
