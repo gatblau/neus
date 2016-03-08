@@ -84,23 +84,6 @@
       name=mysql
       target="{{gogs_path}}/scripts/initialise.sql"
 
-  - name: Installing GOGS service
-    copy:
-      src=gogs.service
-      dest=/etc/systemd/system/gogs.service
-      mode=0755
-
-  - name: Starting the GOGS service
-    service: 
-      name=gogs
-      state=started
-      enabled=yes
-    when: blueprint != "silicon"
-
-  - name: Start GOGS
-    shell: "su -c \"/usr/local/gogs/gogs web &\" - gogs"
-    when: blueprint == "silicon"
-
   - name: Copying GOGS repositories to the host
     copy: 
       src=gogs-repositories.zip 
@@ -118,3 +101,26 @@
     file:
       path=/tmp/gogs-repositories.zip
       state=absent
+
+  - name: Update PAMM seed repository
+    git:
+      repo=http://github.com/gatblau/pamm.seed
+      dest=/home/{{gogs_user}}/gogs-repositories/pamm.seed
+      update=yes
+
+  - name: Installing GOGS service
+    copy:
+      src=gogs.service
+      dest=/etc/systemd/system/gogs.service
+      mode=0755
+
+  - name: Starting the GOGS service
+    service:
+      name=gogs
+      state=started
+      enabled=yes
+    when: blueprint != "silicon"
+
+  - name: Start GOGS
+    shell: "su -c \"/usr/local/gogs/gogs web &\" - gogs"
+    when: blueprint == "silicon"

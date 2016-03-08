@@ -1,8 +1,8 @@
--- MySQL dump 10.15  Distrib 10.0.22-MariaDB, for Linux (x86_64)
+-- MySQL dump 10.15  Distrib 10.0.24-MariaDB, for Linux (x86_64)
 --
 -- Host: localhost    Database: gogs
 -- ------------------------------------------------------
--- Server version	10.0.22-MariaDB
+-- Server version	10.0.24-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -100,7 +100,7 @@ CREATE TABLE `action` (
   `content` text,
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,7 +109,7 @@ CREATE TABLE `action` (
 
 LOCK TABLES `action` WRITE;
 /*!40000 ALTER TABLE `action` DISABLE KEYS */;
-INSERT INTO `action` VALUES (1,1,1,1,'gogs','gogs@devops.net',1,'gogs','maven-repo','',0,'','2015-10-30 15:26:42');
+INSERT INTO `action` VALUES (1,1,1,1,'gogs','gogs@devops.net',1,'gogs','maven-repo','',0,'','2015-10-30 15:26:42'),(2,1,1,1,'gogs','gogs@devops.net',2,'gogs','pamm.seed','',0,'','2016-03-08 09:32:01');
 /*!40000 ALTER TABLE `action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,6 +188,7 @@ CREATE TABLE `comment` (
   `line` bigint(20) DEFAULT NULL,
   `content` text,
   `created` datetime DEFAULT NULL,
+  `commit_sha` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_comment_issue_id` (`issue_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -298,7 +299,7 @@ CREATE TABLE `hook_task` (
   `hook_id` bigint(20) DEFAULT NULL,
   `uuid` varchar(255) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
+  `url` text,
   `payload_content` text,
   `content_type` int(11) DEFAULT NULL,
   `event_type` varchar(255) DEFAULT NULL,
@@ -672,8 +673,12 @@ CREATE TABLE `pull_request` (
   `has_merged` tinyint(1) DEFAULT NULL,
   `merged` datetime DEFAULT NULL,
   `merger_id` bigint(20) DEFAULT NULL,
+  `issue_id` bigint(20) DEFAULT NULL,
+  `index` bigint(20) DEFAULT NULL,
+  `head_branch` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `IDX_pull_request_pull_id` (`pull_id`)
+  KEY `IDX_pull_request_issue_id` (`issue_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -751,11 +756,18 @@ CREATE TABLE `repository` (
   `fork_id` bigint(20) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
+  `enable_wiki` tinyint(1) NOT NULL DEFAULT '1',
+  `enable_external_wiki` tinyint(1) DEFAULT NULL,
+  `external_wiki_url` varchar(255) DEFAULT NULL,
+  `enable_issues` tinyint(1) NOT NULL DEFAULT '1',
+  `enable_external_tracker` tinyint(1) DEFAULT NULL,
+  `external_tracker_format` varchar(255) DEFAULT NULL,
+  `enable_pulls` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UQE_repository_S` (`owner_id`,`lower_name`),
   KEY `IDX_repository_name` (`name`),
   KEY `IDX_repository_lower_name` (`lower_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -764,7 +776,7 @@ CREATE TABLE `repository` (
 
 LOCK TABLES `repository` WRITE;
 /*!40000 ALTER TABLE `repository` DISABLE KEYS */;
-INSERT INTO `repository` VALUES (1,1,'maven-repo','maven-repo','','','master',1,0,0,0,0,0,0,0,0,0,0,0,0,0,'2015-10-30 15:26:42','2015-10-30 15:26:42');
+INSERT INTO `repository` VALUES (1,1,'maven-repo','maven-repo','','','master',1,0,0,0,0,0,0,0,0,0,0,0,0,0,'2015-10-30 15:26:42','2015-10-30 15:26:42',1,NULL,NULL,1,NULL,NULL,1),(2,1,'pamm.seed','pamm.seed','','','master',1,0,0,0,0,0,0,0,0,0,0,0,0,0,'2016-03-08 09:32:01','2016-03-08 09:32:02',1,0,'',1,0,'',1);
 /*!40000 ALTER TABLE `repository` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -942,10 +954,12 @@ CREATE TABLE `user` (
   `description` varchar(255) DEFAULT NULL,
   `num_teams` int(11) DEFAULT NULL,
   `num_members` int(11) DEFAULT NULL,
+  `max_repo_creation` int(11) NOT NULL DEFAULT '-1',
+  `allow_import_local` tinyint(1) DEFAULT NULL,
+  `num_following` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UQE_user_lower_name` (`lower_name`),
-  UNIQUE KEY `UQE_user_name` (`name`),
-  UNIQUE KEY `UQE_user_S` (`email`,`type`)
+  UNIQUE KEY `UQE_user_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -955,7 +969,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'gogs','gogs','','gogs@devops.net','ece2d30dde64b0ce933bf0fa47b809e3960e151f4d4da8b576d3c42f79dd9ddad8383505d754546fe8604d407a36822a3bc5',0,0,'',0,'','','MgQxgpFO3T','8nqtZmOG08','2015-10-30 15:26:09','2015-10-30 15:26:42',0,1,1,0,'215bf0afb9698ccfbd896d10b5dd4875','gogs@devops.net',0,0,0,0,1,'',0,0);
+INSERT INTO `user` VALUES (1,'gogs','gogs','','gogs@devops.net','ece2d30dde64b0ce933bf0fa47b809e3960e151f4d4da8b576d3c42f79dd9ddad8383505d754546fe8604d407a36822a3bc5',0,0,'',0,'','','MgQxgpFO3T','8nqtZmOG08','2015-10-30 15:26:09','2016-03-08 09:32:01',0,1,1,0,'215bf0afb9698ccfbd896d10b5dd4875','gogs@devops.net',0,0,0,0,2,'',0,0,-1,0,0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -979,7 +993,7 @@ CREATE TABLE `version` (
 
 LOCK TABLES `version` WRITE;
 /*!40000 ALTER TABLE `version` DISABLE KEYS */;
-INSERT INTO `version` VALUES (1,8);
+INSERT INTO `version` VALUES (1,11);
 /*!40000 ALTER TABLE `version` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -996,7 +1010,7 @@ CREATE TABLE `watch` (
   `repo_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UQE_watch_WATCH` (`user_id`,`repo_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1005,7 +1019,7 @@ CREATE TABLE `watch` (
 
 LOCK TABLES `watch` WRITE;
 /*!40000 ALTER TABLE `watch` DISABLE KEYS */;
-INSERT INTO `watch` VALUES (1,1,1);
+INSERT INTO `watch` VALUES (1,1,1),(2,1,2);
 /*!40000 ALTER TABLE `watch` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1053,4 +1067,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-30 15:36:57
+-- Dump completed on 2016-03-08  9:33:18
