@@ -1,3 +1,7 @@
+#
+#  For use when VMs have already been provisioned in order to capture IP addresses of
+#  VMs that need to be connected with each other.
+#
 ---
   # Store IP addresses for use by Jenkins role on ci-a
   - copy: content={{hostvars['ci-b']['ansible_host']}} dest=cache/ci-b-ip.txt
