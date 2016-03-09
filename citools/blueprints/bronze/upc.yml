@@ -33,6 +33,7 @@
     command: "/usr/sbin/init"
     state: started
     privileged: yes
+    restart_policy: always
 
 - name: Starting up the host ci-b
   docker:
@@ -45,6 +46,7 @@
     command: "/usr/sbin/init"
     state: started
     privileged: yes
+    restart_policy: always
 
 - name: Starting up the host ci-dit
   docker:
@@ -57,6 +59,7 @@
     command: "/usr/sbin/init"
     state: started
     privileged: yes
+    restart_policy: always
 
 # Obtain IP addresses of ci-b and ci-dit containers for Jenkins
 - name: Get ci-b IP address

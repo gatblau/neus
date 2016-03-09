@@ -33,4 +33,4 @@
     command: "/usr/sbin/init"
     state: started
     privileged: yes
-
+    restart_policy: always
