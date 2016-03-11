@@ -19,10 +19,10 @@ The PAMM solution is available for deployment on the following infrastructure.
  
 Running CentOS or RHEL 7, via the following blueprints:
 
-- [Bronze](blueprints/bronze/readme.md): the minimum configuration running on two virtual machines.
-- [Silver](blueprints/silver/readme.md): adds a high availability proxy to load balance two instances of the PAMM application.
-- [Gold](blueprints/gold/readme.md): adds cluster databases to the Silver blueprint.
-- [Platinum](blueprints/platinum/readme.md): provides 3 PAMM instances and separate clusters for SQL and NO-SQL databases.
+- [Bronze](blueprints/bronze/readme.md): the minimum configuration running on a single virtual machine.
+- [Silver](blueprints/silver/readme.md): separates the database from the web tier in two virtual machines.
+- [Gold](blueprints/gold/readme.md): adds load balancing of web tier.
+- [Platinum](blueprints/platinum/readme.md): adds clusters for SQL and NO-SQL databases.
 
 ### Container Management Platforms
 
