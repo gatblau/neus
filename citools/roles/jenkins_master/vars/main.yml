@@ -75,8 +75,8 @@
 
   perl_rpm: perl-5.16.3-286.el7.x86_64.rpm
 
-  sbt_folder: sbt-0.13.8
-  sbt_zip: sbt-0.13.8.zip
+  sbt_folder: sbt-0.13.11
+  sbt_zip: sbt-0.13.11.zip
 
   sonar_runner_folder: sonar-runner-2.4
   sonar_runner_zipfile: sonar-runner-dist-2.4.zip

@@ -49,7 +49,7 @@ download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "unzip-6.0-15.e
 download "https://sonatype-download.global.ssl.fastly.net/nexus/oss/" "nexus-2.12.0-01-bundle.zip"
 download "http://download.oracle.com/otn-pub/java/jdk/8u74-b02/" "jdk-8u74-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"
 download "https://services.gradle.org/distributions/" "gradle-2.7-bin.zip"
-download "https://dl.bintray.com/sbt/native-packages/sbt/0.13.8/" "sbt-0.13.8.zip"
+download "https://dl.bintray.com/sbt/native-packages/sbt/0.13.11/" "sbt-0.13.11.zip"
 download "http://mirrors.ukfast.co.uk/sites/ftp.apache.org/maven/maven-3/3.3.9/binaries/" "apache-maven-3.3.9-bin.zip"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/e/" "epel-release-7-5.noarch.rpm"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nodejs-0.10.42-4.el7.x86_64.rpm"
