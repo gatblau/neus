@@ -97,7 +97,7 @@
     when: jenkins_exists.stat.exists == false
 
 ### Setup Jenkins to remote connectivity
-  - name: Fetch Jenkins public key and save in temporary folcer
+  - name: Fetch Jenkins public key and save in temporary folder
     fetch:
       src="{{jenkins_user_home}}/.ssh/id_rsa.pub"
       dest=cache/authorized_keys
