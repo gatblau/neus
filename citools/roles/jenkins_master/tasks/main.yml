@@ -1,6 +1,10 @@
 ---
 # This play installs Jenkins and build tools
 
+### Create jenkins user
+  - name: Create jenkins user
+    include: jenkins_user.yml
+
 ###  Install Build Tools
   # Install JDK (JDK variables are set in group_vars/all/main.yml)
   - name: Check if Java installed
