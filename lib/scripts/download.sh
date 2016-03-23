@@ -23,7 +23,7 @@
 # Fetches all required packages and copies them to the ROOT folder
 # Usage:
 #    sh fetch.sh
-#    sh fetch.sh clean (to clean the chache)
+#    sh fetch.sh clean (to clean the cache)
 #
 
 download() {
