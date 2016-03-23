@@ -24,12 +24,12 @@
 ---
 - name: Starting up the host pamm-a
   docker:
-    image: gatblau.org/centos:7d
+    image: gatblau.org/centos:7ds
     name: pamm-a
     pull: missing
     detach: yes
     tty: yes
-    expose: [ 80 ]
+    expose: [ 80, 5000, 8081 ]
     command: "/usr/sbin/init"
     state: started
     privileged: yes
