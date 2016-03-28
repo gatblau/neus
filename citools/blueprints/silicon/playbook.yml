@@ -54,19 +54,12 @@
   roles:
     - gogs
 
-- name: Provisioning host ci-gerrit
-  hosts: ci-gerrit
-  connection: "{{connection}}"
-  become: "{{become}}"
-  roles:
-    - gerrit
-
-- name: Provisioning host ci-sonar
-  hosts: ci-sonar
-  connection: "{{connection}}"
-  become: "{{become}}"
-  roles:
-    - sonar
+#- name: Provisioning host ci-sonar
+#  hosts: ci-sonar
+#  connection: "{{connection}}"
+#  become: "{{become}}"
+#  roles:
+#    - sonar
 
 - name: Provisioning host ci-mariadb
   hosts: ci-mariadb
