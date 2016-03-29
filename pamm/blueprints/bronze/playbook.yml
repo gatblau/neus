@@ -29,7 +29,6 @@
 - name: Provisioning PAMM-A Play Application
   hosts: pamm-a
   connection: "{{connection}}"
-  become: "{{become}}"
   roles:
     - play
     - mariadb
