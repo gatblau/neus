@@ -35,6 +35,7 @@ source scripts/image.sh
 
 # build the centos7 systemd image if not in the local registry
 build_image ../lib/images/centos7d gatblau.org/centos 7d
+build_image ../lib/images/centos7ds gatblau.org/centos 7ds
 
 # hack to release the network handles created by the containers
 echo restarting the docker daemon service, please wait!!!
