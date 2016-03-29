@@ -34,3 +34,6 @@
     state: started
     privileged: yes
     restart_policy: always
+
+- set_fact: become="no"
+            connection="docker"
