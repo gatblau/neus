@@ -6,3 +6,6 @@
   # Database variables
   db_user      : admin
   db_pwd       : Passw0rd!
+
+  # Connection is set by the localhost when the target platform is provisioned
+  connection: "{{hostvars['localhost']['connection']}}"
