@@ -16,6 +16,11 @@
 # Manages the opening of ports on the target.
 #
 ---
+- name: Ensure that the firewall Service is installed
+  yum:
+    name=firewalld
+    state=present
+
 - name: Starting the firewall Service
   service:
     name=firewalld
