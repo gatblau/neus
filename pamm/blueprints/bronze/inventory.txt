@@ -28,10 +28,6 @@
 [local]
 localhost
 
-[pamm]
-# uncomment the ansible_host variables when using connection=ssh below.
-pamm-a # ansible_host=192.168.10.50
-
 [local:vars]
 # sets the connection plugin to use, it can be either:
 #   a) docker: uses the ansible docker plugin - use for testing VM blueprints on docker or for creating docker images.
@@ -44,10 +40,5 @@ connection=docker
 # flags the type of blueprint for plays to decide how to configure accordingly.
 blueprint=bronze
 
-# Settings for development only
-become=no
-
-# Settings for VM remote provisioning
-# become=yes
-# ansible_ssh_port=22
-
+[pamm]
+pamm-a
