@@ -1,0 +1,9 @@
+---
+  - name:  Setting up parameters for pamm-a VM
+    add_host: groups=pamm
+              hostname=pamm-a
+              ansible_host="{{pamm_a_ip}}"
+              ansible_user="root"
+              ansible_port=22
+              become="yes"
+              connection="ssh"
