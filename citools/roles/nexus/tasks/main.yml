@@ -1,3 +1,8 @@
 ---
+  - name: Check Nexus installed
+    stat: path="/usr/local/nexus"
+    register: nexus_exists
+
   - name: Install Nexus
     include: install_nexus.yml
+    when: nexus_exists.stat.exists == false
