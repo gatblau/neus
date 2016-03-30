@@ -76,3 +76,4 @@
 
 - local_action: copy content={{ci_dit_ip.stdout}} dest=./cache/ci-dit-ip.txt
 
+- copy: content="127.0.0.1" dest=./cache/ci-db-ip.txt

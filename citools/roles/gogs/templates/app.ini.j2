@@ -3,20 +3,19 @@ RUN_MODE = prod
 
 [database]
 DB_TYPE = mysql
-HOST = 127.0.0.1:{{ database_port }}
+HOST = {{database_uri}}:{{ database_port }}
 NAME = gogs
 USER = {{db_user}}
 PASSWD = {{db_pwd}}
 SSL_MODE = disable
-PATH = data/gogs.db
 
 [repository]
 ROOT = /home/{{gogs_user}}/gogs-repositories
 
 [server]
 DOMAIN = localhost
-HTTP_PORT = 3000
-ROOT_URL = http://localhost/git
+HTTP_PORT = {{ gogs_port }}
+ROOT_URL = http://localhost:{{ gogs_port }}/
 
 [session]
 PROVIDER = file

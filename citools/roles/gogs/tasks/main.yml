@@ -19,5 +19,7 @@
     changed_when: no
 
   - include: install_gogs.yml
+    vars:
+      database_uri: "{{ lookup('file', 'cache/{{database_host}}-ip.txt') }}"
     when: gogs_exists.stat.exists == false
 
