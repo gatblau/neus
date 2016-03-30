@@ -4,6 +4,34 @@
 #
 ---
   # Store IP addresses for use by Jenkins role on ci-a
-  - copy: content={{hostvars['ci-b']['ansible_host']}} dest=cache/ci-b-ip.txt
+  - copy: content={{ci_b_ip}} dest=cache/ci-b-ip.txt
 
-  - copy: content={{hostvars['ci-dit']['ansible_host']}} dest=cache/ci-dit-ip.txt
+  - copy: content={{ci_dit_ip}} dest=cache/ci-dit-ip.txt
+
+  # Add hosts and set variables
+  - name:  Setting up parameters for ci-a VM
+    add_host: groups=ci
+              hostname=ci-a
+              ansible_host="{{ci_a_ip}}"
+              ansible_user="root"
+              ansible_port=22
+              become="yes"
+              connection="ssh"
+
+  - name:  Setting up parameters for ci-b VM
+    add_host: groups=ci
+              hostname=ci-b
+              ansible_host="{{ci_b_ip}}"
+              ansible_user="root"
+              ansible_port=22
+              become="yes"
+              connection="ssh"
+
+  - name:  Setting up parameters for ci-dit VM
+    add_host: groups=ci
+              hostname=ci-dit
+              ansible_host="{{ci_dit_ip}}"
+              ansible_user="root"
+              ansible_port=22
+              become="yes"
+              connection="ssh"

@@ -29,11 +29,6 @@ local
 ci
 
 [global:vars]
-# sets the connection plugin to use, it can be either:
-#   a) docker: uses the ansible docker plugin - use for testing VM blueprints on docker or for creating docker images.
-#   b) ssh: uses the ansible SSH plugin - use to deploy to actual VMs
-connection=docker
-
 # port numbers
 ansible_port=22
 jenkins_port=8080
@@ -46,12 +41,24 @@ sonar_port=5003
 [local]
 localhost
 
+[local:vars]
+# Sets the target platform to deploy to, it can be one of the following:
+#   a) ec2    - for Amazon Web Services (AWS) Elastic Cloud Compute (EC2) - set EC2 variables below
+#   b) vm     - for actual VM: enter ip address below and when running up.sh will need to add -k to prompt for password
+#   c) docker - for Docker containers - used to test the build scripts
+#
+tgt_platform=docker
+
+# For vm target platform, enter IP addresses below:
+ci_a_ip=192.168.110.160
+ci_b_ip=192.168.110.161
+ci_dit_ip=192.168.110.167
+
 
 [ci]
-# uncomment the ansible_host variables when using connection=ssh.
-ci-a    # ansible_host=192.168.110.160
-ci-b    # ansible_host=192.168.110.161
-ci-dit  # ansible_host=192.168.110.165
+ci-a
+ci-b
+ci-dit
 
 [ci:vars]
 # flags the type of blueprint for plays to decide how to configure accordingly.
@@ -61,11 +68,6 @@ blueprint=bronze
 #   - rtc: for an external connection to Rational Team Concert
 scm=gogs
 
-# Settings for development only
-become=no
-
-# Settings for VM remote provisioning
-#become=yes
 
 # change below if scm=rtc
 
