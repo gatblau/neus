@@ -27,3 +27,6 @@
 
     - include: "../upv.yml"
       when: tgt_platform == "vm"
+
+    - include: "../upv_ec2.yml"
+      when: tgt_platform == "ec2"
