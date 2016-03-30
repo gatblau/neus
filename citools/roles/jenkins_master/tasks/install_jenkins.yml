@@ -94,5 +94,5 @@
     when: blueprint != "silicon"
 
   - name: Start Jenkins
-    shell: "su -c \"java -jar /usr/lib/jenkins/jenkins.war --prefix=/jenkins &\" - jenkins"
+    shell: "su -c \"java -jar /usr/lib/jenkins/jenkins.war &\" - jenkins"
     when: blueprint == "silicon"
