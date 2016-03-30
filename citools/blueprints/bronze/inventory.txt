@@ -61,6 +61,10 @@ ci-b
 ci-dit
 
 [ci:vars]
+# Set to yes to include PAMM or JAMM seeds in CI Tools environment
+pamm=no
+jamm=no
+
 # flags the type of source control to use:
 #   - gogs: for local Go Git Repository
 #   - rtc: for an external connection to Rational Team Concert
