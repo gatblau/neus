@@ -23,7 +23,7 @@
   connection: local
   tasks:
     - include: "../upc.yml"
-      when: connection == "docker"
+      when: tgt_platform == "docker"
 
     - include: "../upv.yml"
-      when: connection == "ssh"
+      when: tgt_platform == "vm"

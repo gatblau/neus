@@ -29,13 +29,15 @@
 localhost
 
 [local:vars]
-# sets the connection plugin to use, it can be either:
-#   a) docker: uses the ansible docker plugin - use for testing VM blueprints on docker or for creating docker images.
+# Sets the target platform to deploy to, it can be one of the following:
+#   a) docker - for Docker containers - used to test the build scripts
 #   b) ssh: uses the ansible SSH plugin - use to deploy to actual VMs
-connection=docker
+#
+tgt_platform=ec2
+
 
 [pamm:vars]
-connection=docker
+
 
 # flags the type of blueprint for plays to decide how to configure accordingly.
 blueprint=bronze
