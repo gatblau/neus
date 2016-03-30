@@ -61,8 +61,6 @@ ci-b
 ci-dit
 
 [ci:vars]
-# flags the type of blueprint for plays to decide how to configure accordingly.
-blueprint=bronze
 # flags the type of source control to use:
 #   - gogs: for local Go Git Repository
 #   - rtc: for an external connection to Rational Team Concert
