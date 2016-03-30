@@ -53,7 +53,7 @@ JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true"
 # Port Jenkins is listening on.
 # Set to -1 to disable
 #
-JENKINS_PORT="8080"
+JENKINS_PORT="{{ jenkins_port }}"
 
 ## Type:        string
 ## Default:     ""
@@ -107,7 +107,8 @@ JENKINS_HTTPS_LISTEN_ADDRESS=""
 # Ajp13 Port Jenkins is listening on.
 # Set to -1 to disable
 #
-JENKINS_AJP_PORT="8009"
+#JENKINS_AJP_PORT="8009"
+JENKINS_AJP_PORT="-1"
 
 ## Type:        string
 ## Default:     ""
@@ -158,4 +159,4 @@ JENKINS_HANDLER_IDLE="20"
 # Pass arbitrary arguments to Jenkins.
 # Full option list: java -jar jenkins.war --help
 #
-JENKINS_ARGS="--prefix=/jenkins"
+JENKINS_ARGS=""

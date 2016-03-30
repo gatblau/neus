@@ -32,7 +32,6 @@
   roles:
     - baseline
     - browsers
-    - nginx
     - jenkins_master
     - nexus
 
@@ -41,7 +40,6 @@
   connection: "{{connection}}"
   roles:
     - baseline
-    - nginx
     - mariadb
     - gogs
     - sonar

@@ -32,10 +32,10 @@ ci
 # port numbers
 ansible_port=22
 jenkins_port=8080
-database_port=5000
-nexus_port=5001
-gogs_port=5002
-sonar_port=5003
+database_port=3306
+nexus_port=8081
+gogs_port=3000
+sonar_port=9000
 
 
 [local]

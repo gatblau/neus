@@ -93,7 +93,7 @@
   - include: install_jenkins.yml
     vars:
       gogs_uri:      "{{ lookup('file', 'cache/{{gogs_host}}-ip.txt') }}"
-      sonarqube_uri: "{{ lookup('file', 'cache/{{sonar_host}}-ip.txt') }}"
+      sonar_uri: "{{ lookup('file', 'cache/{{sonar_host}}-ip.txt') }}"
     when: jenkins_exists.stat.exists == false
 
 ### Setup Jenkins to remote connectivity

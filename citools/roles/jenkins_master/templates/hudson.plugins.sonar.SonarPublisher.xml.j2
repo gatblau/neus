@@ -4,10 +4,10 @@
     <hudson.plugins.sonar.SonarInstallation>
       <name>SonarQube</name>
       <disabled>false</disabled>
-      <serverUrl>http://{{sonarqube_uri}}/sonar</serverUrl>
+      <serverUrl>http://{{sonar_uri}}:{{sonar_port}}</serverUrl>
       <mojoVersion></mojoVersion>
-      <databaseUrl>jdbc:mysql://{{sonarqube_uri}}:{{ database_port }}/sonar</databaseUrl>
-      <databaseLogin>admin</databaseLogin>
+      <databaseUrl></databaseUrl>
+      <databaseLogin></databaseLogin>
       <additionalProperties></additionalProperties>
       <additionalAnalysisProperties></additionalAnalysisProperties>
       <triggers>
@@ -16,8 +16,8 @@
         <envVar></envVar>
       </triggers>
       <sonarLogin>admin</sonarLogin>
-      <databaseSecret>vzdjYk5OUxbnfpHPxHFawAWOqky5BnslORdv4Glrins=</databaseSecret>
-      <sonarSecret>/4lSHY9+NQj4FyaSyuKUh1LiI0UoUqyx4lgi0Lzi1S8=</sonarSecret>
+      <databaseSecret>Ig5Kh7daFJipzw+zPKP2yA==</databaseSecret>
+      <sonarSecret>JpjppkqKUA5fFL/mCxTrGMS46TY8E22DiIbVTA7gFj8=</sonarSecret>
     </hudson.plugins.sonar.SonarInstallation>
   </installations>
   <buildWrapperEnabled>false</buildWrapperEnabled>
