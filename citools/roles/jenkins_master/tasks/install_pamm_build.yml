@@ -1,0 +1,48 @@
+---
+  - name: Install Karma
+    command: "su -c \"npm install karma --save-dev\" - jenkins"
+
+  - name: Install Karma plugins
+    command: "su -c \"npm install karma-jasmine karma-chrome-launcher --save-dev\" - jenkins"
+
+  - name: Create karma.cmd symbolic link
+    command: "su -c \"cd node_modules/.bin && ln -s ../karma/bin/karma karma.cmd\" - jenkins"
+
+  - name: Copying PAMM seed build job to the host
+    copy:
+      src=pamm_seed.zip
+      dest=/tmp
+
+  - name: Unzipping PAMM seed build job
+    unarchive:
+      src=/tmp/pamm_seed.zip
+      dest="{{jenkins_home}}"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+      copy=no
+
+  - name: Removing PAMM seed zip file from the host
+    file: path=/tmp/pamm_seed.zip state=absent
+
+  - name: Clone PAMM seed repository
+    git:
+      repo=http://github.com/gatblau/pamm.seed
+      dest=/tmp/pamm.seed
+      update=yes
+
+  - name: Fetch latest PAMM seed label from GitHub
+    shell: "cd /tmp/pamm.seed && git describe --tags $(git rev-list --tags --max-count=1)"
+    register: pamm_seed_tag
+
+  - debug: msg="Set PAMM seed build tag to {{pamm_seed_tag.stdout}}"
+
+  - name: Configure PAMM seed Build
+    template:
+      src=pamm_seed_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pamm_seed/config.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+
+  - name: Remove PAMM seed repository
+    file: path=/tmp/pamm.seed state=absent
+

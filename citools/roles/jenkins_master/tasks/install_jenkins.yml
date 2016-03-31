@@ -48,21 +48,21 @@
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
-  - name: Copying Jenkins build jobs to the host
+  - name: Copying Jenkins smoke test build job to the host
     copy:
-      src=jobs.zip
+      src=smoke_test.zip
       dest=/tmp
 
-  - name: Unzipping Jenkins build jobs
+  - name: Unzipping Jenkin smoke test build job
     unarchive:
-      src=/tmp/jobs.zip
+      src=/tmp/smoke_test.zip
       dest="{{jenkins_home}}"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
       copy=no
 
-  - name: Removing Jenkins jobs from the host
-    file: path=/tmp/jobs.zip state=absent
+  - name: Removing Jenkin smoke test job zip file from the host
+    file: path=/tmp/smoke_test.zip state=absent
 
   - name: Configure Smoke Test Build
     template:
@@ -71,12 +71,9 @@
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
-  - name: Configure PAMM seed Build
-    template:
-      src=pamm_seed_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pamm_seed/config.xml"
-      owner="{{jenkins_user}}"
-      group="{{jenkins_group}}"
+  - name: Install PAMM seed build job
+    include: install_pamm_build.yml
+    when: pamm == "yes"
 
   - name: Jenkins service setup
     template:
