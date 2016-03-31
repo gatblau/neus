@@ -8,6 +8,9 @@
 
   - copy: content={{ci_dit_ip}} dest=cache/ci-dit-ip.txt
 
+  # Store database IP address for use by GOGS role on ci-b
+  - copy: content="127.0.0.1" dest=./cache/ci-db-ip.txt
+
   # Add hosts and set variables
   - name:  Setting up parameters for ci-a VM
     add_host: groups=ci
