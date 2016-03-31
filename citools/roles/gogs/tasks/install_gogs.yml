@@ -70,13 +70,23 @@
       path=/tmp/{{gogs_zipfile}}
       state=absent
 
-  - name: Copy database initilisation script
+  - name: Copy database initilisation script (without PAMM seed)
     copy:
-      src=import.sql
+      src=smoke_test.sql
       dest="{{gogs_path}}/scripts/initialise.sql"
       owner="{{gogs_user}}"
       group="{{gogs_group}}"
       mode=0755
+    when: pamm == "no"
+
+  - name: Copy database initilisation script (with PAMM seed)
+    copy:
+      src=pamm_seed.sql
+      dest="{{gogs_path}}/scripts/initialise.sql"
+      owner="{{gogs_user}}"
+      group="{{gogs_group}}"
+      mode=0755
+    when: pamm == "yes"
 
   - name: Creating the GOGS database
     mysql_db:
@@ -84,12 +94,12 @@
       name=mysql
       target="{{gogs_path}}/scripts/initialise.sql"
 
-  - name: Copying GOGS repositories to the host
+  - name: Copying smoke test repository zip file to the host
     copy: 
       src=gogs-repositories.zip 
       dest=/tmp
 
-  - name: Unzipping GOGS repositories
+  - name: Unzipping smoke repository
     unarchive:
       src=/tmp/gogs-repositories.zip
       dest=/home/{{gogs_user}}/
@@ -97,16 +107,14 @@
       group="{{gogs_group}}"
       copy=no
 
-  - name: Removing GOGS repositories from the host
+  - name: Removing smoke test repository zip file from the host
     file:
       path=/tmp/gogs-repositories.zip
       state=absent
 
-  - name: Update PAMM seed repository
-    git:
-      repo=http://github.com/gatblau/pamm.seed
-      dest=/home/{{gogs_user}}/gogs-repositories/pamm.seed
-      update=yes
+  - name: Clone PAMM seed repository
+    include: install_pamm_seed.yml
+    when: pamm == "yes"
 
   - name: Installing GOGS service
     copy:
