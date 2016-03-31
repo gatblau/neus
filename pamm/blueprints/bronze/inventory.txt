@@ -34,7 +34,7 @@ localhost
 #   b) vm     - for actual VM: enter ip address below and when running up.sh will need to add -k to prompt for password
 #   c) ec2    - for Amazon Web Services (AWS) Elastic Cloud Compute (EC2) - set EC2 variables below
 #
-tgt_platform=ec2
+tgt_platform=docker
 
 # For vm target platform, enter its IP address below:
 pamm_a_ip=192.168.110.165
