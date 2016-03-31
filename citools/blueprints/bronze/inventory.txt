@@ -69,7 +69,6 @@ jamm=no
 #   - gogs: for local Go Git Repository
 #   - rtc: for an external connection to Rational Team Concert
 scm=gogs
-database_uri=127.0.0.1
 
 # change below if scm=rtc
 
