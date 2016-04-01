@@ -23,6 +23,7 @@
 #
 ---
 - set_fact: connection="docker"
+            become="no"
 
 - name: Starting up the host ci-a
   docker:

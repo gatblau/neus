@@ -29,6 +29,7 @@
 - name: Provisioning host A Build Server and Artefact Repository
   hosts: ci-a
   connection: "{{connection}}"
+  become: "{{become}}"
   roles:
     - baseline
     - browsers
@@ -38,6 +39,7 @@
 - name: Provisioning host B Source Control, Source Review and Code Quality
   hosts: ci-b
   connection: "{{connection}}"
+  become: "{{become}}"
   roles:
     - baseline
     - mariadb
@@ -47,6 +49,7 @@
 - name: Provisioning host DIT Jenkins connection
   hosts: ci-dit
   connection: "{{connection}}"
+  become: "{{become}}"
   roles:
     - connect
 
