@@ -4,5 +4,6 @@
   mariadb_user: maria
   mariadb_password: Passw0rd!
 
-  # Connection is set by the localhost when the target platform is provisioned
+  # Variables are set by the localhost when the target platform is provisioned
+  become: "{{hostvars['localhost']['become']}}"
   connection: "{{hostvars['localhost']['connection']}}"
