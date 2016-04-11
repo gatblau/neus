@@ -43,9 +43,9 @@ localhost
 
 [local:vars]
 # Sets the target platform to deploy to, it can be one of the following:
-#   a) ec2    - for Amazon Web Services (AWS) Elastic Cloud Compute (EC2) - set EC2 variables below
+#   a) docker - for Docker containers - used to test the build scripts
 #   b) vm     - for actual VM: enter ip address below and when running up.sh will need to add -k to prompt for password
-#   c) docker - for Docker containers - used to test the build scripts
+#   c) ec2    - for Amazon Web Services (AWS) Elastic Cloud Compute (EC2) - set EC2 variables below
 #
 tgt_platform=docker
 
