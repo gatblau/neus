@@ -70,30 +70,6 @@
       path=/tmp/{{gogs_zipfile}}
       state=absent
 
-  - name: Copy database initilisation script (without PAMM seed)
-    copy:
-      src=smoke_test.sql
-      dest="{{gogs_path}}/scripts/initialise.sql"
-      owner="{{gogs_user}}"
-      group="{{gogs_group}}"
-      mode=0755
-    when: pamm == "no"
-
-  - name: Copy database initilisation script (with PAMM seed)
-    copy:
-      src=pamm_seed.sql
-      dest="{{gogs_path}}/scripts/initialise.sql"
-      owner="{{gogs_user}}"
-      group="{{gogs_group}}"
-      mode=0755
-    when: pamm == "yes"
-
-  - name: Creating the GOGS database
-    mysql_db:
-      state=import
-      name=mysql
-      target="{{gogs_path}}/scripts/initialise.sql"
-
   - name: Copying smoke test repository zip file to the host
     copy: 
       src=gogs-repositories.zip 

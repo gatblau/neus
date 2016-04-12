@@ -26,11 +26,6 @@ export PATH=$PATH:$JAVA_HOME/bin
               dest=/opt/sonar/conf/sonar.properties
               owner={{sonar_user}}
 
-  - name: Creating the SONAR database
-    mysql_db:
-      name=sonar
-      state=present
-
   - name: Starting the SONAR service
     service:
       name=sonar

@@ -7,3 +7,9 @@
   - name: Install MariaDB
     include: install_mariadb.yml
     when: mariadb_exists.stat.exists == false
+
+  - name: Initialise GOGS database
+    include: initialise_gogs_database.yml
+
+  - name: Initialise Sonar database
+    include: initialise_sonar_database.yml
