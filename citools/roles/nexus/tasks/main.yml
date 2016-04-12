@@ -1,4 +1,12 @@
 ---
+  # Install JDK (JDK variables are set in group_vars/all/main.yml)
+  - name: Check if Java installed
+    stat: path=/usr/java/default
+    register: java_exists
+
+  - include: install_jdk.yml
+    when: java_exists.stat.exists == false
+
   - name: Check Nexus installed
     stat: path="/usr/local/nexus"
     register: nexus_exists
