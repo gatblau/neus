@@ -32,17 +32,6 @@
     command: sleep infinity
     state: started
 
-- name: Starting up the host ci-gerrit
-  docker:
-    image: docker.io/centos:7
-    name: ci-gerrit
-    pull: missing
-    detach: yes
-    tty: yes
-    expose: [ 3000, 9000 ]
-    command: sleep infinity
-    state: started
-
 - name: Starting up the host ci-gogs
   docker:
     image: docker.io/centos:7
