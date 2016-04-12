@@ -31,6 +31,19 @@
 #   on which roles are deployed to which hosts, only host and variable definitions.
 #   The mapping between roles and hosts is done in the main playbook file.
 #
+[global:children]
+local
+ci
+
+[global:vars]
+# port numbers
+ansible_port=22
+jenkins_port=8080
+database_port=3306
+nexus_port=8081
+gogs_port=3000
+sonar_port=9000
+
 
 [local]
 localhost

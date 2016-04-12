@@ -6,7 +6,7 @@
     pull: missing
     detach: yes
     tty: yes
-    expose: [ 8080, 8081 ]
+    expose: "[ {{jenkins_port}} ]"
     command: sleep infinity
     state: started
 
@@ -17,7 +17,7 @@
     pull: missing
     detach: yes
     tty: yes
-    expose: [ 8080 ]
+    expose: "[ {{jenkins_port}} ]"
     command: sleep infinity
     state: started
 
@@ -28,7 +28,7 @@
     pull: missing
     detach: yes
     tty: yes
-    expose: [ 3000, 9000 ]
+    expose: "[ {{nexus_port}} ]"
     command: sleep infinity
     state: started
 
@@ -39,7 +39,7 @@
     pull: missing
     detach: yes
     tty: yes
-    expose: [ 3000, 9000 ]
+    expose: "[ {{gogs_port}} ]"
     command: sleep infinity
     state: started
 
@@ -50,7 +50,7 @@
     pull: missing
     detach: yes
     tty: yes
-    expose: [ 3000, 9000 ]
+    expose: "[ {{sonar_port}} ]"
     command: sleep infinity
     state: started
 
@@ -61,6 +61,6 @@
     pull: missing
     detach: yes
     tty: yes
-    expose: [ 3000, 9000 ]
+    expose: "[ {{database_port}} ]"
     command: sleep infinity
     state: started
