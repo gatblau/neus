@@ -47,6 +47,13 @@
   roles:
     - nexus
 
+- name: Provisioning host ci-mariadb
+  hosts: ci-mariadb
+  connection: "{{connection}}"
+  become: "{{become}}"
+  roles:
+    - mariadb
+
 - name: Provisioning host ci-gogs
   hosts: ci-gogs
   connection: "{{connection}}"
@@ -54,16 +61,9 @@
   roles:
     - gogs
 
-#- name: Provisioning host ci-sonar
-#  hosts: ci-sonar
-#  connection: "{{connection}}"
-#  become: "{{become}}"
-#  roles:
-#    - sonar
-
-- name: Provisioning host ci-mariadb
-  hosts: ci-mariadb
+- name: Provisioning host ci-sonar
+  hosts: ci-sonar
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
-    - mariadb
+    - sonar
