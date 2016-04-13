@@ -3,6 +3,7 @@
   docker:
     image: docker.io/centos:7
     name: ci-jenkins-master
+    hostname: ci-jenkins-master
     pull: missing
     detach: yes
     tty: yes
@@ -14,6 +15,7 @@
   docker:
     image: docker.io/centos:7
     name: ci-jenkins-slave
+    hostname: ci-jenkins-slave
     pull: missing
     detach: yes
     tty: yes
@@ -25,6 +27,7 @@
   docker:
     image: docker.io/centos:7
     name: ci-nexus
+    hostname: ci-nexus
     pull: missing
     detach: yes
     tty: yes
@@ -36,6 +39,7 @@
   docker:
     image: docker.io/centos:7
     name: ci-gogs
+    hostname: ci-gogs
     pull: missing
     detach: yes
     tty: yes
@@ -47,6 +51,7 @@
   docker:
     image: docker.io/centos:7
     name: ci-sonar
+    hostname: ci-sonar
     pull: missing
     detach: yes
     tty: yes
@@ -58,6 +63,7 @@
   docker:
     image: docker.io/centos:7
     name: ci-mariadb
+    hostname: ci-mariadb
     pull: missing
     detach: yes
     tty: yes
