@@ -53,7 +53,7 @@
       src=smoke_test.zip
       dest=/tmp
 
-  - name: Unzipping Jenkin smoke test build job
+  - name: Unzipping Jenkins smoke test build job
     unarchive:
       src=/tmp/smoke_test.zip
       dest="{{jenkins_home}}"
@@ -61,7 +61,7 @@
       group="{{jenkins_group}}"
       copy=no
 
-  - name: Removing Jenkin smoke test job zip file from the host
+  - name: Removing Jenkins smoke test job zip file from the host
     file: path=/tmp/smoke_test.zip state=absent
 
   - name: Configure Smoke Test Build

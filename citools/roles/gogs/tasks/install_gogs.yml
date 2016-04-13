@@ -75,7 +75,7 @@
       src=gogs-repositories.zip 
       dest=/tmp
 
-  - name: Unzipping smoke repository
+  - name: Unzipping smoke test repository
     unarchive:
       src=/tmp/gogs-repositories.zip
       dest=/home/{{gogs_user}}/
