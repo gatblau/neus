@@ -90,6 +90,13 @@
       enabled=yes
     when: blueprint != "silicon"
 
+  - name: Copy entrypoint script for Jenkins Master Docker container
+    copy:
+      src=entrypoint.sh
+      dest=/
+      mode=0755
+    when: blueprint == "silicon"
+
   - name: Start Jenkins
-    shell: "su -c \"java -jar /usr/lib/jenkins/jenkins.war &\" - jenkins"
+    command: "./entrypoint.sh"
     when: blueprint == "silicon"
