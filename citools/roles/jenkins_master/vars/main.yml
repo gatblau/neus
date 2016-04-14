@@ -15,7 +15,6 @@
 
   # Remote host settings for "publish over ssh" plugin
   remote_host_name: Development Integration Test
-  remote_ip_address: "{{ lookup('file', 'cache/ci-dit-ip.txt') }}"
 
   # Jenkins Plugins
   jenkins_plugins:

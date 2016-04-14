@@ -3,13 +3,12 @@
 #  VMs that need to be connected with each other.
 #
 ---
-  # Store IP addresses for use by Jenkins role on ci-a
-  - copy: content={{ci_b_ip}} dest=cache/ci-b-ip.txt
-
-  - copy: content={{ci_dit_ip}} dest=cache/ci-dit-ip.txt
-
-  # Store database IP address for use by GOGS role on ci-b
-  - copy: content="127.0.0.1" dest=./cache/ci-db-ip.txt
+  - set_fact:
+      database_ip_address="127.0.0.1"
+      gogs_ip_address="{{ci_b_ip.stdout}}"
+      nexus_ip_address="{{ci_b_ip.stdout}}"
+      sonar_ip_address="{{ci_b_ip.stdout}}"
+      remote_ip_address="{{ci_dit_ip.stdout}}"
 
   # Add hosts and set variables
   - name:  Setting up parameters for ci-a VM
