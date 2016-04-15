@@ -30,6 +30,7 @@
       dest="{{jenkins_home}}/config.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
+    when: pamm == "no"
 
   - name: Copy Jenkins credentials file
     template:
@@ -71,7 +72,7 @@
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
-  - name: Install PAMM seed build job
+  - name: Install PAMM seed build jobs
     include: install_pamm_build.yml
     when: pamm == "yes"
 

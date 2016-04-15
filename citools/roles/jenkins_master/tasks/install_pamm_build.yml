@@ -8,12 +8,12 @@
   - name: Create karma.cmd symbolic link
     command: "su -c \"cd node_modules/.bin && ln -s ../karma/bin/karma karma.cmd\" - jenkins"
 
-  - name: Copying PAMM seed build job to the host
+  - name: Copying PAMM seed zip file to the host
     copy:
       src=pamm_seed.zip
       dest=/tmp
 
-  - name: Unzipping PAMM seed build job
+  - name: Unzipping PAMM seed zip file
     unarchive:
       src=/tmp/pamm_seed.zip
       dest="{{jenkins_home}}"
@@ -24,13 +24,13 @@
   - name: Removing PAMM seed zip file from the host
     file: path=/tmp/pamm_seed.zip state=absent
 
-  - name: Clone PAMM seed repository
+  - name: Clone PAMM seed repository (latest tag)
     git:
       repo=http://github.com/gatblau/pamm.seed
       dest=/tmp/pamm.seed
       update=yes
 
-  - name: Fetch latest PAMM seed label from GitHub
+  - name: Fetch latest PAMM seed tag from GitHub
     shell: "cd /tmp/pamm.seed && git describe --tags $(git rev-list --tags --max-count=1)"
     register: pamm_seed_tag
 
@@ -38,11 +38,17 @@
 
   - name: Configure PAMM seed Build
     template:
-      src=pamm_seed_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pamm_seed/config.xml"
+      src=pamm_seed/pamm_seed_clean_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pamm-seed-clean/config.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
   - name: Remove PAMM seed repository
     file: path=/tmp/pamm.seed state=absent
 
+  - name: Copy Jenkins configuration file
+    template:
+      src=pamm_seed/jenkins_config.xml.j2
+      dest="{{jenkins_home}}/config.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
