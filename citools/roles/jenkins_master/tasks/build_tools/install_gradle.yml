@@ -8,10 +8,3 @@
       zip_has_folder : true
       has_bin_folder : true
       user: jenkins
-
-  - name: Create Gradle symbolic link
-    file:
-      src=/usr/local/gradle/default/bin/gradle
-      dest=/bin/gradle
-      state=link
-      mode=0755

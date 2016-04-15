@@ -1,5 +1,6 @@
 ---
-  - include: "plays/install_tool.yml"
+  - name: Install Maven
+    include: "plays/install_tool.yml"
     vars:
       tool_name : Maven
       folder_name : "{{ maven_folder }}"
@@ -8,10 +9,3 @@
       zip_has_folder : true
       has_bin_folder : true
       user: jenkins
-
-  - name: Create Maven symbolic link
-    file:
-      src=/usr/local/maven/default/bin/mvn
-      dest=/bin/mvn
-      state=link
-      mode=0755
