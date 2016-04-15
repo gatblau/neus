@@ -35,8 +35,15 @@
       enabled=yes
     when: blueprint != "silicon"
 
+  - name: Copy entrypoint script for MariaDB Docker container
+    copy:
+      src=entrypoint.sh
+      dest=/entrypoint.sh
+      mode=0755
+    when: blueprint == "silicon"
+
   - name: Start MariaDB
-    shell: "/usr/bin/mysqld_safe &"
+    shell: "./entrypoint.sh"
     when: blueprint == "silicon"
 
   - name: Creating a read and write user to access the server remotely
