@@ -1,0 +1,13 @@
+---
+### Create jenkins user
+  - name: Create jenkins user
+    include: jenkins_user.yml
+
+###  Install Build Tools
+  # Install JDK (JDK variables are set in group_vars/all/main.yml)
+  - name: Check if Java installed
+    stat: path=/usr/java/default
+    register: java_exists
+
+  - include: install_jdk.yml
+    when: java_exists.stat.exists == false
