@@ -42,6 +42,13 @@
       enabled=yes
     when: blueprint != "silicon"
 
+  - name: Copy entrypoint script for Nexus Docker container
+    copy:
+      src=entrypoint.sh
+      dest=/
+      mode=0755
+    when: blueprint == "silicon"
+
   - name: Start Nexus console
-    shell: "su -c \"/usr/local/nexus/default/bin/nexus console &\" - nexus"
+    command: "./entrypoint.sh"
     when: blueprint == "silicon"
