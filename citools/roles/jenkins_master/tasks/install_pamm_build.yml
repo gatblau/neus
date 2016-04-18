@@ -30,6 +30,11 @@
       dest=/tmp/pamm.seed
       update=yes
 
+  - name: Install PAMM seed dependencies
+    npm:
+      name=package.json
+      path=/tmp/pamm.seed
+
   - name: Fetch latest PAMM seed tag from GitHub
     shell: "cd /tmp/pamm.seed && git describe --tags $(git rev-list --tags --max-count=1)"
     register: pamm_seed_tag
