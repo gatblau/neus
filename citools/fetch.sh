@@ -70,8 +70,8 @@ download "http://opensource.wandisco.com/centos/7/git/x86_64/" "perl-Git-2.4.1-1
 download_as "http://sourceforge.net/projects/sonar-pkg/files/rpm/noarch/sonar-5.2-1.noarch.rpm/download" "sonar-5.2-1.noarch.rpm"
 download_mysql_connector $ROOT mysql-connector-java-5.1.36
 download "http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/2.4/" "sonar-runner-dist-2.4.zip"
-download "http://updates.jenkins-ci.org/latest/" "artifactory.hpi"
 download "http://updates.jenkins-ci.org/latest/" "ansible.hpi"
+download "http://updates.jenkins-ci.org/latest/" "artifact-promotion.hpi"
 download "http://updates.jenkins-ci.org/latest/" "config-file-provider.hpi"
 download "http://updates.jenkins-ci.org/latest/" "credentials.hpi"
 download "http://updates.jenkins-ci.org/latest/" "delivery-pipeline-plugin.hpi"

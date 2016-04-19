@@ -20,7 +20,7 @@
   jenkins_plugins:
     [
       'ansible.hpi',
-      'artifactory.hpi',
+      'artifact-promotion.hpi',
       'config-file-provider.hpi',
       'credentials.hpi',
       'delivery-pipeline-plugin.hpi',
