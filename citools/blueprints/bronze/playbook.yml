@@ -32,7 +32,6 @@
   become: "{{become}}"
   roles:
     - baseline
-    - browsers
     - jenkins_master
     - nexus
 
