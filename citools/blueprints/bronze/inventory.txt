@@ -55,6 +55,23 @@ ci_b_ip=192.168.110.161
 ci_dit_ip=192.168.110.167
 
 
+#
+# These variables are for AWS EC2 hosts and only used if platform is set to ec2
+#
+# Size of instance to create (t2.micro is eligible for use in the free tier)
+instance_type=t2.micro
+# The region in which to host the instance
+region=eu-west-1
+# Instance tag name
+tag_name=ci-tools
+# Enter your subnet here
+vpc_subnet_id=subnet-52b88e0b
+# The zone in which the region is based
+zone=eu-west-1b
+# Create the ci-dit instance before provisioning CI Tools
+ci_dit_public_dns_name=ec2-54-229-151-221.eu-west-1.compute.amazonaws.com
+
+
 [ci]
 ci-a
 ci-b
