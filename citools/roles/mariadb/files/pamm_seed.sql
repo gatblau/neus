@@ -63,8 +63,6 @@ CREATE TABLE `access_token` (
   `sha1` varchar(40) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
-  `created_unix` bigint(20) DEFAULT NULL,
-  `updated_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UQE_access_token_sha1` (`sha1`),
   KEY `IDX_access_token_uid` (`uid`)
@@ -101,9 +99,8 @@ CREATE TABLE `action` (
   `is_private` tinyint(1) NOT NULL DEFAULT '0',
   `content` text,
   `created` datetime DEFAULT NULL,
-  `created_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +109,7 @@ CREATE TABLE `action` (
 
 LOCK TABLES `action` WRITE;
 /*!40000 ALTER TABLE `action` DISABLE KEYS */;
-INSERT INTO `action` VALUES (1,1,1,1,'gogs','gogs@devops.net',1,'gogs','maven-repo','',0,'','2015-10-30 15:26:42',1446218802),(4,1,1,1,'gogs','gogs@devops.net',4,'gogs','pamm.seed','',0,'',NULL,1461049716);
+INSERT INTO `action` VALUES (1,1,1,1,'gogs','gogs@devops.net',1,'gogs','maven-repo','',0,'','2015-10-30 15:26:42'),(2,1,1,1,'gogs','gogs@devops.net',2,'gogs','pamm.seed','',0,'','2016-03-08 09:32:01');
 /*!40000 ALTER TABLE `action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +128,6 @@ CREATE TABLE `attachment` (
   `release_id` bigint(20) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
-  `created_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UQE_attachment_uuid` (`uuid`),
   KEY `IDX_attachment_issue_id` (`issue_id`),
@@ -160,7 +156,6 @@ CREATE TABLE `collaboration` (
   `repo_id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL,
   `created` datetime DEFAULT NULL,
-  `mode` int(11) NOT NULL DEFAULT '2',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UQE_collaboration_S` (`repo_id`,`user_id`),
   KEY `IDX_collaboration_repo_id` (`repo_id`),
@@ -194,7 +189,6 @@ CREATE TABLE `comment` (
   `content` text,
   `created` datetime DEFAULT NULL,
   `commit_sha` varchar(40) DEFAULT NULL,
-  `created_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_comment_issue_id` (`issue_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -224,8 +218,6 @@ CREATE TABLE `deploy_key` (
   `fingerprint` varchar(255) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
-  `created_unix` bigint(20) DEFAULT NULL,
-  `updated_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UQE_deploy_key_S` (`key_id`,`repo_id`),
   KEY `IDX_deploy_key_key_id` (`key_id`),
@@ -354,9 +346,6 @@ CREATE TABLE `issue` (
   `deadline` datetime DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
-  `deadline_unix` bigint(20) DEFAULT NULL,
-  `created_unix` bigint(20) DEFAULT NULL,
-  `updated_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_issue_repo_id` (`repo_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -473,8 +462,6 @@ CREATE TABLE `login_source` (
   `allow_auto_register` tinyint(1) NOT NULL DEFAULT '0',
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
-  `created_unix` bigint(20) DEFAULT NULL,
-  `updated_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UQE_login_source_name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -507,8 +494,6 @@ CREATE TABLE `milestone` (
   `completeness` int(11) DEFAULT NULL,
   `deadline` datetime DEFAULT NULL,
   `closed_date` datetime DEFAULT NULL,
-  `deadline_unix` bigint(20) DEFAULT NULL,
-  `closed_date_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_milestone_repo_id` (`repo_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -536,8 +521,6 @@ CREATE TABLE `mirror` (
   `interval` int(11) DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
   `next_update` datetime DEFAULT NULL,
-  `updated_unix` bigint(20) DEFAULT NULL,
-  `next_update_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -563,7 +546,6 @@ CREATE TABLE `notice` (
   `type` int(11) DEFAULT NULL,
   `description` text,
   `created` datetime DEFAULT NULL,
-  `created_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -654,8 +636,6 @@ CREATE TABLE `public_key` (
   `type` int(11) NOT NULL DEFAULT '1',
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
-  `created_unix` bigint(20) DEFAULT NULL,
-  `updated_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_public_key_owner_id` (`owner_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -697,7 +677,6 @@ CREATE TABLE `pull_request` (
   `index` bigint(20) DEFAULT NULL,
   `head_branch` varchar(255) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
-  `merged_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_pull_request_issue_id` (`issue_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -733,7 +712,6 @@ CREATE TABLE `release` (
   `is_draft` tinyint(1) NOT NULL DEFAULT '0',
   `is_prerelease` tinyint(1) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
-  `created_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -785,13 +763,11 @@ CREATE TABLE `repository` (
   `enable_external_tracker` tinyint(1) DEFAULT NULL,
   `external_tracker_format` varchar(255) DEFAULT NULL,
   `enable_pulls` tinyint(1) NOT NULL DEFAULT '1',
-  `created_unix` bigint(20) DEFAULT NULL,
-  `updated_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UQE_repository_S` (`owner_id`,`lower_name`),
   KEY `IDX_repository_name` (`name`),
   KEY `IDX_repository_lower_name` (`lower_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -800,7 +776,7 @@ CREATE TABLE `repository` (
 
 LOCK TABLES `repository` WRITE;
 /*!40000 ALTER TABLE `repository` DISABLE KEYS */;
-INSERT INTO `repository` VALUES (1,1,'maven-repo','maven-repo','','','master',1,0,0,0,0,0,0,0,0,0,0,0,0,0,'2015-10-30 15:26:42','2015-10-30 15:26:42',1,NULL,NULL,1,NULL,NULL,1,1446218802,1446218802),(4,1,'pamm.seed','pamm.seed','','','master',1,0,0,0,0,0,0,0,0,0,0,0,0,0,NULL,NULL,1,0,'',1,0,'',1,1461049716,1461049716);
+INSERT INTO `repository` VALUES (1,1,'maven-repo','maven-repo','','','master',1,0,0,0,0,0,0,0,0,0,0,0,0,0,'2015-10-30 15:26:42','2015-10-30 15:26:42',1,NULL,NULL,1,NULL,NULL,1),(2,1,'pamm.seed','pamm.seed','','','master',1,0,0,0,0,0,0,0,0,0,0,0,0,0,'2016-03-08 09:32:01','2016-03-08 09:32:02',1,0,'',1,0,'',1);
 /*!40000 ALTER TABLE `repository` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -981,8 +957,6 @@ CREATE TABLE `user` (
   `max_repo_creation` int(11) NOT NULL DEFAULT '-1',
   `allow_import_local` tinyint(1) DEFAULT NULL,
   `num_following` int(11) NOT NULL DEFAULT '0',
-  `created_unix` bigint(20) DEFAULT NULL,
-  `updated_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UQE_user_lower_name` (`lower_name`),
   UNIQUE KEY `UQE_user_name` (`name`)
@@ -995,7 +969,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'gogs','gogs','','gogs@devops.net','ece2d30dde64b0ce933bf0fa47b809e3960e151f4d4da8b576d3c42f79dd9ddad8383505d754546fe8604d407a36822a3bc5',0,0,'',0,'','','MgQxgpFO3T','8nqtZmOG08','2015-10-30 15:26:09','2016-03-08 09:32:01',0,1,1,0,'215bf0afb9698ccfbd896d10b5dd4875','gogs@devops.net',0,0,0,0,2,'',0,0,-1,0,0,1446218769,1461049716);
+INSERT INTO `user` VALUES (1,'gogs','gogs','','gogs@devops.net','ece2d30dde64b0ce933bf0fa47b809e3960e151f4d4da8b576d3c42f79dd9ddad8383505d754546fe8604d407a36822a3bc5',0,0,'',0,'','','MgQxgpFO3T','8nqtZmOG08','2015-10-30 15:26:09','2016-03-08 09:32:01',0,1,1,0,'215bf0afb9698ccfbd896d10b5dd4875','gogs@devops.net',0,0,0,0,2,'',0,0,-1,0,0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1019,7 +993,7 @@ CREATE TABLE `version` (
 
 LOCK TABLES `version` WRITE;
 /*!40000 ALTER TABLE `version` DISABLE KEYS */;
-INSERT INTO `version` VALUES (1,12);
+INSERT INTO `version` VALUES (1,11);
 /*!40000 ALTER TABLE `version` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1036,7 +1010,7 @@ CREATE TABLE `watch` (
   `repo_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UQE_watch_WATCH` (`user_id`,`repo_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1045,7 +1019,7 @@ CREATE TABLE `watch` (
 
 LOCK TABLES `watch` WRITE;
 /*!40000 ALTER TABLE `watch` DISABLE KEYS */;
-INSERT INTO `watch` VALUES (1,1,1),(4,1,4);
+INSERT INTO `watch` VALUES (1,1,1),(2,1,2);
 /*!40000 ALTER TABLE `watch` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1071,8 +1045,6 @@ CREATE TABLE `webhook` (
   `last_status` int(11) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
-  `created_unix` bigint(20) DEFAULT NULL,
-  `updated_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1095,4 +1067,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-19  7:09:56
+-- Dump completed on 2016-03-08  9:33:18
