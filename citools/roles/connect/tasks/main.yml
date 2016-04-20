@@ -21,6 +21,15 @@
   - name: Add Jenkins to sudoers list
     copy: src=jenkins dest=/etc/sudoers.d/jenkins
 
+  - name: Disable requiretty for jenkins user
+    blockinfile:
+      dest: "/etc/sudoers"
+      insertafter: "Defaults    requiretty"
+      marker: "# {mark} Disable Jenkins Require TTY"
+      block:  "Defaults:jenkins !requiretty
+
+"
+
   - name: Copy ssh key file to host
     copy:
       src=cache/authorized_keys
