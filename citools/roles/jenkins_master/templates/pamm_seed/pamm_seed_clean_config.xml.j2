@@ -38,15 +38,15 @@
     <disabled>false</disabled>
     <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
     <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-    <jdk>Java JDK 8u77-x64</jdk>
+    <jdk>{{java_sdk_name}}</jdk>
     <triggers/>
     <concurrentBuild>false</concurrentBuild>
     <builders>
         <hudson.tasks.Shell>
             <command># Create link to node_modules for Karma tests
-                if [[ ! -e node_modules ]]; then
-                ln -s ~/node_modules node_modules
-                fi</command>
+if [[ ! -e node_modules ]]; then
+    ln -s ~/node_modules node_modules
+fi</command>
         </hudson.tasks.Shell>
         <org.jvnet.hudson.plugins.SbtPluginBuilder plugin="sbt@1.5">
             <name>SBT</name>
@@ -62,8 +62,9 @@
                 <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
                     <configs>
                         <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-                            <properties>SOURCE_BUILD_NUMBER=${BUILD_NUMBER}
-                                SOURCE_BUILD_WORKSPACE=${WORKSPACE}</properties>
+                            <properties>SOURCE_BUILD_NUMBER=${SOURCE_BUILD_NUMBER}
+SOURCE_BUILD_WORKSPACE=${WORKSPACE}
+APP_DIR={{app_dir}}</properties>
                         </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
                     </configs>
                     <projects>pamm-seed-build</projects>
