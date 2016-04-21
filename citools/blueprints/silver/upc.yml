@@ -39,14 +39,13 @@
   shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-b"
   register: ci_b_ip
 
-- debug: msg="ci-b ip address is {{ci_b_ip.stdout}}"
-
-- local_action: copy content={{ci_b_ip.stdout}} dest=./cache/ci-b-ip.txt
-
 - name: Get ci-c ip address
   shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-c"
   register: ci_c_ip
 
-- debug: msg="ci-c ip address is {{ci_c_ip.stdout}}"
-
-- local_action: copy content={{ci_c_ip.stdout}} dest=./cache/ci-c-ip.txt
+- set_fact:
+    database_ip_address="127.0.0.1"
+    gogs_ip_address="{{ci_c_ip.stdout}}"
+    nexus_ip_address="127.0.0.1"
+    sonar_ip_address="{{ci_c_ip.stdout}}"
+    remote_ip_address="{{ci_dit_ip.stdout}}"

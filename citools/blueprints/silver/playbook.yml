@@ -32,7 +32,6 @@
   become: "{{become}}"
   roles:
     - baseline
-    - nginx
     - jenkins_master
     - nexus
 
@@ -42,8 +41,7 @@
   become: "{{become}}"
   roles:
     - baseline
-    - nginx
-#    - jenkins_slave
+    - jenkins_slave
 
 - name: Provisioning host ci-c
   hosts: ci-c
@@ -51,8 +49,6 @@
   become: "{{become}}"
   roles:
     - baseline
-    - nginx
     - mariadb
     - gogs
-#    - gerrit
     - sonar
