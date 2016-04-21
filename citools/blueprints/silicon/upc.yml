@@ -70,3 +70,49 @@
     expose: "[ {{database_port}} ]"
     command: sleep infinity
     state: started
+
+- name: Starting up the host ci-dit
+  docker:
+    image: docker.io/centos:7
+    name: ci-dit
+    hostname: ci-dit
+    pull: missing
+    detach: yes
+    tty: yes
+    expose: "[ {{ansible_port}} ]"
+    command: sleep infinity
+    state: started
+
+# Obtain IP address of GOGS container for Jenkins
+- name: Get ci-gogs IP address
+  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-gogs"
+  register: ci_gogs_ip
+
+# Obtain IP address of Nexus container for Jenkins
+- name: Get ci-nexus IP address
+  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-nexus"
+  register: ci_nexus_ip
+
+# Obtain IP address of SonarQube container for Jenkins
+- name: Get ci-sonar IP address
+  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-sonar"
+  register: ci_sonar_ip
+
+# Obtain IP address of MariaDB container
+- name: Get ci-mariadb IP address
+  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-mariadb"
+  register: ci_mariadb_ip
+
+# Obtain IP address of DIT container
+- name: Get ci-dit IP address
+  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-dit"
+  register: ci_dit_ip
+
+- set_fact:
+    connection="docker"
+    become="no"
+    database_ip_address="{{ci_mariadb_ip.stdout}}"
+    gogs_ip_address="{{ci_gogs_ip.stdout}}"
+    nexus_ip_address="{{ci_nexus_ip.stdout}}"
+    sonar_ip_address="{{ci_sonar_ip.stdout}}"
+    remote_ip_address="{{ci_dit_ip.stdout}}"

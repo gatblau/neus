@@ -19,7 +19,7 @@
 #
 
 #
-# The playbook to deploy the Contnuous Integrations Tools Silicon blueprint
+# The playbook to deploy the Continuous Integrations Tools Silicon blueprint
 #
 ---
 - include: "plays/up_host.yml"
