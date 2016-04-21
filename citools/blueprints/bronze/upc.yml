@@ -29,6 +29,7 @@
   docker:
     image: gatblau.org/centos:7ds
     name: ci-a
+    hostname: ci-a
     pull: missing
     detach: yes
     tty: yes
@@ -42,6 +43,7 @@
   docker:
     image: gatblau.org/centos:7d
     name: ci-b
+    hostname: ci-b
     pull: missing
     detach: yes
     tty: yes
@@ -55,6 +57,7 @@
   docker:
     image: gatblau.org/centos:7ds
     name: ci-dit
+    hostname: ci-dit
     pull: missing
     detach: yes
     tty: yes
