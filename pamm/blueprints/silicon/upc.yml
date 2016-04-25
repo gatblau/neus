@@ -1,0 +1,49 @@
+#
+# Copyright (c) 2016 GATBLAU - www.gatblau.org
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Manages the execution of roles on a docker container.
+# The only part of this playbook that needs changing is the list of roles as described below.
+# The name of the playbook should be updated to reflect the host name - e.g. database.yml
+#
+
+#
+# Provides the containers required to deploy the Silicon blueprint
+#
+---
+- name: Delete existing Docker containers
+  become: yes
+  docker:
+    name: "{{item.container}}"
+    image: "{{item.image}}"
+    state: absent
+  with_items:
+    - { container: 'pamm-a', image: 'docker.io/centos:7'}
+
+- name: Starting up the host pamm-a
+  docker:
+    image: "{{item.image}}"
+    name: "{{item.container}}"
+    hostname: "{{item.container}}"
+    pull: missing
+    detach: yes
+    tty: yes
+    expose: "[ {{item.ports}} ]"
+    command: sleep infinity
+    state: started
+  with_items:
+    - { container: 'pamm-a', image: 'docker.io/centos:7', ports: '80, 3306, 8080'}
+
+- set_fact: become="no"
+            connection="docker"
