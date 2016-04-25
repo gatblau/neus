@@ -1,6 +1,5 @@
 ---
   unzip_rpm : unzip-6.0-15.el7.x86_64.rpm
-  database_port: 5000
   mariadb_user: maria
   mariadb_password: Passw0rd!
 

@@ -24,6 +24,13 @@
 #   on which roles are deployed to which hosts, only host and variable definitions.
 #   The mapping between roles and hosts is done in the main playbook file.
 #
+[global]
+local
+pamm
+
+[global:vars]
+database_port=3306
+
 
 [local]
 localhost
