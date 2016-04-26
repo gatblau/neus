@@ -28,7 +28,7 @@
 
 - name: Build Docker image with sudo, ssh and systemd
   become: yes
-  command: docker build --rm -t gatblau.org/centos:7d ../lib/images/centos7d
+  command: docker build --rm -t gatblau.org/centos:7ds ../lib/images/centos7ds
 
 - name: Restart Docker daemon to release network handles
   become: yes
