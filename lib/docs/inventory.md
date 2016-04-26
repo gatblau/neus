@@ -27,9 +27,6 @@ Below is a list of options in the CI Tools inventory files.  Some of the options
 | jamm | yes | no | <ul><li>yes</li><li>no</li></ul> | Not yet available. |
 | scm | | gogs | <ul><li>gogs</li><li>rtc</li></ul> | flags the type of source control to use:<ul><li>gogs: for local Go Git Repository</li><li>rtc: for an external connection to Rational Team Concert</li></ul> |
 | blueprint | yes | | <li>bronze</li><li>silver</li><li>gold</li> | Set to blueprint, do not change the value. |
-| database_host | yes | | | Set according to the blueprint.  Do not change the value. |
-| gogs_host | yes | | | Set according to the blueprint.  Do not change the value. |
-| sonar_host | yes | | | Set according to the blueprint.  Do not change the value. |
 
 #### PAMM
 

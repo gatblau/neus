@@ -70,9 +70,3 @@ source_control_uri=#"{{hostvars['ci-b']['ansible_host']}}"
 
 # flags the type of blueprint for plays to decide how to configure accordingly.
 blueprint=silicon
-
-# Location of CI tools
-database_host=ci-mariadb
-gogs_host=ci-gogs
-nexus_host=ci-nexus
-sonar_host=ci-sonar
