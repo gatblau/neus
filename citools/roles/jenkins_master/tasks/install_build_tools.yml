@@ -1,12 +1,4 @@
 ---
-  # Install JDK (JDK variables are set in group_vars/all/main.yml)
-  - name: Check if Java installed
-    stat: path=/usr/java/default
-    register: java_exists
-
-  - include: build_tools/install_jdk.yml
-    when: java_exists.stat.exists == false
-
   # Install Groovy
   - name: Check if Groovy installed
     stat: path=/usr/local/groovy

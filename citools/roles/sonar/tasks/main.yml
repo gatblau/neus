@@ -1,14 +1,4 @@
 ---
-# This play installs SonarQube - source code quality tool
-#
-### Install JDK (JDK variables are set in group_vars/all/main.yml)
-  - name: Check if Java installed
-    stat: path=/usr/java/default
-    register: java_exists
-
-  - include: install_jdk.yml
-    when: java_exists.stat.exists == false
-
 ### Install SonarQube
   - name: Check Sonar installed
     stat: path=/opt/sonar
