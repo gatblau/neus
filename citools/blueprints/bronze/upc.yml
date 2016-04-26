@@ -22,50 +22,52 @@
 # Provides the containers required to deploy the Bronze blueprint
 #
 ---
-- set_fact: connection="docker"
-            become="no"
+- name: Build Docker image with sudo and ssh
+  become: yes
+  command: docker build --rm -t gatblau.org/centos:7s ../lib/images/centos7s
 
-- name: Starting up the host ci-a
+- name: Build Docker image with sudo, ssh and systemd
+  become: yes
+  command: docker build --rm -t gatblau.org/centos:7d ../lib/images/centos7d
+
+- name: Restart Docker daemon to release network handles
+  become: yes
+  command: systemctl restart docker
+
+- name: Set Docker daemon permissions
+  become: yes
+  file:
+    path=/var/run/docker.sock
+    mode=0666
+
+- name: Delete existing Docker containers
+  become: yes
   docker:
-    image: gatblau.org/centos:7ds
-    name: ci-a
-    hostname: ci-a
+    name: "{{item.name}}"
+    image: "{{item.image}}"
+    state: absent
+  with_items:
+    - { name: "ci-a", image: "gatblau.org/centos:7ds"}
+    - { name: "ci-b", image: "gatblau.org/centos:7ds"}
+    - { name: "ci-dit", image: "gatblau.org/centos:7ds"}
+
+- name: Start up the Docker containers
+  docker:
+    image: "{{item.image}}"
+    name: "{{item.name}}"
+    hostname: "{{item.name}}"
     pull: missing
     detach: yes
     tty: yes
-    expose: "[ {{jenkins_port}}, {{nexus_port}} ]"
+    expose: "[ {{item.ports}} ]"
     command: "/usr/sbin/init"
     state: started
     privileged: yes
-    restart_policy: always
-
-- name: Starting up the host ci-b
-  docker:
-    image: gatblau.org/centos:7d
-    name: ci-b
-    hostname: ci-b
-    pull: missing
-    detach: yes
-    tty: yes
-    expose: "[ {{database_port}}, {{gogs_port}}, {{sonar_port}}  ]"
-    command: "/usr/sbin/init"
-    state: started
-    privileged: yes
-    restart_policy: always
-
-- name: Starting up the host ci-dit
-  docker:
-    image: gatblau.org/centos:7ds
-    name: ci-dit
-    hostname: ci-dit
-    pull: missing
-    detach: yes
-    tty: yes
-    expose: "[ {{ansible_port}} ]"
-    command: "/usr/sbin/init"
-    state: started
-    privileged: yes
-    restart_policy: always
+  with_items:
+    - { name: "ci-a", image: "gatblau.org/centos:7ds", ports: "{{jenkins_port}}, {{nexus_port}}, 4444"}
+    - { name: "ci-b", image: "gatblau.org/centos:7ds", ports: "{{database_port}}, {{gogs_port}}, {{sonar_port}}"}
+    - { name: "ci-dit", image: "gatblau.org/centos:7ds", ports: "{{hostvars['ci']['ansible_port']}}"}
+#    restart_policy: always
 
 # Obtain IP addresses of ci-b and ci-dit containers for Jenkins
 - name: Get ci-b IP address
@@ -77,9 +79,10 @@
   register: ci_dit_ip
 
 - set_fact:
+    connection="docker"
+    become="no"
     database_ip_address="127.0.0.1"
     gogs_ip_address="{{ci_b_ip.stdout}}"
     nexus_ip_address="{{ci_b_ip.stdout}}"
     sonar_ip_address="{{ci_b_ip.stdout}}"
     remote_ip_address="{{ci_dit_ip.stdout}}"
-

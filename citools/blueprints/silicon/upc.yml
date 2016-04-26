@@ -1,87 +1,62 @@
+#
+# Copyright (c) 2016 GATBLAU - www.gatblau.org
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Manages the execution of roles on a docker container.
+# The only part of this playbook that needs changing is the list of roles as described below.
+# The name of the playbook should be updated to reflect the host name - e.g. database.yml
+#
+
+#
+# Provides the containers required to deploy the Silicon blueprint
+#
 ---
-- name: Starting up the host ci-jenkins-master
-  docker:
-    image: docker.io/centos:7
-    name: ci-jenkins-master
-    hostname: ci-jenkins-master
-    pull: missing
-    detach: yes
-    tty: yes
-    expose: "[ {{jenkins_port}} ]"
-    command: sleep infinity
-    state: started
+- name: Build Docker image with gosu
+  command: docker build --rm -t gatblau.org/centos:7g ../lib/images/centos7g
 
-- name: Starting up the host ci-jenkins-slave
+- name: Delete existing Docker containers
+  become: yes
   docker:
-    image: docker.io/centos:7
-    name: ci-jenkins-slave
-    hostname: ci-jenkins-slave
-    pull: missing
-    detach: yes
-    tty: yes
-    expose: "[ {{jenkins_port}} ]"
-    command: sleep infinity
-    state: started
+    name: "{{item.container}}"
+    image: "{{item.image}}"
+    state: absent
+  with_items:
+    - { container: 'ci-jenkins-master', image: 'gatblau.org/centos:7s'}
+    - { container: 'ci-jenkins-slave', image: 'docker.io/centos:7'}
+    - { container: 'ci-nexus', image: 'gatblau.org/centos:7s'}
+    - { container: 'ci-mariadb', image: 'docker.io/centos:7'}
+    - { container: 'ci-gogs', image: 'gatblau.org/centos:7g'}
+    - { container: 'ci-sonar', image: 'gatblau.org/centos:7s'}
 
-- name: Starting up the host ci-nexus
+- name: Start up the Docker containers
   docker:
-    image: docker.io/centos:7
-    name: ci-nexus
-    hostname: ci-nexus
+    image: "{{item.image}}"
+    name: "{{item.name}}"
+    hostname: "{{item.name}}"
     pull: missing
     detach: yes
     tty: yes
-    expose: "[ {{nexus_port}} ]"
+    expose: "[ {{item.ports}} ]"
     command: sleep infinity
     state: started
-
-- name: Starting up the host ci-gogs
-  docker:
-    image: docker.io/centos:7
-    name: ci-gogs
-    hostname: ci-gogs
-    pull: missing
-    detach: yes
-    tty: yes
-    expose: "[ {{gogs_port}} ]"
-    command: sleep infinity
-    state: started
-
-- name: Starting up the host ci-sonar
-  docker:
-    image: docker.io/centos:7
-    name: ci-sonar
-    hostname: ci-sonar
-    pull: missing
-    detach: yes
-    tty: yes
-    expose: "[ {{sonar_port}} ]"
-    command: sleep infinity
-    state: started
-
-- name: Starting up the host ci-mariadb
-  docker:
-    image: docker.io/centos:7
-    name: ci-mariadb
-    hostname: ci-mariadb
-    pull: missing
-    detach: yes
-    tty: yes
-    expose: "[ {{database_port}} ]"
-    command: sleep infinity
-    state: started
-
-- name: Starting up the host ci-dit
-  docker:
-    image: docker.io/centos:7
-    name: ci-dit
-    hostname: ci-dit
-    pull: missing
-    detach: yes
-    tty: yes
-    expose: "[ {{ansible_port}} ]"
-    command: sleep infinity
-    state: started
+  with_items:
+    - { name: "ci-jenkins-master", image: "gatblau.org/centos:7s", ports: "{{jenkins_port}}" }
+    - { name: "ci-jenkins-slave", image: "docker.io/centos:7", ports: "{{jenkins_port}}" }
+    - { name: "ci-nexus", image: "gatblau.org/centos:7s", ports: "{{nexus_port}}" }
+    - { name: "ci-mariadb", image: "docker.io/centos:7", ports: "{{sonar_port}}" }
+    - { name: "ci-gogs", image: "gatblau.org/centos:7g", ports: "{{gogs_port}}" }
+    - { name: "ci-sonar", image: "gatblau.org/centos:7s", ports: "{{sonar_port}}" }
 
 # Obtain IP address of GOGS container for Jenkins
 - name: Get ci-gogs IP address
@@ -103,11 +78,6 @@
   shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-mariadb"
   register: ci_mariadb_ip
 
-# Obtain IP address of DIT container
-- name: Get ci-dit IP address
-  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-dit"
-  register: ci_dit_ip
-
 - set_fact:
     connection="docker"
     become="no"
@@ -115,4 +85,4 @@
     gogs_ip_address="{{ci_gogs_ip.stdout}}"
     nexus_ip_address="{{ci_nexus_ip.stdout}}"
     sonar_ip_address="{{ci_sonar_ip.stdout}}"
-    remote_ip_address="{{ci_dit_ip.stdout}}"
+#    remote_ip_address="{{ci_dit_ip.stdout}}"
