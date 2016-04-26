@@ -9,7 +9,7 @@
 # pam.i686 - required for GOGS
 # glibc.i386 - required for GOGS
 #
-FROM centos:7
+FROM gatblau.org/centos:7s
 MAINTAINER "gatblau" <admin@gatblau.org>
 ENV container docker
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
