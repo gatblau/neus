@@ -22,6 +22,10 @@
 # Provides the containers required to deploy the Silicon blueprint
 #
 ---
+- name: Build Docker image with sudo and ssh
+  become: yes
+  command: docker build --rm -t gatblau.org/centos:7s ../lib/images/centos7s
+
 - name: Build Docker image with gosu
   command: docker build --rm -t gatblau.org/centos:7g ../lib/images/centos7g
 
