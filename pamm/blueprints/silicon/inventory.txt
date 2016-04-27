@@ -24,13 +24,6 @@
 #   on which roles are deployed to which hosts, only host and variable definitions.
 #   The mapping between roles and hosts is done in the main playbook file.
 #
-[global]
-local
-pamm
-
-[global:vars]
-database_port=3306
-
 
 [local]
 localhost
@@ -45,11 +38,12 @@ tgt_platform=docker
 base_image=docker.io/centos:7
 #base_image=rhel7.2:latest
 
+
 [pamm]
 pamm-a
 
 [pamm:vars]
 # flags the type of blueprint for plays to decide how to configure accordingly.
 blueprint=silicon
-
+database_port=3306
 
