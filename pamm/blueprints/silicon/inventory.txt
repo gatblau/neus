@@ -39,7 +39,11 @@ localhost
 # Sets the target platform to deploy to, it can be one of the following:
 #   a) docker - for Docker containers - used to test the build scripts
 #
+# Also set the base Docker image on which to build the PAMM environment.
+#
 tgt_platform=docker
+base_image=docker.io/centos:7
+#base_image=rhel7.2:latest
 
 [pamm]
 pamm-a
