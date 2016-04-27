@@ -29,21 +29,6 @@ if [[ -z $1 ]]; then
    exit
 fi
 
-# load shell libraries
-source scripts/remove.sh
-source scripts/image.sh
-
-# build the centos7 systemd image if not in the local registry
-build_image ../lib/images/centos7d gatblau.org/centos 7d
-build_image ../lib/images/centos7ds gatblau.org/centos 7ds
-
-# hack to release the network handles created by the containers
-echo restarting the docker daemon service, please wait!!!
-sudo systemctl restart docker && source ~/.bash_profile
-
-# check if existing containers exist and removes them
-remove_by_name pamm-
-
 # fetches any required packages
 source ./fetch.sh
 

@@ -22,18 +22,51 @@
 # Provides the containers required to deploy the Bronze blueprint
 #
 ---
+# Set base images for test containers here
+- set_fact:
+    pamm_base="gatblau.org/centos:7ds"
+
+- name: Build Docker image with sudo and ssh
+  become: yes
+  command: docker build --rm -t gatblau.org/centos:7s ../lib/images/centos7s
+
+- name: Build Docker image with sudo, ssh and systemd
+  become: yes
+  command: docker build --rm -t gatblau.org/centos:7ds ../lib/images/centos7ds
+
+- name: Restart Docker daemon to release network handles (privileged containers)
+  become: yes
+  command: systemctl restart docker
+
+- name: Set Docker daemon permissions
+  become: yes
+  file:
+    path=/var/run/docker.sock
+    mode=0666
+
+- name: Delete existing Docker containers
+  become: yes
+  docker:
+    name: "{{item.name}}"
+    image: "{{item.image}}"
+    state: absent
+  with_items:
+    - { name: "pamm-a", image: "{{pamm_base}}"}
+
 - name: Starting up the host pamm-a
   docker:
-    image: gatblau.org/centos:7ds
-    name: pamm-a
+    image: "{{item.image}}"
+    name: "{{item.name}}"
+    hostname: "{{item.name}}"
     pull: missing
     detach: yes
     tty: yes
-    expose: [ 80, 5000, 8081 ]
+    expose: "[ {{item.ports}} ]"
     command: "/usr/sbin/init"
     state: started
     privileged: yes
-    restart_policy: always
+  with_items:
+    - { name: "pamm-a", image: "{{pamm_base}}", ports: "80, 5000, 8081"}
 
 - set_fact: become="no"
             connection="docker"
