@@ -29,7 +29,8 @@
     image: "{{item.image}}"
     state: absent
   with_items:
-    - { container: 'pamm-a', image: '{{base_image}}'}
+    - { container: 'pamm-jvm', image: '{{base_image}}'}
+    - { container: 'pamm-mariadb', image: '{{base_image}}'}
 
 - name: Delete any existing PAMM Docker images
   docker_image:
@@ -38,7 +39,7 @@
   with_items:
     - { name: 'pamm-a'}
 
-- name: Starting up the host pamm-a
+- name: "Starting up the hosts"
   docker:
     image: "{{item.image}}"
     name: "{{item.container}}"
@@ -50,7 +51,8 @@
     command: sleep infinity
     state: started
   with_items:
-    - { container: 'pamm-a', image: '{{base_image}}', ports: '80, 3306, 8080'}
+    - { container: 'pamm-jvm', image: '{{base_image}}', ports: '80, 8080'}
+    - { container: 'pamm-mariadb', image: '{{base_image}}', ports: '3306'}
 
 - set_fact: become="no"
             connection="docker"
