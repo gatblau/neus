@@ -16,7 +16,8 @@
     password={{ mariadb_password }}
     state=present
 
-- include: plays/open_port.yml
+- name: Open database port {{database_port}} in firewall
+  include: plays/open_port.yml
   vars:
     - port_number: "{{database_port}}"
   when: connection == "ssh"
@@ -39,6 +40,18 @@
     name=mysql
     state=started
     enabled=yes
+  when: blueprint != "silicon"
+
+- name: Copy entrypoint script for MariaDB Docker container
+  copy:
+    src=entrypoint.sh
+    dest=/entrypoint.sh
+    mode=0755
+  when: blueprint == "silicon"
+
+- name: Start MariaDB
+  shell: "/entrypoint.sh &"
+  when: blueprint == "silicon"
 
 - name: Creating account "{{db_user}}" to access the server remotely
   mysql_user:

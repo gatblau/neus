@@ -40,7 +40,8 @@ base_image=docker.io/centos:7
 
 
 [pamm]
-pamm-a
+pamm-play
+pamm-mariadb
 
 [pamm:vars]
 # flags the type of blueprint for plays to decide how to configure accordingly.

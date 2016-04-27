@@ -26,14 +26,21 @@
   vars:
     blueprint: bronze
 
-- name: Provisioning PAMM-A Play Application
-  hosts: pamm-a
+- name: Provisioning PAMM JVM Application
+  hosts: pamm-jvm
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
-    - play
+    - jvm
+
+- name: Provisioning PAMM MariaDB Application
+  hosts: pamm-mariadb
+  connection: "{{connection}}"
+  become: "{{become}}"
+  roles:
     - mariadb
 #    - mongodb
 
-# Command to create Docker image from pamm-a docker container
-#docker commit --change='CMD ["/entrypoint.sh"]' $(docker inspect --format \{\{' 'index' '.ID' '\}\} pamm-a) gatblau/pamm-a:latest
+# Command to create Docker images from pamm silicon docker containers
+#docker commit --change='CMD ["/entrypoint.sh"]' $(docker inspect --format \{\{' 'index' '.ID' '\}\} pamm-jvm) silicon/pamm-jvm:1.0.0
+#docker commit --change='CMD ["/entrypoint.sh"]' $(docker inspect --format \{\{' 'index' '.ID' '\}\} pamm-jvm) silicon/pamm-mariadb:1.0.0
