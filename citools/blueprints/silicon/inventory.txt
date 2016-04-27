@@ -43,6 +43,15 @@ localhost
 #   b) ose - OpenShift
 #
 tgt_platform=docker
+#
+# Set the base Docker image on which to build the CI Tools environment.
+#
+jenkins_master_base=gatblau.org/centos:7s
+jenkins_slave_base=docker.io/centos:7
+nexus_base=gatblau.org/centos:7s
+mariadb_base=docker.io/centos:7
+gogs_base=gatblau.org/centos:7g
+sonar_base=gatblau.org/centos:7s
 
 
 [ci]

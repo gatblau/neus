@@ -36,12 +36,12 @@
     image: "{{item.image}}"
     state: absent
   with_items:
-    - { container: 'ci-jenkins-master', image: 'gatblau.org/centos:7s'}
-    - { container: 'ci-jenkins-slave', image: 'docker.io/centos:7'}
-    - { container: 'ci-nexus', image: 'gatblau.org/centos:7s'}
-    - { container: 'ci-mariadb', image: 'docker.io/centos:7'}
-    - { container: 'ci-gogs', image: 'gatblau.org/centos:7g'}
-    - { container: 'ci-sonar', image: 'gatblau.org/centos:7s'}
+    - { container: 'ci-jenkins-master', image: '{{jenkins_master_base}}'}
+    - { container: 'ci-jenkins-slave', image: '{{jenkins_slave_base}}'}
+    - { container: 'ci-nexus', image: '{{nexus_base}}'}
+    - { container: 'ci-mariadb', image: '{{mariadb_base}}'}
+    - { container: 'ci-gogs', image: '{{gogs_base}}'}
+    - { container: 'ci-sonar', image: '{{sonar_base}}'}
 
 - name: Start up the Docker containers
   docker:
@@ -55,12 +55,12 @@
     command: sleep infinity
     state: started
   with_items:
-    - { name: "ci-jenkins-master", image: "gatblau.org/centos:7s", ports: "{{jenkins_port}}" }
-    - { name: "ci-jenkins-slave", image: "docker.io/centos:7", ports: "{{jenkins_port}}" }
-    - { name: "ci-nexus", image: "gatblau.org/centos:7s", ports: "{{nexus_port}}" }
-    - { name: "ci-mariadb", image: "docker.io/centos:7", ports: "{{sonar_port}}" }
-    - { name: "ci-gogs", image: "gatblau.org/centos:7g", ports: "{{gogs_port}}" }
-    - { name: "ci-sonar", image: "gatblau.org/centos:7s", ports: "{{sonar_port}}" }
+    - { name: "ci-jenkins-master", image: "{{jenkins_master_base}}", ports: "{{jenkins_port}}" }
+    - { name: "ci-jenkins-slave", image: "{{jenkins_slave_base}}", ports: "{{jenkins_port}}" }
+    - { name: "ci-nexus", image: "{{nexus_base}}", ports: "{{nexus_port}}" }
+    - { name: "ci-mariadb", image: "{{mariadb_base}}", ports: "{{sonar_port}}" }
+    - { name: "ci-gogs", image: "{{gogs_base}}", ports: "{{gogs_port}}" }
+    - { name: "ci-sonar", image: "{{sonar_base}}", ports: "{{sonar_port}}" }
 
 # Obtain IP address of GOGS container for Jenkins
 - name: Get ci-gogs IP address
