@@ -22,6 +22,12 @@
 # Provides the containers required to deploy the Bronze blueprint
 #
 ---
+# Set base images for test containers here
+- set_fact:
+    ci_a_base="gatblau.org/centos:7ds"
+    ci_b_base="gatblau.org/centos:7ds"
+    ci_dit_base="gatblau.org/centos:7ds"
+
 - name: Build Docker image with sudo and ssh
   become: yes
   command: docker build --rm -t gatblau.org/centos:7s ../lib/images/centos7s
@@ -30,7 +36,7 @@
   become: yes
   command: docker build --rm -t gatblau.org/centos:7ds ../lib/images/centos7ds
 
-- name: Restart Docker daemon to release network handles
+- name: Restart Docker daemon to release network handles (privileged containers)
   become: yes
   command: systemctl restart docker
 
@@ -47,9 +53,9 @@
     image: "{{item.image}}"
     state: absent
   with_items:
-    - { name: "ci-a", image: "gatblau.org/centos:7ds"}
-    - { name: "ci-b", image: "gatblau.org/centos:7ds"}
-    - { name: "ci-dit", image: "gatblau.org/centos:7ds"}
+    - { name: "ci-a", image: "{{ci_a_base}}"}
+    - { name: "ci-b", image: "{{ci_b_base}}"}
+    - { name: "ci-dit", image: "{{ci_dit_base}}"}
 
 - name: Start up the Docker containers
   docker:
@@ -64,10 +70,9 @@
     state: started
     privileged: yes
   with_items:
-    - { name: "ci-a", image: "gatblau.org/centos:7ds", ports: "{{jenkins_port}}, {{nexus_port}}, 4444"}
-    - { name: "ci-b", image: "gatblau.org/centos:7ds", ports: "{{database_port}}, {{gogs_port}}, {{sonar_port}}"}
-    - { name: "ci-dit", image: "gatblau.org/centos:7ds", ports: "{{hostvars['ci']['ansible_port']}}"}
-#    restart_policy: always
+    - { name: "ci-a", image: "{{ci_a_base}}", ports: "{{jenkins_port}}, {{nexus_port}}, 4444"}
+    - { name: "ci-b", image: "{{ci_b_base}}", ports: "{{database_port}}, {{gogs_port}}, {{sonar_port}}"}
+    - { name: "ci-dit", image: "{{ci_dit_base}}", ports: "{{ansible_port}}"}
 
 # Obtain IP addresses of ci-b and ci-dit containers for Jenkins
 - name: Get ci-b IP address
