@@ -25,7 +25,7 @@ local
 ci
 
 [global:vars]
-# port numbers
+# port numbers - exposed in containers
 ansible_port=22
 jenkins_port=8080
 database_port=3306
@@ -46,17 +46,25 @@ tgt_platform=docker
 #
 # Set the base Docker image on which to build the CI Tools environment.
 #
-jenkins_master_base=gatblau.org/centos:7s
-jenkins_slave_base=docker.io/centos:7
-nexus_base=gatblau.org/centos:7s
+jenkins_base=gatblau.org/centos:7ds
+nexus_base=docker.io/centos:7
 mariadb_base=docker.io/centos:7
-gogs_base=gatblau.org/centos:7g
-sonar_base=gatblau.org/centos:7s
+gogs_base=docker.io/centos:7
+sonar_base=docker.io/centos:7
+#
+# Set the Docker image version
+#
+image_version=1.0.1
 
+ansible_port=22
+jenkins_port=8080
+database_port=3306
+nexus_port=8081
+gogs_port=3000
+sonar_port=9000
 
 [ci]
-ci-jenkins-master
-ci-jenkins-slave
+ci-jenkins
 ci-nexus
 ci-gogs
 ci-sonar
@@ -66,6 +74,7 @@ ci-mariadb
 # Set to yes to include PAMM or JAMM seeds in CI Tools environment
 pamm=yes
 jamm=no
+app_dir=pamm-seed
 
 # flags the type of source control to use:
 #   - gogs: for local Go Git Repository
@@ -74,8 +83,12 @@ scm=gogs
 
 # change below if scm=rtc
 
-# ip addresses from ssh host dont work when using docker connection plugin
-source_control_uri=#"{{hostvars['ci-b']['ansible_host']}}"
-
 # flags the type of blueprint for plays to decide how to configure accordingly.
 blueprint=silicon
+
+ansible_port=22
+jenkins_port=8080
+database_port=3306
+nexus_port=8081
+gogs_port=3000
+sonar_port=9000

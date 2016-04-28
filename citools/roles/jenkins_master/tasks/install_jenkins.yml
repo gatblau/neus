@@ -39,9 +39,6 @@
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
-  - debug:
-      msg="COPY NEXUS CONFIGURATION HERE"
-
   - name: Set up Jenkins to Sonar configuration
     template: 
       src=hudson.plugins.sonar.SonarPublisher.xml.j2
@@ -72,7 +69,7 @@
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
-  - name: Install PAMM seed build jobs
+  - name: Install PAMM seed build pipeline
     include: install_pamm_build.yml
     when: pamm == "yes"
 
@@ -92,12 +89,8 @@
     when: blueprint != "silicon"
 
   - name: Copy entrypoint script for Jenkins Master Docker container
-    copy:
-      src=entrypoint.sh
-      dest=/
+    template:
+      src=entrypoint.sh.j2
+      dest=/entrypoint.sh
       mode=0755
-    when: blueprint == "silicon"
-
-  - name: Start Jenkins
-    command: "./entrypoint.sh"
     when: blueprint == "silicon"

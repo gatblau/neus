@@ -26,19 +26,12 @@
   vars:
     blueprint: silicon
 
-- name: Provisioning host ci-jenkins-master
-  hosts: ci-jenkins-master
+- name: Provisioning host ci-jenkins
+  hosts: ci-jenkins
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
     - jenkins_master
-
-- name: Provisioning host ci-jenkins-slave
-  hosts: ci-jenkins-slave
-  connection: "{{connection}}"
-  become: "{{become}}"
-  roles:
-    - jenkins_slave
 
 - name: Provisioning host ci-nexus
   hosts: ci-nexus

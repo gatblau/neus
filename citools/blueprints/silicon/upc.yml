@@ -22,22 +22,15 @@
 # Provides the containers required to deploy the Silicon blueprint
 #
 ---
-- name: Build Docker image with sudo and ssh
-  become: yes
-  command: docker build --rm -t gatblau.org/centos:7s ../lib/images/centos7s
 
-- name: Build Docker image with gosu
-  command: docker build --rm -t gatblau.org/centos:7g ../lib/images/centos7g
-
-- name: Delete existing Docker containers
+- name: Delete any existing Docker containers
   become: yes
   docker:
     name: "{{item.container}}"
     image: "{{item.image}}"
     state: absent
   with_items:
-    - { container: 'ci-jenkins-master', image: '{{jenkins_master_base}}'}
-    - { container: 'ci-jenkins-slave', image: '{{jenkins_slave_base}}'}
+    - { container: 'ci-jenkins', image: '{{jenkins_base}}'}
     - { container: 'ci-nexus', image: '{{nexus_base}}'}
     - { container: 'ci-mariadb', image: '{{mariadb_base}}'}
     - { container: 'ci-gogs', image: '{{gogs_base}}'}
@@ -54,39 +47,25 @@
     expose: "[ {{item.ports}} ]"
     command: sleep infinity
     state: started
+    volumes:
+      - /var/cache/yum/neus:/var/cache/yum:rw
   with_items:
-    - { name: "ci-jenkins-master", image: "{{jenkins_master_base}}", ports: "{{jenkins_port}}" }
-    - { name: "ci-jenkins-slave", image: "{{jenkins_slave_base}}", ports: "{{jenkins_port}}" }
+    - { name: "ci-jenkins", image: "{{jenkins_base}}", ports: "{{jenkins_port}}" }
     - { name: "ci-nexus", image: "{{nexus_base}}", ports: "{{nexus_port}}" }
     - { name: "ci-mariadb", image: "{{mariadb_base}}", ports: "{{sonar_port}}" }
     - { name: "ci-gogs", image: "{{gogs_base}}", ports: "{{gogs_port}}" }
     - { name: "ci-sonar", image: "{{sonar_base}}", ports: "{{sonar_port}}" }
 
-# Obtain IP address of GOGS container for Jenkins
-- name: Get ci-gogs IP address
-  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-gogs"
-  register: ci_gogs_ip
-
-# Obtain IP address of Nexus container for Jenkins
-- name: Get ci-nexus IP address
-  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-nexus"
-  register: ci_nexus_ip
-
-# Obtain IP address of SonarQube container for Jenkins
-- name: Get ci-sonar IP address
-  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-sonar"
-  register: ci_sonar_ip
-
-# Obtain IP address of MariaDB container
-- name: Get ci-mariadb IP address
-  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-mariadb"
-  register: ci_mariadb_ip
-
 - set_fact:
     connection="docker"
     become="no"
-    database_ip_address="{{ci_mariadb_ip.stdout}}"
-    gogs_ip_address="{{ci_gogs_ip.stdout}}"
-    nexus_ip_address="{{ci_nexus_ip.stdout}}"
-    sonar_ip_address="{{ci_sonar_ip.stdout}}"
-#    remote_ip_address="{{ci_dit_ip.stdout}}"
+    keep_yum_cache="yes"
+    database_ip_address="\${DB_IP_ADDRESS}"
+    gogs_ip_address="\${GOGS_IP_ADDRESS}"
+    nexus_ip_address="\${NEXUS_IP_ADDRESS}"
+    sonar_ip_address="\${SONAR_IP_ADDRESS}"
+    remote_ip_address="\${DIT_IP_ADDRESS}"
+    jenkins_port=\${JENKINS_PORT}
+    nexus_port=\${NEXUS_PORT}
+    gogs_port=\${GOGS_PORT}
+    sonar_port=\${SONAR_PORT}

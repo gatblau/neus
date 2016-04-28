@@ -17,9 +17,6 @@
 
   - include: install_jenkins.yml
     become: "{{become}}"
-    vars:
-      gogs_uri:  "{{ gogs_ip_address }}"
-      sonar_uri: "{{ sonar_ip_address }}"
     when: jenkins_exists.stat.exists == false
 
 ### Setup Jenkins to remote connectivity
@@ -36,7 +33,11 @@
       dest="{{jenkins_home}}/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
-    vars:
-      gogs_uri: "{{ gogs_ip_address }}"
     when: blueprint != "silicon"
 
+  - name: Change Jenkins folder permissions
+    file:
+      name="{{jenkins_user_home}}"
+      recurse="yes"
+      mode="0777"
+    when: blueprint == "silicon"
