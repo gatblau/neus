@@ -1,4 +1,11 @@
 ---
+- name: Set yum cache to "keep"
+  replace:
+    dest=/etc/yum.conf
+    regexp='keepcache=(.*)'
+    replace='keepcache=1'
+  when: connection == "docker"
+
 - name: Installing the Unzip command
   include: plays/install_rpm.yml
   vars:

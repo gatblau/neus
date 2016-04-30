@@ -69,6 +69,8 @@
     command: "/usr/sbin/init"
     state: started
     privileged: yes
+    volumes:
+      - /var/cache/yum/neus:/var/cache/yum:rw
   with_items:
     - { name: "ci-a", image: "{{ci_a_base}}", ports: "{{jenkins_port}}, {{nexus_port}}, 4444"}
     - { name: "ci-b", image: "{{ci_b_base}}", ports: "{{database_port}}, {{gogs_port}}, {{sonar_port}}"}
