@@ -52,7 +52,7 @@
   with_items:
     - { name: "ci-jenkins", image: "{{jenkins_base}}", ports: "{{jenkins_port}}" }
     - { name: "ci-nexus", image: "{{nexus_base}}", ports: "{{nexus_port}}" }
-    - { name: "ci-mariadb", image: "{{mariadb_base}}", ports: "{{sonar_port}}" }
+    - { name: "ci-mariadb", image: "{{mariadb_base}}", ports: "{{database_port}}" }
     - { name: "ci-gogs", image: "{{gogs_base}}", ports: "{{gogs_port}}" }
     - { name: "ci-sonar", image: "{{sonar_base}}", ports: "{{sonar_port}}" }
 
