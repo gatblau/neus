@@ -19,7 +19,28 @@
     changed_when: no
 
   - include: install_gogs.yml
-    vars:
-      database_uri: "{{ database_ip_address }}"
     when: gogs_exists.stat.exists == false
 
+  - name: Create data folder
+    file:
+      name="{{gogs_path}}/data/application"
+      state=directory
+      recurse="yes"
+      mode="0777"
+      owner={{gogs_user}}
+      group={{gogs_group}}
+    when: blueprint == "silicon"
+
+  - name: Change GOGS home folder permissions
+    file:
+      name="{{gogs_path}}"
+      recurse="yes"
+      mode="0777"
+    when: blueprint == "silicon"
+
+  - name: Change GOGS user folder permissions
+    file:
+      name="/home/{{gogs_user}}"
+      recurse="yes"
+      mode="0777"
+    when: blueprint == "silicon"

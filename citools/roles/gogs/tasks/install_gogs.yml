@@ -17,6 +17,7 @@
   - name: Create user for GOGS
     user:
       name="{{gogs_user}}"
+      group="{{gogs_group}}"
       password="{{gogs_password}}"
       state=present
 
@@ -105,6 +106,9 @@
       enabled=yes
     when: blueprint != "silicon"
 
-  - name: Start GOGS
-    shell: "su -c \"/usr/local/gogs/gogs web &\" - gogs"
+  - name: Copy entrypoint script for GOGS Docker container
+    template:
+      src=entrypoint.sh.j2
+      dest=/entrypoint.sh
+      mode=0777
     when: blueprint == "silicon"

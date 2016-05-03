@@ -11,7 +11,7 @@ Group=gogs
 WorkingDirectory=/usr/local/gogs
 ExecStart=/usr/local/gogs/gogs web
 Restart=always
-Environment="USER=gogs","HOME=/home/gogs"
+Environment="USER=gogs","USERNAME=gogs","HOME=/home/gogs"
 
 [Install]
 WantedBy=multi-user.target

@@ -3,7 +3,7 @@ RUN_MODE = prod
 
 [database]
 DB_TYPE = mysql
-HOST = {{database_uri}}:{{ database_port }}
+HOST = {{database_ip_address}}:{{ database_port }}
 NAME = gogs
 USER = {{db_user}}
 PASSWD = `{{db_pwd}}`
