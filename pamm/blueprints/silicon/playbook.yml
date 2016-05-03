@@ -39,8 +39,17 @@
   become: "{{become}}"
   roles:
     - mariadb
-#    - mongodb
 
-# Command to create Docker images from pamm silicon docker containers
-#docker commit --change='CMD ["/entrypoint.sh"]' $(docker inspect --format \{\{' 'index' '.ID' '\}\} pamm-jvm) silicon/pamm-jvm:1.0.0
-#docker commit --change='CMD ["/entrypoint.sh"]' $(docker inspect --format \{\{' 'index' '.ID' '\}\} pamm-jvm) silicon/pamm-mariadb:1.0.0
+- name: Post build - create Docker images
+  hosts: localhost
+  connection: local
+  become: no
+  tasks:
+    - name: Create Docker image
+      include: "plays/docker_image.yml"
+      vars:
+        container_name: "{{item.container}}"
+        image_name: "{{item.image}}"
+      with_items:
+        - { container: 'pamm-jvm', image: 'silicon/pamm-jvm:latest'}
+        - { container: 'pamm-mariadb', image: 'silicon/pamm-mariadb:latest'}
