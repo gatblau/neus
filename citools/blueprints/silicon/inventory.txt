@@ -40,7 +40,6 @@ localhost
 [local:vars]
 # Sets the target platform to deploy to, it can be one of the following:
 #   a) docker - for Docker containers - used to test the build scripts
-#   b) ose - OpenShift
 #
 tgt_platform=docker
 #

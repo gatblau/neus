@@ -31,7 +31,6 @@
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
-    - baseline
     - jenkins_master
     - nexus
 
@@ -40,7 +39,6 @@
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
-    - baseline
     - mariadb
     - gogs
     - sonar
