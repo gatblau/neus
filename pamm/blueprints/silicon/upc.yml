@@ -37,7 +37,8 @@
     name: "{{item.name}}"
     state: absent
   with_items:
-    - { name: 'pamm-a'}
+    - { name: 'silicon/pamm-jvm'}
+    - { name: 'silicon/pamm-mariadb'}
 
 - name: "Starting up the hosts"
   docker:
