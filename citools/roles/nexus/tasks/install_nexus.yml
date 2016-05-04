@@ -34,6 +34,7 @@
       dest=/etc/init.d/nexus
       mode=0755
       owner=root
+    when: blueprint != "silicon"
 
   - name: Starting the NEXUS service
     service:
@@ -45,10 +46,6 @@
   - name: Copy entrypoint script for Nexus Docker container
     copy:
       src=entrypoint.sh
-      dest=/
+      dest=/entrypoint.sh
       mode=0755
-    when: blueprint == "silicon"
-
-  - name: Start Nexus console
-    command: "./entrypoint.sh"
     when: blueprint == "silicon"
