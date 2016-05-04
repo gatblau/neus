@@ -13,3 +13,11 @@
 
   - name: Initialise Sonar database
     include: initialise_sonar_database.yml
+
+  - name: Change MariaDB home folder permissions
+    file:
+      name="/var/lib/mysql"
+      recurse="yes"
+      mode="0777"
+    when: blueprint == "silicon"
+
