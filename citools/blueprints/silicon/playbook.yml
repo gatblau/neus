@@ -59,4 +59,21 @@
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
-    - sonar
+   - sonar
+
+- name: Post build - create Docker images
+  hosts: localhost
+  connection: local
+  become: no
+  tasks:
+    - name: Create Docker images
+      include: "plays/docker_image.yml"
+      vars:
+        container_name: "{{item.container}}"
+        image_name: "{{item.image}}"
+      with_items:
+        - { container: 'ci-jenkins', image: 'silicon/ci-jenkins:{{image_version}}'}
+        - { container: 'ci-nexus', image: 'silicon/ci-nexus:{{image_version}}'}
+        - { container: 'ci-mariadb', image: 'silicon/ci-mariadb:{{image_version}}'}
+        - { container: 'ci-gogs', image: 'silicon/ci-gogs:{{image_version}}'}
+        - { container: 'ci-sonar', image: 'silicon/ci-sonar:{{image_version}}'}

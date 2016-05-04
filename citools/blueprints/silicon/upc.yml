@@ -22,7 +22,6 @@
 # Provides the containers required to deploy the Silicon blueprint
 #
 ---
-
 - name: Delete any existing Docker containers
   become: yes
   docker:
@@ -59,13 +58,12 @@
 - set_fact:
     connection="docker"
     become="no"
-    keep_yum_cache="yes"
-    database_ip_address="\${DB_IP_ADDRESS}"
-    gogs_ip_address="\${GOGS_IP_ADDRESS}"
-    nexus_ip_address="\${NEXUS_IP_ADDRESS}"
-    sonar_ip_address="\${SONAR_IP_ADDRESS}"
-    remote_ip_address="\${DIT_IP_ADDRESS}"
-    jenkins_port=\${JENKINS_PORT}
-    nexus_port=\${NEXUS_PORT}
-    gogs_port=\${GOGS_PORT}
-    sonar_port=\${SONAR_PORT}
+    database_ip_address="${DB_IP_ADDRESS}"
+    gogs_ip_address="${GOGS_IP_ADDRESS}"
+    nexus_ip_address="${NEXUS_IP_ADDRESS}"
+    sonar_ip_address="${SONAR_IP_ADDRESS}"
+    remote_ip_address="${DIT_IP_ADDRESS}"
+    jenkins_port=${JENKINS_PORT}
+    nexus_port=${NEXUS_PORT}
+    gogs_port=${GOGS_PORT}
+    sonar_port=${SONAR_PORT}
