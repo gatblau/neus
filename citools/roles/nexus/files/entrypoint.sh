@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 # Start Nexus console
-su -c "/usr/local/nexus/default/bin/nexus console &" - nexus
-wait
+export NEXUS_HOME=/usr/local/nexus/default
+cd /usr/local/nexus/default
+./bin/nexus start
+sleep infinity
