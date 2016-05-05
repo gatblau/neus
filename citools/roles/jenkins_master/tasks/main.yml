@@ -37,7 +37,10 @@
 
   - name: Change Jenkins folder permissions
     file:
-      name="{{jenkins_user_home}}"
+      name="{{item.folder}}"
       recurse="yes"
       mode="0777"
+    with_items:
+      - { folder: '{{jenkins_user_home}}'}
+      - { folder: 'var/log/jenkins'}
     when: blueprint == "silicon"
