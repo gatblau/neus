@@ -78,9 +78,12 @@ ci-b
 ci-dit
 
 [ci:vars]
+# PAMM / JAMM Seeds
 # Set to yes to include PAMM or JAMM seeds in CI Tools environment
-pamm=no
+# Set play_dir to application deployment directory
+pamm=yes
 jamm=no
+app_dir=pamm-seed
 
 # flags the type of source control to use:
 #   - gogs: for local Go Git Repository
@@ -88,9 +91,6 @@ jamm=no
 scm=gogs
 
 # change below if scm=rtc
-
-# ip addresses from ssh host dont work when using docker connection plugin
-source_control_uri=#"{{hostvars['ci-b']['ansible_host']}}"
 
 # flags the type of blueprint for plays to decide how to configure accordingly.
 blueprint=bronze
