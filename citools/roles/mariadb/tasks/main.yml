@@ -10,9 +10,11 @@
 
   - name: Initialise GOGS database
     include: initialise_gogs_database.yml
+    when: inventory_hostname != "ci-dit"
 
   - name: Initialise Sonar database
     include: initialise_sonar_database.yml
+    when: inventory_hostname != "ci-dit"
 
   - name: Change MariaDB home folder permissions
     file:
