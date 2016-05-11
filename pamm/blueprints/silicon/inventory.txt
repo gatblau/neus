@@ -40,7 +40,7 @@ base_image=docker.io/centos:7
 
 
 [pamm]
-pamm-play
+pamm-jvm
 pamm-mariadb
 
 [pamm:vars]
