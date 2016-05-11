@@ -50,4 +50,4 @@
   roles:
     - connect
     - { role: jdk,     when tgt_platform == 'docker' }
-    - { role: mariadb, when tgt_platform == 'docker' }
+    - { role: mariadb, db_user: 'pamm', db_pwd: 'n3us', when tgt_platform == 'docker' }
