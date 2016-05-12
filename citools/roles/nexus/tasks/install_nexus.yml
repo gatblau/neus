@@ -37,7 +37,10 @@
     when: blueprint != "silicon"
 
   - name: Create link to Nexus script
-    command: ln -s /usr/local/nexus/default/bin/nexus /etc/init.d/nexus
+    file:
+      src=/usr/local/nexus/default/bin/nexus
+      dest=/etc/init.d/nexus
+      state=link
     when: blueprint != "silicon"
 
   - name: Copy Nexus start script
