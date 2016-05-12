@@ -49,6 +49,13 @@
     mode=0755
   when: blueprint == "silicon"
 
+- name: Change MariaDB home folder permissions
+  file:
+    name="/var/lib/mysql"
+    recurse="yes"
+    mode="0777"
+  when: blueprint == "silicon"
+
 - name: Start MariaDB
   shell: "/entrypoint.sh &"
   when: blueprint == "silicon"
