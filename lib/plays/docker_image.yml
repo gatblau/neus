@@ -1,9 +1,9 @@
 ---
-  - name: Get Docker container ID
+  - name: "Get Docker container {{container_name}} ID"
     command: >
       docker inspect --format \{\{' 'index' '.ID' '\}\} {{container_name}}
     register: container_id
 
-  - name: Create Docker Image
+  - name: "Create Docker Image: {{image_name}}"
     command: >
       docker commit --change='CMD ["/entrypoint.sh"]' {{container_id.stdout}} {{image_name}}
