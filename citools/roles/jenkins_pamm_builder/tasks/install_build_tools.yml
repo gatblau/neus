@@ -1,0 +1,43 @@
+---
+  - name: Install Git
+    yum:
+      name: "{{item.name}}"
+      state: latest
+    with_items:
+      - { name: "bzip2" }
+      - { name: "git" }
+
+  # Install Bower (npm)
+  - name: Installing npm
+    include: "plays/install_rpm.yml"
+    vars:
+      rpm_app_name: npm
+      rpm_filename: "{{npm_rpm}}"
+
+  - name: Installing Bower (npm)
+    command: "npm install -g bower"
+
+  - name: Install Simple Build Tool (SBT)
+    include: "plays/install_tool.yml"
+    vars:
+      tool_name : SBT
+      folder_name : "{{ sbt_folder }}"
+      zip_filename: "{{ sbt_zip }}"
+      add_version_to_folder : true
+      zip_has_folder : true
+      has_bin_folder : true
+
+  - name: Put link to SBT in /usr/bin
+    file:
+      src=/usr/local/sbt/default/bin/sbt
+      dest=/usr/bin/sbt
+      state=link
+
+  - name: Install Karma
+    command: "npm install karma --save-dev"
+
+  - name: Install Karma plugins
+    command: "npm install karma-jasmine karma-chrome-launcher --save-dev"
+
+  - name: Create karma.cmd symbolic link
+    command: "cd node_modules/.bin && ln -s ../karma/bin/karma karma.cmd"

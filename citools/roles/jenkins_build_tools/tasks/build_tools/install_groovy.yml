@@ -1,0 +1,10 @@
+---
+  - include: "plays/install_tool.yml"
+    vars:
+      tool_name : Groovy
+      folder_name : "{{ groovy_folder }}"
+      zip_filename: "{{ groovy_zip }}"
+      add_version_to_folder : false
+      zip_has_folder : true
+      has_bin_folder : true
+      user: jenkins

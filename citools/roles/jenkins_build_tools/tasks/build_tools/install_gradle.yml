@@ -1,0 +1,10 @@
+---
+  - include: "plays/install_tool.yml"
+    vars:
+      tool_name : Gradle
+      folder_name : "{{ gradle_folder }}"
+      zip_filename: "{{ gradle_zip }}"
+      add_version_to_folder : false
+      zip_has_folder : true
+      has_bin_folder : true
+      user: jenkins

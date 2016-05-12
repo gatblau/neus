@@ -1,0 +1,26 @@
+---
+  - name: Clone PAMM seed repository
+    git:
+      repo=http://github.com/gatblau/pamm.seed
+      dest=/pamm.seed
+      update=yes
+
+  - name: Create link to Node Manager
+    file:
+      src=/node_modules
+      dest=/pamm.seed/node_modules
+      state=link
+
+  - name: Install required dependencies
+    npm: path=/pamm.seed
+
+  - name: Update webdriver
+    shell: "cd /pamm.seed && npm run webdriver-update"
+
+  - name: Build PAMM seed to download SBT dependencies
+    shell: "cd /pamm.seed && sbt clean compile svc/dist testsetup/dist -Dsbt.log.noformat=true"
+
+  - name: Remove PAMM seed
+    file:
+      path=/pamm.seed/
+      state=absent

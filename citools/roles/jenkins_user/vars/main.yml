@@ -1,0 +1,8 @@
+---
+  # Jenkins home
+  jenkins_user_home: /home/jenkins
+
+  # Jenkins username and password
+  jenkins_user: jenkins
+  jenkins_password: $6$rounds=656000$vEwfQFfx8of8GbEK$.Ib42z9muqnJxiuQL/fw7JomQ5VXAPNBIWCQsQIm1nBIa/Jy17dXT3mxzwiI.BJ4mVdzJ2COlhlXmgn0EIaEz1
+  jenkins_group: jenkins

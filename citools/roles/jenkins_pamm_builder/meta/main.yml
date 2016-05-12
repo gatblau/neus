@@ -1,0 +1,6 @@
+---
+  dependencies:
+    - { role: baseline }
+    - { role: jdk }
+    - { role: jenkins_browsers }
+    - { role: jenkins_build_tools }
