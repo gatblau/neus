@@ -73,8 +73,5 @@ jamm=no
 scm=gogs
 # change below if scm=rtc
 
-# ip addresses from ssh host dont work when using docker connection plugin
-source_control_uri=#"{{hostvars['ci-b']['ansible_host']}}"
-
 # flags the type of blueprint for plays to decide how to configure accordingly.
 blueprint=silver

@@ -43,26 +43,22 @@ connection=docker
 
 [ci]
 # uncomment the ansible_ssh_host variables when using connection=ssh above.
-ci-a # ansible_ssh_host=192.168.10.50
-ci-b # ansible_ssh_host=192.168.10.60
-ci-c # ansible_ssh_host=192.168.10.70
-ci-d # ansible_ssh_host=192.168.10.80
-ci-e # ansible_ssh_host=192.168.10.90
+ci-a
+ci-b
+ci-c
+ci-d
+ci-e
 
 [ci:vars]
 # flags the type of blueprint for plays to decide how to configure accordingly.
 blueprint=gold
 
 [ci-a:vars]
-nexus_uri="{{hostvars['ci-a']['ansible_ssh_host']}}"
 
 [ci-b:vars]
 
 [ci-c:vars]
 
 [ci-d:vars]
-gogs_uri="{{hostvars['ci-d']['ansible_ssh_host']}}/git"
 
 [ci-e:vars]
-sonar_uri="{{hostvars['ci-c']['ansible_ssh_host']}}"
-mariadb_port=5000
