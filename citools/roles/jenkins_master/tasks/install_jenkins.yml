@@ -71,7 +71,7 @@
 
   - name: Install PAMM seed build pipeline
     include: install_pamm_build.yml
-    when: pamm == "yes"
+    when: pamm == "yes" and blueprint != "silicon"
 
   - name: Jenkins service setup
     template:

@@ -1,5 +1,7 @@
 ---
   dependencies:
     - { role: baseline }
-    - { role: browsers }
     - { role: jdk }
+    - { role: jenkins_user }
+    - { role: jenkins_browsers,    when: "blueprint != 'silicon'" }
+    - { role: jenkins_build_tools, when: "blueprint != 'silicon'" }

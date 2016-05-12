@@ -27,21 +27,28 @@
   - name: Clone PAMM seed repository (latest tag)
     git:
       repo=http://github.com/gatblau/pamm.seed
-      dest=/tmp/pamm.seed
+      dest="{{jenkins_user_home}}/pamm.seed"
       update=yes
 
-  - name: Install PAMM seed dependencies
-    npm:
-      name=package.json
-      path=/tmp/pamm.seed
+  - name: Install bzip2
+    yum:
+      name=bzip2
+      state=installed
+
+  - name: Install dependencies
+    shell: "cd {{jenkins_user_home}}/pamm.seed && npm install"
+
+  - name: Update webdriver
+    shell: "cd {{jenkins_user_home}}/pamm.seed && npm run webdriver-update"
 
   - name: Fetch latest PAMM seed tag from GitHub
-    shell: "cd /tmp/pamm.seed && git describe --tags $(git rev-list --tags --max-count=1)"
+    shell: "cd {{jenkins_user_home}}/pamm.seed && git describe --tags $(git rev-list --tags --max-count=1)"
     register: pamm_seed_tag
 
-  - debug: msg="Set PAMM seed build tag to {{pamm_seed_tag.stdout}}"
+  - name: Find latest PAMM Seed tag
+    debug: msg="Set PAMM seed build tag to {{pamm_seed_tag.stdout}}"
 
-  - name: Configure PAMM seed Build
+  - name: Configure PAMM seed Clean Build job
     template:
       src=pamm_seed/pamm_seed_clean_config.xml.j2
       dest="{{jenkins_home}}/jobs/pamm-seed-clean/config.xml"
@@ -49,7 +56,9 @@
       group="{{jenkins_group}}"
 
   - name: Remove PAMM seed repository
-    file: path=/tmp/pamm.seed state=absent
+    file:
+      path="{{jenkins_user_home}}/pamm.seed"
+      state=absent
 
   - name: Copy Jenkins configuration file
     template:

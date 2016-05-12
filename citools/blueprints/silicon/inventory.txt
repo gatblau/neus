@@ -50,6 +50,7 @@ nexus_base=docker.io/centos:7
 mariadb_base=docker.io/centos:7
 gogs_base=docker.io/centos:7
 sonar_base=docker.io/centos:7
+builder_base=docker.io/centos:7
 #
 # Set the Docker image version
 #
@@ -64,6 +65,7 @@ sonar_port=9000
 
 [ci]
 ci-jenkins
+ci-builder
 ci-nexus
 ci-gogs
 ci-sonar

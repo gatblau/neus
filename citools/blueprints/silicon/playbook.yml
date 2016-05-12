@@ -61,6 +61,13 @@
   roles:
    - sonar
 
+- name: Provisioning host Jenkins builder
+  hosts: ci-builder
+  connection: "{{connection}}"
+  become: "{{become}}"
+  roles:
+    - jenkins_pamm_builder
+
 - name: Post build - create Docker images
   hosts: localhost
   connection: local

@@ -34,6 +34,7 @@
     - { container: 'ci-mariadb', image: '{{mariadb_base}}'}
     - { container: 'ci-gogs', image: '{{gogs_base}}'}
     - { container: 'ci-sonar', image: '{{sonar_base}}'}
+    - { container: 'ci-builder', image: '{{builder_base}}'}
 
 - name: Start up the Docker containers
   docker:
@@ -54,6 +55,7 @@
     - { name: "ci-mariadb", image: "{{mariadb_base}}", ports: "{{database_port}}" }
     - { name: "ci-gogs", image: "{{gogs_base}}", ports: "{{gogs_port}}" }
     - { name: "ci-sonar", image: "{{sonar_base}}", ports: "{{sonar_port}}" }
+    - { name: "ci-builder", image: "{{builder_base}}", ports: "{{jenkins_port}}" }
 
 - set_fact:
     connection="docker"

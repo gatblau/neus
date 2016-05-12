@@ -1,15 +1,4 @@
 ---
-# This play installs Jenkins and build tools
-
-### Create jenkins user
-  - name: Create jenkins user
-    include: jenkins_user.yml
-
-###  Install Build Tools
-  - name: Install Build Tools
-    become: "{{become}}"
-    include: install_build_tools.yml
-
 ### Install Jenkins
   - name: Check Jenkins installed
     stat: path="{{jenkins_home}}"
