@@ -84,3 +84,4 @@
         - { container: 'ci-mariadb', image: 'silicon/ci-mariadb:{{image_version}}'}
         - { container: 'ci-gogs', image: 'silicon/ci-gogs:{{image_version}}'}
         - { container: 'ci-sonar', image: 'silicon/ci-sonar:{{image_version}}'}
+        - { container: 'ci-builder', image: 'silicon/ci-pamm-builder:{{image_version}}'}
