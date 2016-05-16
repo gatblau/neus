@@ -19,6 +19,7 @@
     changed_when: no
 
   - include: install_gogs.yml
+    become: "{{become}}"
     when: gogs_exists.stat.exists == false
 
   - name: Create data folder
