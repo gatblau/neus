@@ -41,13 +41,6 @@
   - name: Update webdriver
     shell: "cd {{jenkins_user_home}}/pamm.seed && npm run webdriver-update"
 
-  - name: Fetch latest PAMM seed tag from GitHub
-    shell: "cd {{jenkins_user_home}}/pamm.seed && git describe --tags $(git rev-list --tags --max-count=1)"
-    register: pamm_seed_tag
-
-  - name: Find latest PAMM Seed tag
-    debug: msg="Set PAMM seed build tag to {{pamm_seed_tag.stdout}}"
-
   - name: Configure PAMM seed Clean Build job
     template:
       src=pamm_seed/pamm_seed_clean_config.xml.j2
