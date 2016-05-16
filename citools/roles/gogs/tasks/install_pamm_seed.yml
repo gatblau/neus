@@ -11,6 +11,3 @@
       owner="{{gogs_user}}"
       group="{{gogs_group}}"
       recurse=yes
-
-  - name: Checkout latest PAMM seed label from GitHub
-    command: "su -c \"cd /home/{{gogs_user}}/gogs-repositories/pamm.seed && git checkout $(git describe --tags $(git rev-list --tags --max-count=1))\" - gogs"
