@@ -83,7 +83,7 @@
       'workflow-api.hpi',
       'workflow-basic-steps.hpi',
       'workflow-cps.hpi',
-      'workflow-cps-global-lib.hpi'
+      'workflow-cps-global-lib.hpi',
       'workflow-durable-task-step.hpi',
       'workflow-job.hpi',
       'workflow-multibranch.hpi',
