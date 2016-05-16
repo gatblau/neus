@@ -15,7 +15,7 @@
       mode=0666
 
   - name: Copy entrypoint script for Jenkins PAMM builder container
-    template:
-      src=entrypoint.sh.j2
+    copy:
+      src=entrypoint.sh
       dest=/entrypoint.sh
       mode=0755
