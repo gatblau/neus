@@ -66,3 +66,9 @@
     mysql_db:
       name=test
       state=absent
+
+  - name: Creating the PAMM database (for ci-dit testing)
+    mysql_db:
+      name=pamm
+      state=present
+    when: connection == "docker" and "{{inventory_hostname}}" == "ci-dit"
