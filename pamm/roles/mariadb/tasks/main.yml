@@ -98,3 +98,15 @@
     name=test
     state=absent
     login_password={{ db_root_pwd }}
+
+- name: Clean up for Docker image
+  file:
+    name="/var/lib/mysql/{{item.filename}}"
+    state=absent
+  with_items:
+    - { filename: "multi-master.info"}
+    - { filename: "mysql.sock"}
+    - { filename: "pamm-mariadb.err"}
+    - { filename: "pamm-mariadb.pid"}
+    - { filename: "tc.log"}
+  when: blueprint == "silicon"
