@@ -24,7 +24,7 @@
 #   on which roles are deployed to which hosts, only host and variable definitions.
 #   The mapping between roles and hosts is done in the main playbook file.
 #
-[global]
+[global:children]
 local
 pamm
 
