@@ -60,8 +60,10 @@ vpc_subnet_id=subnet-52b88e0b
 # The zone in which the region is based
 zone=eu-west-1b
 
-# flags the type of blueprint for plays to decide how to configure accordingly.
-blueprint=bronze
 
 [pamm]
 pamm-a
+
+[pamm:vars]
+# flags the type of blueprint for plays to decide how to configure accordingly.
+blueprint=bronze
