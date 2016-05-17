@@ -5,10 +5,10 @@
 ---
   - set_fact:
       database_ip_address="127.0.0.1"
-      gogs_ip_address="{{ci_b_ip.stdout}}"
-      nexus_ip_address="{{ci_b_ip.stdout}}"
-      sonar_ip_address="{{ci_b_ip.stdout}}"
-      remote_ip_address="{{ci_dit_ip.stdout}}"
+      gogs_ip_address="{{ci_b_ip}}"
+      nexus_ip_address="{{ci_b_ip}}"
+      sonar_ip_address="{{ci_b_ip}}"
+      remote_ip_address="{{ci_dit_ip}}"
 
   # Add hosts and set variables
   - name:  Setting up parameters for ci-a VM
