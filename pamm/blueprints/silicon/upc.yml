@@ -51,6 +51,8 @@
     expose: "[ {{item.ports}} ]"
     command: sleep infinity
     state: started
+    volumes:
+      - /var/cache/yum/neus:/var/cache/yum:rw
   with_items:
     - { container: 'pamm-jvm', image: '{{base_image}}', ports: '80, 8080'}
     - { container: 'pamm-mariadb', image: '{{base_image}}', ports: '3306'}

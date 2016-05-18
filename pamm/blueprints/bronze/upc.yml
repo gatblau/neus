@@ -65,6 +65,8 @@
     command: "/usr/sbin/init"
     state: started
     privileged: yes
+    volumes:
+      - /var/cache/yum/neus:/var/cache/yum:rw
   with_items:
     - { name: "pamm-a", image: "{{pamm_base}}", ports: "80, 5000, 8081"}
 
