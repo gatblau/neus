@@ -19,6 +19,7 @@
   # Jenkins Plugins
   jenkins_plugins:
     [
+      'ace-editor.hpi',
       'ansible.hpi',
       'ant.hpi',
       'antisamy-markup-formatter.hpi',

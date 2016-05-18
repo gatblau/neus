@@ -71,6 +71,7 @@ download_as "http://sourceforge.net/projects/sonar-pkg/files/rpm/noarch/sonar-5.
 download_mysql_connector $ROOT mysql-connector-java-5.1.36
 download "http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/2.4/" "sonar-runner-dist-2.4.zip"
 download "http://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/2.0/" "swarm-client-2.0-jar-with-dependencies.jar"
+download "http://updates.jenkins-ci.org/latest/" "ace-editor.hpi"
 download "http://updates.jenkins-ci.org/latest/" "ansible.hpi"
 download "http://updates.jenkins-ci.org/latest/" "ant.hpi"
 download "http://updates.jenkins-ci.org/latest/" "antisamy-markup-formatter.hpi"
