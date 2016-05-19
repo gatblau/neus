@@ -26,6 +26,7 @@
       'artifact-promotion.hpi',
       'authentication-tokens.hpi',
       'branch-api.hpi',
+      'clone-workspace-scm.hpi',
       'cloudbees-folder.hpi',
       'config-file-provider.hpi',
       'credentials.hpi',
