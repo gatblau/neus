@@ -11,3 +11,17 @@
       owner="{{gogs_user}}"
       group="{{gogs_group}}"
       recurse=yes
+
+  - name: Copy PAMM seed import script
+    copy:
+      src=import_pamm_seed.sh
+      dest=/import_pamm_seed.sh
+      mode=0755
+
+  - name: Import PAMM seed into GOGS
+    shell: /import_pamm_seed.sh
+
+  - name: Remove PAMM seed import script
+    file:
+      path=/import_pamm_seed.sh
+      state=absent

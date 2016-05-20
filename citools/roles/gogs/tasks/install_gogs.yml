@@ -89,10 +89,6 @@
       path=/tmp/gogs-repositories.zip
       state=absent
 
-  - name: Clone PAMM seed repository
-    include: install_pamm_seed.yml
-    when: pamm == "yes"
-
   - name: Installing GOGS service
     copy:
       src=gogs.service
@@ -105,6 +101,10 @@
       state=started
       enabled=yes
     when: blueprint != "silicon"
+
+  - name: Import PAMM seed repository
+    include: install_pamm_seed.yml
+    when: pamm == "yes"
 
   - name: Copy entrypoint script for GOGS Docker container
     template:

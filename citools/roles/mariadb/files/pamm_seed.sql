@@ -103,7 +103,7 @@ CREATE TABLE `action` (
   `created` datetime DEFAULT NULL,
   `created_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +112,7 @@ CREATE TABLE `action` (
 
 LOCK TABLES `action` WRITE;
 /*!40000 ALTER TABLE `action` DISABLE KEYS */;
-INSERT INTO `action` VALUES (1,1,1,1,'gogs','gogs@devops.net',1,'gogs','maven-repo','',0,'','2015-10-30 15:26:42',1446218802),(5,1,1,1,'gogs','gogs@devops.net',5,'gogs','builder-repo','',0,'',NULL,1463127650),(6,1,5,1,'gogs','gogs@devops.net',5,'gogs','builder-repo','master',0,'{\"Len\":1,\"Commits\":[{\"Sha1\":\"586a55b7e66099eb51965cee17ae3a7bb6966f12\",\"Message\":\"first commit\\n\",\"AuthorEmail\":\"gogs@devops.net\",\"AuthorName\":\"gogs\"}],\"CompareUrl\":\"\"}',NULL,1463127824),(7,1,1,1,'gogs','gogs@devops.net',6,'gogs','pamm.seed','',0,'',NULL,1463404252);
+INSERT INTO `action` VALUES (1,1,1,1,'gogs','gogs@devops.net',1,'gogs','maven-repo','',0,'','2015-10-30 15:26:42',1446218802),(5,1,1,1,'gogs','gogs@devops.net',5,'gogs','builder-repo','',0,'',NULL,1463127650),(6,1,5,1,'gogs','gogs@devops.net',5,'gogs','builder-repo','master',0,'{\"Len\":1,\"Commits\":[{\"Sha1\":\"586a55b7e66099eb51965cee17ae3a7bb6966f12\",\"Message\":\"first commit\\n\",\"AuthorEmail\":\"gogs@devops.net\",\"AuthorName\":\"gogs\"}],\"CompareUrl\":\"\"}',NULL,1463127824),(10,1,1,1,'gogs','gogs@devops.net',8,'gogs','pamm.seed','',0,'',NULL,1463672963);
 /*!40000 ALTER TABLE `action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -791,7 +791,7 @@ CREATE TABLE `repository` (
   UNIQUE KEY `UQE_repository_S` (`owner_id`,`lower_name`),
   KEY `IDX_repository_name` (`name`),
   KEY `IDX_repository_lower_name` (`lower_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -800,7 +800,7 @@ CREATE TABLE `repository` (
 
 LOCK TABLES `repository` WRITE;
 /*!40000 ALTER TABLE `repository` DISABLE KEYS */;
-INSERT INTO `repository` VALUES (1,1,'maven-repo','maven-repo','','','master',1,0,0,0,0,0,0,0,0,0,0,0,0,0,'2015-10-30 15:26:42','2015-10-30 15:26:42',1,NULL,NULL,1,NULL,NULL,1,1446218802,1446218802),(5,1,'builder-repo','builder-repo','Empty builder repository','','master',1,0,0,0,0,0,0,0,0,0,0,0,0,0,NULL,NULL,1,0,'',1,0,'',1,1463127650,1463127824),(6,1,'pamm.seed','pamm.seed','','','master',1,0,0,0,0,0,0,0,0,0,0,0,0,0,NULL,NULL,1,0,'',1,0,'',1,1463404252,1463404252);
+INSERT INTO `repository` VALUES (1,1,'maven-repo','maven-repo','','','master',1,0,0,0,0,0,0,0,0,0,0,0,0,0,'2015-10-30 15:26:42','2015-10-30 15:26:42',1,NULL,NULL,1,NULL,NULL,1,1446218802,1446218802),(5,1,'builder-repo','builder-repo','Empty builder repository','','master',1,0,0,0,0,0,0,0,0,0,0,0,0,0,NULL,NULL,1,0,'',1,0,'',1,1463127650,1463127824),(8,1,'pamm.seed','pamm.seed','Play Angular Mongo MariaDB','','master',1,0,0,0,0,0,0,0,0,0,1,0,0,0,NULL,NULL,1,0,'',1,0,'',1,1463672963,1463672963);
 /*!40000 ALTER TABLE `repository` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -995,7 +995,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'gogs','gogs','','gogs@devops.net','ece2d30dde64b0ce933bf0fa47b809e3960e151f4d4da8b576d3c42f79dd9ddad8383505d754546fe8604d407a36822a3bc5',0,0,'',0,'','','MgQxgpFO3T','8nqtZmOG08','2015-10-30 15:26:09','2016-03-08 09:32:01',0,1,1,0,'215bf0afb9698ccfbd896d10b5dd4875','gogs@devops.net',0,0,0,0,3,'',0,0,-1,0,0,1446218769,1463404252);
+INSERT INTO `user` VALUES (1,'gogs','gogs','','gogs@devops.net','ece2d30dde64b0ce933bf0fa47b809e3960e151f4d4da8b576d3c42f79dd9ddad8383505d754546fe8604d407a36822a3bc5',0,0,'',0,'','','MgQxgpFO3T','8nqtZmOG08','2015-10-30 15:26:09','2016-03-08 09:32:01',0,1,1,0,'215bf0afb9698ccfbd896d10b5dd4875','gogs@devops.net',0,0,0,0,3,'',0,0,-1,0,0,1446218769,1463672963);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1036,7 +1036,7 @@ CREATE TABLE `watch` (
   `repo_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UQE_watch_WATCH` (`user_id`,`repo_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1045,7 +1045,7 @@ CREATE TABLE `watch` (
 
 LOCK TABLES `watch` WRITE;
 /*!40000 ALTER TABLE `watch` DISABLE KEYS */;
-INSERT INTO `watch` VALUES (1,1,1),(5,1,5),(6,1,6);
+INSERT INTO `watch` VALUES (1,1,1),(5,1,5),(8,1,8);
 /*!40000 ALTER TABLE `watch` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1095,4 +1095,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-16 13:12:17
+-- Dump completed on 2016-05-19 15:50:00
