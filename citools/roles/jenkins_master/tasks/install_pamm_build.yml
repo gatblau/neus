@@ -35,6 +35,12 @@
       name=bzip2
       state=installed
 
+  - name: Create node_modules symbolic link in PAMM seed
+    file:
+      src="{{jenkins_user_home}}/node_modules"
+      dest="{{jenkins_user_home}}/pamm.seed/node_modules"
+      state=link
+
   - name: Install dependencies
     shell: "cd {{jenkins_user_home}}/pamm.seed && npm install"
 
