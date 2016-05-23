@@ -92,7 +92,6 @@
       'workflow-scm-step.hpi',
       'workflow-step-api.hpi',
       'workflow-support.hpi',
-      'workflow-api.hpi',
       'ws-cleanup.hpi'
     ]
 
