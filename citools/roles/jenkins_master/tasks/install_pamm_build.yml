@@ -47,13 +47,6 @@
   - name: Update webdriver
     shell: "cd {{jenkins_user_home}}/pamm.seed && npm run webdriver-update"
 
-  - name: Configure PAMM seed Clean Build job
-    template:
-      src=pamm_seed/pamm_seed_clean_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pamm-seed-clean/config.xml"
-      owner="{{jenkins_user}}"
-      group="{{jenkins_group}}"
-
   - name: Remove PAMM seed repository
     file:
       path="{{jenkins_user_home}}/pamm.seed"
@@ -63,5 +56,33 @@
     template:
       src=pamm_seed/jenkins_config.xml.j2
       dest="{{jenkins_home}}/config.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+
+  - name: Configure PAMM seed Clean Build job
+    template:
+      src=pamm_seed/pamm_seed_clean_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pamm-seed-clean/config.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+
+  - name: Configure PAMM seed run main app Build job
+    template:
+      src=pamm_seed/pamm_seed_run_main_app_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pamm-seed-run-main-app/config.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+
+  - name: Configure PAMM seed run test client Build job
+    template:
+      src=pamm_seed/pamm_seed_run_test_client_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pamm-seed-run-test-client/config.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+
+  - name: Configure PAMM seed run tests Build job
+    template:
+      src=pamm_seed/pamm_seed_run_tests_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pamm-seed-run-tests/config.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
