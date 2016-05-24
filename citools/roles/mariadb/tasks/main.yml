@@ -16,6 +16,9 @@
     include: initialise_sonar_database.yml
     when: inventory_hostname != "ci-dit"
 
+  - name: Initialise PAMM seed database 
+    include: initialise_pamm_database.yml
+
   - name: Change MariaDB home folder permissions
     file:
       name="/var/lib/mysql"
