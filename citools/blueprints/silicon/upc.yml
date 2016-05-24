@@ -57,6 +57,10 @@
     - { name: "ci-sonar", image: "{{sonar_base}}", ports: "{{sonar_port}}" }
     - { name: "ci-builder", image: "{{builder_base}}", ports: "{{jenkins_port}}" }
 
+- name: Get ci-mariadb IP address for GOGS (import PAMM seed)
+  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-mariadb"
+  register: ci_mariadb_ip
+
 - set_fact:
     connection="docker"
     become="no"
@@ -70,3 +74,4 @@
     nexus_port=${NEXUS_PORT}
     gogs_port=${GOGS_PORT}
     sonar_port=${SONAR_PORT}
+    gogs_db_address="{{ci_mariadb_ip.stdout}}"
