@@ -77,7 +77,7 @@
     - { name: "ci-dit", image: "{{ci_dit_base}}", ports: "{{ansible_port}}"}
 
 # Obtain IP addresses of containers
-- name: Get ci-b IP address
+- name: Get ci-a IP address
   shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-a"
   register: ci_a_ip
 
@@ -93,6 +93,7 @@
     connection="docker"
     become="no"
     database_ip_address="127.0.0.1"
+    gogs_db_address="{{database_ip_address}}"
     gogs_ip_address="{{ci_b_ip.stdout}}"
     jenkins_ip_address="{{ci_a_ip.stdout}}"
     nexus_ip_address="{{ci_a_ip.stdout}}"

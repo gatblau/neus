@@ -5,6 +5,7 @@
 ---
   - set_fact:
       database_ip_address="127.0.0.1"
+      gogs_db_address="{{database_ip_address}}"
       gogs_ip_address="{{ci_b_ip}}"
       jenkins_ip_address="{{ci_a_ip}}"
       nexus_ip_address="{{ci_a_ip}}"

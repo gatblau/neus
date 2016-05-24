@@ -133,6 +133,7 @@
 
   - set_fact:
       database_ip_address="127.0.0.1"
+      gogs_db_address="{{database_ip_address}}"
       gogs_ip_address="{{ec2.instances[1].public_dns_name}}"
       jenkins_ip_address="{{ec2.instances[0].public_dns_name}}"
       nexus_ip_address="{{ec2.instances[0].public_dns_name}}"
