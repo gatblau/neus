@@ -24,7 +24,7 @@
   - name: Removing PAMM seed zip file from the host
     file: path=/tmp/pamm_seed.zip state=absent
 
-  - name: Clone PAMM seed repository (latest tag)
+  - name: Clone PAMM seed repository
     git:
       repo=http://github.com/gatblau/pamm.seed
       dest="{{jenkins_user_home}}/pamm.seed"
@@ -86,3 +86,6 @@
       dest="{{jenkins_home}}/jobs/pamm-seed-run-tests/config.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
+    vars:
+      pamm_app_ip_address: "{{hostvars['localhost']['remote_ip_address']}}"
+      test_client_ip_address: "{{hostvars['localhost']['remote_ip_address']}}"
