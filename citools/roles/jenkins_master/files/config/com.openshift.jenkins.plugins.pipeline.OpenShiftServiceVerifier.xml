@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<com.openshift.jenkins.plugins.pipeline.OpenShiftServiceVerifier_-DescriptorImpl plugin="openshift-pipeline@1.0.12">
+  <retry>100</retry>
+</com.openshift.jenkins.plugins.pipeline.OpenShiftServiceVerifier_-DescriptorImpl>

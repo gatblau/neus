@@ -15,6 +15,7 @@ Check console output at $BUILD_URL to view the results.</defaultBody>
   </defaultTriggerIds>
   <maxAttachmentSize>-1</maxAttachmentSize>
   <recipientList></recipientList>
+  <defaultReplyTo></defaultReplyTo>
   <excludedCommitters></excludedCommitters>
   <overrideGlobalSettings>true</overrideGlobalSettings>
   <precedenceBulk>false</precedenceBulk>
