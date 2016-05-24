@@ -46,29 +46,6 @@
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
-  - name: Copying Jenkins smoke test build job to the host
-    copy:
-      src=smoke_test.zip
-      dest=/tmp
-
-  - name: Unzipping Jenkins smoke test build job
-    unarchive:
-      src=/tmp/smoke_test.zip
-      dest="{{jenkins_home}}"
-      owner="{{jenkins_user}}"
-      group="{{jenkins_group}}"
-      copy=no
-
-  - name: Removing Jenkins smoke test job zip file from the host
-    file: path=/tmp/smoke_test.zip state=absent
-
-  - name: Configure Smoke Test Build
-    template:
-      src=smoke_test_config.xml.j2
-      dest="{{jenkins_home}}/jobs/smoke_test/config.xml"
-      owner="{{jenkins_user}}"
-      group="{{jenkins_group}}"
-
   - name: Install PAMM seed build pipeline
     include: install_pamm_build.yml
     when: pamm == "yes" and blueprint != "silicon"
