@@ -45,4 +45,10 @@
       path=/run/nologin
       state=absent
     when: connection == "docker"
-    
+
+  - name: Start sshd service (Docker only)
+    service:
+      name=sshd
+      state=started
+      enabled=yes
+    when: connection == "docker"
