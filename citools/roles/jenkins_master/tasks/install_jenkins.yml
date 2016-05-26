@@ -46,6 +46,15 @@
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
+  - name: Set up Jenkins location
+    template:
+      src=jenkins.model.JenkinsLocationConfiguration.xml.j2
+      dest="{{jenkins_home}}/jenkins.model.JenkinsLocationConfiguration.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+    vars:
+      jenkins_ip_address: "{{hostvars['localhost']['jenkins_ip_address']}}"
+
   - name: Install PAMM seed build pipeline
     include: install_pamm_build.yml
     when: pamm == "yes" and blueprint != "silicon"
