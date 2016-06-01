@@ -28,32 +28,18 @@
       state=directory
       recurse=yes
 
-  - name: Set Nexus "run as" user
+  - name: Copy Nexus script
     copy:
-      src=nexus.rc
-      dest=/usr/local/nexus/default/bin/nexus.rc
-      owner="{{nexus_user}}"
-      group="{{nexus_group}}"
-    when: blueprint != "silicon"
-
-  - name: Create link to Nexus script
-    file:
-      src=/usr/local/nexus/default/bin/nexus
+      src=nexus
       dest=/etc/init.d/nexus
-      state=link
-    when: blueprint != "silicon"
-
-  - name: Copy Nexus start script
-    copy:
-      src=start_nexus.sh
-      dest=/usr/local/nexus/default/start_nexus.sh
-      owner="{{nexus_user}}"
-      group="{{nexus_group}}"
-      mode=0777
-    when: blueprint != "silicon"
+      mode=0755
+      owner=root
 
   - name: Starting the NEXUS service
-    command: /usr/local/nexus/default/start_nexus.sh
+    service:
+      name=nexus
+      state=started
+      enabled=yes
     when: blueprint != "silicon"
 
   - name: Copy entrypoint script for Nexus Docker container
@@ -61,4 +47,8 @@
       src=entrypoint.sh
       dest=/entrypoint.sh
       mode=0755
+    when: blueprint == "silicon"
+
+  - name: Start Nexus console
+    command: "./entrypoint.sh"
     when: blueprint == "silicon"

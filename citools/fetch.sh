@@ -46,7 +46,7 @@ find $ROOT. -size 0c -delete
 
 # download the following files to the root folder if they do not exist
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "unzip-6.0-15.el7.x86_64.rpm"
-download "http://download.sonatype.com/nexus/3/" "nexus-3.0.0-03-unix.tar.gz"
+download "https://sonatype-download.global.ssl.fastly.net/nexus/oss/" "nexus-2.13.0-01-bundle.zip"
 download "http://download.oracle.com/otn-pub/java/jdk/8u92-b14/" "jdk-8u92-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"
 download "https://dl.google.com/linux/direct/" "google-chrome-stable_current_x86_64.rpm"
 download "http://mirror.centos.org/centos/7/updates/x86_64/Packages/" "firefox-38.7.0-1.el7.centos.x86_64.rpm"
