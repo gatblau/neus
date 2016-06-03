@@ -29,19 +29,9 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <sp.sd.nexusartifactuploader.NexusArtifactUploader plugin="nexus-artifact-uploader@2.2">
-      <protocol>http</protocol>
-      <nexusUrl>{{nexus_ip_address}}:{{nexus_port}}/nexus</nexusUrl>
-      <nexusUser></nexusUser>
-      <nexusPassword></nexusPassword>
-      <groupId>net.atos.pamm</groupId>
-      <artifactId>svc</artifactId>
-      <version>0.0.1</version>
-      <packaging>jar</packaging>
-      <repository>snapshots</repository>
-      <file>svc/target/scala-2.11/svc-assembly-0.0.1-SNAPSHOT.jar</file>
-      <credentialsId>7136e5a0-871b-429f-816d-aafd4b4cb487</credentialsId>
-    </sp.sd.nexusartifactuploader.NexusArtifactUploader>
+    <hudson.tasks.Shell>
+      <command>curl -v -u admin:admin123 --upload-file svc/target/scala-2.11/svc-assembly-0.0.1-SNAPSHOT.jar http://{{nexus_ip_address}}:{{nexus_port}}/nexus/content/repositories/snapshots/net/atos/pamm/svc/0.0.1/svc-assembly-0.0.1-SNAPSHOT.jar</command>
+    </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.29">
