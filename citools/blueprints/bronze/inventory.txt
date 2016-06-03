@@ -37,6 +37,9 @@ nexus_port=8081
 gogs_port=3000
 sonar_port=9000
 
+pamm_app_port=8080
+pamm_test_port=8081
+selenium_port=4444
 
 [local]
 localhost
@@ -80,10 +83,8 @@ ci-dit
 [ci:vars]
 # PAMM / JAMM Seeds
 # Set to yes to include PAMM or JAMM seeds in CI Tools environment
-# Set play_dir to application deployment directory
 pamm=yes
 jamm=no
-app_dir=pamm-seed
 
 # flags the type of source control to use:
 #   - gogs: for local Go Git Repository

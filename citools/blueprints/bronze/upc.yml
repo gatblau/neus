@@ -72,9 +72,9 @@
     volumes:
       - /var/cache/yum/neus:/var/cache/yum:rw
   with_items:
-    - { name: "ci-a", image: "{{ci_a_base}}", ports: "{{jenkins_port}}, {{nexus_port}}, 4444"}
+    - { name: "ci-a", image: "{{ci_a_base}}", ports: "{{jenkins_port}}, {{nexus_port}}, {{selenium_port}}"}
     - { name: "ci-b", image: "{{ci_b_base}}", ports: "{{database_port}}, {{gogs_port}}, {{sonar_port}}"}
-    - { name: "ci-dit", image: "{{ci_dit_base}}", ports: "{{ansible_port}}"}
+    - { name: "ci-dit", image: "{{ci_dit_base}}", ports: "{{ansible_port}}, {{pamm_app_port}}, {{pamm_test_port}}"}
 
 # Obtain IP addresses of containers
 - name: Get ci-a IP address
