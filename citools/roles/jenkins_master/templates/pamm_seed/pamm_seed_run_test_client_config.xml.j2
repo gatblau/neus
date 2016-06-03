@@ -46,7 +46,10 @@
                   <noDefaultExcludes>false</noDefaultExcludes>
                   <makeEmptyDirs>false</makeEmptyDirs>
                   <patternSeparator>[, ]+</patternSeparator>
-                  <execCommand>kill $(ps aux | grep &apos;[t]estsetup-assembly&apos; | awk &apos;{print $2}&apos;) &gt; /dev/null 2&gt;&amp;1</execCommand>
+                  <execCommand>PID=ps aux | grep &apos;[t]estsetup-assembly&apos; | awk &apos;{print $2}&apos;
+if [[ &quot;&quot; !=  &quot;$PID&quot; ]]; then
+kill -9 $PID
+fi</execCommand>
                   <execTimeout>120000</execTimeout>
                   <usePty>false</usePty>
                 </jenkins.plugins.publish__over__ssh.BapSshTransfer>
@@ -82,10 +85,7 @@
                   <noDefaultExcludes>false</noDefaultExcludes>
                   <makeEmptyDirs>false</makeEmptyDirs>
                   <patternSeparator>[, ]+</patternSeparator>
-                  <execCommand>PID=ps aux | grep &apos;[t]estsetup-assembly&apos; | awk &apos;{print $2}&apos;
-if [[ &quot;&quot; !=  &quot;$PID&quot; ]]; then
-  kill -9 $PID
-fi</execCommand>
+                  <execCommand>java -jar -Dhttp.port=8081 -Ddb.default.password=&quot;n3us&quot; -Ddb.default.url=&quot;jdbc:mysql://{{database_ip_address}}:{{database_port}}/pamm?useUnicode=true&amp;characterEncoding=utf8&quot; testsetup-assembly-0.0.1-SNAPSHOT.jar &gt; testsetup.log &amp;</execCommand>
                   <execTimeout>120000</execTimeout>
                   <usePty>false</usePty>
                 </jenkins.plugins.publish__over__ssh.BapSshTransfer>
