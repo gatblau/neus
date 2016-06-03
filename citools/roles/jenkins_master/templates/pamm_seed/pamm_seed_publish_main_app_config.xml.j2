@@ -13,7 +13,7 @@
       </strategy>
     </jenkins.model.BuildDiscarderProperty>
     <se.diabol.jenkins.pipeline.PipelineProperty plugin="delivery-pipeline-plugin@0.9.11">
-      <taskName>run tests</taskName>
+      <taskName>publish main app</taskName>
       <stageName>integration</stageName>
     </se.diabol.jenkins.pipeline.PipelineProperty>
   </properties>
@@ -29,23 +29,21 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.tasks.Shell>
-      <command>node_modules/.bin/webdriver-manager start &amp;
-sleep 10
-node_modules/.bin/protractor --baseUrl=&quot;http://{{remote_ip_address}}:8080&quot; --params.testsetupurl=&quot;http://{{remote_ip_address}}:8081&quot; svc/test/webapp/e2e_test/feature/all-tests.conf.js</command>
-    </hudson.tasks.Shell>
+    <sp.sd.nexusartifactuploader.NexusArtifactUploader plugin="nexus-artifact-uploader@2.2">
+      <protocol>http</protocol>
+      <nexusUrl>{{nexus_ip_address}}:{{nexus_port}}/nexus</nexusUrl>
+      <nexusUser></nexusUser>
+      <nexusPassword></nexusPassword>
+      <groupId>net.atos.pamm</groupId>
+      <artifactId>svc</artifactId>
+      <version>0.0.1</version>
+      <packaging>jar</packaging>
+      <repository>snapshots</repository>
+      <file>svc/target/scala-2.11/svc-assembly-0.0.1-SNAPSHOT.jar</file>
+      <credentialsId>7136e5a0-871b-429f-816d-aafd4b4cb487</credentialsId>
+    </sp.sd.nexusartifactuploader.NexusArtifactUploader>
   </builders>
   <publishers>
-    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.30">
-      <configs>
-        <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
-          <configs class="empty-list"/>
-          <projects>pamm-seed-publish-main-app</projects>
-          <condition>UNSTABLE_OR_BETTER</condition>
-          <triggerWithNoParameters>true</triggerWithNoParameters>
-        </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
-      </configs>
-    </hudson.plugins.parameterizedtrigger.BuildTrigger>
     <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.29">
       <deleteDirs>false</deleteDirs>
       <skipWhenFailed>false</skipWhenFailed>
@@ -59,12 +57,5 @@ node_modules/.bin/protractor --baseUrl=&quot;http://{{remote_ip_address}}:8080&q
       <externalDelete></externalDelete>
     </hudson.plugins.ws__cleanup.WsCleanup>
   </publishers>
-  <buildWrappers>
-    <EnvInjectBuildWrapper plugin="envinject@1.92.1">
-      <info>
-        <propertiesContent>DISPLAY=:99</propertiesContent>
-        <loadFilesFromMaster>false</loadFilesFromMaster>
-      </info>
-    </EnvInjectBuildWrapper>
-  </buildWrappers>
+  <buildWrappers/>
 </project>

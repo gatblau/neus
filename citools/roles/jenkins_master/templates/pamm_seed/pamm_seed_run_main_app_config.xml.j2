@@ -12,7 +12,7 @@
         <artifactNumToKeep>-1</artifactNumToKeep>
       </strategy>
     </jenkins.model.BuildDiscarderProperty>
-    <se.diabol.jenkins.pipeline.PipelineProperty plugin="delivery-pipeline-plugin@0.9.9">
+    <se.diabol.jenkins.pipeline.PipelineProperty plugin="delivery-pipeline-plugin@0.9.11">
       <taskName>start main app</taskName>
       <stageName>deployment</stageName>
     </se.diabol.jenkins.pipeline.PipelineProperty>
@@ -46,8 +46,47 @@
                   <noDefaultExcludes>false</noDefaultExcludes>
                   <makeEmptyDirs>false</makeEmptyDirs>
                   <patternSeparator>[, ]+</patternSeparator>
-                  <execCommand>export PLAY_DIR=svc-0.0.1-SNAPSHOT
-java -cp &quot;$PLAY_DIR/lib/*&quot; -Ddb.default.username=pamm -Ddb.default.password=&quot;n3us&quot; -Ddb.default.url=&quot;jdbc:mysql://{{database_ip_address}}:3306/pamm?useUnicode=true&amp;characterEncoding=utf8&quot; -Dhttp.port=8080 play.core.server.ProdServerStart $PLAY_DIR &amp;&gt; main-app-server.log &amp;</execCommand>
+                  <execCommand>PID=ps aux | grep &apos;[s]vc-assembly&apos; | awk &apos;{print $2}&apos;
+if [[ &quot;&quot; !=  &quot;$PID&quot; ]]; then
+kill -9 $PID
+fi</execCommand>
+                  <execTimeout>120000</execTimeout>
+                  <usePty>false</usePty>
+                </jenkins.plugins.publish__over__ssh.BapSshTransfer>
+              </transfers>
+              <useWorkspaceInPromotion>false</useWorkspaceInPromotion>
+              <usePromotionTimestamp>false</usePromotionTimestamp>
+            </jenkins.plugins.publish__over__ssh.BapSshPublisher>
+          </publishers>
+          <continueOnError>false</continueOnError>
+          <failOnError>false</failOnError>
+          <alwaysPublishFromMaster>false</alwaysPublishFromMaster>
+          <hostConfigurationAccess class="jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin" reference="../.."/>
+        </delegate>
+      </delegate>
+    </jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin>
+    <jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin plugin="publish-over-ssh@1.14">
+      <delegate>
+        <consolePrefix>SSH: </consolePrefix>
+        <delegate>
+          <publishers>
+            <jenkins.plugins.publish__over__ssh.BapSshPublisher>
+              <configName>Development Integration Test</configName>
+              <verbose>false</verbose>
+              <transfers>
+                <jenkins.plugins.publish__over__ssh.BapSshTransfer>
+                  <remoteDirectory></remoteDirectory>
+                  <sourceFiles></sourceFiles>
+                  <excludes></excludes>
+                  <removePrefix></removePrefix>
+                  <remoteDirectorySDF>false</remoteDirectorySDF>
+                  <flatten>false</flatten>
+                  <cleanRemote>false</cleanRemote>
+                  <noDefaultExcludes>false</noDefaultExcludes>
+                  <makeEmptyDirs>false</makeEmptyDirs>
+                  <patternSeparator>[, ]+</patternSeparator>
+                  <execCommand>cd svc
+java -jar -Dhttp.port=8080 -Ddb.default.password=&quot;n3us&quot; -Ddb.default.url=&quot;jdbc:mysql://{{database_ip_address}}:{{database_port}}/pamm?useUnicode=true&amp;characterEncoding=utf8&quot; svc-assembly-0.0.1-SNAPSHOT.jar &gt; svc.log &amp;</execCommand>
                   <execTimeout>120000</execTimeout>
                   <usePty>false</usePty>
                 </jenkins.plugins.publish__over__ssh.BapSshTransfer>
@@ -70,7 +109,7 @@ java -cp &quot;$PLAY_DIR/lib/*&quot; -Ddb.default.username=pamm -Ddb.default.pas
         <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
           <configs class="empty-list"/>
           <projects>pamm-seed-run-test-client</projects>
-          <condition>SUCCESS</condition>
+          <condition>UNSTABLE_OR_BETTER</condition>
           <triggerWithNoParameters>true</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
       </configs>

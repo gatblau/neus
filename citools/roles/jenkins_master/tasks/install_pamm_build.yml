@@ -52,6 +52,9 @@
       path="{{jenkins_user_home}}/pamm.seed"
       state=absent
 
+  - name: Set Protractor timeout
+    command: 'sed -i "s/allScriptsTimeout: 11000,/allScriptsTimeout: 30000,/" /home/jenkins/node_modules/protractor/lib/configParser.js'
+
   - name: Copy Jenkins configuration file
     template:
       src=pamm_seed/jenkins_config.xml.j2
@@ -89,3 +92,10 @@
     vars:
       pamm_app_ip_address: "{{hostvars['localhost']['remote_ip_address']}}"
       test_client_ip_address: "{{hostvars['localhost']['remote_ip_address']}}"
+
+  - name: Configure PAMM seed publish main app Build job
+    template:
+      src=pamm_seed/pamm_seed_publish_main_app_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pamm-seed-publish-main-app/config.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
