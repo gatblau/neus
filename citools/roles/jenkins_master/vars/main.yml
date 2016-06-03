@@ -58,6 +58,7 @@
       'matrix-auth.hpi',
       'matrix-project.hpi',
       'momentjs.hpi',
+      'nexus-artifact-uploader.hpi',
       'openshift-deployer.hpi',
       'openshift-pipeline.hpi',
       'pam-auth.hpi',
