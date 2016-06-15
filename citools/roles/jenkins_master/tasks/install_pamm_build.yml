@@ -62,10 +62,10 @@
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
-  - name: Configure PAMM seed Clean Build job
+  - name: Configure PAMM seed Code Quality Build job
     template:
-      src=pamm_seed/pamm_seed_clean_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pamm-seed-clean/config.xml"
+      src=pamm_seed/pamm_seed_code_quality_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pamm-seed-code-quality/config.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 

@@ -13,7 +13,7 @@
       </strategy>
     </jenkins.model.BuildDiscarderProperty>
     <se.diabol.jenkins.pipeline.PipelineProperty plugin="delivery-pipeline-plugin@0.9.11">
-      <taskName>clean</taskName>
+      <taskName>quality</taskName>
       <stageName>build</stageName>
     </se.diabol.jenkins.pipeline.PipelineProperty>
   </properties>
@@ -38,27 +38,24 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-    <jdk>{{java_sdk_name}}</jdk>
-  <triggers>
-    <com.cloudbees.jenkins.GitHubPushTrigger plugin="github@1.19.1">
-      <spec></spec>
-    </com.cloudbees.jenkins.GitHubPushTrigger>
-  </triggers>
+  <jdk>(System)</jdk>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command># Create link to node_modules for Karma tests
+    <command># Create link to node_modules for Karma tests
 if [[ ! -e node_modules ]]; then
-    ln -s ~/node_modules node_modules
+  ln -s ~/node_modules node_modules
 fi</command>
     </hudson.tasks.Shell>
-    <org.jvnet.hudson.plugins.SbtPluginBuilder plugin="sbt@1.5">
-      <name>SBT</name>
-      <jvmFlags></jvmFlags>
-      <sbtFlags>-Dsbt.log.noformat=true</sbtFlags>
-      <actions>clean</actions>
-      <subdirPath></subdirPath>
-    </org.jvnet.hudson.plugins.SbtPluginBuilder>
+    <hudson.plugins.sonar.SonarRunnerBuilder plugin="sonar@2.4.3">
+      <project></project>
+      <properties></properties>
+      <javaOpts></javaOpts>
+      <additionalArguments>-Dsonar.projectKey=pamm -Dsonar.projectName=PAMM -Dsonar.projectVersion=1.0 -Dsonar.sources=${WORKSPACE}/svc/app</additionalArguments>
+      <jdk>(Inherit From Job)</jdk>
+      <task></task>
+    </hudson.plugins.sonar.SonarRunnerBuilder>
   </builders>
   <publishers>
     <hudson.plugins.cloneworkspace.CloneWorkspacePublisher plugin="clone-workspace-scm@0.6">
@@ -71,7 +68,7 @@ fi</command>
       <configs>
         <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
           <configs class="empty-list"/>
-          <projects>pamm-seed-build</projects>
+          <projects>pamm-seed-package-main-app</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>true</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
@@ -90,11 +87,5 @@ fi</command>
       <externalDelete></externalDelete>
     </hudson.plugins.ws__cleanup.WsCleanup>
   </publishers>
-  <buildWrappers>
-    <hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.29">
-      <deleteDirs>false</deleteDirs>
-      <cleanupParameter></cleanupParameter>
-      <externalDelete></externalDelete>
-    </hudson.plugins.ws__cleanup.PreBuildCleanup>
-  </buildWrappers>
+  <buildWrappers/>
 </project>
