@@ -28,6 +28,15 @@ export PATH=$PATH:$JAVA_HOME/bin
 
 "
 
+  - name: Disable requiretty for jenkins user
+    blockinfile:
+      dest: "/etc/sudoers"
+      insertafter: "Defaults    requiretty"
+      marker: "# {mark} Disable Jenkins Require TTY"
+      block:  "Defaults:jenkins !requiretty
+
+"
+
   - name: Generate ssh keys for jenkins user
     include: generate_ssh_keys.yml
     when: blueprint != "silicon"
