@@ -41,6 +41,9 @@ pamm_app_port=8080
 pamm_test_port=8081
 selenium_port=4444
 
+proxy_ip_address=
+proxy_port=
+
 [local]
 localhost
 
