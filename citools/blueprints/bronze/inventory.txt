@@ -53,7 +53,7 @@ localhost
 tgt_platform=docker
 
 # For vm target platform:
-Enter IP addresses, for Ansible script provisioning:
+# Enter IP addresses, for Ansible script provisioning:
 ci_a_ip=192.168.110.160
 ci_b_ip=192.168.110.161
 ci_dit_ip=192.168.110.167
