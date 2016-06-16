@@ -31,8 +31,8 @@
   <builders>
     <hudson.tasks.Shell>
       <command>node_modules/.bin/webdriver-manager start &amp;
-sleep 10
-node_modules/.bin/protractor --baseUrl=&quot;http://{{remote_ip_address}}:8080&quot; --params.testsetupurl=&quot;http://{{remote_ip_address}}:8081&quot; svc/test/webapp/e2e_test/feature/all-tests.conf.js</command>
+while netstat -lnt | awk '$4 ~ /:'{{selenium_port}}'$/ {exit 1}'; do sleep 5; done
+node_modules/.bin/protractor --baseUrl=&quot;http://{{pamm_app_ip_address}}:8080&quot; --params.testsetupurl=&quot;http://{{testsetup_ip_address}}:8081&quot; svc/test/webapp/e2e_test/feature/all-tests.conf.js</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
