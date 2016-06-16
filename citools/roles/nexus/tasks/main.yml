@@ -1,4 +1,10 @@
 ---
+### Open Port for Nexus
+  - include: "plays/open_port.yml"
+    vars:
+      - port_number: "{{nexus_port}}"
+    when: connection == "ssh"
+
   - name: Check Nexus installed
     stat: path="/usr/local/nexus"
     register: nexus_exists

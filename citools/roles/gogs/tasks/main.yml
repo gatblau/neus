@@ -1,6 +1,11 @@
 ---
 # This play installs GOGS - source code repository tool
 #
+### Open Port for GOGS
+  - include: "plays/open_port.yml"
+    vars:
+      - port_number: "{{gogs_port}}"
+    when: connection == "ssh"
 
 ### Install Git (GOGS)
   # Check if GIT has been installed

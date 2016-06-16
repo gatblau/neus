@@ -1,4 +1,10 @@
 ---
+### Open Port for Sonar
+  - include: "plays/open_port.yml"
+    vars:
+      - port_number: "{{sonar_port}}"
+    when: connection == "ssh"
+
 ### Install SonarQube
   - name: Check Sonar installed
     stat: path=/opt/sonar
