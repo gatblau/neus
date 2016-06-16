@@ -29,6 +29,8 @@ local
 pamm
 
 [global:vars]
+application_port=8080
+testsetup_port=8081
 database_port=3306
 
 
