@@ -64,6 +64,8 @@ ci_dit_ip=192.168.110.167
 ci_a_dns_name={{ci_a_ip}}
 ci_b_dns_name={{ci_b_ip}}
 ci_dit_dns_name={{ci_dit_ip}}
+# Enter DNS name wildcard for Jenkins to access without using proxy
+no_proxy_host=
 
 
 #
