@@ -33,4 +33,11 @@ fi
 source ./fetch.sh
 
 # starts the deployment using the specified inventory
-ansible-playbook -vvvv -i blueprints/$1/inventory.txt blueprints/$1/playbook.yml
+startTime=$(date -u +"%s")
+
+ansible-playbook -i blueprints/$1/inventory.txt blueprints/$1/playbook.yml
+
+endTime=$(date -u +"%s")
+diff=$(($endTime-$startTime))
+
+echo $os "PAMM build process complete: it took $(($diff / 60)) minutes and $(($diff % 60)) seconds."
