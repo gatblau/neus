@@ -91,7 +91,8 @@
       group="{{jenkins_group}}"
     vars:
       pamm_app_ip_address: "{{hostvars['localhost']['remote_ip_address']}}"
-      test_client_ip_address: "{{hostvars['localhost']['remote_ip_address']}}"
+      testsetup_ip_address: "{{hostvars['localhost']['remote_ip_address']}}"
+      selenium_port: "{{hostvars['localhost']['selenium_port']}}"
 
   - name: Configure PAMM seed publish main app Build job
     template:
