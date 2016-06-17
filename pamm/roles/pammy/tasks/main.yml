@@ -1,0 +1,8 @@
+---
+- name: Open ports
+  include: plays/open_port.yml
+  vars:
+    - port_number: "{{item.port}}"
+  with_items:
+    - { port: "{{application_port}}" }
+    - { port: "{{testsetup_port}}" }

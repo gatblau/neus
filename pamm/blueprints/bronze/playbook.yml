@@ -33,5 +33,5 @@
   roles:
     - jvm
     - mariadb
-
+    - pammy
 
