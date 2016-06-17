@@ -49,6 +49,3 @@
       mode=0755
     when: blueprint == "silicon"
 
-  - name: Start Nexus console
-    command: "./entrypoint.sh"
-    when: blueprint == "silicon"
