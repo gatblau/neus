@@ -26,10 +26,6 @@
 - set_fact:
     pamm_base="gatblau.org/centos:7ds"
 
-- name: Build Docker image with sudo and ssh
-  become: yes
-  command: docker build --rm -t gatblau.org/centos:7s ../lib/images/centos7s
-
 - name: Build Docker image with sudo, ssh and systemd
   become: yes
   command: docker build --rm -t gatblau.org/centos:7ds ../lib/images/centos7ds
