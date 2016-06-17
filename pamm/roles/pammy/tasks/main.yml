@@ -6,3 +6,5 @@
   with_items:
     - { port: "{{application_port}}" }
     - { port: "{{testsetup_port}}" }
+  when: connection == "ssh"
+
