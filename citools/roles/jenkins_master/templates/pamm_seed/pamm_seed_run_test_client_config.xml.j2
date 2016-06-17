@@ -85,7 +85,8 @@ fi</execCommand>
                   <noDefaultExcludes>false</noDefaultExcludes>
                   <makeEmptyDirs>false</makeEmptyDirs>
                   <patternSeparator>[, ]+</patternSeparator>
-                  <execCommand>java -jar -Dhttp.port=8081 -Ddb.default.password=&quot;n3us&quot; -Ddb.default.url=&quot;jdbc:mysql://{{database_ip_address}}:{{database_port}}/pamm?useUnicode=true&amp;characterEncoding=utf8&quot; testsetup-assembly-0.0.1-SNAPSHOT.jar &gt; testsetup.log &amp;</execCommand>
+                  <execCommand>cd testsetup
+java -jar -Dhttp.port=8081 -Ddb.default.password=&quot;n3us&quot; -Ddb.default.url=&quot;jdbc:mysql://{{database_ip_address}}:{{database_port}}/pamm?useUnicode=true&amp;characterEncoding=utf8&quot; testsetup-assembly-0.0.1-SNAPSHOT.jar &gt; testsetup.log &amp;</execCommand>
                   <execTimeout>120000</execTimeout>
                   <usePty>false</usePty>
                 </jenkins.plugins.publish__over__ssh.BapSshTransfer>
