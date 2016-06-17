@@ -99,6 +99,13 @@
     state=absent
     login_password={{ db_root_pwd }}
 
+- name: Creating the pamm database
+  mysql_db:
+    name=pamm
+    state=present
+    login_user={{db_user}}
+    login_password={{db_pwd}}
+
 - name: Clean up for Docker image
   file:
     name="/var/lib/mysql/{{item.filename}}"
