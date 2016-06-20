@@ -100,3 +100,23 @@
       dest="{{jenkins_home}}/jobs/pamm-seed-publish-main-app/config.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
+
+  - name: Configure PAMM seed package main app Build job
+    template:
+      src=pamm_seed/pamm_seed_package_main_app_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pamm-seed-package-main-app/config.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+    vars:
+      proxy_ip_address: "{{hostvars['localhost']['proxy_ip_address']}}"
+      proxy_port: "{{hostvars['localhost']['proxy_port']}}"
+
+  - name: Configure PAMM seed package test client Build job
+    template:
+      src=pamm_seed/pamm_seed_package_test_client_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pamm-seed-package-test-client/config.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+    vars:
+      proxy_ip_address: "{{hostvars['localhost']['proxy_ip_address']}}"
+      proxy_port: "{{hostvars['localhost']['proxy_port']}}"
