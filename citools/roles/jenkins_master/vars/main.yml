@@ -76,6 +76,7 @@
       'sonar.hpi',
       'ssh-credentials.hpi',
       'ssh-slaves.hpi',
+      'structs.hpi',
       'swarm.hpi',
       'teamconcert.hpi',
       'token-macro.hpi',
