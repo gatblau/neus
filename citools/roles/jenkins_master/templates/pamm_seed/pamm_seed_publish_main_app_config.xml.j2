@@ -30,7 +30,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>curl -v -u admin:admin123 --upload-file svc/target/scala-2.11/svc-assembly-0.0.1-SNAPSHOT.jar http://{{nexus_ip_address}}:{{nexus_port}}/nexus/content/repositories/snapshots/net/atos/pamm/svc/0.0.1/svc-assembly-0.0.1-SNAPSHOT.jar</command>
+      <command>curl -v -u deployment:deployment123 --upload-file svc/target/scala-2.11/svc-assembly-0.0.1-SNAPSHOT.jar http://{{nexus_ip_address}}:{{nexus_port}}/nexus/content/repositories/snapshots/net/atos/pamm/svc/0.0.1/svc-assembly-0.0.1-SNAPSHOT.jar</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
