@@ -4,12 +4,11 @@
 # Use for emulating Virtual machines running CentOS 7 or RHEL 7 for testing playbooks.
 #
 # Additional packages:
+#   sudo
+#   ssh
+#   net-tools
 #
-# NetworkManager - required for systemctl
-# pam.i686 - required for GOGS
-# glibc.i386 - required for GOGS
-#
-FROM gatblau.org/centos:7s
+FROM centos:7
 MAINTAINER "gatblau" <admin@gatblau.org>
 ENV container docker
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
@@ -21,7 +20,10 @@ rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
 rm -f /lib/systemd/system/basic.target.wants/*; \
 rm -f /lib/systemd/system/anaconda.target.wants/*;
 RUN yum update -y; \
+    yum install -y openssh-server; \
+    yum install -y sudo ; \
     yum install -y initscripts ; \
+    yum install -y net-tools ; \
     yum clean all
 VOLUME [ "/sys/fs/cgroup" ]
 CMD ["/usr/sbin/init"]
