@@ -8,6 +8,7 @@
       gogs_db_address="{{database_ip_address}}"
       gogs_ip_address="{{ci_b_dns_name}}"
       jenkins_ip_address="{{ci_a_dns_name}}"
+      jenkins_location="{{ci_a_ext_dns_name}}"
       nexus_ip_address="{{ci_a_dns_name}}"
       sonar_ip_address="{{ci_b_dns_name}}"
       remote_ip_address="{{ci_dit_dns_name}}"

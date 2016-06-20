@@ -136,6 +136,7 @@
       gogs_db_address="{{database_ip_address}}"
       gogs_ip_address="{{ec2.instances[1].public_dns_name}}"
       jenkins_ip_address="{{ec2.instances[0].public_dns_name}}"
+      jenkins_location="{{ec2.instances[0].public_dns_name}}"
       nexus_ip_address="{{ec2.instances[0].public_dns_name}}"
       sonar_ip_address="{{ec2.instances[1].public_dns_name}}"
       remote_ip_address="{{ci_dit_public_dns_name}}"

@@ -53,7 +53,7 @@
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
     vars:
-      jenkins_ip_address: "{{hostvars['localhost']['jenkins_ip_address']}}"
+      jenkins_ip_address: "{{hostvars['localhost']['jenkins_location']}}"
 
   - name: Install PAMM seed build pipeline
     include: install_pamm_build.yml
