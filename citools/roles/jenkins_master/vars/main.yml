@@ -6,7 +6,7 @@
 
   # Jenkins folders
   jenkins_user_home: /home/jenkins
-  jenkins_home: "{{jenkins_user_home}}/.jenkins"
+  jenkins_home: "/var/lib/jenkins"
 
   # Jenkins username and password
   jenkins_user: jenkins
