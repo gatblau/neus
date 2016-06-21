@@ -55,5 +55,7 @@
 - name: Start Jenkins PAMM seed build
   hosts: localhost
   connection: local
-  roles:
-    - { role: start_pamm_build, when: pamm == 'yes' }
+  tasks:
+    - command: "curl -X POST http://jenkins:jenkins@{{jenkins_url}}/job/pamm-seed-code-quality/build?token=NEUS"
+      ignore_errors: yes
+      when: pamm == 'yes'
