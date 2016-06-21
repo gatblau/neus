@@ -51,3 +51,9 @@
     - connect
     - { role: jdk, when: connection == 'docker' }
     - { role: mariadb, db_user: 'pamm', db_pwd: 'n3us', when: connection == 'docker' }
+
+- name: Start Jenkins PAMM seed build
+  hosts: localhost
+  connection: local
+  roles:
+    - { role: start_pamm_build, when: pamm == 'yes' }

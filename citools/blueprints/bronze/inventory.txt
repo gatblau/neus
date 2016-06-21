@@ -44,6 +44,12 @@ selenium_port=4444
 proxy_ip_address=
 proxy_port=
 
+# PAMM / JAMM Seeds
+# Set to yes to include PAMM or JAMM seeds in CI Tools environment
+pamm=yes
+jamm=no
+
+
 [local]
 localhost
 
@@ -92,11 +98,6 @@ ci-b
 ci-dit
 
 [ci:vars]
-# PAMM / JAMM Seeds
-# Set to yes to include PAMM or JAMM seeds in CI Tools environment
-pamm=yes
-jamm=no
-
 # flags the type of source control to use:
 #   - gogs: for local Go Git Repository
 #   - rtc: for an external connection to Rational Team Concert

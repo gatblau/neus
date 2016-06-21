@@ -1,0 +1,3 @@
+---
+  - command: "curl -X POST http://jenkins:jenkins@{{jenkins_url}}/job/pamm-seed-code-quality/build?token=NEUS"
+    ignore_errors: yes
