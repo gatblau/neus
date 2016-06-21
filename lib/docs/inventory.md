@@ -6,7 +6,7 @@ For Neus, the inventory contains the following options:
 
 #### CI Tools
 
-Below is a list of options in the CI Tools inventory files.  Some of the options are only applicable to silver of gold blueprints.
+Below is a list of some of the options in the CI Tools inventory files.  Some of the options are only applicable to silver or gold blueprints.  Note: see the `inventory.txt` file for AWS EC2 options.
 
 | parameter | required | default | choices | comments |
 |--------|--------|--------|--------|--------|
@@ -16,13 +16,22 @@ Below is a list of options in the CI Tools inventory files.  Some of the options
 | nexus_port | yes | 8081 |  | Default port used by Nexus. |
 | gogs_port | yes | 3000 |  | Default port used by GOGS. |
 | sonar_port | yes | 9000 |  | Default port used by SonarQube. |
-| tgt_platform | yes | docker | <ul><li>docker</li><li>vm</li><li>ec2</li></ul> | docker: uses Docker containers to test the build scripts <br> vm: deploys to VMs, also use `-k` with `up.sh` to ask for password <br> ec2: deploys to Amazon Web Services (AWS) Elastic Cloud Compute (EC2) |
-| ci_a_ip | when tgt_platform is *vm* | | | Set to the IP address of the VM for ci-a |
-| ci_b_ip | when tgt_platform is *vm* | | | Set to the IP address of the VM for ci-b |
+| pamm_app_port | yes | 8080 |  | Default port used by the PAMM application on the integration test environment. |
+| pamm_test_port | yes | 8081 |  | Default port used by the PAMM test application on the integration test environment. |
+| selenium_port | yes | 4444 |  | Default port used by Selenium when running the PAMM tests. |
+| proxy_ip_address | no |   |  | If running behind a proxy set its IP address. |
+| proxy_port | no |   |  | If running behid a proxy set its port number. |
+| tgt_platform | yes | docker | <ul><li>docker</li><li>vm</li><li>ec2</li></ul> | docker: uses Docker containers to test the build scripts <br> vm: deploys to VMs, if a password is required, then set `ask_pass` to `True` in `ansible.cfg` <br> ec2: deploys to Amazon Web Services (AWS) Elastic Cloud Compute (EC2) |
+| ci_a_ip | when tgt_platform is *vm* | | | Set to the IP address of the VM for ci-a. |
+| ci_b_ip | when tgt_platform is *vm* | | | Set to the IP address of the VM for ci-b.  To use one VM for the CI tools environment, set to `{{ci_a_ip}}` . |
 | ci_dit_ip | when tgt_platform is *vm* | | | Set to the IP address of the VM for ci-dit |
 | ci_c_ip | when tgt_platform is *vm* | | | Only available in `silver` or `gold` blueprints; set to the IP address of the VM for ci-c |
 | ci_d_ip | when tgt_platform is *vm* | | | Only available in `gold` blueprint; set to the IP address of the VM for ci-d |
 | ci_e_ip | when tgt_platform is *vm* | | | Only available in `gold` blueprint; set to the IP address of the VM for ci-e |
+| ci_a_int_dns_name | when tgt_platform is *vm* | ci_a_ip | | If using internal DNS names, holds the ci-a DNS name. |
+| ci_b_int_dns_name | when tgt_platform is *vm* | ci_b_ip | | If using internal DNS names, holds the ci-b DNS name. |
+| ci_dit_int_dns_name | when tgt_platform is *vm* | ci_dit_ip | | If using internal DNS names, holds the ci-dit DNS name. |
+| ci_a_ext_dns_name | when tgt_platform is *vm* | ci_a_ip | | If using external DNS names, holds the ci-a DNS name. |
 | pamm | yes | no | <ul><li>yes</li><li>no</li></ul> | When set to `yes` the PAMM seed will be imported into GOGS and a build job will be created in Jenkins to build the PAMM seed. |
 | jamm | yes | no | <ul><li>yes</li><li>no</li></ul> | Not yet available. |
 | scm | | gogs | <ul><li>gogs</li><li>rtc</li></ul> | flags the type of source control to use:<ul><li>gogs: for local Go Git Repository</li><li>rtc: for an external connection to Rational Team Concert</li></ul> |
