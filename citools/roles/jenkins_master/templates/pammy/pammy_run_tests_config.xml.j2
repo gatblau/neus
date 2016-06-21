@@ -13,12 +13,12 @@
       </strategy>
     </jenkins.model.BuildDiscarderProperty>
     <se.diabol.jenkins.pipeline.PipelineProperty plugin="delivery-pipeline-plugin@0.9.11">
-      <taskName>package test client</taskName>
-      <stageName>build</stageName>
+      <taskName>run tests</taskName>
+      <stageName>integration</stageName>
     </se.diabol.jenkins.pipeline.PipelineProperty>
   </properties>
   <scm class="hudson.plugins.cloneworkspace.CloneWorkspaceSCM" plugin="clone-workspace-scm@0.6">
-    <parentJobName>pamm-seed-code-quality</parentJobName>
+    <parentJobName>pamm-seed-package-main-app</parentJobName>
     <criteria>Any</criteria>
   </scm>
   <canRoam>true</canRoam>
@@ -29,27 +29,19 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <org.jvnet.hudson.plugins.SbtPluginBuilder plugin="sbt@1.5">
-      <name>SBT</name>
-      <jvmFlags>-Dhttps.proxyHost={{proxy_ip_address}} -Dhttps.proxyPort={{proxy_port}}</jvmFlags>
-      <sbtFlags>-Dsbt.log.noformat=true</sbtFlags>
-      <actions>testsetup/assembly</actions>
-      <subdirPath></subdirPath>
-    </org.jvnet.hudson.plugins.SbtPluginBuilder>
+    <hudson.tasks.Shell>
+      <command>node_modules/.bin/webdriver-manager start &amp;
+while netstat -lnt | awk '$4 ~ /:'{{selenium_port}}'$/ {exit 1}'; do sleep 5; done
+node_modules/.bin/protractor --baseUrl=&quot;http://{{pamm_app_ip_address}}:8080&quot; --params.testsetupurl=&quot;http://{{testsetup_ip_address}}:8081&quot; svc/test/webapp/e2e_test/feature/all-tests.conf.js</command>
+    </hudson.tasks.Shell>
   </builders>
   <publishers>
-    <hudson.plugins.cloneworkspace.CloneWorkspacePublisher plugin="clone-workspace-scm@0.6">
-      <workspaceGlob></workspaceGlob>
-      <criteria>Any</criteria>
-      <archiveMethod>TAR</archiveMethod>
-      <overrideDefaultExcludes>false</overrideDefaultExcludes>
-    </hudson.plugins.cloneworkspace.CloneWorkspacePublisher>
     <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.30">
       <configs>
         <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
           <configs class="empty-list"/>
-          <projects>pamm-seed-deploy-main-app</projects>
-          <condition>SUCCESS</condition>
+          <projects>pammy-publish-application</projects>
+          <condition>UNSTABLE_OR_BETTER</condition>
           <triggerWithNoParameters>true</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
       </configs>
@@ -67,5 +59,12 @@
       <externalDelete></externalDelete>
     </hudson.plugins.ws__cleanup.WsCleanup>
   </publishers>
-  <buildWrappers/>
+  <buildWrappers>
+    <EnvInjectBuildWrapper plugin="envinject@1.92.1">
+      <info>
+        <propertiesContent>DISPLAY=:99</propertiesContent>
+        <loadFilesFromMaster>false</loadFilesFromMaster>
+      </info>
+    </EnvInjectBuildWrapper>
+  </buildWrappers>
 </project>

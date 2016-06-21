@@ -13,11 +13,11 @@
       </strategy>
     </jenkins.model.BuildDiscarderProperty>
     <se.diabol.jenkins.pipeline.PipelineProperty plugin="delivery-pipeline-plugin@0.9.11">
-      <taskName>quality</taskName>
+      <taskName>check code quality</taskName>
       <stageName>build</stageName>
     </se.diabol.jenkins.pipeline.PipelineProperty>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.4.4">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.5.0">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
@@ -43,7 +43,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-    <command># Create link to node_modules for Karma tests
+      <command># Create link to node_modules for Karma tests
 if [[ ! -e node_modules ]]; then
   ln -s ~/node_modules node_modules
 fi</command>
@@ -64,11 +64,11 @@ fi</command>
       <archiveMethod>TAR</archiveMethod>
       <overrideDefaultExcludes>false</overrideDefaultExcludes>
     </hudson.plugins.cloneworkspace.CloneWorkspacePublisher>
-    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.30">
+    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.31">
       <configs>
         <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
           <configs class="empty-list"/>
-          <projects>pamm-seed-package-main-app</projects>
+          <projects>pammy-compile-application</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>true</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>

@@ -10,19 +10,19 @@
 
   - name: Copying PAMM seed zip file to the host
     copy:
-      src=pamm_seed.zip
+      src=pammy.zip
       dest=/tmp
 
   - name: Unzipping PAMM seed zip file
     unarchive:
-      src=/tmp/pamm_seed.zip
+      src=/tmp/pammy.zip
       dest="{{jenkins_home}}"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
       copy=no
 
   - name: Removing PAMM seed zip file from the host
-    file: path=/tmp/pamm_seed.zip state=absent
+    file: path=/tmp/pammy.zip state=absent
 
   - name: Clone PAMM seed repository
     git:
@@ -57,36 +57,36 @@
 
   - name: Copy Jenkins configuration file
     template:
-      src=pamm_seed/jenkins_config.xml.j2
+      src=pammy/jenkins_config.xml.j2
       dest="{{jenkins_home}}/config.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
   - name: Configure PAMM seed Code Quality Build job
     template:
-      src=pamm_seed/pamm_seed_code_quality_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pamm-seed-code-quality/config.xml"
+      src=pammy/pammy_check_code_quality_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pammy-check-code-quality/config.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
   - name: Configure PAMM seed run main app Build job
     template:
-      src=pamm_seed/pamm_seed_run_main_app_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pamm-seed-run-main-app/config.xml"
+      src=pammy/pammy_start_application_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pammy-start-application/config.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
   - name: Configure PAMM seed run test client Build job
     template:
-      src=pamm_seed/pamm_seed_run_test_client_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pamm-seed-run-test-client/config.xml"
+      src=pammy/pammy_start_test_service_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pammy-start-test-service/config.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
   - name: Configure PAMM seed run tests Build job
     template:
-      src=pamm_seed/pamm_seed_run_tests_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pamm-seed-run-tests/config.xml"
+      src=pammy/pammy_run_tests_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pammy-run-tests/config.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
     vars:
@@ -96,15 +96,15 @@
 
   - name: Configure PAMM seed publish main app Build job
     template:
-      src=pamm_seed/pamm_seed_publish_main_app_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pamm-seed-publish-main-app/config.xml"
+      src=pammy/pammy_publish_application_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pammy-publish-application/config.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
   - name: Configure PAMM seed package main app Build job
     template:
-      src=pamm_seed/pamm_seed_package_main_app_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pamm-seed-package-main-app/config.xml"
+      src=pammy/pammy_compile_application_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pammy-compile-application/config.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
     vars:
@@ -113,8 +113,8 @@
 
   - name: Configure PAMM seed package test client Build job
     template:
-      src=pamm_seed/pamm_seed_package_test_client_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pamm-seed-package-test-client/config.xml"
+      src=pammy/pammy_compile_test_service_config.xml.j2
+      dest="{{jenkins_home}}/jobs/pammy-compile-test-service/config.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
     vars:

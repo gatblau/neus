@@ -13,8 +13,8 @@
       </strategy>
     </jenkins.model.BuildDiscarderProperty>
     <se.diabol.jenkins.pipeline.PipelineProperty plugin="delivery-pipeline-plugin@0.9.11">
-      <taskName>run test client</taskName>
-      <stageName>integration</stageName>
+      <taskName>start test service</taskName>
+      <stageName>deployment</stageName>
     </se.diabol.jenkins.pipeline.PipelineProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
@@ -104,11 +104,11 @@ java -jar -Dhttp.port=8081 -Ddb.default.password=&quot;n3us&quot; -Ddb.default.u
     </jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin>
   </builders>
   <publishers>
-    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.30">
+    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.31">
       <configs>
         <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
           <configs class="empty-list"/>
-          <projects>pamm-seed-run-tests</projects>
+          <projects>pammy-run-tests</projects>
           <condition>UNSTABLE_OR_BETTER</condition>
           <triggerWithNoParameters>true</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
