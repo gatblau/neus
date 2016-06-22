@@ -39,10 +39,17 @@
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
-  - name: Set up Jenkins to Sonar configuration
+  - name: Set up Jenkins to Sonar Publisher configuration
     template: 
       src=hudson.plugins.sonar.SonarPublisher.xml.j2
       dest="{{jenkins_home}}/hudson.plugins.sonar.SonarPublisher.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+
+  - name: Set up Jenkins to Sonar global configuration
+    template:
+      src=hudson.plugins.sonar.SonarGlobalConfiguration.xml.j2
+      dest="{{jenkins_home}}/hudson.plugins.sonar.SonarGlobalConfiguration.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
