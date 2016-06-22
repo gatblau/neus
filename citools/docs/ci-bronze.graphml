@@ -54,7 +54,7 @@
           <y:Geometry height="60.092592592592666" width="118.54166666666669" x="202.57108081172453" y="-566.4496527777778"/>
           <y:Fill color="#CCFFFF" transparent="false"/>
           <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="63.548828125" x="27.496419270833343" y="14.077546296296362">Database
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="63.548828125" x="27.49641927083337" y="14.077546296296305">Database
 (MariaDb)<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
@@ -71,7 +71,7 @@
           <y:Geometry height="52.71412037037041" width="118.54166666666669" x="202.57108081172453" y="-416.3570601851852"/>
           <y:Fill color="#CCFFFF" transparent="false"/>
           <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="92.93359375" x="12.804036458333343" y="10.388310185185219">Source Control
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="92.93359375" x="12.804036458333371" y="10.388310185185219">Source Control
 (GoGS)<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
@@ -290,7 +290,7 @@ Deployment Configuration<y:LabelModel>
           <y:Geometry height="37.78746918170731" width="31.44164985688144" x="417.9641571629654" y="-412.7874691817073"/>
           <y:Fill color="#CCCCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" modelName="custom" textColor="#000000" visible="true" width="4.0" x="13.72082492844072" y="41.787469181707365">
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" modelName="custom" textColor="#000000" visible="true" width="4.0" x="13.72082492844072" y="41.78746918170731">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
@@ -403,7 +403,6 @@ Developer<y:LabelModel>
       </data>
     </edge>
     <edge id="e6" source="n2" target="n1">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -413,21 +412,7 @@ Developer<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e7" source="n2" target="n14">
-      <data key="d9"/>
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="-59.3028516450579" sy="10.491106378363838" tx="59.292856852213546" ty="0.0">
-            <y:Point x="180.0" y="-525.9122501031177"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="standard" target="standard"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e8" source="n14" target="n11">
-      <data key="d9"/>
+    <edge id="e7" source="n14" target="n11">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -437,8 +422,7 @@ Developer<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e9" source="n12" target="n11">
-      <data key="d9"/>
+    <edge id="e8" source="n12" target="n11">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -448,8 +432,7 @@ Developer<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e10" source="n12" target="n15">
-      <data key="d9"/>
+    <edge id="e9" source="n12" target="n15">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="24.86547679274763" sy="-2.315606584599209" tx="-43.604508988164866" ty="-16.0">
@@ -461,7 +444,7 @@ Developer<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e11" source="n12" target="n3">
+    <edge id="e10" source="n12" target="n3">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="59.24828929274763" sy="17.68439341540079" tx="0.0" ty="0.0"/>
