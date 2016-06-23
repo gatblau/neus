@@ -11,6 +11,17 @@
       group="{{jenkins_group}}"
       state=present
 
+  - name: Check group local_ssh exists
+    shell: "/usr/bin/getent group | grep local_ssh | awk -F\":\" '{print $1}'"
+    register: group_exists
+
+  - name: Add user to local_ssh group (if available)
+    user:
+      name="{{jenkins_user}}"
+      groups="local_ssh"
+      append=yes
+    when: group_exists.stdout != ""
+
   - name: Create key folder
     file:
       path=/home/jenkins/.ssh
