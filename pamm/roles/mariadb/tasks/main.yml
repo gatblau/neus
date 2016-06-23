@@ -65,7 +65,7 @@
     name={{ db_user }}
     host={{ item }}
     password={{ db_pwd }}
-    priv=*.*:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP
+    priv=*.*:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER
     state=present
   with_items:
     - "localhost"
