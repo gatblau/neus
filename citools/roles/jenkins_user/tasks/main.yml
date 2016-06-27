@@ -1,6 +1,6 @@
 ---
   - name: Create jenkins group
-    user:
+    group:
       name="{{jenkins_group}}"
       state=present
 
