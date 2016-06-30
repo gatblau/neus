@@ -75,7 +75,6 @@ ci-mariadb
 # Set to yes to include PAMM or JAMM seeds in CI Tools environment
 pamm=yes
 jamm=no
-app_dir=pamm-seed
 
 # flags the type of source control to use:
 #   - gogs: for local Go Git Repository
