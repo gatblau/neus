@@ -79,7 +79,9 @@ ci_a_ext_dns_name={{ci_a_ip}}
 # These variables are for AWS EC2 hosts and only used if platform is set to ec2
 #
 # Size of instance to create (t2.micro is eligible for use in the free tier)
-instance_type=t2.micro
+ci_a_instance_type=t2.micro
+ci_b_instance_type=t2.micro
+#ci_b_instance_type=c3.large
 # The region in which to host the instance
 region=eu-west-1
 # Instance tag name
