@@ -60,12 +60,6 @@ builder_base=docker.io/centos:7
 #
 image_version=1.0.1
 
-ansible_port=22
-jenkins_port=8080
-database_port=3306
-nexus_port=8081
-gogs_port=3000
-sonar_port=9000
 
 [ci]
 ci-jenkins
@@ -90,9 +84,3 @@ scm=gogs
 # flags the type of blueprint for plays to decide how to configure accordingly.
 blueprint=silicon
 
-ansible_port=22
-jenkins_port=8080
-database_port=3306
-nexus_port=8081
-gogs_port=3000
-sonar_port=9000
