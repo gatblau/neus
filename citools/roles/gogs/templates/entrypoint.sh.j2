@@ -10,3 +10,15 @@ sed -i "s/\${DB_IP_ADDRESS}/${DB_IP_ADDRESS}/" /usr/local/gogs/custom/conf/app.i
 # Start GOGS
 cd /usr/local/gogs/
 ./gogs web
+
+
+# Clone PAMMY
+git clone http://github.com/gatblau/pamm.seed /home/{{gogs_user}}/gogs-repositories/pamm.seed
+chown -R gogs:gogs /home/{{gogs_user}}/gogs-repositories/pamm.seed
+
+git config --global push.default matching
+
+# Import cloned PAMM seed into GOGS
+cd /home/gogs/gogs-repositories/pamm.seed
+git remote set-url origin http://gogs:gogs@localhost:3000/gogs/pamm.seed.git
+git push -u origin master

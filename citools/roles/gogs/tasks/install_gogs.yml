@@ -104,7 +104,7 @@
 
   - name: Import PAMM seed repository
     include: install_pamm_seed.yml
-    when: pamm == "yes"
+    when: pamm == "yes"  and blueprint != "silicon"
 
   - name: Copy entrypoint script for GOGS Docker container
     template:
