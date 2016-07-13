@@ -45,6 +45,7 @@ Before building the toolset, update the inventory file as follows:
 
 1. Target platform: for testing, select docker
 2. If target platform is vm then update the IP Addresses
+3. If the target platform is AWS EC2 then update the CI DIT public DNS name.
 
 ### Building the Toolset
 
