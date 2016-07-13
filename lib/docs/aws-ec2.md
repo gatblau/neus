@@ -36,6 +36,20 @@ This guide assumes that the prerequisites below are carried out using a [Europa]
 | Shell Agent | Create a shell agent:</br>`ssh-agent bash`</br>` ssh-add ~/.ssh/ec2user.pem` |
 | Host Key Checking | To turn off host key checking for EC2 instances, edit/create the `~/.ssh/config` file and add the following lines:</p>`Host ec2-*.compute.amazonaws.com`</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`StrictHostKeyChecking no`</p> and set the file permissions to 0400. |
 
+#### Running the neus scripts
+
+| column | column |
+|--------|--------|
+| 1. Clone the neus code | `git clone http://github.com/gatblau/neus` |
+| 2. Edit the pamm inventory file | Edit the `pamm/inventory.txt` file and change `tgt_platform` to `ec2` |
+| 3. Copy the key pair | Copy the `ec2user.pem` file to the `neus/lib/keys` folder and ensure the file permissions are set to 0400 |
+| 4. Run the pamm script | In a terminal window `cd` to the `pamm` folder and enter: `up.sh bronze`</p>Note: got to the AWS EC2 instances page and not the public dns name of the `pamm-a` instance. |
+| 5. Edit the citools inventory file | Edit the `citools/inventory.txt` file and change:</br> `tgt_platform` to `ec2`</br> `ci_dit_public_dns_name` to the `pamm-a` public dns name</br> `ci_b_instance_type` to `c3.large` |
+| 6. Run the citools script | In a terminal window `cd` to the `citools` folder and enter: `up.sh bronze` |
+
+The scripts may take a few hours to complete.  Once they have finished, the tolls can be accessed by using the EC2 instance public dns name and port number:
+e.g. for Jenkins: `ec2-54-171-145-237.eu-west-1.compute.amazonaws.com:8080`
+
 
 ## Elastic Cloud Compute (EC2)
 
