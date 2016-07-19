@@ -63,6 +63,7 @@
     database_ip_address="${DB_IP_ADDRESS}"
     gogs_ip_address="${GOGS_IP_ADDRESS}"
     jenkins_ip_address="${JENKINS_IP_ADDRESS}"
+    jenkins_location="${JENKINS_IP_ADDRESS}"
     nexus_ip_address="${NEXUS_IP_ADDRESS}"
     sonar_ip_address="${SONAR_IP_ADDRESS}"
     remote_ip_address="${DIT_IP_ADDRESS}"
