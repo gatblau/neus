@@ -36,6 +36,19 @@
     - { container: 'ci-sonar', image: '{{sonar_base}}'}
     - { container: 'ci-builder', image: '{{builder_base}}'}
 
+- name: Delete any existing CI Tools Docker images
+  docker_image:
+    name: "{{item.name}}"
+    state: absent
+    force: yes
+  with_items:
+    - { name: 'silicon/ci-jenkins'}
+    - { name: 'silicon/ci-nexus'}
+    - { name: 'silicon/ci-mariadb'}
+    - { name: 'silicon/ci-gogs'}
+    - { name: 'silicon/ci-sonar'}
+    - { name: 'silicon/ci-pamm-builder'}
+
 - name: Start up the Docker containers
   docker:
     image: "{{item.image}}"
