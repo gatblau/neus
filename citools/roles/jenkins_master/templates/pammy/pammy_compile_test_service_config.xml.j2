@@ -31,7 +31,7 @@
   <builders>
     <org.jvnet.hudson.plugins.SbtPluginBuilder plugin="sbt@1.5">
       <name>SBT</name>
-      <jvmFlags>-Dhttps.proxyHost={{proxy_ip_address}} -Dhttps.proxyPort={{proxy_port}}</jvmFlags>
+      <jvmFlags>-Dhttps.proxyHost={{proxy_ip_address}} -Dhttps.proxyPort={{proxy_port}} -Dhttp.proxyHost={{proxy_ip_address}} -Dhttp.proxyPort={{proxy_port}}</jvmFlags>
       <sbtFlags>-Dsbt.log.noformat=true</sbtFlags>
       <actions>testsetup/assembly</actions>
       <subdirPath></subdirPath>
