@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+git config --global push.default matching
+
+# Clone PAMMY from GitHub
+git clone http://github.com/gatblau/pamm.seed /home/{{gogs_user}}/gogs-repositories/pamm.seed
+
+# Import PAMMY into GOGS
+cd /home/{{gogs_user}}/gogs-repositories/pamm.seed
+git remote set-url origin http://gogs:gogs@localhost:3000/gogs/pamm.seed.git
+git push -u origin master

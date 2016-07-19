@@ -106,6 +106,13 @@
     include: install_pamm_seed.yml
     when: pamm == "yes"  and blueprint != "silicon"
 
+  - name: Copy PAMMY import script
+    template:
+      src=clone_pammy.sh.j2
+      dest=/clone_pammy.sh
+      mode=0777
+    when: pamm == "yes"  and blueprint == "silicon"
+
   - name: Copy entrypoint script for GOGS Docker container
     template:
       src=entrypoint.sh.j2
