@@ -32,6 +32,7 @@ database_port=3306
 nexus_port=8081
 gogs_port=3000
 sonar_port=9000
+selenium_port=4444
 
 # Proxy settings for Jenkins
 proxy_ip_address=
