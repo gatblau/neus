@@ -10,4 +10,4 @@ The NEUS project is an environment automation library aimed at defining, standar
 
 ## Getting Started
 
-See the [Getting Started](lib/docs/getting_started.md) guide for details of how to build the Neus tools.
+See the [Getting Started](lib/docs/getting_started.md) guide for details of how to build and use the CI Tools environment.

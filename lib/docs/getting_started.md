@@ -54,3 +54,7 @@ Open a terminal and cd into the toolset directory.  To build the toolset, run `u
 e.g. `up.sh bronze`
 
 If the target platform is `vm` and ssh keys have not been set up, then edit `ansible.cfg` and and set `ask_pass` to `true` so that Ansible will prompt for a password.  Note: if there is more than one VM, then they must all have the same password.
+
+### CI Tools User Guide
+
+See the [user guide](user_guide.md) for details on pre-use checks and how to access and use the CI Tools environment.

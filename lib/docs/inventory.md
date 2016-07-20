@@ -20,7 +20,8 @@ Below is a list of some of the options in the CI Tools inventory files.  Some of
 | pamm_test_port | yes | 8081 |  | Default port used by the PAMM test application on the integration test environment. |
 | selenium_port | yes | 4444 |  | Default port used by Selenium when running the PAMM tests. |
 | proxy_ip_address | no |   |  | If running behind a proxy set its IP address. |
-| proxy_port | no |   |  | If running behid a proxy set its port number. |
+| proxy_port | no |   |  | If running behind a proxy set its port number. |
+| no_proxy_host | no |   |  | Host name patterns that should not go through the Jenkins proxy set up. |
 | tgt_platform | yes | docker | <ul><li>docker</li><li>vm</li><li>ec2</li></ul> | docker: uses Docker containers to test the build scripts <br> vm: deploys to VMs, if a password is required, then set `ask_pass` to `True` in `ansible.cfg` <br> ec2: deploys to Amazon Web Services (AWS) Elastic Cloud Compute (EC2) |
 | ci_a_ip | when tgt_platform is *vm* | | | Set to the IP address of the VM for ci-a. |
 | ci_b_ip | when tgt_platform is *vm* | | | Set to the IP address of the VM for ci-b.  To use one VM for the CI tools environment, set to `{{ci_a_ip}}` . |
