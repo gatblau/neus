@@ -59,7 +59,7 @@ builder_base=docker.io/centos:7
 #
 # Set the Docker image version
 #
-image_version=1.0.1
+image_version=latest
 
 
 [ci]

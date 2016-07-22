@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # This script runs the CI Tools Docker images for local testing
-export VERSION=1.0.1
+export VERSION=latest
 docker run -d -u 10000 --name mariadb -p 3306:3306 silicon/ci-mariadb:$VERSION
 docker run -d -u 10000 --name nexus -p 8081:8081 silicon/ci-nexus:$VERSION
 docker run -d -u 10000 --name gogs -p 3000:3000 -e DB_IP_ADDRESS=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' mariadb) silicon/ci-gogs:$VERSION
