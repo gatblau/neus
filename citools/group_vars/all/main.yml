@@ -1,7 +1,7 @@
 ---
   # JDK variables
-  java_sdk_name: "Java JDK 8u92-x64"
-  java_sdk_rpm: jdk-8u92-linux-x64.rpm
+  java_sdk_name: "Java JDK 8u102-x64"
+  java_sdk_rpm: jdk-8u102-linux-x64.rpm
 
   npm_rpm: npm-1.3.6-5.el7.noarch.rpm
 
