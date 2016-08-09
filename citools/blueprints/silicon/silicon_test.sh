@@ -7,8 +7,8 @@ docker run -d -u 10000 --name gogs -p 3000:3000 -e DB_IP_ADDRESS=$(docker inspec
 docker run -d -u 10000 --name sonar -p 9000:9000 -e DB_IP_ADDRESS=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' mariadb) silicon/ci-sonar:$VERSION
 docker run -d -u 10000 --name jenkins -p 8080:8080 -e NEXUS_IP_ADDRESS=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' nexus) -e GOGS_IP_ADDRESS=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' gogs) -e SONAR_IP_ADDRESS=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' sonar) silicon/ci-jenkins:$VERSION
 
-echo MariaDB container IP address: docker inspect --format '{{ .NetworkSettings.IPAddress }}' mariadb
-echo Nexus   container IP address: docker inspect --format '{{ .NetworkSettings.IPAddress }}' nexus
-echo GOGS    container IP address: docker inspect --format '{{ .NetworkSettings.IPAddress }}' gogs
-echo Sonar   container IP address: docker inspect --format '{{ .NetworkSettings.IPAddress }}' sonar
-echo Jenkins container IP address: docker inspect --format '{{ .NetworkSettings.IPAddress }}' jenkins
+echo MariaDB container IP address: $(docker inspect --format '{{ .NetworkSettings.IPAddress }}' mariadb)
+echo Nexus   container IP address: $(docker inspect --format '{{ .NetworkSettings.IPAddress }}' nexus)
+echo GOGS    container IP address: $(docker inspect --format '{{ .NetworkSettings.IPAddress }}' gogs)
+echo Sonar   container IP address: $(docker inspect --format '{{ .NetworkSettings.IPAddress }}' sonar)
+echo Jenkins container IP address: $(docker inspect --format '{{ .NetworkSettings.IPAddress }}' jenkins)
