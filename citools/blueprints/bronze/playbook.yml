@@ -40,7 +40,8 @@
   become: "{{become}}"
   roles:
     - mariadb
-    - gogs
+    - { role: gogs,       when: pamm == "no"  }
+    - { role: gogs_pammy, when: pamm == "yes" }
     - sonar
 
 - name: Provisioning host DIT Jenkins connection

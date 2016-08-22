@@ -1,0 +1,85 @@
+---
+# This role tailors the vanilla GOGS installation with PAMMY
+  - name: Copying GOGS repositories zip file to the host
+    copy:
+      src=gogs-repositories.zip
+      dest=/tmp
+
+  - name: Unzipping GOGS repositories
+    unarchive:
+      src=/tmp/gogs-repositories.zip
+      dest=/home/{{gogs_user}}/
+      owner="{{gogs_user}}"
+      group="{{gogs_group}}"
+      copy=no
+
+  - name: Removing GOGS repositories zip file from the host
+    file:
+      path=/tmp/gogs-repositories.zip
+      state=absent
+
+  - name: Copy build entrypoint script for GOGS Docker container
+    template:
+      src=build_entrypoint.sh.j2
+      dest=/entrypoint.sh
+      mode=0777
+      force=yes
+    vars:
+      DB_IP_ADDRESS: "{{hostvars['localhost']['database_container']}}"
+    when: pamm == "yes" and blueprint == "silicon"
+
+  - name: Copying GOGS custom configuration file
+    template:
+      src=app.ini.j2
+      dest="{{gogs_path}}/custom/conf/app.ini"
+      owner="{{gogs_user}}"
+      group="{{gogs_group}}"
+      mode=0755
+      force=yes
+    vars:
+      database_ip_address: "{{hostvars['localhost']['database_container']}}"
+    when: pamm == "yes" and blueprint == "silicon"
+
+  # TODO - start GOGS automatically and remove this manual workaround
+  - name: Start GOGS web console
+    pause:
+      prompt="Run 'docker exec -it ci-gogs bash' to connect to ci-gogs container then run 'sh /entrypoint.sh' to start GOGS"
+    when: pamm == "yes" and blueprint == "silicon"
+#    shell: "sh /build_entrypoint.sh"
+
+  - name: Import PAMM seed repository
+    include: install_pamm_seed.yml
+    when: pamm == "yes"
+
+  - name: Stop GOGS (silicon only)
+    command: "pkill gogs"
+    when: pamm == "yes" and blueprint == "silicon"
+
+  - name: Clean up container (silicon only)
+    file:
+      path: "{{item.file}}"
+      state: absent
+    when: pamm == "yes" and blueprint == "silicon"
+    with_items:
+      - { file: "{{gogs_path}}/logs/gogs.log" }
+      - { file: "{{gogs_path}}/logs/http.log" }
+      - { file: "{{gogs_path}}/logs/xorm.log" }
+
+  - name: Overwrite GOGS custom configuration file
+    template:
+      src=app.ini.j2
+      dest="{{gogs_path}}/custom/conf/app.ini"
+      owner="{{gogs_user}}"
+      group="{{gogs_group}}"
+      mode=0755
+      force=yes
+    when: pamm == "yes" and blueprint == "silicon"
+
+  - name: Overwrite container entrypoint script for GOGS Docker container
+    template:
+      src=container_entrypoint.sh.j2
+      dest=/entrypoint.sh
+      mode=0777
+      force=yes
+    when: pamm == "yes" and blueprint == "silicon"
+
