@@ -1,6 +1,6 @@
 ---
   - name: Create group for Nexus user
-    user:
+    group:
       name="{{nexus_group}}"
       state=present
 
