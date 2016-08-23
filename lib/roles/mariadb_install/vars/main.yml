@@ -1,0 +1,9 @@
+---
+# This play contains variables for the mariadb role
+  #db_user      : set in group_vars/all/main.yml
+  #db_pwd       : set in group_vars/all/main.yml
+
+  mariadb_user: mariadb
+  mariadb_password: $6$rounds=656000$D9KRZoam0U6pf5YB$hcSY8ILhucJ/u4I3oa/B/9GVX290ORueMw1D./TFlT.ldmKTo1KI6/LvB44DVvXYf5lx0tV/JzGYWAQGjCb64.
+  mariadb_repo: mariadb_10.repo
+
