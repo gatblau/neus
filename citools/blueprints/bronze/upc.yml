@@ -34,7 +34,9 @@
 
 - name: Restart Docker daemon to release network handles (privileged containers)
   become: yes
-  command: systemctl restart docker
+  service:
+    name=docker
+    state=restarted
 
 - name: Set Docker daemon permissions
   become: yes
