@@ -18,6 +18,12 @@
       path=/tmp/gogs-repositories.zip
       state=absent
 
+  - name: Starting the GOGS service
+    service:
+      name=gogs
+      state=started
+      enabled=yes
+
   - name: Copy build entrypoint script for GOGS Docker container
     template:
       src=build_entrypoint.sh.j2
@@ -26,7 +32,7 @@
       force=yes
     vars:
       DB_IP_ADDRESS: "{{hostvars['localhost']['database_container']}}"
-    when: pamm == "yes" and blueprint == "silicon"
+    when: blueprint == "silicon"
 
   - name: Copying GOGS custom configuration file
     template:
@@ -38,28 +44,27 @@
       force=yes
     vars:
       database_ip_address: "{{hostvars['localhost']['database_container']}}"
-    when: pamm == "yes" and blueprint == "silicon"
+    when: blueprint == "silicon"
 
   # TODO - start GOGS automatically and remove this manual workaround
   - name: Start GOGS web console
     pause:
       prompt="Run 'docker exec -it ci-gogs bash' to connect to ci-gogs container then run 'sh /entrypoint.sh' to start GOGS"
-    when: pamm == "yes" and blueprint == "silicon"
+    when: blueprint == "silicon"
 #    shell: "sh /build_entrypoint.sh"
 
   - name: Import PAMM seed repository
     include: install_pamm_seed.yml
-    when: pamm == "yes"
 
   - name: Stop GOGS (silicon only)
     command: "pkill gogs"
-    when: pamm == "yes" and blueprint == "silicon"
+    when: blueprint == "silicon"
 
   - name: Clean up container (silicon only)
     file:
       path: "{{item.file}}"
       state: absent
-    when: pamm == "yes" and blueprint == "silicon"
+    when: blueprint == "silicon"
     with_items:
       - { file: "{{gogs_path}}/logs/gogs.log" }
       - { file: "{{gogs_path}}/logs/http.log" }
@@ -73,7 +78,7 @@
       group="{{gogs_group}}"
       mode=0755
       force=yes
-    when: pamm == "yes" and blueprint == "silicon"
+    when: blueprint == "silicon"
 
   - name: Overwrite container entrypoint script for GOGS Docker container
     template:
@@ -81,5 +86,5 @@
       dest=/entrypoint.sh
       mode=0777
       force=yes
-    when: pamm == "yes" and blueprint == "silicon"
+    when: blueprint == "silicon"
 
