@@ -19,3 +19,8 @@
       state=import
       name=mysql
       target="/tmp/initialise.sql"
+
+  - name: Remove initialisation script
+    file:
+      path=/tmp/initialise.sql
+      state=absent
