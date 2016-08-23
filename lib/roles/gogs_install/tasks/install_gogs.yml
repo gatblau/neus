@@ -10,7 +10,7 @@
       state=latest
 
   - name: Create group for GOGS user
-    user:
+    group:
       name="{{gogs_group}}"
       state=present
 
@@ -76,10 +76,3 @@
       src=gogs.service
       dest=/etc/systemd/system/gogs.service
       mode=0755
-
-  - name: Starting the GOGS service
-    service:
-      name=gogs
-      state=started
-      enabled=yes
-    when: blueprint != "silicon"
