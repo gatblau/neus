@@ -1,0 +1,4 @@
+---
+  dependencies:
+    - { role: gogs_install }
+    - { role: gogs_pammy, when: pamm == "yes" }
