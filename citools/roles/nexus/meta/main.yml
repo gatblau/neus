@@ -1,4 +1,3 @@
 ---
   dependencies:
-    - { role: baseline }
-    - { role: jdk }
+    - { role: nexus_install }
