@@ -56,11 +56,11 @@
   - name: Import PAMM seed repository
     include: install_pamm_seed.yml
 
-  - name: Stop GOGS (silicon only)
+  - name: Stop GOGS (silicon blueprint)
     command: "pkill gogs"
     when: blueprint == "silicon"
 
-  - name: Clean up container (silicon only)
+  - name: Clean up container (silicon blueprint)
     file:
       path: "{{item.file}}"
       state: absent
@@ -70,7 +70,7 @@
       - { file: "{{gogs_path}}/logs/http.log" }
       - { file: "{{gogs_path}}/logs/xorm.log" }
 
-  - name: Overwrite GOGS custom configuration file
+  - name: Overwrite GOGS custom configuration file (silicon blueprint)
     template:
       src=app.ini.j2
       dest="{{gogs_path}}/custom/conf/app.ini"
@@ -80,7 +80,7 @@
       force=yes
     when: blueprint == "silicon"
 
-  - name: Overwrite container entrypoint script for GOGS Docker container
+  - name: Overwrite container entrypoint script for GOGS Docker container (silicon blueprint)
     template:
       src=container_entrypoint.sh.j2
       dest=/entrypoint.sh
