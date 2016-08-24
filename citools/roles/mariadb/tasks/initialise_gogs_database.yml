@@ -2,7 +2,7 @@
   # Set up GOGS database
   - name: Copy GOGS database initilisation script (without PAMM seed)
     copy:
-      src=smoke_test.sql
+      src=gogs_database.sql
       dest="/tmp/initialise.sql"
       mode=0755
     when: pamm == "no"
