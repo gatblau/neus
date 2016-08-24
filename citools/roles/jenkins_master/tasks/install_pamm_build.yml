@@ -62,26 +62,17 @@
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
 
-  - name: Configure PAMM seed Code Quality Build job
+  - name: Configure PAMM pipeline build jobs
     template:
-      src=pammy/pammy_check_code_quality_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pammy-check-code-quality/config.xml"
+      src="pammy/{{item.src}}"
+      dest="{{jenkins_home}}/jobs/{{item.dest}}"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
-
-  - name: Configure PAMM seed run main app Build job
-    template:
-      src=pammy/pammy_start_application_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pammy-start-application/config.xml"
-      owner="{{jenkins_user}}"
-      group="{{jenkins_group}}"
-
-  - name: Configure PAMM seed run test client Build job
-    template:
-      src=pammy/pammy_start_test_service_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pammy-start-test-service/config.xml"
-      owner="{{jenkins_user}}"
-      group="{{jenkins_group}}"
+    with_items:
+      - { src: "pammy_check_code_quality_config.xml.j2", dest: "pammy-check-code-quality/config.xml" }
+      - { src: "pammy_start_application_config.xml.j2", dest: "pammy-start-application/config.xml" }
+      - { src: "pammy_start_test_service_config.xml.j2", dest: "pammy-start-test-service/config.xml" }
+      - { src: "pammy_publish_application_config.xml.j2", dest: "pammy-publish-application/config.xml" }
 
   - name: Configure PAMM seed run tests Build job
     template:
@@ -94,29 +85,15 @@
       testsetup_ip_address: "{{hostvars['localhost']['remote_ip_address']}}"
       selenium_port: "{{hostvars['localhost']['selenium_port']}}"
 
-  - name: Configure PAMM seed publish main app Build job
+  - name: Configure PAMM pipeline build jobs - proxy settings
     template:
-      src=pammy/pammy_publish_application_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pammy-publish-application/config.xml"
-      owner="{{jenkins_user}}"
-      group="{{jenkins_group}}"
-
-  - name: Configure PAMM seed package main app Build job
-    template:
-      src=pammy/pammy_compile_application_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pammy-compile-application/config.xml"
+      src="pammy/{{item.src}}"
+      dest="{{jenkins_home}}/jobs/{{item.dest}}"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
     vars:
       proxy_ip_address: "{{hostvars['localhost']['proxy_ip_address']}}"
       proxy_port: "{{hostvars['localhost']['proxy_port']}}"
-
-  - name: Configure PAMM seed package test client Build job
-    template:
-      src=pammy/pammy_compile_test_service_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pammy-compile-test-service/config.xml"
-      owner="{{jenkins_user}}"
-      group="{{jenkins_group}}"
-    vars:
-      proxy_ip_address: "{{hostvars['localhost']['proxy_ip_address']}}"
-      proxy_port: "{{hostvars['localhost']['proxy_port']}}"
+    with_items:
+      - { src: "pammy_compile_application_config.xml.j2", dest: "pammy-compile-application/config.xml" }
+      - { src: "pammy_compile_test_service_config.xml.j2", dest: "pammy-compile-test-service/config.xml" }
