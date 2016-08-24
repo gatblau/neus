@@ -27,7 +27,7 @@
     become: "{{become}}"
     when: gogs_exists.stat.exists == false
 
-  - name: Create data folder
+  - name: Create data folder (silicon blueprint)
     file:
       name="{{gogs_path}}/data/application"
       state=directory
@@ -37,7 +37,7 @@
       group={{gogs_group}}
     when: blueprint == "silicon"
 
-  - name: Change GOGS home folder permissions
+  - name: Change GOGS home folder permissions (silicon blueprint)
     file:
       name="{{gogs_path}}"
       recurse="yes"
