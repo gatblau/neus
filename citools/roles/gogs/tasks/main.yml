@@ -4,3 +4,4 @@
       name=gogs
       state=started
       enabled=yes
+    when: pamm == "no"
