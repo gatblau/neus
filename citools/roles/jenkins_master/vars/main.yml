@@ -99,29 +99,3 @@
       'workflow-support.hpi',
       'ws-cleanup.hpi'
     ]
-
-### Build tools variables
-  git_perl_rpm: perl-Git-2.4.1-1.WANdisco.259.noarch.rpm
-  git_scm_rpm: git-2.4.1-1.WANdisco.259.x86_64.rpm
-  git_wandisco_rpm: wandisco-git-release-7-1.noarch.rpm
-
-  gradle_folder: gradle-2.7
-  gradle_zip: gradle-2.7-bin.zip
-
-  groovy_folder: groovy-2.4.4
-  groovy_zip: apache-groovy-binary-2.4.4.zip
-
-  maven_folder: apache-maven-3.3.9
-  maven_zip: apache-maven-3.3.9-bin.zip
-
-  nodejs_rpm: nodejs-0.10.42-4.el7.x86_64.rpm
-  # npm_rpm:    set in group_vars/all/main.yml
-
-  perl_rpm: perl-5.16.3-286.el7.x86_64.rpm
-
-  # sbt_folder: set in group_vars/all/main.yml
-  # sbt_zip:    set in group_vars/all/main.yml
-
-  sonar_runner_folder: sonar-runner-2.4
-  sonar_runner_zipfile: sonar-runner-dist-2.4.zip
-
