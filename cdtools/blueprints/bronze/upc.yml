@@ -31,17 +31,17 @@
     become: yes
     command: docker build --rm -t gatblau.org/centos:7ds ../lib/images/centos7ds
 
-#  - name: Restart Docker daemon to release network handles (privileged containers)
-#    become: yes
-#    service:
-#      name=docker
-#      state=restarted
-#
-#  - name: Set Docker daemon permissions
-#    become: yes
-#    file:
-#      path=/var/run/docker.sock
-#      mode=0666
+  - name: Restart Docker daemon to release network handles (privileged containers)
+    become: yes
+    service:
+      name=docker
+      state=restarted
+
+  - name: Set Docker daemon permissions
+    become: yes
+    file:
+      path=/var/run/docker.sock
+      mode=0666
 
   - name: Delete existing Docker containers
     become: yes
