@@ -1,0 +1,22 @@
+---
+  - name: Copy GOGS database initialisation script
+    copy:
+      src=gogs_database.sql
+      dest=/tmp/gogs_database.sql
+
+  - name: Create GOGS database
+    mysql_db:
+      state=import
+      name=mysql
+      target="/tmp/gogs_database.sql"
+
+  - name: Remove GOGS database initialisation script
+    file:
+      path=/tmp/gogs_database.sql
+      state=absent
+
+  - name: Starting the GOGS service
+    service:
+      name=gogs
+      state=started
+      enabled=yes

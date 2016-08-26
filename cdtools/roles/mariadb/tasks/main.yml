@@ -1,0 +1,41 @@
+---
+  - name: Starting the MariaDB Server
+    service:
+      name=mysql
+      state=started
+      enabled=yes
+    when: blueprint != "silicon"
+
+  - name: Copy entrypoint script for MariaDB Docker container
+    copy:
+      src=entrypoint.sh
+      dest=/entrypoint.sh
+      mode=0755
+    when: blueprint == "silicon"
+
+  - name: Start MariaDB
+    shell: "/entrypoint.sh &"
+    when: blueprint == "silicon"
+
+  - name: Creating a read and write user to access the server remotely
+    mysql_user:
+      name={{db_user}}
+      host="%"
+      password={{db_pwd}}
+      priv=*.*:ALL
+      state=present
+
+  - name: Creating a read and write user to access the server locally (via the loopback interface)
+    mysql_user:
+      name={{db_user}}
+      host="localhost"
+      password={{db_pwd}}
+      priv=*.*:ALL
+      state=present
+
+  - name: Deleting the Test Database
+    mysql_db:
+      name=test
+      state=absent
+
+

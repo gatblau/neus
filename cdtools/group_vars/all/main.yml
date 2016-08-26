@@ -1,0 +1,15 @@
+---
+  # JDK variables
+  java_sdk_name: "Java JDK 8u102-x64"
+  java_sdk_rpm: jdk-8u102-linux-x64.rpm
+
+  # Database variables
+  db_user      : admin
+  db_pwd       : Passw0rd!
+
+  # Variables are set by the localhost when the target platform is provisioned
+  become: "{{hostvars['localhost']['become']}}"
+  connection: "{{hostvars['localhost']['connection']}}"
+
+  # IP Addresses for the CD Tools
+  database_ip_address: "{{hostvars['localhost']['database_ip_address']}}"

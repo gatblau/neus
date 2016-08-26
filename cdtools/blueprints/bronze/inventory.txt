@@ -1,0 +1,62 @@
+#
+# Copyright (c) 2016 GATBLAU - www.gatblau.org
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Ansible inventory for the BRONZE level CI Tools blueprint
+#
+# NOTE:
+#   This blueprint is meant for deployment ONLY on Virtual Machines using the SSH connection plugin.
+#   For development purposes, Privileged Docker Containers are used to simulate virtual machine targets in a linux
+#   environment using the Docker connection plugin.
+#
+#   So that it is possible to use docker and ssh interchangeably, this inventory does not contain information
+#   on which roles are deployed to which hosts, only host and variable definitions.
+#   The mapping between roles and hosts is done in the main playbook file.
+#
+[global:children]
+local
+cd
+
+
+[global:vars]
+# port numbers
+ansible_port=22
+database_port=3306
+gogs_port=3000
+nexus_port=8081
+
+
+[local]
+localhost
+
+[local:vars]
+# Sets the target platform to deploy to, it can be one of the following:
+#   a) docker - for Docker containers - used to test the build scripts
+#   b) vm     - for actual VM: enter ip address below and when running up.sh will need to add -k to prompt for password
+#
+tgt_platform=docker
+
+# For vm target platform:
+# Enter IP addresses, for Ansible script provisioning:
+cd_a_ip=192.168.110.177
+
+
+[cd]
+cd-a
+
+[cd:vars]
+# Repository list - example for testing
+repository_list=['epel-release-7-8.noarch.rpm', 'wandisco-git-release-7-1.noarch.rpm']
+
+blueprint=bronze

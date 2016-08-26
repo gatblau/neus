@@ -1,0 +1,17 @@
+#
+#  For use when a VM has already been provisioned.
+#
+---
+  - set_fact:
+      database_ip_address="127.0.0.1"
+      gogs_db_address="{{database_ip_address}}"
+
+  # Add hosts and set variables
+  - name:  Setting up parameters for cd-a VM
+    add_host: groups=cd
+              hostname=cd-a
+              ansible_host="{{cd_a_ip}}"
+              ansible_user="root"
+              ansible_port=22
+              become="yes"
+              connection="ssh"
