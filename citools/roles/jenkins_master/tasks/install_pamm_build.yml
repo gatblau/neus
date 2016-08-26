@@ -70,6 +70,8 @@
       group="{{jenkins_group}}"
     with_items:
       - { src: "pammy_check_code_quality_config.xml.j2", dest: "pammy-check-code-quality/config.xml" }
+      - { src: "pammy_compile_application_config.xml.j2", dest: "pammy-compile-application/config.xml" }
+      - { src: "pammy_compile_test_service_config.xml.j2", dest: "pammy-compile-test-service/config.xml" }
       - { src: "pammy_start_application_config.xml.j2", dest: "pammy-start-application/config.xml" }
       - { src: "pammy_start_test_service_config.xml.j2", dest: "pammy-start-test-service/config.xml" }
       - { src: "pammy_publish_application_config.xml.j2", dest: "pammy-publish-application/config.xml" }
@@ -83,16 +85,3 @@
     vars:
       pamm_app_ip_address: "{{hostvars['localhost']['remote_ip_address']}}"
       testsetup_ip_address: "{{hostvars['localhost']['remote_ip_address']}}"
-
-  - name: Configure PAMM pipeline build jobs - proxy settings
-    template:
-      src="pammy/{{item.src}}"
-      dest="{{jenkins_home}}/jobs/{{item.dest}}"
-      owner="{{jenkins_user}}"
-      group="{{jenkins_group}}"
-    vars:
-      proxy_ip_address: "{{hostvars['localhost']['proxy_ip_address']}}"
-      proxy_port: "{{hostvars['localhost']['proxy_port']}}"
-    with_items:
-      - { src: "pammy_compile_application_config.xml.j2", dest: "pammy-compile-application/config.xml" }
-      - { src: "pammy_compile_test_service_config.xml.j2", dest: "pammy-compile-test-service/config.xml" }

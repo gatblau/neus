@@ -72,10 +72,6 @@
       dest="{{jenkins_home}}/proxy.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
-    vars:
-      proxy_ip_address: "{{hostvars['localhost']['proxy_ip_address']}}"
-      proxy_port: "{{hostvars['localhost']['proxy_port']}}"
-      no_proxy_host: "{{hostvars['localhost']['no_proxy_host']}}"
 
   - name: Jenkins service setup
     template:
