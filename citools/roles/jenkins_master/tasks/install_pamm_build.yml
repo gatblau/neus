@@ -83,7 +83,7 @@
     vars:
       pamm_app_ip_address: "{{hostvars['localhost']['remote_ip_address']}}"
       testsetup_ip_address: "{{hostvars['localhost']['remote_ip_address']}}"
-      selenium_port: "{{hostvars['localhost']['selenium_port']}}"
+      selenium_port: "{{selenium_port}}"
 
   - name: Configure PAMM pipeline build jobs - proxy settings
     template:
