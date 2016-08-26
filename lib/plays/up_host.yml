@@ -29,4 +29,5 @@
       when: tgt_platform == "vm"
 
     - include: "../upv_ec2.yml"
+      static: no
       when: tgt_platform == "ec2"
