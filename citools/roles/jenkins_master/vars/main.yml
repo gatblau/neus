@@ -2,7 +2,7 @@
 # This play contains variables for the jenkins role
 
   # Jenkins RPM
-  jenkins_rpm: jenkins-2.7-1.1.noarch.rpm
+  jenkins_rpm: jenkins-2.7.3-1.1.noarch.rpm
 
   # Jenkins folders
   jenkins_user_home: /home/jenkins
