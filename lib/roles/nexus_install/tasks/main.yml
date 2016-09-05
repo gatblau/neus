@@ -1,21 +1,31 @@
 ---
-### Open Port for Nexus
-  - include: "plays/open_port.yml"
+  - name: Create group for Nexus user
+    group:
+      name: "{{nexus_group}}"
+      state: present
+
+  - name: Create user for Nexus
+    user:
+      name: "{{nexus_user}}"
+      password: "{{nexus_password}}"
+      state: present
+
+  - name: Install Nexus OSS
+    include: "plays/install_tool.yml"
     vars:
-      - port_number: "{{nexus_port}}"
-    when: connection == "ssh"
+      tool_name : nexus
+      folder_name : "{{ nexus_folder }}"
+      zip_filename: "{{ nexus_zip }}"
+      add_version_to_folder : false
+      zip_has_folder : true
+      has_bin_folder : true
+      user: "{{nexus_user}}"
 
-  - name: Check Nexus installed
-    stat: path="/usr/local/nexus"
-    register: nexus_exists
-
-  - name: Install Nexus
-    include: install_nexus.yml
-    when: nexus_exists.stat.exists == false
-
-  - name: Change Nexus home folder permissions
+  - name: Set Nexus folder owner
     file:
-      name="/usr/local/nexus"
-      recurse="yes"
-      mode="0777"
-    when: blueprint == "silicon"
+      path: /usr/local/nexus
+      owner: "{{nexus_user}}"
+      group: "{{nexus_group}}"
+      state: directory
+      recurse: yes
+
