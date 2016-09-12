@@ -23,9 +23,11 @@
   connection: local
   tasks:
     - include: "../upc.yml"
+      static: no
       when: tgt_platform == "docker"
 
     - include: "../upv.yml"
+      static: no
       when: tgt_platform == "vm"
 
     - include: "../upv_ec2.yml"
