@@ -31,7 +31,14 @@
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
+    - baseline
+    - jdk
+    - jenkins_user
+    - jenkins_install
+    - { role: jenkins_browsers,    when: "blueprint != 'silicon'" }
+    - { role: jenkins_build_tools, when: "blueprint != 'silicon'" }
     - jenkins_master
+    - nexus_install
     - nexus
 
 - name: Provisioning host B Source Control, Source Review and Code Quality
@@ -39,9 +46,12 @@
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
+    - baseline
+    - jdk
     - mariadb
     - gogs_install
     - { role: gogs_import_pammy, when: pamm == "yes" }
+    - sonar_install
     - sonar
 
 - name: Provisioning host DIT Jenkins connection
