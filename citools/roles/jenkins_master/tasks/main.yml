@@ -7,7 +7,7 @@
 
 ### Install Jenkins
   - name: Check Jenkins installed
-    stat: path="{{jenkins_home}}"
+    stat: path="{{jenkins_home}}/plugins"
     register: jenkins_exists
 
   - include: install_jenkins.yml
