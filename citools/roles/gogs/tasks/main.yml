@@ -1,7 +1,0 @@
----
-  - name: Starting the GOGS service
-    service:
-      name=gogs
-      state=started
-      enabled=yes
-    when: pamm == "no"

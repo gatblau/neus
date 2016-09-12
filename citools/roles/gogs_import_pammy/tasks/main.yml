@@ -18,11 +18,11 @@
       path=/tmp/gogs-repositories.zip
       state=absent
 
-  - name: Starting the GOGS service
-    service:
-      name=gogs
-      state=started
-      enabled=yes
+#  - name: Starting the GOGS service
+#    service:
+#      name=gogs
+#      state=started
+#      enabled=yes
 
   - name: Copy build entrypoint script for GOGS Docker container
     template:
