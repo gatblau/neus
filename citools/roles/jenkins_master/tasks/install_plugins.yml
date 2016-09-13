@@ -8,9 +8,8 @@
 
   - name: Copying Jenkins plugins to the host
     copy:
-      src="cache/{{ item }}"
+      src="{{ item }}"
       dest="{{jenkins_home}}/plugins"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
-    with_items:
-      - "{{jenkins_plugins}}"
+    with_fileglob: ../cache/*.hpi
