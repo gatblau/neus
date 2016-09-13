@@ -35,8 +35,9 @@
     - jdk
     - jenkins_user
     - jenkins_install
-    - { role: jenkins_browsers,    when: "blueprint != 'silicon'" }
-    - { role: jenkins_build_tools, when: "blueprint != 'silicon'" }
+    - jenkins_browsers
+    - jenkins_user
+    - jenkins_build_tools
     - jenkins_master
     - nexus_install
     - nexus
