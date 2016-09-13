@@ -8,8 +8,8 @@
     when: pamm == "no"
 
   - name: Copy GOGS database initilisation script (with PAMM seed)
-    copy:
-      src=pamm_seed.sql
+    template:
+      src=pamm_seed.sql.j2
       dest="/tmp/initialise.sql"
       mode=0755
     when: pamm == "yes"

@@ -1,8 +1,8 @@
--- MySQL dump 10.15  Distrib 10.0.25-MariaDB, for Linux (x86_64)
+-- MySQL dump 10.15  Distrib 10.0.27-MariaDB, for Linux (x86_64)
 --
 -- Host: localhost    Database: gogs
 -- ------------------------------------------------------
--- Server version	10.0.25-MariaDB
+-- Server version	10.0.27-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -103,7 +103,7 @@ CREATE TABLE `action` (
   `created` datetime DEFAULT NULL,
   `created_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +112,7 @@ CREATE TABLE `action` (
 
 LOCK TABLES `action` WRITE;
 /*!40000 ALTER TABLE `action` DISABLE KEYS */;
-INSERT INTO `action` VALUES (1,1,1,1,'gogs','gogs@devops.net',1,'gogs','maven-repo','',0,'','2015-10-30 15:26:42',1446218802),(5,1,1,1,'gogs','gogs@devops.net',5,'gogs','builder-repo','',0,'',NULL,1463127650),(6,1,5,1,'gogs','gogs@devops.net',5,'gogs','builder-repo','master',0,'{\"Len\":1,\"Commits\":[{\"Sha1\":\"586a55b7e66099eb51965cee17ae3a7bb6966f12\",\"Message\":\"first commit\\n\",\"AuthorEmail\":\"gogs@devops.net\",\"AuthorName\":\"gogs\"}],\"CompareUrl\":\"\"}',NULL,1463127824),(10,1,1,1,'gogs','gogs@devops.net',8,'gogs','pamm.seed','',0,'',NULL,1463672963);
+INSERT INTO `action` VALUES (1,1,1,1,'gogs','gogs@devops.net',1,'gogs','maven-repo','',0,'','2015-10-30 15:26:42',1446218802),(5,1,1,1,'gogs','gogs@devops.net',5,'gogs','builder-repo','',0,'',NULL,1463127650),(6,1,5,1,'gogs','gogs@devops.net',5,'gogs','builder-repo','master',0,'{\"Len\":1,\"Commits\":[{\"Sha1\":\"586a55b7e66099eb51965cee17ae3a7bb6966f12\",\"Message\":\"first commit\\n\",\"AuthorEmail\":\"gogs@devops.net\",\"AuthorName\":\"gogs\"}],\"CompareUrl\":\"\"}',NULL,1463127824),(13,1,1,1,'gogs',NULL,9,'gogs','pamm.seed','',0,'',NULL,1473697247);
 /*!40000 ALTER TABLE `action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,6 +195,7 @@ CREATE TABLE `comment` (
   `created` datetime DEFAULT NULL,
   `commit_sha` varchar(40) DEFAULT NULL,
   `created_unix` bigint(20) DEFAULT NULL,
+  `updated_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_comment_issue_id` (`issue_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -319,7 +320,7 @@ CREATE TABLE `hook_task` (
   `response_content` text,
   PRIMARY KEY (`id`),
   KEY `IDX_hook_task_repo_id` (`repo_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -328,6 +329,7 @@ CREATE TABLE `hook_task` (
 
 LOCK TABLES `hook_task` WRITE;
 /*!40000 ALTER TABLE `hook_task` DISABLE KEYS */;
+INSERT INTO `hook_task` VALUES (1,8,1,'7ec0d771-40a1-4399-a199-faf6d1f408c5',1,'http://{{jenkins_ip_address}}:{{jenkins_port}}/gogs-webhook/?job=pammy-check-code-quality','{\n  \"secret\": \"\",\n  \"ref\": \"refs/heads/master\",\n  \"before\": \"c3f3cf65e811fd239c21bfa1d422f941982758c2\",\n  \"after\": \"c3f3cf65e811fd239c21bfa1d422f941982758c2\",\n  \"compare_url\": \"\",\n  \"commits\": [\n    {\n      \"id\": \"c3f3cf65e811fd239c21bfa1d422f941982758c2\",\n      \"message\": \"Updates the version of SBT to 0.13.11\\n\",\n      \"url\": \"http://localhost:3000/gogs/pamm.seed/commit/c3f3cf65e811fd239c21bfa1d422f941982758c2\",\n      \"author\": {\n        \"name\": \"gatblau\",\n        \"email\": \"Stella75\",\n        \"username\": \"\"\n      },\n      \"committer\": {\n        \"name\": \"gatblau\",\n        \"email\": \"Stella75\",\n        \"username\": \"\"\n      },\n      \"timestamp\": \"0001-01-01T00:00:00Z\"\n    }\n  ],\n  \"repository\": {\n    \"id\": 8,\n    \"owner\": {\n      \"id\": 1,\n      \"username\": \"gogs\",\n      \"full_name\": \"\",\n      \"email\": \"gogs@devops.net\",\n      \"avatar_url\": \"https://secure.gravatar.com/avatar/215bf0afb9698ccfbd896d10b5dd4875\"\n    },\n    \"name\": \"pamm.seed\",\n    \"full_name\": \"gogs/pamm.seed\",\n    \"description\": \"Play Angular Mongo MariaDB\",\n    \"private\": false,\n    \"fork\": false,\n    \"html_url\": \"http://localhost:3000/gogs/pamm.seed\",\n    \"ssh_url\": \"gogs@localhost:gogs/pamm.seed.git\",\n    \"clone_url\": \"http://localhost:3000/gogs/pamm.seed.git\",\n    \"website\": \"\",\n    \"stars_count\": 0,\n    \"forks_count\": 0,\n    \"watchers_count\": 1,\n    \"open_issues_count\": 0,\n    \"default_branch\": \"master\",\n    \"created_at\": \"2016-05-19T15:49:23Z\",\n    \"updated_at\": \"2016-09-12T14:03:06Z\"\n  },\n  \"pusher\": {\n    \"id\": 1,\n    \"username\": \"gogs\",\n    \"full_name\": \"\",\n    \"email\": \"gogs@devops.net\",\n    \"avatar_url\": \"https://secure.gravatar.com/avatar/215bf0afb9698ccfbd896d10b5dd4875\"\n  },\n  \"sender\": {\n    \"id\": 1,\n    \"username\": \"gogs\",\n    \"full_name\": \"\",\n    \"email\": \"gogs@devops.net\",\n    \"avatar_url\": \"https://secure.gravatar.com/avatar/215bf0afb9698ccfbd896d10b5dd4875\"\n  }\n}',1,'push',0,1,1473691875382742515,1,'{\"headers\":{\"Content-Type\":\"application/json\",\"X-Gogs-Delivery\":\"7ec0d771-40a1-4399-a199-faf6d1f408c5\",\"X-Gogs-Event\":\"push\"}}','{\"status\":200,\"headers\":{\"Content-Length\":\"70\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 12 Sep 2016 14:51:15 GMT\",\"Server\":\"Jetty(9.2.z-SNAPSHOT)\",\"X-Content-Type-Options\":\"nosniff\"},\"body\":\"{\\\"result\\\":\\\"OK\\\",\\\"message\\\":\\\"Job \'pammy-check-code-quality\' is executed\\\"}\"}'),(2,8,1,'d7227b5b-2529-47f3-bd3e-e0bfc8e97ab5',1,'http://{{jenkins_ip_address}}:{{jenkins_port}}/gogs-webhook/?job=pammy-check-code-quality','{\n  \"secret\": \"\",\n  \"ref\": \"refs/heads/master\",\n  \"before\": \"c3f3cf65e811fd239c21bfa1d422f941982758c2\",\n  \"after\": \"f41dab2f1a1a2f5035e391a7fe12ccc9e0cd28eb\",\n  \"compare_url\": \"http://localhost:3000/gogs/pamm.seed/compare/c3f3cf65e811fd239c21bfa1d422f941982758c2...f41dab2f1a1a2f5035e391a7fe12ccc9e0cd28eb\",\n  \"commits\": [\n    {\n      \"id\": \"f41dab2f1a1a2f5035e391a7fe12ccc9e0cd28eb\",\n      \"message\": \"Update \\\"PAMM Seed\\\" to \\\"PAMMY\\\".\\n\",\n      \"url\": \"http://localhost:3000/gogs/pamm.seed/commit/f41dab2f1a1a2f5035e391a7fe12ccc9e0cd28eb\",\n      \"author\": {\n        \"name\": \"iturner\",\n        \"email\": \"ian.2.turner@atos.net\",\n        \"username\": \"\"\n      },\n      \"committer\": {\n        \"name\": \"iturner\",\n        \"email\": \"ian.2.turner@atos.net\",\n        \"username\": \"\"\n      },\n      \"timestamp\": \"2016-09-12T15:21:47Z\"\n    }\n  ],\n  \"repository\": {\n    \"id\": 8,\n    \"owner\": {\n      \"id\": 1,\n      \"username\": \"gogs\",\n      \"full_name\": \"\",\n      \"email\": \"gogs@devops.net\",\n      \"avatar_url\": \"https://secure.gravatar.com/avatar/215bf0afb9698ccfbd896d10b5dd4875\"\n    },\n    \"name\": \"pamm.seed\",\n    \"full_name\": \"gogs/pamm.seed\",\n    \"description\": \"Play Angular Mongo MariaDB\",\n    \"private\": false,\n    \"fork\": false,\n    \"html_url\": \"http://localhost:3000/gogs/pamm.seed\",\n    \"ssh_url\": \"gogs@localhost:gogs/pamm.seed.git\",\n    \"clone_url\": \"http://localhost:3000/gogs/pamm.seed.git\",\n    \"website\": \"\",\n    \"stars_count\": 0,\n    \"forks_count\": 0,\n    \"watchers_count\": 1,\n    \"open_issues_count\": 0,\n    \"default_branch\": \"master\",\n    \"created_at\": \"2016-05-19T15:49:23Z\",\n    \"updated_at\": \"2016-09-12T14:03:06Z\"\n  },\n  \"pusher\": {\n    \"id\": 1,\n    \"username\": \"gogs\",\n    \"full_name\": \"\",\n    \"email\": \"gogs@devops.net\",\n    \"avatar_url\": \"https://secure.gravatar.com/avatar/215bf0afb9698ccfbd896d10b5dd4875\"\n  },\n  \"sender\": {\n    \"id\": 1,\n    \"username\": \"gogs\",\n    \"full_name\": \"\",\n    \"email\": \"gogs@devops.net\",\n    \"avatar_url\": \"https://secure.gravatar.com/avatar/215bf0afb9698ccfbd896d10b5dd4875\"\n  }\n}',1,'push',0,1,1473693718239242427,1,'{\"headers\":{\"Content-Type\":\"application/json\",\"X-Gogs-Delivery\":\"d7227b5b-2529-47f3-bd3e-e0bfc8e97ab5\",\"X-Gogs-Event\":\"push\"}}','{\"status\":200,\"headers\":{\"Content-Length\":\"70\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 12 Sep 2016 15:21:57 GMT\",\"Server\":\"Jetty(9.2.z-SNAPSHOT)\",\"X-Content-Type-Options\":\"nosniff\"},\"body\":\"{\\\"result\\\":\\\"OK\\\",\\\"message\\\":\\\"Job \'pammy-check-code-quality\' is executed\\\"}\"}');
 /*!40000 ALTER TABLE `hook_task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -358,6 +360,7 @@ CREATE TABLE `issue` (
   `created_unix` bigint(20) DEFAULT NULL,
   `updated_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `UQE_issue_REPO_INDEX` (`repo_id`,`index`),
   KEY `IDX_issue_repo_id` (`repo_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -538,6 +541,7 @@ CREATE TABLE `mirror` (
   `next_update` datetime DEFAULT NULL,
   `updated_unix` bigint(20) DEFAULT NULL,
   `next_update_unix` bigint(20) DEFAULT NULL,
+  `enable_prune` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -787,11 +791,12 @@ CREATE TABLE `repository` (
   `enable_pulls` tinyint(1) NOT NULL DEFAULT '1',
   `created_unix` bigint(20) DEFAULT NULL,
   `updated_unix` bigint(20) DEFAULT NULL,
+  `external_tracker_style` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UQE_repository_S` (`owner_id`,`lower_name`),
   KEY `IDX_repository_name` (`name`),
   KEY `IDX_repository_lower_name` (`lower_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -800,7 +805,7 @@ CREATE TABLE `repository` (
 
 LOCK TABLES `repository` WRITE;
 /*!40000 ALTER TABLE `repository` DISABLE KEYS */;
-INSERT INTO `repository` VALUES (1,1,'maven-repo','maven-repo','','','master',1,0,0,0,0,0,0,0,0,0,0,0,0,0,'2015-10-30 15:26:42','2015-10-30 15:26:42',1,NULL,NULL,1,NULL,NULL,1,1446218802,1446218802),(5,1,'builder-repo','builder-repo','Empty builder repository','','master',1,0,0,0,0,0,0,0,0,0,0,0,0,0,NULL,NULL,1,0,'',1,0,'',1,1463127650,1463127824),(8,1,'pamm.seed','pamm.seed','Play Angular Mongo MariaDB','','master',1,0,0,0,0,0,0,0,0,0,1,0,0,0,NULL,NULL,1,0,'',1,0,'',1,1463672963,1463672963);
+INSERT INTO `repository` VALUES (1,1,'maven-repo','maven-repo','','','master',1,0,0,0,0,0,0,0,0,0,0,0,0,0,'2015-10-30 15:26:42','2015-10-30 15:26:42',1,NULL,NULL,1,NULL,NULL,1,1446218802,1446218802,NULL),(5,1,'builder-repo','builder-repo','Empty builder repository','','master',1,0,0,0,0,0,0,0,0,0,0,0,0,0,NULL,NULL,1,0,'',1,0,'',1,1463127650,1463127824,NULL),(9,1,'pamm.seed','pamm.seed','','','master',1,0,0,0,0,0,0,0,0,0,1,0,0,0,NULL,NULL,1,0,'',1,0,'',1,1473697247,1473697248,'numeric');
 /*!40000 ALTER TABLE `repository` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -941,6 +946,31 @@ LOCK TABLES `update_task` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `upload`
+--
+
+DROP TABLE IF EXISTS `upload`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `upload` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(40) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UQE_upload_uuid` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `upload`
+--
+
+LOCK TABLES `upload` WRITE;
+/*!40000 ALTER TABLE `upload` DISABLE KEYS */;
+/*!40000 ALTER TABLE `upload` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -983,6 +1013,7 @@ CREATE TABLE `user` (
   `num_following` int(11) NOT NULL DEFAULT '0',
   `created_unix` bigint(20) DEFAULT NULL,
   `updated_unix` bigint(20) DEFAULT NULL,
+  `prohibit_login` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UQE_user_lower_name` (`lower_name`),
   UNIQUE KEY `UQE_user_name` (`name`)
@@ -995,7 +1026,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'gogs','gogs','','gogs@devops.net','ece2d30dde64b0ce933bf0fa47b809e3960e151f4d4da8b576d3c42f79dd9ddad8383505d754546fe8604d407a36822a3bc5',0,0,'',0,'','','MgQxgpFO3T','8nqtZmOG08','2015-10-30 15:26:09','2016-03-08 09:32:01',0,1,1,0,'215bf0afb9698ccfbd896d10b5dd4875','gogs@devops.net',0,0,0,0,3,'',0,0,-1,0,0,1446218769,1463672963);
+INSERT INTO `user` VALUES (1,'gogs','gogs','','gogs@devops.net','ece2d30dde64b0ce933bf0fa47b809e3960e151f4d4da8b576d3c42f79dd9ddad8383505d754546fe8604d407a36822a3bc5',0,0,'',0,'','','MgQxgpFO3T','8nqtZmOG08','2015-10-30 15:26:09','2016-03-08 09:32:01',0,1,1,0,'215bf0afb9698ccfbd896d10b5dd4875','gogs@devops.net',0,0,0,0,3,'',0,0,-1,0,0,1446218769,1473697247,0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1019,7 +1050,7 @@ CREATE TABLE `version` (
 
 LOCK TABLES `version` WRITE;
 /*!40000 ALTER TABLE `version` DISABLE KEYS */;
-INSERT INTO `version` VALUES (1,12);
+INSERT INTO `version` VALUES (1,14);
 /*!40000 ALTER TABLE `version` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1036,7 +1067,7 @@ CREATE TABLE `watch` (
   `repo_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UQE_watch_WATCH` (`user_id`,`repo_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1045,7 +1076,7 @@ CREATE TABLE `watch` (
 
 LOCK TABLES `watch` WRITE;
 /*!40000 ALTER TABLE `watch` DISABLE KEYS */;
-INSERT INTO `watch` VALUES (1,1,1),(5,1,5),(8,1,8);
+INSERT INTO `watch` VALUES (1,1,1),(5,1,5),(9,1,9);
 /*!40000 ALTER TABLE `watch` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1074,7 +1105,7 @@ CREATE TABLE `webhook` (
   `created_unix` bigint(20) DEFAULT NULL,
   `updated_unix` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1083,6 +1114,7 @@ CREATE TABLE `webhook` (
 
 LOCK TABLES `webhook` WRITE;
 /*!40000 ALTER TABLE `webhook` DISABLE KEYS */;
+INSERT INTO `webhook` VALUES (1,8,0,'http://{{jenkins_ip_address}}:{{jenkins_port}}/gogs-webhook/?job=pammy-check-code-quality',1,'','{\"push_only\":true,\"send_everything\":false,\"choose_events\":false,\"events\":{\"create\":false,\"push\":false,\"pull_request\":false}}',0,1,1,'',1,NULL,NULL,1473689589,1473693718),(2,9,0,'http://{{jenkins_ip_address}}:{{jenkins_port}}/gogs-webhook/?job=pammy-check-code-quality',1,'','{\"push_only\":true,\"send_everything\":false,\"choose_events\":false,\"events\":{\"create\":false,\"push\":false,\"pull_request\":false}}',0,1,1,'',0,NULL,NULL,1473697267,1473697267);
 /*!40000 ALTER TABLE `webhook` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1095,4 +1127,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-19 15:50:00
+-- Dump completed on 2016-09-12 16:22:03
