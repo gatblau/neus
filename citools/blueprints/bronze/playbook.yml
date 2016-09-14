@@ -36,7 +36,6 @@
     - jenkins_user
     - jenkins_install
     - jenkins_browsers
-    - jenkins_user
     - jenkins_build_tools
     - jenkins_master
     - nexus_install
