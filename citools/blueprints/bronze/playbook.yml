@@ -63,10 +63,3 @@
     - { role: jdk, when: connection == 'docker' }
     - { role: mariadb, db_user: 'pamm', db_pwd: 'n3us', when: connection == 'docker' }
 
-- name: Start Jenkins PAMM seed build
-  hosts: localhost
-  connection: local
-  tasks:
-    - command: "curl -X POST http://jenkins:jenkins@{{jenkins_url}}/job/pammy-check-code-quality/build?token=NEUS"
-      ignore_errors: yes
-      when: pamm == 'yes'
