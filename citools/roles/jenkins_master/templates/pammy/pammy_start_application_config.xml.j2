@@ -46,9 +46,9 @@
                   <noDefaultExcludes>false</noDefaultExcludes>
                   <makeEmptyDirs>false</makeEmptyDirs>
                   <patternSeparator>[, ]+</patternSeparator>
-                  <execCommand>PID=ps aux | grep &apos;[s]vc-assembly&apos; | awk &apos;{print $2}&apos;
+                  <execCommand>PID=$(ps aux | grep &apos;[s]vc-assembly&apos; | awk &apos;{print $2}&apos;)
 if [[ &quot;&quot; !=  &quot;$PID&quot; ]]; then
-kill -9 $PID
+  kill -9 $PID
 fi</execCommand>
                   <execTimeout>120000</execTimeout>
                   <usePty>false</usePty>
@@ -86,6 +86,7 @@ fi</execCommand>
                   <makeEmptyDirs>false</makeEmptyDirs>
                   <patternSeparator>[, ]+</patternSeparator>
                   <execCommand>cd svc
+rm -f RUNNING_PID
 java -jar -Dhttp.port=8080 -Ddb.default.password=&quot;n3us&quot; -Ddb.default.url=&quot;jdbc:mysql://{{database_ip_address}}:{{database_port}}/pamm?useUnicode=true&amp;characterEncoding=utf8&quot; svc-assembly-0.0.1-SNAPSHOT.jar &gt; svc.log &amp;</execCommand>
                   <execTimeout>120000</execTimeout>
                   <usePty>false</usePty>
