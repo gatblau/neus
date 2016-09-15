@@ -18,7 +18,7 @@
     shell: "cd /pamm.seed && npm run webdriver-update"
 
   - name: Build PAMM seed to download SBT dependencies
-    shell: "cd /pamm.seed && sbt clean compile svc/dist testsetup/dist -Dsbt.log.noformat=true"
+    shell: "cd /pamm.seed && sbt clean compile svc/assembly testsetup/assembly -Dsbt.log.noformat=true"
 
   - name: Remove PAMM seed
     file:
