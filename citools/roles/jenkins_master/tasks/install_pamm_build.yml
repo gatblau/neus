@@ -47,6 +47,18 @@
   - name: Update webdriver
     shell: "cd {{jenkins_user_home}}/pamm.seed && npm run webdriver-update"
 
+  - name: Check for local SBT cache
+    local_action: "stat path=cache/{{sbt_cache}}"
+    register: sbt_dependencies
+
+  - name: Build PAMM seed to create SBT cache
+    shell: 'su -c "cd {{jenkins_user_home}}/pamm.seed && /usr/local/sbt/default/bin/sbt svc/assembly testsetup/assembly -Dsbt.log.noformat=true" - jenkins'
+    when: sbt_dependencies.stat.exists == false
+
+  - name: Create local SBT cache
+    local_action: "shell docker cp ci-a:/home/jenkins/.ivy2 cache && cd cache && zip -r {{sbt_cache}} .ivy2 && rm -rf .ivy2"
+    when: sbt_dependencies.stat.exists == false and connection == "docker"
+
   - name: Remove PAMM seed repository
     file:
       path="{{jenkins_user_home}}/pamm.seed"

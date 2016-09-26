@@ -30,6 +30,7 @@
 
   # sbt_folder: set in group_vars/all/main.yml
   # sbt_zip:    set in group_vars/all/main.yml
+  # sbt_cache:  set in group_vars/all/main.yml
 
   sonar_runner_folder: sonar-runner-2.4
   sonar_runner_zipfile: sonar-runner-dist-2.4.zip

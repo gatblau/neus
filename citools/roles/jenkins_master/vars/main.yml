@@ -15,3 +15,5 @@
 
   # Remote host settings for "publish over ssh" plugin
   remote_host_name: Development Integration Test
+
+  # sbt_cache:  set in group_vars/all/main.yml
