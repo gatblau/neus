@@ -1,0 +1,6 @@
+---
+# Variables for all nodes.
+
+become:       yes
+connection:   ssh
+ansible_user: "root"

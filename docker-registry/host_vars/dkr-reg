@@ -1,0 +1,9 @@
+---
+# Variables for dkr-reg managed node
+
+ansible_port: 22
+ansible_host: 192.168.110.179
+
+registry_name:  registry
+registry_image: registry:2
+registry_port:  5000

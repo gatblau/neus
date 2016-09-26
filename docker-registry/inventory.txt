@@ -1,0 +1,5 @@
+[local]
+localhost
+
+[registry]
+dkr-reg

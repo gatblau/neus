@@ -1,0 +1,7 @@
+---
+  - name: Provisioning Docker Registry Server
+    hosts: dkr-reg
+    connection: "{{connection}}"
+    become: "{{become}}"
+    roles:
+      - docker_registry
