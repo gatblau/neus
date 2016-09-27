@@ -2,21 +2,21 @@
 # This role tailors the vanilla GOGS installation with PAMMY
   - name: Copying GOGS repositories zip file to the host
     copy:
-      src=gogs-repositories.zip
-      dest=/tmp
+      src: gogs-repositories.zip
+      dest: /tmp
 
   - name: Unzipping GOGS repositories
     unarchive:
-      src=/tmp/gogs-repositories.zip
-      dest=/home/{{gogs_user}}/
-      owner="{{gogs_user}}"
-      group="{{gogs_group}}"
-      copy=no
+      src: /tmp/gogs-repositories.zip
+      dest: /home/{{gogs_user}}/
+      owner: "{{gogs_user}}"
+      group: "{{gogs_group}}"
+      copy: no
 
   - name: Removing GOGS repositories zip file from the host
     file:
-      path=/tmp/gogs-repositories.zip
-      state=absent
+      path: /tmp/gogs-repositories.zip
+      state: absent
 
 #  - name: Starting the GOGS service
 #    service:
@@ -26,22 +26,22 @@
 
   - name: Copy build entrypoint script for GOGS Docker container
     template:
-      src=build_entrypoint.sh.j2
-      dest=/entrypoint.sh
-      mode=0777
-      force=yes
+      src: build_entrypoint.sh.j2
+      dest: /entrypoint.sh
+      mode: 0777
+      force: yes
     vars:
       DB_IP_ADDRESS: "{{hostvars['localhost']['database_container']}}"
     when: blueprint == "silicon"
 
   - name: Copying GOGS custom configuration file
     template:
-      src=app.ini.j2
-      dest="{{gogs_path}}/custom/conf/app.ini"
-      owner="{{gogs_user}}"
-      group="{{gogs_group}}"
-      mode=0755
-      force=yes
+      src: app.ini.j2
+      dest: "{{gogs_path}}/custom/conf/app.ini"
+      owner: "{{gogs_user}}"
+      group: "{{gogs_group}}"
+      mode: 0755
+      force: yes
     vars:
       database_ip_address: "{{hostvars['localhost']['database_container']}}"
     when: blueprint == "silicon"
@@ -72,19 +72,19 @@
 
   - name: Overwrite GOGS custom configuration file (silicon blueprint)
     template:
-      src=app.ini.j2
-      dest="{{gogs_path}}/custom/conf/app.ini"
-      owner="{{gogs_user}}"
-      group="{{gogs_group}}"
-      mode=0755
-      force=yes
+      src: app.ini.j2
+      dest: "{{gogs_path}}/custom/conf/app.ini"
+      owner: "{{gogs_user}}"
+      group: "{{gogs_group}}"
+      mode: 0755
+      force: yes
     when: blueprint == "silicon"
 
   - name: Overwrite container entrypoint script for GOGS Docker container (silicon blueprint)
     template:
-      src=container_entrypoint.sh.j2
-      dest=/entrypoint.sh
-      mode=0777
-      force=yes
+      src: container_entrypoint.sh.j2
+      dest: /entrypoint.sh
+      mode: 0777
+      force: yes
     when: blueprint == "silicon"
 
