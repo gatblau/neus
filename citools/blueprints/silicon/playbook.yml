@@ -31,6 +31,8 @@
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
+    - jenkins_user
+    - jenkins_install
     - jenkins_master
 
 - name: Provisioning host ci-nexus
@@ -38,6 +40,7 @@
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
+    - nexus_install
     - nexus
 
 - name: Provisioning host ci-mariadb
@@ -45,6 +48,8 @@
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
+    - baseline
+    - mariadb_install
     - mariadb
 
 - name: Provisioning host ci-gogs
@@ -52,20 +57,25 @@
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
-    - gogs
+    - gogs_install
+    - { role: gogs_import_pammy, when: pamm == "yes" }
 
 - name: Provisioning host ci-sonar
   hosts: ci-sonar
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
-   - sonar
+    - sonar_install
+    - sonar
 
 - name: Provisioning host Jenkins builder
   hosts: ci-builder
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
+    - jenkins_browsers
+    - jenkins_user
+    - jenkins_build_tools
     - jenkins_pamm_builder
 
 - name: Post build - create Docker images
