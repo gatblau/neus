@@ -8,7 +8,7 @@
   # SBT variables
   sbt_folder: sbt-0.13.11
   sbt_zip: sbt-0.13.11.zip
-sbt_cache: sbt-cache-0.13.zip
+  sbt_cache: sbt-cache-0.13.zip
 
   # Database variables
   db_user      : admin
