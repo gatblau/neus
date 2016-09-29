@@ -49,7 +49,7 @@
   # TODO - start GOGS automatically and remove this manual workaround
   - name: Start GOGS web console
     pause:
-      prompt="Run 'docker exec -it ci-gogs bash' to connect to ci-gogs container then run 'sh /entrypoint.sh' to start GOGS"
+      prompt: "Run 'docker exec -it ci-gogs bash' to connect to ci-gogs container then run 'sh /entrypoint.sh' to start GOGS"
     when: blueprint == "silicon"
 #    shell: "sh /build_entrypoint.sh"
 
@@ -88,3 +88,11 @@
       force: yes
     when: blueprint == "silicon"
 
+  - name: Update GOGS file permissions
+    file:
+      path: /usr/local/gogs
+      mode: 0777
+      owner: "{{ gogs_user }}"
+      group: "{{ gogs_group  }}"
+      recurse: true
+    when: blueprint == "silicon"
