@@ -89,9 +89,9 @@
         container_name: "{{item.container}}"
         image_name: "{{item.image}}"
       with_items:
-        - { container: 'ci-jenkins', image: 'silicon/ci-jenkins:{{image_version}}'}
-        - { container: 'ci-nexus', image: 'silicon/ci-nexus:{{image_version}}'}
-        - { container: 'ci-mariadb', image: 'silicon/ci-mariadb:{{image_version}}'}
-        - { container: 'ci-gogs', image: 'silicon/ci-gogs:{{image_version}}'}
-        - { container: 'ci-sonar', image: 'silicon/ci-sonar:{{image_version}}'}
-        - { container: 'ci-builder', image: 'silicon/ci-pamm-builder:{{image_version}}'}
+        - { container: 'ci-jenkins', image: 'silicon/test/ci-jenkins:{{image_version}}'}
+        - { container: 'ci-nexus',   image: 'silicon/test/ci-nexus:{{image_version}}'}
+        - { container: 'ci-mariadb', image: 'silicon/test/ci-mariadb:{{image_version}}'}
+        - { container: 'ci-gogs',    image: 'silicon/test/ci-gogs:{{image_version}}'}
+        - { container: 'ci-sonar',   image: 'silicon/test/ci-sonar:{{image_version}}'}
+        - { container: 'ci-builder', image: 'silicon/test/ci-pamm-builder:{{image_version}}'}

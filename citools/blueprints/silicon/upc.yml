@@ -42,12 +42,12 @@
     state: absent
     force: yes
   with_items:
-    - { name: 'silicon/ci-jenkins'}
-    - { name: 'silicon/ci-nexus'}
-    - { name: 'silicon/ci-mariadb'}
-    - { name: 'silicon/ci-gogs'}
-    - { name: 'silicon/ci-sonar'}
-    - { name: 'silicon/ci-pamm-builder'}
+    - { name: 'silicon/test/ci-jenkins'}
+    - { name: 'silicon/test/ci-nexus'}
+    - { name: 'silicon/test/ci-mariadb'}
+    - { name: 'silicon/test/ci-gogs'}
+    - { name: 'silicon/test/ci-sonar'}
+    - { name: 'silicon/test/ci-pamm-builder'}
 
 - name: Start up the Docker containers
   docker:
