@@ -1,29 +1,29 @@
 ---
   - name: Create user for MariaDB
     user:
-      name={{ mariadb_user }}
-      password={{ mariadb_password }}
-      state=present
+      name: "{{ mariadb_user }}"
+      password: "{{ mariadb_password }}"
+      state: present
 
   - include: "plays/open_port.yml"
     vars:
-      - port_number: "{{database_port}}"
+      - port_number: "{{ database_port }}"
     when: connection == "ssh"
 
   - name: Installing the MariaDB YUM repository file
     copy:
-      src="{{ mariadb_repo }}"
-      dest=/etc/yum.repos.d/{{ mariadb_repo }}
+      src: "{{ mariadb_repo }}"
+      dest: "/etc/yum.repos.d/{{ mariadb_repo }}"
 
   - name: Installing MariaDB
     yum:
-      name={{item}}
-      state=present
+      name: "{{ item }}"
+      state: present
     with_items:
       - MariaDB-server
       - MySQL-python
 
   - name: Setting MariaDB port number to {{database_port}}
-    template: src=server.cnf.j2
-              dest=/etc/my.cnf.d/server.cnf
-              owner={{mariadb_user}}
+    template: src: server.cnf.j2
+              dest: /etc/my.cnf.d/server.cnf
+              owner: "{{ mariadb_user }}"
