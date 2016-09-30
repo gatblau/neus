@@ -24,6 +24,14 @@
       - MySQL-python
 
   - name: Setting MariaDB port number to {{database_port}}
-    template: src: server.cnf.j2
-              dest: /etc/my.cnf.d/server.cnf
-              owner: "{{ mariadb_user }}"
+    template:
+      src: server.cnf.j2
+      dest: /etc/my.cnf.d/server.cnf
+      owner: "{{ mariadb_user }}"
+
+  - name: Change MariaDB home folder permissions
+    file:
+      name: "/var/lib/mysql"
+      recurse: "yes"
+      mode: "0777"
+    when: blueprint == "silicon"
