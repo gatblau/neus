@@ -22,14 +22,17 @@
   hosts: localhost
   connection: local
   tasks:
-    - include: "../upc.yml"
+    - name: Start up Docker containers
+      include: "../upc.yml"
       static: no
       when: tgt_platform == "docker"
 
-    - include: "../upv.yml"
+    - name: Add VMs to list of hosts
+      include: "../upv.yml"
       static: no
       when: tgt_platform == "vm"
 
-    - include: "../upv_ec2.yml"
+    - name: Start up AWS EC2 instances
+      include: "../upv_ec2.yml"
       static: no
       when: tgt_platform == "ec2"
