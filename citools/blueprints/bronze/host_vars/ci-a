@@ -1,4 +1,14 @@
+---
 # Variables for ci-a managed node
 
+# Jenkins variables
 jenkins_home: /var/lib/jenkins
+jenkins_master_executors: 2
 jenkins_rpm:  jenkins-2.19.1-1.1.noarch.rpm
+
+# SBT variables
+sbt_folder: sbt-0.13.11
+sbt_zip: sbt-0.13.11.zip
+sbt_cache: sbt-cache-0.13.zip
+
+npm_rpm: npm-1.3.6-5.el7.noarch.rpm

@@ -3,7 +3,7 @@
 
   # Jenkins folders
   jenkins_user_home: /home/jenkins
-  # jenkins_home: set in blueprint folder: host_vars/ci-a
+  # jenkins_home: set in blueprint host_vars managed node file
 
   # Jenkins username and group
   jenkins_user: jenkins
@@ -24,13 +24,13 @@
   maven_zip: apache-maven-3.3.9-bin.zip
 
   nodejs_rpm: nodejs-6.7.0-107.el7.x86_64.rpm
-  # npm_rpm:    set in group_vars/all/main.yml
+  # npm_rpm:    set in blueprint host_vars managed node file
 
   perl_rpm: perl-5.16.3-286.el7.x86_64.rpm
 
-  # sbt_folder: set in group_vars/all/main.yml
-  # sbt_zip:    set in group_vars/all/main.yml
-  # sbt_cache:  set in group_vars/all/main.yml
+  # sbt_folder: set in blueprint host_vars managed node file
+  # sbt_zip:    set in blueprint host_vars managed node file
+  # sbt_cache:  set in blueprint host_vars managed node file
 
   sonar_runner_folder: sonar-runner-2.4
   sonar_runner_zipfile: sonar-runner-dist-2.4.zip
