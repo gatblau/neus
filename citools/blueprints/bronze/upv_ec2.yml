@@ -23,6 +23,16 @@
 # The variables used in this play are in inventory.txt
 #
 ---
+  # Set facts for EC2 managed nodes
+  - set_fact:
+      ci_a_instance_type: t2.micro
+      ci_b_instance_type: t2.micro
+      region: eu-west-1
+      tag_name: ci-tools
+      vpc_subnet_id: subnet-52b88e0b
+      zone: eu-west-1b
+      ci_dit_public_dns_name: ec2-54-229-151-221.eu-west-1.compute.amazonaws.com
+
   - name: Create a security group
     local_action:
       module: ec2_group

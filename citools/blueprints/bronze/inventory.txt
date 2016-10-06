@@ -24,76 +24,8 @@
 #   on which roles are deployed to which hosts, only host and variable definitions.
 #   The mapping between roles and hosts is done in the main playbook file.
 #
-[global:children]
-local
-ci
-
-[global:vars]
-# port numbers
-ansible_port=22
-jenkins_port=8080
-database_port=3306
-nexus_port=8081
-gogs_port=3000
-sonar_port=9000
-
-pamm_app_port=8080
-pamm_test_port=8081
-selenium_port=4444
-
-proxy_ip_address=
-proxy_port=
-no_proxy_host=
-
-# PAMM / JAMM Seeds
-# Set to yes to include PAMM or JAMM seeds in CI Tools environment
-pamm=yes
-jamm=no
-
-
 [local]
 localhost
-
-[local:vars]
-# Sets the target platform to deploy to, it can be one of the following:
-#   a) docker - for Docker containers - used to test the build scripts
-#   b) vm     - for actual VM: enter ip address below and when running up.sh will need to add -k to prompt for password
-#   c) ec2    - for Amazon Web Services (AWS) Elastic Cloud Compute (EC2) - set EC2 variables below
-#
-tgt_platform=docker
-
-# For vm target platform:
-# Enter IP addresses, for Ansible script provisioning:
-ci_a_ip=192.168.110.160
-ci_b_ip=192.168.110.161
-ci_dit_ip=192.168.110.167
-# Enter internal DNS names (if required) for CI workflow connectivity (Jenkins to GOGS etc):
-ci_a_int_dns_name={{ci_a_ip}}
-ci_b_int_dns_name={{ci_b_ip}}
-ci_dit_int_dns_name={{ci_dit_ip}}
-# Enter internal DNS name wildcard for Jenkins to access without using proxy
-no_proxy_host=
-# Enter external DNS names (if required)
-ci_a_ext_dns_name={{ci_a_ip}}
-
-#
-# These variables are for AWS EC2 hosts and only used if platform is set to ec2
-#
-# Size of instance to create (t2.micro is eligible for use in the free tier)
-ci_a_instance_type=t2.micro
-ci_b_instance_type=t2.micro
-#ci_b_instance_type=c3.large
-# The region in which to host the instance
-region=eu-west-1
-# Instance tag name
-tag_name=ci-tools
-# Enter your subnet here
-vpc_subnet_id=subnet-52b88e0b
-# The zone in which the region is based
-zone=eu-west-1b
-# Create the ci-dit instance before provisioning CI Tools
-ci_dit_public_dns_name=ec2-54-229-151-221.eu-west-1.compute.amazonaws.com
-
 
 [ci]
 ci-a
@@ -101,12 +33,5 @@ ci-b
 ci-dit
 
 [ci:vars]
-# flags the type of source control to use:
-#   - gogs: for local Go Git Repository
-#   - rtc: for an external connection to Rational Team Concert
-scm=gogs
-
-# change below if scm=rtc
-
 # flags the type of blueprint for plays to decide how to configure accordingly.
 blueprint=bronze

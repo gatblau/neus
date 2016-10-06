@@ -1,0 +1,27 @@
+---
+# Variables for ci group
+
+# flags the type of source control to use:
+#   - gogs: for local Go Git Repository
+#   - rtc: for an external connection to Rational Team Concert
+scm: gogs
+
+# change below if scm=rtc
+
+
+
+# JDK variables
+java_sdk_name: "Java JDK 8u102-x64"
+java_sdk_rpm: jdk-8u102-linux-x64.rpm
+
+# The following variables are set by the control node when the target platform is provisioned:
+become:     "{{ hostvars['localhost']['become'] }}"
+connection: "{{ hostvars['localhost']['connection'] }}"
+
+# IP Addresses for the CI Tools
+database_ip_address: "{{ hostvars['localhost']['database_ip_address'] }}"
+gogs_ip_address:     "{{ hostvars['localhost']['gogs_ip_address'] }}"
+jenkins_ip_address:  "{{ hostvars['localhost']['jenkins_ip_address'] }}"
+nexus_ip_address:    "{{ hostvars['localhost']['nexus_ip_address'] }}"
+sonar_ip_address:    "{{ hostvars['localhost']['sonar_ip_address'] }}"
+remote_ip_address:   "{{ hostvars['localhost']['remote_ip_address'] }}"

@@ -18,9 +18,7 @@ Once the Europa environment is running, clone the Neus code as follows:
 
     a) Neus URL: http://github.com/gatblau/neus
 
-    b) Create the IdeaProjects directory
-
-    c) Click on `Clone` to clone into IntelliJ
+    b) Click on `Clone` to clone into IntelliJ
 
 6. Click on `Yes` to create IntelliJ project.
 
@@ -32,16 +30,16 @@ Each toolset is divided into blueprints; *bronze*, *silver*, *gold* or *silicon*
 
 | File | Description |
 |--------|--------|
-| inventory.txt | See [inventory](inventory.md) for details of the inventory file. |
+| inventory.txt | The inventory file. |
 | playbook.yml | This is the [playbook](http://docs.ansible.com/ansible/playbooks.html) that provisions the toolset.   |
 | readme.md | The readme describes the blueprint. |
 | upc.yml | This playbook provisions the Docker containers used when testing the build. |
 | upv.yml | This playbook is used to add the VM hosts when deploying to VMs. |
 | upv_ec2.yml | This playbook is used to provision the AWS EC2 instances when deploying to AWS EC2.  In order to provision to AWS EC2, an [AWS account](aws-ec2.md) is required. |
 
-### Update Inventory
+### Update Build Parameters
 
-Before building the toolset, update the inventory file as follows:
+Before building the toolset, update the build parameters in the blueprint host_vars/localhost file as follows:
 
 1. Target platform: for testing, select docker
 2. If target platform is vm then update the IP Addresses

@@ -1,27 +1,24 @@
 ---
-  # JDK variables
-  java_sdk_name: "Java JDK 8u102-x64"
-  java_sdk_rpm: jdk-8u102-linux-x64.rpm
+# Variables for control node and managed nodes
 
-  npm_rpm: npm-1.3.6-5.el7.noarch.rpm
+# PAMM / JAMM Seeds
+# Set to yes to include PAMM or JAMM seeds in CI Tools environment
+pamm: "yes"
+jamm: "no"
 
-  # SBT variables
-  sbt_folder: sbt-0.13.11
-  sbt_zip: sbt-0.13.11.zip
-  sbt_cache: sbt-cache-0.13.zip
+# Port numbers
+ansible_port:  22
+jenkins_port:  8080
+database_port: 3306
+nexus_port:    8081
+gogs_port:     3000
+sonar_port:    9000
 
-  # Database variables
-  db_user      : admin
-  db_pwd       : Passw0rd!
+pamm_app_port:  8080
+pamm_test_port: 8081
+selenium_port:  4444
 
-  # Variables are set by the localhost when the target platform is provisioned
-  become: "{{hostvars['localhost']['become']}}"
-  connection: "{{hostvars['localhost']['connection']}}"
-
-  # IP Addresses for the CI Tools
-  database_ip_address: "{{hostvars['localhost']['database_ip_address']}}"
-  gogs_ip_address: "{{hostvars['localhost']['gogs_ip_address']}}"
-  jenkins_ip_address: "{{hostvars['localhost']['jenkins_ip_address']}}"
-  nexus_ip_address: "{{hostvars['localhost']['nexus_ip_address']}}"
-  sonar_ip_address: "{{hostvars['localhost']['sonar_ip_address']}}"
-  remote_ip_address: "{{hostvars['localhost']['remote_ip_address']}}"
+# Proxy settings
+proxy_ip_address:
+proxy_port:
+no_proxy_host:
