@@ -1,3 +1,4 @@
 # Variables for ci-a managed node
 
 jenkins_home: /var/lib/jenkins
+jenkins_rpm:  jenkins-2.19.1-1.1.noarch.rpm

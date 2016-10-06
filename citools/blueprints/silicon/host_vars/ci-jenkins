@@ -1,3 +1,6 @@
-# Variables for ci-a managed node
+---
+# Variables for ci-jenkins managed node
 
+# Jenkins variables
 jenkins_home: /home/jenkins/.jenkins
+jenkins_rpm:  jenkins-2.19.1-1.1.noarch.rpm
