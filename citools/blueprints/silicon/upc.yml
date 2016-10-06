@@ -25,67 +25,67 @@
 - name: Delete any existing Docker containers
   become: yes
   docker:
-    name: "{{item.container}}"
-    image: "{{item.image}}"
+    name: "{{ item.container }}"
+    image: "{{ item.image }}"
     state: absent
   with_items:
-    - { container: 'ci-jenkins', image: '{{jenkins_base}}'}
-    - { container: 'ci-nexus', image: '{{nexus_base}}'}
-    - { container: 'ci-mariadb', image: '{{mariadb_base}}'}
-    - { container: 'ci-gogs', image: '{{gogs_base}}'}
-    - { container: 'ci-sonar', image: '{{sonar_base}}'}
-    - { container: 'ci-builder', image: '{{builder_base}}'}
+    - { container: 'ci-jenkins', image: '{{ jenkins_base }}' }
+    - { container: 'ci-nexus',   image: '{{ nexus_base }}' }
+    - { container: 'ci-mariadb', image: '{{ mariadb_base }}' }
+    - { container: 'ci-gogs',    image: '{{ gogs_base }}' }
+    - { container: 'ci-sonar',   image: '{{ sonar_base }}' }
+    - { container: 'ci-builder', image: '{{ builder_base }}' }
 
 - name: Delete any existing CI Tools Docker images
   docker_image:
-    name: "{{item.name}}"
+    name: "{{ item.name }}"
     state: absent
     force: yes
   with_items:
-    - { name: 'silicon/test/ci-jenkins'}
-    - { name: 'silicon/test/ci-nexus'}
-    - { name: 'silicon/test/ci-mariadb'}
-    - { name: 'silicon/test/ci-gogs'}
-    - { name: 'silicon/test/ci-sonar'}
-    - { name: 'silicon/test/ci-pamm-builder'}
+    - { name: 'silicon/test/ci-jenkins' }
+    - { name: 'silicon/test/ci-nexus' }
+    - { name: 'silicon/test/ci-mariadb' }
+    - { name: 'silicon/test/ci-gogs' }
+    - { name: 'silicon/test/ci-sonar' }
+    - { name: 'silicon/test/ci-pamm-builder' }
 
 - name: Start up the Docker containers
   docker:
-    image: "{{item.image}}"
-    name: "{{item.name}}"
-    hostname: "{{item.name}}"
+    image: "{{ item.image }}"
+    name: "{{ item.name }}"
+    hostname: "{{ item.name }}"
     pull: missing
     detach: yes
     tty: yes
-    expose: "[ {{item.ports}} ]"
+    expose: "[ {{ item.ports }} ]"
     command: sleep infinity
     state: started
     volumes:
       - /var/cache/yum/neus:/var/cache/yum:rw
   with_items:
-    - { name: "ci-jenkins", image: "{{jenkins_base}}", ports: "{{jenkins_port}}" }
-    - { name: "ci-nexus", image: "{{nexus_base}}", ports: "{{nexus_port}}" }
-    - { name: "ci-mariadb", image: "{{mariadb_base}}", ports: "{{database_port}}" }
-    - { name: "ci-gogs", image: "{{gogs_base}}", ports: "{{gogs_port}}" }
-    - { name: "ci-sonar", image: "{{sonar_base}}", ports: "{{sonar_port}}" }
-    - { name: "ci-builder", image: "{{builder_base}}", ports: "{{jenkins_port}}" }
+    - { name: "ci-jenkins", image: "{{ jenkins_base }}", ports: "{{ jenkins_port }}" }
+    - { name: "ci-nexus",   image: "{{ nexus_base }}",   ports: "{{ nexus_port }}" }
+    - { name: "ci-mariadb", image: "{{ mariadb_base }}", ports: "{{ database_port }}" }
+    - { name: "ci-gogs",    image: "{{ gogs_base }}",    ports: "{{ gogs_port }}" }
+    - { name: "ci-sonar",   image: "{{ sonar_base }}",   ports: "{{ sonar_port }}" }
+    - { name: "ci-builder", image: "{{ builder_base }}", ports: "{{ jenkins_port }}" }
 
 - name: Get ci-mariadb container IP address
   shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-mariadb"
   register: ci_mariadb_ip
 
 - set_fact:
-    connection="docker"
-    become="no"
-    database_container="{{ci_mariadb_ip.stdout}}"
-    database_ip_address="${DB_IP_ADDRESS}"
-    gogs_ip_address="${GOGS_IP_ADDRESS}"
-    jenkins_ip_address="${JENKINS_IP_ADDRESS}"
-    jenkins_location="${JENKINS_IP_ADDRESS}"
-    nexus_ip_address="${NEXUS_IP_ADDRESS}"
-    sonar_ip_address="${SONAR_IP_ADDRESS}"
-    remote_ip_address="${DIT_IP_ADDRESS}"
-    jenkins_port=${JENKINS_PORT}
-    nexus_port=${NEXUS_PORT}
-    gogs_port=${GOGS_PORT}
-    sonar_port=${SONAR_PORT}
+    connection: "docker"
+    become: "no"
+    database_container: "{{ ci_mariadb_ip.stdout }}"
+    database_ip_address: "${DB_IP_ADDRESS}"
+    gogs_ip_address:     "${GOGS_IP_ADDRESS}"
+    jenkins_ip_address:  "${JENKINS_IP_ADDRESS}"
+    jenkins_location:    "${JENKINS_IP_ADDRESS}"
+    nexus_ip_address:    "${NEXUS_IP_ADDRESS}"
+    sonar_ip_address:    "${SONAR_IP_ADDRESS}"
+    remote_ip_address:   "${DIT_IP_ADDRESS}"
+    jenkins_port: "${JENKINS_PORT}"
+    nexus_port:   "${NEXUS_PORT}"
+    gogs_port:    "${GOGS_PORT}"
+    sonar_port:   "${SONAR_PORT}"

@@ -24,9 +24,9 @@
 ---
 # Set base images for test containers here
 - set_fact:
-    ci_a_base="gatblau.org/centos:7ds"
-    ci_b_base="gatblau.org/centos:7ds"
-    ci_dit_base="gatblau.org/centos:7ds"
+    ci_a_base:   "gatblau.org/centos:7ds"
+    ci_b_base:   "gatblau.org/centos:7ds"
+    ci_dit_base: "gatblau.org/centos:7ds"
 
 - name: Build Docker image with sudo, ssh, systemd and net-tools
   become: yes
@@ -35,44 +35,45 @@
 - name: Restart Docker daemon to release network handles (privileged containers)
   become: yes
   service:
-    name=docker
-    state=restarted
+    name: docker
+    state: restarted
 
 - name: Set Docker daemon permissions
   become: yes
   file:
-    path=/var/run/docker.sock
-    mode=0666
+    path: /var/run/docker.sock
+    mode: 0666
 
 - name: Delete existing Docker containers
   become: yes
-  docker:
-    name: "{{item.name}}"
-    image: "{{item.image}}"
+  docker_container:
+    name:  "{{ item.name }}"
+    image: "{{ item.image }}"
     state: absent
+    force_kill: true
   with_items:
-    - { name: "ci-a", image: "{{ci_a_base}}"}
-    - { name: "ci-b", image: "{{ci_b_base}}"}
-    - { name: "ci-dit", image: "{{ci_dit_base}}"}
+    - { name: "ci-a",   image: "{{ ci_a_base }}" }
+    - { name: "ci-b",   image: "{{ ci_b_base }}" }
+    - { name: "ci-dit", image: "{{ ci_dit_base }}" }
 
 - name: Start up the Docker containers
   docker:
-    image: "{{item.image}}"
-    name: "{{item.name}}"
-    hostname: "{{item.name}}"
+    image: "{{ item.image }}"
+    name: "{{ item.name }}"
+    hostname: "{{ item.name }}"
     pull: missing
     detach: yes
     tty: yes
-    expose: "[ {{item.ports}} ]"
+    expose: "[ {{ item.ports }} ]"
     command: "/usr/sbin/init"
     state: started
     privileged: yes
     volumes:
       - /var/cache/yum/neus:/var/cache/yum:rw
   with_items:
-    - { name: "ci-a", image: "{{ci_a_base}}", ports: "{{jenkins_port}}, {{nexus_port}}, {{selenium_port}}"}
-    - { name: "ci-b", image: "{{ci_b_base}}", ports: "{{database_port}}, {{gogs_port}}, {{sonar_port}}"}
-    - { name: "ci-dit", image: "{{ci_dit_base}}", ports: "{{ansible_port}}, {{pamm_app_port}}, {{pamm_test_port}}"}
+    - { name: "ci-a",   image: "{{ ci_a_base }}",   ports: "{{ jenkins_port }}, {{ nexus_port }}, {{ selenium_port }}"}
+    - { name: "ci-b",   image: "{{ ci_b_base }}",   ports: "{{ database_port }}, {{ gogs_port }}, {{ sonar_port }}"}
+    - { name: "ci-dit", image: "{{ ci_dit_base }}", ports: "{{ ansible_port }}, {{ pamm_app_port }}, {{ pamm_test_port }}"}
 
 # Obtain IP addresses of containers
 - name: Get ci-a IP address
@@ -88,14 +89,13 @@
   register: ci_dit_ip
 
 - set_fact:
-    connection="docker"
-    become="no"
-    database_ip_address="127.0.0.1"
-    gogs_db_address="{{database_ip_address}}"
-    gogs_ip_address="{{ci_b_ip.stdout}}"
-    jenkins_ip_address="{{ci_a_ip.stdout}}"
-    jenkins_location="{{ci_a_ip.stdout}}"
-    jenkins_url="{{ci_a_ip.stdout}}:{{jenkins_port}}"
-    nexus_ip_address="{{ci_a_ip.stdout}}"
-    sonar_ip_address="{{ci_b_ip.stdout}}"
-    remote_ip_address="{{ci_dit_ip.stdout}}"
+    connection: "docker"
+    become:     "no"
+    database_ip_address: "127.0.0.1"
+    gogs_ip_address:     "{{ ci_b_ip.stdout }}"
+    jenkins_ip_address:  "{{ ci_a_ip.stdout }}"
+    jenkins_location:    "{{ ci_a_ip.stdout }}"
+    jenkins_url:         "{{ ci_a_ip.stdout }}:{{ jenkins_port }}"
+    nexus_ip_address:    "{{ ci_a_ip.stdout }}"
+    sonar_ip_address:    "{{ ci_b_ip.stdout }}"
+    remote_ip_address:   "{{ ci_dit_ip.stdout }}"
