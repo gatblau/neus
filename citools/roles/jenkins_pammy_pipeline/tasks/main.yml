@@ -10,76 +10,78 @@
 
   - name: Copying PAMM seed zip file to the host
     copy:
-      src=pammy.zip
-      dest=/tmp
+      src: pammy.zip
+      dest: /tmp
 
   - name: Unzipping PAMM seed zip file
     unarchive:
-      src=/tmp/pammy.zip
-      dest="{{jenkins_home}}"
-      owner="{{jenkins_user}}"
-      group="{{jenkins_group}}"
-      copy=no
+      src: /tmp/pammy.zip
+      dest:  "{{ jenkins_home }}"
+      owner: "{{ jenkins_user }}"
+      group: "{{ jenkins_group }}"
+      copy: no
 
   - name: Removing PAMM seed zip file from the host
-    file: path=/tmp/pammy.zip state=absent
+    file:
+      path: /tmp/pammy.zip
+      state: absent
 
   - name: Clone PAMM seed repository
     git:
-      repo=http://github.com/gatblau/pamm.seed
-      dest="{{jenkins_user_home}}/pamm.seed"
-      update=yes
+      repo: http://github.com/gatblau/pamm.seed
+      dest: "{{ jenkins_user_home }}/pamm.seed"
+      update: yes
 
   - name: Install bzip2
     yum:
-      name=bzip2
-      state=installed
+      name: bzip2
+      state: installed
 
   - name: Create node_modules symbolic link in PAMM seed
     file:
-      src="{{jenkins_user_home}}/node_modules"
-      dest="{{jenkins_user_home}}/pamm.seed/node_modules"
-      state=link
+      src:  "{{ jenkins_user_home }}/node_modules"
+      dest: "{{ jenkins_user_home }}/pamm.seed/node_modules"
+      state: link
 
   - name: Install dependencies
-    shell: "cd {{jenkins_user_home}}/pamm.seed && npm install"
+    shell: "cd {{ jenkins_user_home }}/pamm.seed && npm install"
 
   - name: Update webdriver
-    shell: "cd {{jenkins_user_home}}/pamm.seed && npm run webdriver-update"
+    shell: "cd {{ jenkins_user_home }}/pamm.seed && npm run webdriver-update"
 
   - name: Check for local SBT cache
-    local_action: "stat path=cache/{{sbt_cache}}"
+    local_action: "stat path=cache/{{ sbt_cache }}"
     register: sbt_dependencies
 
   - name: Build PAMM seed to create SBT cache
-    shell: 'su -c "cd {{jenkins_user_home}}/pamm.seed && /usr/local/sbt/default/bin/sbt svc/assembly testsetup/assembly -Dsbt.log.noformat=true" - jenkins'
+    shell: 'su -c "cd {{ jenkins_user_home }}/pamm.seed && /usr/local/sbt/default/bin/sbt svc/assembly testsetup/assembly -Dsbt.log.noformat=true" - jenkins'
     when: sbt_dependencies.stat.exists == false
 
   - name: Create local SBT cache
-    local_action: "shell docker cp ci-a:/home/jenkins/.ivy2 cache && cd cache && zip -r {{sbt_cache}} .ivy2 && rm -rf .ivy2"
+    local_action: "shell docker cp ci-a:/home/jenkins/.ivy2 cache && cd cache && zip -r {{ sbt_cache }} .ivy2 && rm -rf .ivy2"
     when: sbt_dependencies.stat.exists == false and connection == "docker"
 
   - name: Remove PAMM seed repository
     file:
-      path="{{jenkins_user_home}}/pamm.seed"
-      state=absent
+      path: "{{ jenkins_user_home }}/pamm.seed"
+      state: absent
 
   - name: Set Protractor timeout
     command: 'sed -i "s/allScriptsTimeout: 11000,/allScriptsTimeout: 30000,/" /home/jenkins/node_modules/protractor/lib/configParser.js'
 
   - name: Copy Jenkins configuration file
     template:
-      src=pammy/jenkins_config.xml.j2
-      dest="{{jenkins_home}}/config.xml"
-      owner="{{jenkins_user}}"
-      group="{{jenkins_group}}"
+      src: jenkins_config.xml.j2
+      dest:  "{{ jenkins_home }}/config.xml"
+      owner: "{{ jenkins_user }}"
+      group: "{{ jenkins_group }}"
 
   - name: Configure PAMM pipeline build jobs
     template:
-      src="pammy/{{item.src}}"
-      dest="{{jenkins_home}}/jobs/{{item.dest}}"
-      owner="{{jenkins_user}}"
-      group="{{jenkins_group}}"
+      src:   "{{ item.src }}"
+      dest:  "{{ jenkins_home }}/jobs/{{ item.dest }}"
+      owner: "{{ jenkins_user }}"
+      group: "{{ jenkins_group }}"
     with_items:
       - { src: "pammy_check_code_quality_config.xml.j2", dest: "pammy-check-code-quality/config.xml" }
       - { src: "pammy_compile_application_config.xml.j2", dest: "pammy-compile-application/config.xml" }
@@ -90,10 +92,10 @@
 
   - name: Configure PAMM seed run tests Build job
     template:
-      src=pammy/pammy_run_tests_config.xml.j2
-      dest="{{jenkins_home}}/jobs/pammy-run-tests/config.xml"
-      owner="{{jenkins_user}}"
-      group="{{jenkins_group}}"
+      src: pammy_run_tests_config.xml.j2
+      dest:  "{{ jenkins_home }}/jobs/pammy-run-tests/config.xml"
+      owner: "{{ jenkins_user }}"
+      group: "{{ jenkins_group }}"
     vars:
-      pamm_app_ip_address: "{{hostvars['localhost']['remote_ip_address']}}"
-      testsetup_ip_address: "{{hostvars['localhost']['remote_ip_address']}}"
+      pamm_app_ip_address:  "{{ hostvars['localhost']['remote_ip_address'] }}"
+      testsetup_ip_address: "{{ hostvars['localhost']['remote_ip_address'] }}"

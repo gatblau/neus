@@ -24,7 +24,6 @@
       dest="{{jenkins_home}}/config.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
-    when: pamm == "no"
 
   - name: Copy Jenkins credentials file
     template:
@@ -55,10 +54,6 @@
       group="{{jenkins_group}}"
     vars:
       jenkins_ip_address: "{{hostvars['localhost']['jenkins_location']}}"
-
-  - name: Install PAMM seed build pipeline
-    include: install_pamm_build.yml
-    when: pamm == "yes" and blueprint != "silicon"
 
   - name: Set Jenkins proxy settings
     template:

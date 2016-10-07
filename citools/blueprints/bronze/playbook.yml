@@ -35,9 +35,10 @@
     - jdk
     - jenkins_user
     - jenkins_install
-    - jenkins_browsers
+    - { role: jenkins_browsers, when: pamm == "yes" }
     - jenkins_build_tools
     - jenkins_master
+    - { role: jenkins_pammy_pipeline, when: pamm == "yes" }
     - nexus_install
     - nexus
 
