@@ -14,9 +14,5 @@
     file:
       path=/tmp/gogs_database.sql
       state=absent
-
-  - name: Starting the GOGS service
-    service:
-      name=gogs
-      state=started
-      enabled=yes
+    notify:
+      - restart_gogs
