@@ -46,7 +46,7 @@ find $ROOT. -size 0c -delete
 
 # download the following files to the root folder if they do not exist
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "unzip-6.0-15.el7.x86_64.rpm"
-download "http://7d9nal.com2.z0.glb.qiniucdn.com/" "gogs_v0.9.13_linux_386.zip"
+download "https://github.com/gogits/gogs/releases/download/v0.9.97/" "linux_386.zip"
 download "https://sonatype-download.global.ssl.fastly.net/nexus/oss/" "nexus-2.13.0-01-bundle.zip"
 download "http://download.oracle.com/otn-pub/java/jdk/8u102-b14/" "jdk-8u102-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/e/" "epel-release-7-8.noarch.rpm"
