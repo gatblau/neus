@@ -24,39 +24,12 @@
 #   on which roles are deployed to which hosts, only host and variable definitions.
 #   The mapping between roles and hosts is done in the main playbook file.
 #
-[global:children]
-local
-cd
-
-
-[global:vars]
-# port numbers
-ansible_port=22
-database_port=3306
-gogs_port=3000
-nexus_port=8081
-
-
 [local]
 localhost
-
-[local:vars]
-# Sets the target platform to deploy to, it can be one of the following:
-#   a) docker - for Docker containers - used to test the build scripts
-#   b) vm     - for actual VM: enter ip address below and when running up.sh will need to add -k to prompt for password
-#
-tgt_platform=docker
-
-# For vm target platform:
-# Enter IP addresses, for Ansible script provisioning:
-cd_a_ip=192.168.110.177
 
 
 [cd]
 cd-a
 
 [cd:vars]
-# Repository folder
-repository_folder: /local_repo
-
 blueprint=bronze

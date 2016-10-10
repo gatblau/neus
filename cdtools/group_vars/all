@@ -1,0 +1,7 @@
+---
+
+# port numbers
+ansible_port:  22
+database_port: 3306
+gogs_port:     3000
+nexus_port:    8081
