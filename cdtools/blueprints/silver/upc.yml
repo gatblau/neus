@@ -1,0 +1,70 @@
+#
+# Copyright (c) 2016 GATBLAU - www.gatblau.org
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Manages the execution of roles on a docker container.
+# The only part of this playbook that needs changing is the list of roles as described below.
+# The name of the playbook should be updated to reflect the host name - e.g. database.yml
+#
+
+#
+# Provides the containers required to deploy the Bronze blueprint
+#
+---
+# Set base images for test containers here
+  - name: Set base image for Docker containers
+    set_fact:
+      cd_a_base: "gatblau.org/centos:7ds"
+
+  - name: Build Docker image with sudo, ssh, systemd and net-tools
+    become: yes
+    command: docker build --rm -t gatblau.org/centos:7ds ../lib/images/centos7ds
+
+  - name: Restart Docker daemon to release network handles (privileged containers)
+    become: yes
+    service:
+      name=docker
+      state=restarted
+
+  - name: Delete existing Docker containers
+    become: yes
+    docker:
+      name: "{{item.name}}"
+      image: "{{item.image}}"
+      state: absent
+    with_items:
+      - { name: "cd-a", image: "{{cd_a_base}}"}
+
+  - name: Start up the Docker containers
+    docker:
+      image: "{{item.image}}"
+      name: "{{item.name}}"
+      hostname: "{{item.name}}"
+      pull: missing
+      detach: yes
+      tty: yes
+      expose: "[ {{item.ports}} ]"
+      command: "/usr/sbin/init"
+      state: started
+      privileged: yes
+      volumes:
+        - /var/cache/yum/neus:/var/cache/yum:rw
+    with_items:
+      - { name: "cd-a", image: "{{cd_a_base}}", ports: "3000:{{gogs_port}}, 9000:{{nexus_port}}, 3306:{{database_port}}"}
+
+  - name: Set parameters for Docker build
+    set_fact:
+      connection: "docker"
+      become: "no"
+      database_ip_address: localhost

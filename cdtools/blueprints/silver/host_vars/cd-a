@@ -1,0 +1,14 @@
+---
+# Variables for managed node cd-a
+
+# JDK variables
+java_sdk_name: "Java JDK 8u102-x64"
+java_sdk_rpm: jdk-8u102-linux-x64.rpm
+
+# Docker registry vriables
+registry_name:  registry
+registry_image: registry:2
+registry_port:  5000
+
+# Yum repository folder
+repository_folder: /local_repo

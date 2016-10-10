@@ -1,0 +1,11 @@
+---
+# Sets the target platform to deploy to, it can be one of the following:
+#   a) docker - for Docker containers - used to test the build scripts
+#   b) vm     - for actual VM: enter ip address below and when running up.sh will need to add -k to prompt for password
+#
+tgt_platform: vm
+
+# For vm target platform:
+# Enter IP addresses, for Ansible script provisioning:
+cd_a_ip: 192.168.110.189
+cd_b_ip: 192.168.110.190

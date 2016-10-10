@@ -1,0 +1,7 @@
+---
+# Variables for cd group
+
+# Variables are set by the localhost when the target platform is provisioned
+become: "{{hostvars['localhost']['become']}}"
+connection: "{{hostvars['localhost']['connection']}}"
+
