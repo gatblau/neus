@@ -4,18 +4,12 @@
       name: createrepo
       state: latest
 
-  - name: Create local repo folder
+  - name: Create local repository folder
     file:
-      path="/local_repo/"
-      state=directory
-      mode=0777
-
-  - name: Copy rpm(s) to local repo
-    copy:
-      src="cache/{{item}}"
-      dest="/local_repo/{{item}}"
-    with_items:
-      - "{{repository_list}}"
+      path: "{{ repository_folder }}"
+      state: directory
+      mode: 0777
+      recurse: yes
 
   - name: Create local repository database
-    command: createrepo --database /local_repo
+    command: "createrepo --database {{ repository_folder }}"

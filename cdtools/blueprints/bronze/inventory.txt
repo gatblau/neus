@@ -56,7 +56,7 @@ cd_a_ip=192.168.110.177
 cd-a
 
 [cd:vars]
-# Repository list - example for testing
-repository_list=['epel-release-7-8.noarch.rpm', 'wandisco-git-release-7-1.noarch.rpm']
+# Repository folder
+repository_folder: /local_repo
 
 blueprint=bronze
