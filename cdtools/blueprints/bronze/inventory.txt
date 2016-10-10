@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Ansible inventory for the BRONZE level CI Tools blueprint
+# Ansible inventory for the BRONZE level CD Tools blueprint
 #
 # NOTE:
 #   This blueprint is meant for deployment ONLY on Virtual Machines using the SSH connection plugin.

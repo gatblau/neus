@@ -1,0 +1,24 @@
+---
+  - name: Create physical volume
+    command: pvcreate /dev/sdb
+
+  - name: Add physical volume to vg_root group
+    command: vgextend vg_root /dev/sdb
+
+  - name: Create 15GB logical volume
+    command: lvcreate -n lv_registry -L 15G vg_root
+
+  - name: Create an XFS file system
+    command: mkfs.xfs /dev/vg_root/lv_registry
+
+  - name: Mount all filesystems
+    command: mount -a
+
+  - name: Create a directory for the registry
+    file:
+      path: /var/lib/registry
+      state: directory
+      mode: 0755
+
+  - name: Set up storage for Docker
+    command: docker-storage-setup

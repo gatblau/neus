@@ -1,0 +1,69 @@
+---
+  - name: Install Docker
+    yum:
+      name: docker
+      state: latest
+
+  - name: Create Docker registry folder
+    file:
+      path: /var/lib/registry
+      mode: 0755
+      owner: 1001
+      state: directory
+
+  - name: Docker Storage Setup
+    include: docker_storage_setup.yml
+
+  - name: Open Docker Registry port
+    include: "plays/open_port.yml"
+    vars:
+      - port_number: "{{registry_port}}"
+
+  - name: Set up Docker service
+    replace:
+      dest: /etc/sysconfig/docker
+      regexp: "# INSECURE_REGISTRY(.*)"
+      replace: "INSECURE_REGISTRY='--insecure-registry {{ registry_name }}:{{ registry_port }}'"
+
+  - name: Start Docker service
+    service:
+      name: docker
+      enabled: yes
+      state: started
+
+  - name: Pull Docker Registry image
+    command: "docker pull {{registry_image}}"
+
+  - name: Create the registry container
+    command: "docker run -d -u 1001 -p {{ registry_port }}:{{ registry_port }} --restart=always --name registry -v /var/lib/registry:/var/lib/registry:z {{registry_image}}"
+
+  - name: Obtain Docker Registry container IP address
+    shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} registry"
+    register: IP
+
+  - debug: msg="Docker registry IP address is {{IP.stdout}}"
+
+  - name: Add Docker Registry IP to /etc/hosts
+    lineinfile:
+      dest: /etc/hosts
+      line: "{{IP.stdout}}  {{registry_name}}"
+      state: present
+
+  # TESTING - Populate registry
+  - name: Pull Docker Images
+    command: "docker pull {{item.image}}"
+    with_items:
+      - { image: "centos:7" }
+    tags: testing
+
+  - name: Tag Docker Images
+    command: "docker tag {{item.image}} {{item.tag}}"
+    with_items:
+      - { image: "centos:7", tag: "{{ registry_name}}:{{ registry_port }}/centos7" }
+    tags: testing
+
+  - name: Push Tagged Docker Images
+    command: "docker push {{item.tag}}"
+    with_items:
+      - { tag: "{{ registry_name }}:{{ registry_port }}/centos7" }
+    tags: testing
