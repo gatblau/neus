@@ -1,7 +1,7 @@
 ---
 - name: Create directory for Docker proxy settings
   file:
-    name: /etc/systemd/system/docker.service.d
+    path: /etc/systemd/system/docker.service.d
     state: directory
 
 - name: Create Docker proxy settings file
