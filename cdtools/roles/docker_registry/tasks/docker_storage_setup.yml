@@ -10,7 +10,6 @@
     command: "vgcreate {{ vg_name }} /dev/sdb"
     when: vg_name != "vg_root"
 
-
   - name: Create {{ lv_size }} logical volume
     command: "lvcreate -n lv_registry -L {{ lv_size }} {{ vg_name }}"
 
@@ -26,6 +25,14 @@
       backup: true
       line: "/dev/mapper/{{ vg_name }}-lv_registry /var/lib/registry                 xfs     defaults        0 0"
       state: present
+
+  - name: Override Docker volume group
+    lineinfile:
+      dest: /usr/lib/docker-storage-setup/docker-storage-setup
+      regexp: "# VG=(.*)"
+      line: "VG={{ vg_name }}"
+      state: present
+    when: vg_name != "vg_root"
 
   - name: Set up storage for Docker
     command: docker-storage-setup
