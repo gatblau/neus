@@ -25,6 +25,10 @@
       regexp: "# INSECURE_REGISTRY(.*)"
       replace: "INSECURE_REGISTRY='--insecure-registry {{ registry_name }}:{{ registry_port }}'"
 
+  - name: Set proxy for Docker (if required)
+    include: proxy_settings.yml
+    when: proxy_name != ""
+
   - name: Start Docker service
     service:
       name: docker

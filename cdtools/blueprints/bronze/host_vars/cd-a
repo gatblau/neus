@@ -17,3 +17,8 @@ database_ip_address: "{{hostvars['localhost']['database_ip_address']}}"
 
 # Repository folder
 repository_folder: /local_repo
+
+# Proxy settings (if required)
+proxy_name:
+proxy_port:
+

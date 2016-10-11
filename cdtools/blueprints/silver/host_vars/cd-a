@@ -17,3 +17,7 @@ repository_folder: /local_repo
 lv_size: 15G
 # Volume group name
 vg_name: vg_root
+
+# Proxy settings (if required)
+proxy_name:
+proxy_port:
