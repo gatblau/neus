@@ -12,3 +12,8 @@ registry_port:  5000
 
 # Yum repository folder
 repository_folder: /local_repo
+
+# Size of Docker storage (logical volume)
+lv_size: 15G
+# Volume group name
+lv_name: vg_root
