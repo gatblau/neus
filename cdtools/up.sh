@@ -41,17 +41,8 @@ source ./fetch.sh
 # starts the deployment using the specified inventory
 startTime=$(date -u +"%s")
 
-# Check if target platform is vm
-$(grep -qs "tgt_platform=vm" blueprints/$1/inventory.txt)
-if [[ $? -eq 0 ]]; then
-    # Target is vm - ask for password
-    ansible-playbook -i blueprints/$1/inventory.txt blueprints/$1/playbook.yml -k
-else
-    # Target is not vm - no password required
-    ansible-playbook -i blueprints/$1/inventory.txt blueprints/$1/playbook.yml
-fi
+ansible-playbook -i blueprints/$1/inventory.txt blueprints/$1/playbook.yml
 
-endTime=$(date -u +"%s")
 diff=$(($endTime-$startTime))
 
 echo $os "CD Tools $1 build process complete: it took $(($diff / 60)) minutes and $(($diff % 60)) seconds."
