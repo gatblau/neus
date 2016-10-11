@@ -30,6 +30,7 @@ localhost
 
 [cd]
 cd-a
+cd-b
 
 [cd:vars]
 blueprint=silver
