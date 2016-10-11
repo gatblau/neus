@@ -19,5 +19,5 @@ lv_size: 15G
 vg_name: vg_root
 
 # Proxy settings (if required)
-proxy_name:
-proxy_port:
+proxy_name: ""
+proxy_port: ""
