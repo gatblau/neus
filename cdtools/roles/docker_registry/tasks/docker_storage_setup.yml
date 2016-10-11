@@ -14,11 +14,5 @@
   - name: Mount all filesystems
     command: mount -a
 
-  - name: Create a directory for the registry
-    file:
-      path: /var/lib/registry
-      state: directory
-      mode: 0755
-
   - name: Set up storage for Docker
     command: docker-storage-setup
