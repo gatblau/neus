@@ -48,22 +48,3 @@
       dest: /etc/hosts
       line: "{{IP.stdout}}  {{registry_name}}"
       state: present
-
-  # TESTING - Populate registry
-  - name: Pull Docker Images
-    command: "docker pull {{item.image}}"
-    with_items:
-      - { image: "centos:7" }
-    tags: testing
-
-  - name: Tag Docker Images
-    command: "docker tag {{item.image}} {{item.tag}}"
-    with_items:
-      - { image: "centos:7", tag: "{{ registry_name}}:{{ registry_port }}/centos7" }
-    tags: testing
-
-  - name: Push Tagged Docker Images
-    command: "docker push {{item.tag}}"
-    with_items:
-      - { tag: "{{ registry_name }}:{{ registry_port }}/centos7" }
-    tags: testing
