@@ -62,7 +62,7 @@ download_mysql_connector() {
     if [[ ! -e $ROOT$CONNECTOR_FILE ]]; then
         wget -O $ROOT$CONNECTOR_FILE "http://dev.mysql.com/get/Downloads/Connector-J/$CONNECTOR_FILE"
         tar -zxf $ROOT$CONNECTOR_FILE -C $ROOT *.jar
-        mv $ROOT'$2/$2-bin.jar' $ROOT
+        mv $ROOT$2/$2-bin.jar $ROOT
         rm -r $ROOT$2
     fi
 }
