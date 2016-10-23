@@ -76,6 +76,10 @@
       src=gogs.service
       dest=/etc/systemd/system/gogs.service
       mode=0755
-    notify:
-      - start_gogs
+    when: blueprint != "silicon"
+
+  - name: Start GOGS as a service
+    service:
+      name: gogs
+      state: started
     when: blueprint != "silicon"
