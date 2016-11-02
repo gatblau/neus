@@ -19,9 +19,11 @@ The CITOOLS solution is available for deployment on the following infrastructure
  
 Running CentOS or RHEL 7, via the following blueprints:
 
+- [Basic](blueprints/basic/readme.md): the minimum configuration running on one virtual machine.
 - [Bronze](blueprints/bronze/readme.md): the minimum configuration running on two virtual machines.
 - [Silver](blueprints/silver/readme.md): a relatively small configuration for cases where more performant builds are required. Runs on three virtual machines configuration.
 - [Gold](blueprints/gold/readme.md): a larger and scalable configuration using five virtual machines.
+- [Silicon](blueprints/silicon/readme.md): a set of Docker containers for use with an orchestration engine (e.g. OpenShift).
 
 ### Container Management Platforms
 
