@@ -99,3 +99,8 @@
     vars:
       pamm_app_ip_address:  "{{ hostvars['localhost']['remote_ip_address'] }}"
       testsetup_ip_address: "{{ hostvars['localhost']['remote_ip_address'] }}"
+
+  - name: Restart Jenkins to read new PAMMY build pipeline
+    service:
+      name: jenkins
+      state: restarted
