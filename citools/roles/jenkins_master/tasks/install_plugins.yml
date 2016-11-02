@@ -1,15 +1,15 @@
 ---
   - name: Create Jenkins plugins folder
     file:
-      dest="{{jenkins_home}}/plugins"
-      state=directory
-      owner="{{jenkins_user}}"
-      group="{{jenkins_group}}"
+      dest: "{{jenkins_home}}/plugins"
+      state: directory
+      owner: "{{jenkins_user}}"
+      group: "{{jenkins_group}}"
 
   - name: Copying Jenkins plugins to the host
     copy:
-      src="{{ item }}"
-      dest="{{jenkins_home}}/plugins"
-      owner="{{jenkins_user}}"
-      group="{{jenkins_group}}"
+      src: "{{ item }}"
+      dest: "{{jenkins_home}}/plugins"
+      owner: "{{jenkins_user}}"
+      group: "{{jenkins_group}}"
     with_fileglob: ../cache/*.hpi
