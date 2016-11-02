@@ -2,25 +2,25 @@
   # Set up GOGS database
   - name: Copy GOGS database initilisation script (without PAMM seed)
     copy:
-      src=gogs_database.sql
-      dest="/tmp/initialise.sql"
-      mode=0755
+      src: gogs_database.sql
+      dest: "/tmp/initialise.sql"
+      mode: 0755
     when: pamm == "no"
 
   - name: Copy GOGS database initilisation script (with PAMM seed)
     template:
-      src=pamm_seed.sql.j2
-      dest="/tmp/initialise.sql"
-      mode=0755
+      src: pamm_seed.sql.j2
+      dest: "/tmp/initialise.sql"
+      mode: 0755
     when: pamm == "yes"
 
   - name: Initialising the GOGS database
     mysql_db:
-      state=import
-      name=mysql
-      target="/tmp/initialise.sql"
+      state: import
+      name: mysql
+      target: "/tmp/initialise.sql"
 
   - name: Remove initialisation script
     file:
-      path=/tmp/initialise.sql
-      state=absent
+      path: /tmp/initialise.sql
+      state: absent

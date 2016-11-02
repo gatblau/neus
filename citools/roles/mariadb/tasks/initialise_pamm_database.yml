@@ -2,21 +2,21 @@
   # The following script provisions the ci-dit container for blueprint testing only
   - name: Creating the PAMM database (ci-tools test)
     mysql_db:
-      name=pamm
-      state=present
+      name: pamm
+      state: present
 
   - name: Copy PAMM database tables initialisation script (ci-tools test)
     copy:
-      src=pamm_tables.sql
-      dest=/tmp/pamm_tables.sql
+      src: pamm_tables.sql
+      dest: /tmp/pamm_tables.sql
 
   - name: Create pamm database tables (ci-tools test)
     mysql_db:
-      state=import
-      name=mysql
-      target="/tmp/pamm_tables.sql"
+      state: import
+      name: mysql
+      target: "/tmp/pamm_tables.sql"
 
   - name: Remove PAMM database tables initialisation script (ci-tools test)
     file:
-      path=/tmp/pamm_tables.sql
-      state=absent
+      path: /tmp/pamm_tables.sql
+      state: absent
