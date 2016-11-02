@@ -73,10 +73,10 @@
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
-    - jenkins_browsers
     - jenkins_user
+    - jenkins_browsers
     - jenkins_build_tools
-    - jenkins_pamm_builder
+    - jenkins_ose_pammy_builder
 
 - name: Post build - create Docker images
   hosts: localhost
