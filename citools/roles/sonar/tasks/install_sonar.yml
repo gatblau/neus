@@ -1,9 +1,9 @@
 ---
   - name: Create user for SonarQube
     user:
-      name={{sonar_user}}
-      password={{sonar_password}}
-      state=present
+      name: "{{ sonar_user }}"
+      password: "{{ sonar_password }}"
+      state: present
 
   - name: Set sonar user environment variables
     blockinfile:
@@ -22,20 +22,21 @@ export PATH=$PATH:$JAVA_HOME/bin
       rpm_filename : "{{ sonar_rpm }}"
 
   - name: Copying SONAR configuration
-    template: src=sonar.properties.j2
-              dest=/opt/sonar/conf/sonar.properties
-              owner={{sonar_user}}
+    template:
+      src: sonar.properties.j2
+      dest: /opt/sonar/conf/sonar.properties
+      owner: "{{ sonar_user }}"
 
   - name: Starting the SONAR service
     service:
-      name=sonar
-      state=started
-      enabled=yes
+      name: sonar
+      state: started
+      enabled: yes
     when: blueprint != "silicon"
 
   - name: Copy entrypoint script for Sonar Docker container
     template:
-      src=entrypoint.sh.j2
-      dest=/entrypoint.sh
-      mode=0777
+      src: entrypoint.sh.j2
+      dest: /entrypoint.sh
+      mode: 0777
     when: blueprint == "silicon"

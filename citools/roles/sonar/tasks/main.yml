@@ -16,7 +16,7 @@
 
   - name: Change Sonar home folder permissions
     file:
-      name="/opt/sonar"
-      recurse="yes"
-      mode="0777"
+      name: "/opt/sonar"
+      recurse: "yes"
+      mode: "0777"
     when: blueprint == "silicon"
