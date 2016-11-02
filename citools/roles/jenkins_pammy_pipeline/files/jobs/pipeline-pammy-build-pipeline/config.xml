@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--suppress ALL -->
+<flow-definition plugin="workflow-job@2.3">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>-1</daysToKeep>
+        <numToKeep>3</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.9">
+    <script>node {
+    stage &apos;Code Quality&apos;
+    build &apos;pipeline-pammy-code-quality&apos;
+
+    stage &apos;Builds&apos;
+    parallel (
+        &quot;stream 1&quot; : { build &apos;pipeline-pammy-compile-application&apos;  },
+        &quot;stream 2&quot; : { build &apos;pipeline-pammy-compile-test-service&apos; }
+    )
+
+    stage &apos;Deployments&apos;    
+    parallel (
+        &quot;stream 1&quot; : { build &apos;pipeline-pammy-deploy-application&apos;  },
+        &quot;stream 2&quot; : { build &apos;pipeline-pammy-deploy-test-service&apos; }
+    )
+
+    stage &apos;Start Application and Test Service&apos;
+    parallel (
+        &quot;stream 1&quot; : { build &apos;pipeline-pammy-start-application&apos;  },
+        &quot;stream 2&quot; : { build &apos;pipeline-pammy-start-test-service&apos; }
+    )
+
+    stage &apos;Run Tests&apos;
+    build &apos;pipeline-pammy-run-tests&apos;
+
+    stage &apos;Publish Application&apos;
+    build &apos;pipeline-pammy-publish-application&apos;
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+</flow-definition>

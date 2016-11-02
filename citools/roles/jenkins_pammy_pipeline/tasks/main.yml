@@ -1,12 +1,12 @@
 ---
   - name: Install Karma
-    command: "su -c \"npm install karma --save-dev\" - jenkins"
+    command: "su -c \"npm install karma --save-dev\" - jenkins warn=no"
 
   - name: Install Karma plugins
-    command: "su -c \"npm install karma-jasmine karma-chrome-launcher --save-dev\" - jenkins"
+    command: "su -c \"npm install karma-jasmine karma-chrome-launcher --save-dev\" - jenkins warn=no"
 
   - name: Create karma.cmd symbolic link
-    command: "su -c \"cd node_modules/.bin && ln -s ../karma/bin/karma karma.cmd\" - jenkins"
+    command: "su -c \"cd node_modules/.bin && ln -s ../karma/bin/karma karma.cmd\" - jenkins warn=no"
 
   - name: Copying PAMM seed zip file to the host
     copy:
@@ -54,7 +54,7 @@
     register: sbt_dependencies
 
   - name: Build PAMM seed to create SBT cache
-    shell: 'su -c "cd {{ jenkins_user_home }}/pamm.seed && /usr/local/sbt/default/bin/sbt svc/assembly testsetup/assembly -Dsbt.log.noformat=true" - jenkins'
+    shell: 'su -c "cd {{ jenkins_user_home }}/pamm.seed && /usr/local/sbt/default/bin/sbt svc/assembly testsetup/assembly -Dsbt.log.noformat=true" - jenkins warn=no'
     when: sbt_dependencies.stat.exists == false
 
   - name: Create local SBT cache
@@ -67,7 +67,7 @@
       state: absent
 
   - name: Set Protractor timeout
-    command: 'sed -i "s/allScriptsTimeout: 11000,/allScriptsTimeout: 30000,/" /home/jenkins/node_modules/protractor/lib/configParser.js'
+    command: 'sed -i "s/allScriptsTimeout: 11000,/allScriptsTimeout: 30000,/" /home/jenkins/node_modules/protractor/lib/configParser.js warn=no'
 
   - name: Copy Jenkins configuration file
     template:
