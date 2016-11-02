@@ -41,7 +41,7 @@ source ./fetch.sh
 # starts the deployment using the specified inventory
 startTime=$(date -u +"%s")
 
-ansible-playbook -i blueprints/$1/inventory.txt blueprints/$1/playbook.yml
+ansible-playbook -i blueprints/$1/inventory blueprints/$1/playbook.yml
 
 endTime=$(date -u +"%s")
 diff=$(($endTime-$startTime))

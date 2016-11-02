@@ -36,10 +36,6 @@ ci-mariadb
 ci-gogs
 ci-sonar
 
-[bld]
-ci-jenkins
-ci-builder
-
 
 [ci:vars]
 # flags the type of blueprint for plays to decide how to configure accordingly.
