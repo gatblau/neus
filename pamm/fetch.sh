@@ -48,4 +48,4 @@ find $ROOT. -size 0c -delete
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "unzip-6.0-15.el7.x86_64.rpm"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-1.6.3-8.el7.x86_64.rpm"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-filesystem-1.6.3-8.el7.noarch.rpm"
-download "http://download.oracle.com/otn-pub/java/jdk/8u102-b14/" "jdk-8u102-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"
+download "http://download.oracle.com/otn-pub/java/jdk/8u111-b14/" "jdk-8u111-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"

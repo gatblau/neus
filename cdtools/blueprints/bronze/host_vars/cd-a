@@ -1,8 +1,8 @@
 ---
 
 # JDK variables
-java_sdk_name: "Java JDK 8u102-x64"
-java_sdk_rpm: jdk-8u102-linux-x64.rpm
+java_sdk_name: "Java JDK 8u111-x64"
+java_sdk_rpm: jdk-8u111-linux-x64.rpm
 
 # Database variables
 db_user      : admin

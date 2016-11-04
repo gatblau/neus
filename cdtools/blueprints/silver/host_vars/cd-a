@@ -2,8 +2,8 @@
 # Variables for managed node cd-a
 
 # JDK variables
-java_sdk_name: "Java JDK 8u102-x64"
-java_sdk_rpm: jdk-8u102-linux-x64.rpm
+java_sdk_name: "Java JDK 8u111-x64"
+java_sdk_rpm: jdk-8u111-linux-x64.rpm
 
 # Docker registry vriables
 registry_name:  registry
