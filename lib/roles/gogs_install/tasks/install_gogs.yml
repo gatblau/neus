@@ -82,4 +82,5 @@
     service:
       name: gogs
       state: started
+      enabled: yes
     when: blueprint != "silicon"
