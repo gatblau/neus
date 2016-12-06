@@ -4,11 +4,13 @@ Not all variables defined in the group and host variables files are listed below
 
 ## CI Tools
 
-Some of the following variables are only applicable to silver or gold blueprints.  Note: see the `upv_ec2.yml` file for AWS EC2 options.
+Some of the following variables are only applicable to silver or gold blueprints.  
+
+Note: see the `upv_ec2.yml` file for AWS EC2 options.
 
 ### Group Variables
 
-#### All
+#### All Nodes
 
 | parameter | required | default | choices | comments |
 |--------|--------|--------|--------|--------|
@@ -27,7 +29,7 @@ Some of the following variables are only applicable to silver or gold blueprints
 | pamm | yes | no | <ul><li>yes</li><li>no</li></ul> | When set to `yes` the PAMM seed will be imported into GOGS and a build job will be created in Jenkins to build the PAMM seed. |
 | jamm | yes | no | <ul><li>yes</li><li>no</li></ul> | Not yet available. |
 
-#### CI
+#### CI Managed Nodes
 
 | parameter | required | default | choices | comments |
 |--------|--------|--------|--------|--------|
@@ -36,7 +38,7 @@ Some of the following variables are only applicable to silver or gold blueprints
 
 ### Host Variables
 
-#### Localhost
+#### Control Node : localhost
 
 | parameter | required | default | choices | comments |
 |--------|--------|--------|--------|--------|
@@ -62,7 +64,7 @@ Although variables are not normally defined in the inventory, the following vari
 
 | parameter | required | default | choices | comments |
 |--------|--------|--------|--------|--------|
-| blueprint | yes | | <li>bronze</li><li>silver</li><li>gold</li> | Set to blueprint, do not change the value. |
+| blueprint | yes | | <li>bronze</li><li>silver</li><li>gold</li><li>silicon</li> | Set to blueprint, do not change the value. |
 
 
 #### PAMM

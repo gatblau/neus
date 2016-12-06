@@ -44,7 +44,7 @@ This guide assumes that the prerequisites below are carried out using a [Europa]
 | 2. Edit the pamm inventory file | Edit the `pamm/inventory.txt` file and change `tgt_platform` to `ec2` |
 | 3. Copy the key pair | Copy the `ec2user.pem` file to the `neus/lib/keys` folder and ensure the file permissions are set to 0400 |
 | 4. Run the pamm script | In a terminal window `cd` to the `pamm` folder and enter: `up.sh bronze`</p>Note: got to the AWS EC2 instances page and not the public dns name of the `pamm-a` instance. |
-| 5. Edit the citools inventory file | Edit the `citools/inventory.txt` file and change:</br> `tgt_platform` to `ec2`</br> `ci_dit_public_dns_name` to the `pamm-a` public dns name</br> `ci_b_instance_type` to `c3.large` |
+| 5. Edit the citools inventory file | Edit the `citools/blueprint/[bronze|silver|gold]/localhost` file and change:</br> `tgt_platform` to `ec2`</br> `ci_dit_public_dns_name` to the `pamm-a` public dns name</br> `ci_b_instance_type` to `c3.large` |
 | 6. Run the citools script | In a terminal window `cd` to the `citools` folder and enter: `up.sh bronze` |
 
 The scripts may take a few hours to complete.  Once they have finished, the tolls can be accessed by using the EC2 instance public dns name and port number:
