@@ -59,7 +59,7 @@ download "http://dl.fedoraproject.org/pub/epel/7/x86_64/e/" "epel-release-7-8.no
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nodejs-6.7.0-107.el7.x86_64.rpm"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "npm-1.3.6-5.el7.noarch.rpm"
 download "https://github.com/gogits/gogs/releases/download/v0.9.97/" "linux_386.zip"
-download "http://pkg.jenkins-ci.org/redhat-stable/" "jenkins-2.19.2-1.1.noarch.rpm"
+download "http://pkg.jenkins-ci.org/redhat-stable/" "jenkins-2.19.4-1.1.noarch.rpm"
 download "https://bintray.com/artifact/download/groovy/maven/" "apache-groovy-binary-2.4.4.zip"
 #download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-1.6.3-9.el7.x86_64.rpm"
 #download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-filesystem-1.6.3-9.el7.noarch.rpm"

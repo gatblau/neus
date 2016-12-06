@@ -4,4 +4,4 @@
 # Jenkins variables
 jenkins_home: /home/jenkins/.jenkins
 jenkins_master_executors: 0
-jenkins_rpm:  jenkins-2.19.2-1.1.noarch.rpm
+jenkins_rpm:  jenkins-2.19.4-1.1.noarch.rpm
