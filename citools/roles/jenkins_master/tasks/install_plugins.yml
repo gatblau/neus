@@ -12,4 +12,4 @@
       dest: "{{jenkins_home}}/plugins"
       owner: "{{jenkins_user}}"
       group: "{{jenkins_group}}"
-    with_fileglob: ../cache/*.hpi
+    with_fileglob: cache/*.hpi
