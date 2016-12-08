@@ -23,7 +23,7 @@
   maven_folder: apache-maven-3.3.9
   maven_zip: apache-maven-3.3.9-bin.zip
 
-  nodejs_rpm: nodejs-6.7.0-107.el7.x86_64.rpm
+  nodejs_rpm: nodejs-6.9.1-4.el7.x86_64.rpm
   # npm_rpm:    set in blueprint host_vars managed node file
 
   perl_rpm: perl-5.16.3-286.el7.x86_64.rpm
