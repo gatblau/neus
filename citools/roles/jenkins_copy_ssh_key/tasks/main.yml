@@ -1,0 +1,21 @@
+---
+- name: Fetch Jenkins public key and save in cache folder
+  fetch:
+    src:  "{{ jenkins_user_home }}/.ssh/id_rsa.pub"
+    dest: "cache/authorized_keys"
+    flat: yes
+  delegate_to: "{{ item }}"
+  with_items: "{{ groups['build-master'] | first }}"
+
+- name: Copy ssh key file to host
+  copy:
+    src: "cache/authorized_keys"
+    dest: "/home/jenkins/.ssh"
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+    mode: 0600
+
+- name: Remove temporary ssh key file
+  local_action: file
+    path="cache/authorized_keys"
+    state=absent

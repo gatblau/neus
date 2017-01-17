@@ -49,6 +49,16 @@
       line: "nexus-webapp-context-path=*"
       backrefs: yes
 
+  - name: Adding Nexus as a Service
+    command: "chkconfig --add nexus"
+    args:
+       chdir: "/etc/init.d"
+
+  - name: Setting Nexus run level
+    command: "chkconfig --levels 345 nexus on"
+    args:
+       chdir: "/etc/init.d"
+
   - name: Starting the NEXUS service
     service:
       name: nexus

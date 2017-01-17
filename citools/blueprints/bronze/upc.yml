@@ -38,12 +38,6 @@
     name: docker
     state: restarted
 
-- name: Set Docker daemon permissions
-  become: yes
-  file:
-    path: /var/run/docker.sock
-    mode: 0666
-
 - name: Delete existing Docker containers
   become: yes
   docker_container:
@@ -57,14 +51,13 @@
     - { name: "ci-dit", image: "{{ ci_dit_base }}" }
 
 - name: Start up the Docker containers
-  docker:
+  docker_container:
     image: "{{ item.image }}"
     name: "{{ item.name }}"
     hostname: "{{ item.name }}"
-    pull: missing
     detach: yes
     tty: yes
-    expose: "[ {{ item.ports }} ]"
+    exposed_ports: "[ {{ item.ports }} ]"
     command: "/usr/sbin/init"
     state: started
     privileged: yes

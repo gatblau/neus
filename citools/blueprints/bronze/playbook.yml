@@ -35,9 +35,10 @@
     - jdk
     - jenkins_user
     - jenkins_install
-    - { role: jenkins_browsers, when: pamm == "yes" }
     - jenkins_build_tools
     - jenkins_master
+    - { role: jenkins_browsers, when: pamm == "yes" }
+    - { role: jenkins_pammy_dependencies, when: pamm == "yes" }
     - { role: jenkins_pammy_pipeline, when: pamm == "yes" }
     - nexus_install
     - nexus
@@ -60,7 +61,8 @@
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
-    - connect
+    - jenkins_user
+    - jenkins_copy_ssh_key
     - { role: jdk, when: connection == 'docker' }
     - { role: mariadb, db_user: 'pamm', db_pwd: 'n3us', when: connection == 'docker' }
 

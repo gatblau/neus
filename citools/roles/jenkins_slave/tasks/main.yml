@@ -1,5 +1,0 @@
----
-### Create jenkins user
-  - name: Create jenkins user
-    include: jenkins_user.yml
-

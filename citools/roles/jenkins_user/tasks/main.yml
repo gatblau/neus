@@ -1,18 +1,20 @@
 ---
   - name: Create jenkins group
     group:
-      name="{{jenkins_group}}"
-      state=present
+      name:  "{{ jenkins_group }}"
+      state: present
 
   - name: Create jenkins user
     user:
-      name="{{jenkins_user}}"
-      password="{{jenkins_password}}"
-      group="{{jenkins_group}}"
-      state=present
+      name:     "{{ jenkins_user }}"
+      password: "{{ jenkins_password }}"
+      group:    "{{ jenkins_group }}"
+      state:    present
 
   - name: Add Jenkins to sudoers list
-    copy: src=sudoers.jenkins dest=/etc/sudoers.d/jenkins
+    copy:
+      src:  "sudoers.jenkins"
+      dest: "/etc/sudoers.d/jenkins"
     when: blueprint != "silicon"
 
   - name: Set jenkins user environment variables
@@ -22,7 +24,7 @@
       marker: "# {mark} Jenkins Environment Variables"
       block:  "export JAVA_HOME=/usr/java/default
 
-export JENKINS_HOME={{jenkins_home}}
+export JENKINS_HOME={{ jenkins_home }}
 
 export PATH=$PATH:$JAVA_HOME/bin
 
@@ -37,6 +39,19 @@ export PATH=$PATH:$JAVA_HOME/bin
 
 "
     when: blueprint != "silicon"
+
+  - name: Remove nologin file
+    file:
+      path: /run/nologin
+      state: absent
+    when: connection == "docker"
+
+  - name: Start sshd service (Docker only)
+    service:
+      name: sshd
+      state: started
+      enabled: yes
+    when: connection == "docker"
 
   - name: Generate ssh keys for jenkins user
     include: generate_ssh_keys.yml
