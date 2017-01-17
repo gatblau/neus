@@ -1,5 +1,6 @@
 ---
   # Jenkins home
+  jenkins_home:      /var/lib/jenkins
   jenkins_user_home: /home/jenkins
 
   # Jenkins username and password
