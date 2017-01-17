@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker build --rm -t gatblau/centos:7d .
+docker build --rm -t gatblau.org/centos:7ds .
