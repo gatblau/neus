@@ -5,7 +5,7 @@
     dest: "cache/authorized_keys"
     flat: yes
   delegate_to: "{{ item }}"
-  with_items: "{{ groups['build-master'] | first }}"
+  with_items: "{{ groups['ci'] | first }}"
 
 - name: Copy ssh key file to host
   copy:
