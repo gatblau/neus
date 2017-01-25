@@ -19,10 +19,11 @@
 #
 ---
 - set_fact:
+    become: "yes"
+    connection: "ssh"
     database_ip_address: "127.0.0.1"
     jenkins_ip_address: "{{ ci_a_int_dns_name }}"
-    jenkins_location:   "{{ ci_a_ext_dns_name }}"
-    jenkins_url:        "{{ ci_a_ext_dns_name }}"
+    jenkins_location:   "{{ jenkins_url }}"
     nexus_ip_address:   "{{ ci_a_int_dns_name }}"
     gogs_ip_address:    "{{ ci_a_int_dns_name }}"
     sonar_ip_address:   "{{ ci_a_int_dns_name }}"
@@ -43,8 +44,8 @@
     ansible_host: "{{ item.host }}"
     ansible_user: "root"
     ansible_port: 22
-    become: "yes"
-    connection: "ssh"
+    become: "{{ become }}"
+    connection: "{{ connection }}"
   with_items:
     - { name: "ci-a",   host: "{{ ci_a_ip }}" }
     - { name: "ci-dit-pamm", host: "{{ ci_dit_pamm_ip }}" }
