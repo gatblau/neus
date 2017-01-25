@@ -1,5 +1,0 @@
----
-  - name: Creating the SONAR database
-    mysql_db:
-      name: sonar
-      state: present

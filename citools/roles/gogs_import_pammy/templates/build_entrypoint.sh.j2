@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-# Set GOGS environment variables
-export HOME={{gogs_path}}
-export USER={{gogs_user}}
-export USERNAME={{gogs_user}}
-
-# Start GOGS
-echo gogs | su - {{gogs_user}} -c "/usr/local/gogs/gogs web &"

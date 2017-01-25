@@ -1,5 +1,0 @@
----
-  chrome_rpm: google-chrome-stable_current_x86_64.rpm
-  firefox_rpm: firefox-45.4.0-1.el7.centos.x86_64.rpm
-  libexif_rpm: libexif-devel-0.6.21-6.el7.x86_64.rpm
-  xvfb_rpm: xorg-x11-server-Xvfb-1.17.2-22.el7.x86_64.rpm

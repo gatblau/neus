@@ -1,7 +1,0 @@
----
-# Variables for ci-jenkins managed node
-
-# Jenkins variables
-jenkins_home: /home/jenkins/.jenkins
-jenkins_master_executors: 0
-jenkins_rpm:  jenkins-2.32.1-1.1.noarch.rpm

@@ -1,6 +1,0 @@
----
-  dependencies:
-    - { role: baseline }
-    - { role: jdk }
-    - { role: jenkins_user }
-    - { role: jenkins_install }

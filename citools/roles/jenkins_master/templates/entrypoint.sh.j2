@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-export JENKINS_HOME={{jenkins_home}}
-export JAVA_HOME=/usr/java/latest
-
-# Start Jenkins
-echo jenkins | su -c "/usr/java/default/bin/java -Djenkins.install.runSetupWizard=false -jar /usr/lib/jenkins/jenkins.war" - jenkins
