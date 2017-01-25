@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<org.jenkinsci.plugins.openshift.DeployApplication_-DeployApplicationDescriptor plugin="openshift-deployer@1.2.0">
+  <DEFAULT__PUBLICKEY__PATH>/home/jenkins/.ssh/id_rsa.pub</DEFAULT__PUBLICKEY__PATH>
+  <publicKeyPath>/home/jenkins/.ssh/id_rsa.pub</publicKeyPath>
+</org.jenkinsci.plugins.openshift.DeployApplication_-DeployApplicationDescriptor>

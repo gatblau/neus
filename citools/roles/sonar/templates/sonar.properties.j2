@@ -1,0 +1,12 @@
+# User used by SONAR to connect to the database
+sonar.jdbc.username={{ db_user }}
+sonar.jdbc.password={{ db_pwd  }}
+sonar.jdbc.url=jdbc:mysql://{{ database_ip_address }}:{{ database_port }}/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance
+
+# bind to any IP
+#sonar.web.host=0.0.0.0
+#sonar.web.host=localhost
+sonar.web.context=/
+
+# port for incoming http requests
+sonar.web.port={{ sonar_port }}

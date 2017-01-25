@@ -1,81 +1,79 @@
 ---
-  - name: Install glibc libraries
+  - name: Install required libraries
     yum:
-      name=glibc.i686
-      state=latest
-
-  - name: Install pam libraries
-    yum:
-      name=pam.i686
-      state=latest
+      name:  "{{ item }}"
+      state: latest
+    with_items:
+      - "glibc.i686"
+      - "pam.i686"
 
   - name: Create group for GOGS user
     group:
-      name="{{gogs_group}}"
-      state=present
+      name: "{{ gogs_group }}"
+      state: present
 
   - name: Create user for GOGS
     user:
-      name="{{gogs_user}}"
-      group="{{gogs_group}}"
-      password="{{gogs_password}}"
-      state=present
+      name: "{{ gogs_user }}"
+      group: "{{ gogs_group }}"
+      password: "{{ gogs_password }}"
+      state: present
 
   - name: Creating the GOGS installation folder
     file:
-      path="{{gogs_path}}"
-      state=directory
-      owner="{{gogs_user}}"
-      group="{{gogs_group}}"
-      mode=0755
+      path: "{{ gogs_path }}"
+      state: directory
+      owner: "{{ gogs_user }}"
+      group: "{{ gogs_group }}"
+      mode: 0755
 
   - name: Copying GOGS to the host machine
     copy:
-      src=cache/{{gogs_zipfile}}
-      dest=/tmp/{{gogs_zipfile}}
+      src: "cache/{{ gogs_zipfile }}"
+      dest: "/tmp/{{ gogs_zipfile }}"
 
   - name: Unzipping the GOGS archive
     unarchive:
-      src=/tmp/{{gogs_zipfile}}
-      dest=/usr/local
-      owner={{gogs_user}}
-      group="{{gogs_group}}"
-      copy=no
+      src: "/tmp/{{ gogs_zipfile }}"
+      dest: /usr/local
+      owner: "{{ gogs_user }}"
+      group: "{{ gogs_group }}"
+      copy: no
 
   - name: Creating the GOGS custom configuration folder
     file:
-      path="{{gogs_path}}/custom/conf"
-      state=directory
-      owner="{{gogs_user}}"
-      group="{{gogs_group}}"
-      mode=0777
+      path: "{{gogs_path }}/custom/conf"
+      state: directory
+      owner: "{{ gogs_user }}"
+      group: "{{ gogs_group }}"
+      mode: 0777
 
   - name: Copying GOGS custom configuration file
     template:
-      src=app.ini.j2
-      dest="{{gogs_path}}/custom/conf/app.ini"
-      owner="{{gogs_user}}"
-      group="{{gogs_group}}"
-      mode=0755
+      src: app.ini.j2
+      dest: "{{ gogs_path }}/custom/conf/app.ini"
+      owner: "{{ gogs_user }}"
+      group: "{{ gogs_group }}"
+      mode: 0755
 
   - name: Creating the GOGS "log" folder
     file:
-      path="{{gogs_path}}/log"
-      state=directory
-      owner="{{gogs_user}}"
-      group="{{gogs_group}}"
-      mode=0777
+      path: "{{ gogs_path }}/log"
+      state: directory
+      owner: "{{ gogs_user }}"
+      group: "{{ gogs_group }}"
+      mode: 0777
 
   - name: Removing the GOGS archive
     file:
-      path=/tmp/{{gogs_zipfile}}
-      state=absent
+      path: "/tmp/{{ gogs_zipfile }}"
+      state: absent
 
   - name: Installing GOGS service
     copy:
-      src=gogs.service
-      dest=/etc/systemd/system/gogs.service
-      mode=0755
+      src: gogs.service
+      dest: /etc/systemd/system/gogs.service
+      mode: 0755
     when: blueprint != "silicon"
 
   - name: Start GOGS as a service

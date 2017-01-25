@@ -1,0 +1,37 @@
+---
+  - name: Install Simple Build Tool (SBT)
+    include: "plays/install_tool.yml"
+    vars:
+      tool_name : SBT
+      folder_name : "{{ sbt_folder }}"
+      zip_filename: "{{ sbt_zip }}"
+      add_version_to_folder : true
+      zip_has_folder : true
+      has_bin_folder : true
+      user: jenkins
+
+  - name: Check for local SBT cache
+    local_action: "stat path=cache/{{sbt_cache}}"
+    register: sbt_dependencies
+
+  - name: Copy SBT cache zip file
+    copy:
+      src: "cache/{{sbt_cache}}"
+      dest: "/tmp/{{sbt_cache}}"
+      owner: root
+    when: sbt_dependencies.stat.exists == true
+
+  - name: Unzip SBT cache zip file
+    unarchive:
+      src: "/tmp/{{sbt_cache}}"
+      dest: /home/jenkins
+      copy: no
+      owner: jenkins
+      group: jenkins
+    when: sbt_dependencies.stat.exists == true
+
+  - name: Delete SBT cache zip file
+    file:
+      path: "/tmp/{{sbt_cache}}"
+      state: absent
+    when: sbt_dependencies.stat.exists == true

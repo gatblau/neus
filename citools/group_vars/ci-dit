@@ -1,0 +1,3 @@
+---
+jenkins_user_home: "/home/jenkins"
+jenkins_home:      "/var/lib/jenkins"

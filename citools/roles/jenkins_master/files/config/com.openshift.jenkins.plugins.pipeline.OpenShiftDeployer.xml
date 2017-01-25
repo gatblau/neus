@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<com.openshift.jenkins.plugins.pipeline.OpenShiftDeployer_-DescriptorImpl plugin="openshift-pipeline@1.0.12">
+  <wait>60000</wait>
+</com.openshift.jenkins.plugins.pipeline.OpenShiftDeployer_-DescriptorImpl>

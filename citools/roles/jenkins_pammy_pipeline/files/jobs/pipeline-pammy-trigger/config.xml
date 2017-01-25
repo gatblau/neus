@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--suppress ALL -->
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>-1</daysToKeep>
+        <numToKeep>3</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.28"/>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.5.2">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>http://172.17.0.3:3000/gogs/pamm.seed</url>
+        <credentialsId>bae14e67-75b9-4fbc-b2fe-d6172bf07f76</credentialsId>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <jdk>(System)</jdk>
+  <triggers>
+    <com.cloudbees.jenkins.GitHubPushTrigger plugin="github@1.19.3">
+      <spec></spec>
+    </com.cloudbees.jenkins.GitHubPushTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.plugins.parameterizedtrigger.TriggerBuilder plugin="parameterized-trigger@2.31">
+      <configs>
+        <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+          <configs class="empty-list"/>
+          <projects>pipeline-pammy-build-pipeline</projects>
+          <condition>ALWAYS</condition>
+          <triggerWithNoParameters>false</triggerWithNoParameters>
+          <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+        </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+      </configs>
+    </hudson.plugins.parameterizedtrigger.TriggerBuilder>
+  </builders>
+  <publishers>
+    <hudson.plugins.cloneworkspace.CloneWorkspacePublisher plugin="clone-workspace-scm@0.6">
+      <workspaceGlob></workspaceGlob>
+      <criteria>Any</criteria>
+      <archiveMethod>TAR</archiveMethod>
+      <overrideDefaultExcludes>false</overrideDefaultExcludes>
+    </hudson.plugins.cloneworkspace.CloneWorkspacePublisher>
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.29">
+      <deleteDirs>false</deleteDirs>
+      <skipWhenFailed>false</skipWhenFailed>
+      <cleanWhenSuccess>true</cleanWhenSuccess>
+      <cleanWhenUnstable>true</cleanWhenUnstable>
+      <cleanWhenFailure>true</cleanWhenFailure>
+      <cleanWhenNotBuilt>true</cleanWhenNotBuilt>
+      <cleanWhenAborted>true</cleanWhenAborted>
+      <notFailBuild>false</notFailBuild>
+      <cleanupMatrixParent>false</cleanupMatrixParent>
+      <externalDelete></externalDelete>
+    </hudson.plugins.ws__cleanup.WsCleanup>
+  </publishers>
+  <buildWrappers/>
+</project>

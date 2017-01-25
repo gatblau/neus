@@ -1,0 +1,2 @@
+---
+gogs_url: "http://{{ gogs_ip_address }}: {{ gogs_port }}"

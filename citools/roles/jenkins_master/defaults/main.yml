@@ -1,0 +1,3 @@
+---
+jenkins_url: "{{ jenkins_ip_address }}"
+sonar_url:   "{{ sonar_url }}"

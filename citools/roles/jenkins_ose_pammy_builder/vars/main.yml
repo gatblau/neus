@@ -1,0 +1,10 @@
+---
+  # Jenkins username and password
+  jenkins_user: jenkins
+  jenkins_password: $6$rounds=656000$vEwfQFfx8of8GbEK$.Ib42z9muqnJxiuQL/fw7JomQ5VXAPNBIWCQsQIm1nBIa/Jy17dXT3mxzwiI.BJ4mVdzJ2COlhlXmgn0EIaEz1
+  jenkins_group: jenkins
+
+  swarm_client: swarm-client-2.0-jar-with-dependencies.jar
+
+  # sbt_folder: set in group_vars/all/main.yml
+  # sbt_zip:    set in group_vars/all/main.yml

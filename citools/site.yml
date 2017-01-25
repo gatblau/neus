@@ -1,0 +1,139 @@
+---
+- include: "plays/up_host.yml"
+  tags: always
+
+- name: Provisioning build server (Jenkins)
+  hosts: build-master
+  connection: "{{ connection }}"
+  become: "{{ become }}"
+  roles:
+    - jenkins_user
+    - jenkins_install
+    - jenkins_master
+  tags: always
+
+- name: Provisioning build server (build tools and PAMM seed)
+  hosts: build-master
+  connection: "{{ connection }}"
+  become: "{{ become }}"
+  roles:
+    - jenkins_build_tools
+    - { role: jenkins_browsers, when: pamm == "yes" }
+    - { role: jenkins_pammy_dependencies, when: pamm == "yes" }
+    - { role: jenkins_pammy_pipeline, when: pamm == "yes" }
+  tags: [ basic, bronze, silver, gold ]
+
+- name: Provisioning PAMM build server slave(s)
+  hosts: build-slaves-pamm
+  connection: "{{ connection }}"
+  become: "{{ become }}"
+  roles:
+    - jdk
+    - jenkins_user
+    - jenkins_copy_ssh_key
+    - jenkins_configure_slave
+    - jenkins_build_tools
+    - { role: jenkins_browsers, when: pamm == "yes" }
+    - { role: jenkins_pammy_dependencies, when: pamm == "yes" }
+  tags: [ silver, gold ]
+
+- name: Provisioning JAMM build server slave(s)
+  hosts: build-slaves-jamm
+  connection: "{{ connection }}"
+  become: "{{ become }}"
+  roles:
+    - jdk
+    - jenkins_user
+    - jenkins_copy_ssh_key
+    - jenkins_configure_slave
+    - jenkins_build_tools
+#    - { role: jamm, when: jamm == "yes" }
+  tags: [ silver, gold ]
+
+- name: Provisioning artefact repository server
+  hosts: repo
+  connection: "{{ connection }}"
+  become: "{{ become }}"
+  roles:
+    - nexus_install
+    - nexus
+  tags: always
+
+- name: Provisioning database for source and quality servers
+  hosts: database
+  connection: "{{ connection }}"
+  become: "{{ become }}"
+  roles:
+    - mariadb_install
+    - mariadb
+  tags: always
+
+- name: Provisioning quality server
+  hosts: quality
+  connection: "{{ connection }}"
+  become: "{{ become }}"
+  roles:
+    - sonar_install
+    - sonar
+  tags: always
+
+- name: Provisioning PAMM DIT host
+  hosts: ci-dit-pamm
+  connection: "{{connection}}"
+  become: "{{become}}"
+  roles:
+    - jenkins_user
+    - jenkins_copy_ssh_key
+    - { role: jdk, when: connection == 'docker' }
+    - { role: mariadb, db_user: 'pamm', db_pwd: 'n3us', when: connection == 'docker' }
+  tags: [ basic, bronze, silver, gold ]
+
+- name: Provisioning JAMM DIT host
+  hosts: ci-dit-pamm
+  connection: "{{connection}}"
+  become: "{{become}}"
+  roles:
+    - jenkins_user
+    - jenkins_copy_ssh_key
+    - { role: jdk, when: connection == 'docker' }
+  tags: [ basic, bronze, silver, gold ]
+
+# Provision last to allow applications to start up before webhook is triggered
+- name: Provisioning source repository server
+  hosts: source
+  connection: "{{ connection }}"
+  become: "{{ become }}"
+  roles:
+    - gogs_install
+    - { role: gogs_import_pammy, when: pamm == "yes" }
+  tags: always
+
+- name: Provisioning host Jenkins builder (silicon blueprint)
+  hosts: ci-buildtools
+  connection: "{{ connection }}"
+  become: "{{ become }}"
+  roles:
+    - jenkins_user
+    - jenkins_browsers
+    - jenkins_build_tools
+    - jenkins_ose_pammy_builder
+  tags: [ silicon ]
+
+- name: Create Docker images (silicon blueprint)
+  hosts: localhost
+  connection: local
+  become: no
+  tasks:
+    - name: Create Docker images
+      include: "plays/docker_image.yml"
+      vars:
+        container_name: "{{ item.container }}"
+        image_name: "{{ item.image }}"
+      with_items:
+        - { container: 'ci-jenkins',    image: 'silicon/test/ci-jenkins:{{ image_version | default("latest") }}'}
+        - { container: 'ci-nexus',      image: 'silicon/test/ci-nexus:{{ image_version | default("latest") }}'}
+        - { container: 'ci-mariadb',    image: 'silicon/test/ci-mariadb:{{ image_version | default("latest") }}'}
+        - { container: 'ci-gogs',       image: 'silicon/test/ci-gogs:{{ image_version | default("latest") }}'}
+        - { container: 'ci-sonar',      image: 'silicon/test/ci-sonar:{{ image_version | default("latest") }}'}
+        - { container: 'ci-buildtools', image: 'silicon/test/ci-build-tools:{{ image_version | default("latest") }}'}
+  tags: [ silicon ]

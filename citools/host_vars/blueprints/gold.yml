@@ -1,0 +1,22 @@
+---
+containers:
+  ci-a:
+    ports: "{{ jenkins_port }}, {{ nexus_port }}, {{ selenium_port }}"
+  ci-b:
+    ports: "{{ jenkins_port }}"
+  ci-c:
+    ports: "{{ jenkins_port }}"
+  ci-d:
+    ports: "{{ database_port }}"
+  ci-e:
+    ports: "{{ gogs_port }}, {{ sonar_port }}"
+  ci-dit-pamm:
+    ports: "{{ pamm_app_port }}, {{ pamm_test_port }}"
+
+
+#    - { name: "ci-a",   ports:  }
+#    - { name: "ci-b",   ports:  }
+#    - { name: "ci-c",   ports:  }
+#    - { name: "ci-d",   ports:  }
+#    - { name: "ci-e",   ports:  }
+#    - { name: "ci-dit", ports: "{{ pamm_app_port }}, {{ pamm_test_port }}"}

@@ -1,0 +1,4 @@
+---
+  dependencies:
+    - { role: baseline }
+    - { role: mariadb_install }

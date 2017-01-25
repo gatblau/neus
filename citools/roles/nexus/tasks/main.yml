@@ -1,0 +1,7 @@
+---
+- name: Copy entrypoint script for Nexus Docker container
+  copy:
+    src: entrypoint.sh
+    dest: /entrypoint.sh
+    mode: 0755
+  when: blueprint == "silicon"

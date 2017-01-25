@@ -1,0 +1,10 @@
+---
+containers:
+  ci-a:
+    ports: "{{ jenkins_port }}, {{ nexus_port }}, {{ selenium_port }}"
+  ci-b:
+    ports: "{{ gogs_port }}, {{ sonar_port }}"
+  ci-c:
+    ports: "22, {{ jenkins_port }}, {{ selenium_port }}"
+  ci-d:
+    ports: "22, {{ jenkins_port }}, {{ selenium_port }}"

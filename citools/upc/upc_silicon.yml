@@ -1,0 +1,44 @@
+---
+- name: Start up Docker containers (silicon)
+  docker:
+    image: "{{ ci_base }}"
+    name: "{{ item.name }}"
+    hostname: "{{ item.name }}"
+    pull: missing
+    detach: yes
+    tty: yes
+    expose: "[ {{ item.ports }} ]"
+    command: sleep infinity
+    state: started
+    volumes:
+      - /var/cache/yum/neus:/var/cache/yum:rw
+  with_items:
+    - { name: "ci-jenkins",    ports: "{{ jenkins_port }}" }
+    - { name: "ci-nexus",      ports: "{{ nexus_port }}" }
+    - { name: "ci-mariadb",    ports: "{{ database_port }}" }
+    - { name: "ci-gogs",       ports: "{{ gogs_port }}" }
+    - { name: "ci-sonar",      ports: "{{ sonar_port }}" }
+    - { name: "ci-buildtools", ports: "{{ jenkins_port }}, {{ selenium_port }}" }
+
+- name: Get ci-mariadb IP address
+  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-mariadb"
+  register: ci_mariadb_ip
+
+- set_fact:
+    database_container: "{{ ci_mariadb_ip.stdout }}"
+    database_ip_address: "${DB_IP_ADDRESS}"
+    gogs_ip_address:     "${GOGS_IP_ADDRESS}"
+    jenkins_ip_address:  "${JENKINS_IP_ADDRESS}"
+    jenkins_location:    "${JENKINS_IP_ADDRESS}"
+    nexus_ip_address:    "${NEXUS_IP_ADDRESS}"
+    sonar_ip_address:    "${SONAR_IP_ADDRESS}"
+    remote_ip_address:   "${DIT_IP_ADDRESS}"
+    jenkins_url:         "${JENKINS_IP_ADDRESS}"
+    gogs_url:            "http://${GOGS_IP_ADDRESS}:${GOGS_PORT}"
+    nexus_url:           "${NEXUS_IP_ADDRESS}"
+    sonar_url:           "${SONAR_IP_ADDRESS}"
+    jenkins_port: "${JENKINS_PORT}"
+    nexus_port:   "${NEXUS_PORT}"
+    gogs_port:    "${GOGS_PORT}"
+    sonar_port:   "${SONAR_PORT}"
+    image_version: "latest"

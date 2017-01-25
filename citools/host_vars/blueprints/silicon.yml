@@ -1,0 +1,16 @@
+---
+containers:
+
+  ci-jenkins:
+    ports: "{{ jenkins_port }}"
+  ci-nexus:
+    ports: "{{ nexus_port }}"
+  ci-mariadb:
+    ports: "{{ database_port }}"
+  ci-gogs:
+    ports: "{{ gogs_port }}"
+  ci-sonar:
+    ports: "{{ sonar_port }}"
+  ci-buildtools:
+    ports: "{{ jenkins_port }}, {{ selenium_port }}"
+

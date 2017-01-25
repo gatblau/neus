@@ -1,0 +1,10 @@
+---
+  - include: "plays/install_tool.yml"
+    vars:
+      tool_name : sonar-runner
+      folder_name : "{{ sonar_runner_folder }}"
+      zip_filename: "{{ sonar_runner_zipfile }}"
+      zip_has_folder : true
+      add_version_to_folder : false
+      has_bin_folder : true
+

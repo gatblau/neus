@@ -1,0 +1,85 @@
+---
+  - name: Install Plugins
+    include: install_plugins.yml
+
+  - name: Create Jenkins users
+    copy:
+      src=users
+      dest="{{jenkins_home}}"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+
+  - name: Copy Jenkins configuration files
+    copy:
+      src="{{ item }}"
+      dest="{{jenkins_home}}"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+    with_fileglob:
+      - config/*.xml
+
+  - name: Copy Jenkins configuration file
+    template: 
+      src=jenkins_config.xml.j2
+      dest="{{jenkins_home}}/config.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+
+  - name: Copy Jenkins credentials file
+    template:
+      src=credentials.xml.j2
+      dest="{{jenkins_home}}/credentials.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+
+  - name: Set up Jenkins to Sonar Publisher configuration
+    template: 
+      src=hudson.plugins.sonar.SonarPublisher.xml.j2
+      dest="{{jenkins_home}}/hudson.plugins.sonar.SonarPublisher.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+
+  - name: Set up Jenkins to Sonar global configuration
+    template:
+      src=hudson.plugins.sonar.SonarGlobalConfiguration.xml.j2
+      dest="{{jenkins_home}}/hudson.plugins.sonar.SonarGlobalConfiguration.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+
+  - name: Set up Jenkins location
+    template:
+      src=jenkins.model.JenkinsLocationConfiguration.xml.j2
+      dest="{{jenkins_home}}/jenkins.model.JenkinsLocationConfiguration.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+    vars:
+      build_ip_address: "{{hostvars['localhost']['jenkins_location']}}"
+
+  - name: Set Jenkins proxy settings
+    template:
+      src=proxy.xml.j2
+      dest="{{jenkins_home}}/proxy.xml"
+      owner="{{jenkins_user}}"
+      group="{{jenkins_group}}"
+
+  - name: Jenkins service setup
+    template:
+      src=jenkins.j2
+      dest=/etc/sysconfig/jenkins
+      owner=root
+      mode=600
+    when: blueprint != "silicon"
+
+  - name: Starting the Jenkins Service
+    service:
+      name=jenkins
+      state=started
+      enabled=yes
+    when: blueprint != "silicon"
+
+  - name: Copy entrypoint script for Jenkins Master Docker container
+    template:
+      src=entrypoint.sh.j2
+      dest=/entrypoint.sh
+      mode=0755
+    when: blueprint == "silicon"

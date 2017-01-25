@@ -1,0 +1,21 @@
+---
+# Obtain IP addresses of containers
+- name: Get ci-a IP address
+  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-a"
+  register: ci_a_ip
+
+- name: Get ci-dit-pamm IP address
+  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-dit-pamm"
+  register: ci_dit_pamm_ip
+
+- set_fact:
+    database_ip_address: "127.0.0.1"
+    jenkins_ip_address:  "{{ ci_a_ip.stdout }}"
+    jenkins_location:    "{{ ci_a_ip.stdout }}"
+    jenkins_url:         "{{ ci_a_ip.stdout }}:{{ jenkins_port }}"
+    nexus_ip_address:    "{{ ci_a_ip.stdout }}"
+    remote_ip_address:   "{{ ci_dit_pamm_ip.stdout }}"
+    jenkins_url:         "{{ ci_a_ip.stdout }}"
+    nexus_url:           "{{ ci_a_ip.stdout }}"
+    gogs_url:            "http://{{ ci_b_ip.stdout }}:{{ gogs_port }}"
+    sonar_url:           "{{ ci_b_ip.stdout }}"

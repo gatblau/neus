@@ -1,0 +1,59 @@
+---
+- name: Set Jenkins Master executors to zero (Silver/Gold)
+  set_fact:
+    jenkins_master_executors: 0
+  when: blueprint == "silver" or blueprint == "gold"
+
+- name: Copying PAMM seed zip file to the host
+  copy:
+    src: pammy.zip
+    dest: /tmp
+
+- name: Unzipping PAMM seed zip file
+  unarchive:
+    src: /tmp/pammy.zip
+    dest:  "{{ jenkins_home }}"
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+    copy: no
+
+- name: Removing PAMM seed zip file from the host
+  file:
+    path: /tmp/pammy.zip
+    state: absent
+
+- name: Copy Jenkins configuration file
+  template:
+    src: jenkins_config.xml.j2
+    dest:  "{{ jenkins_home }}/config.xml"
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+
+- name: Configure PAMM pipeline build jobs
+  template:
+    src:   "{{ item.src }}"
+    dest:  "{{ jenkins_home }}/jobs/{{ item.dest }}"
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+  with_items:
+    - { src: "pammy_check_code_quality_config.xml.j2", dest: "pammy-check-code-quality/config.xml" }
+    - { src: "pammy_compile_application_config.xml.j2", dest: "pammy-compile-application/config.xml" }
+    - { src: "pammy_compile_test_service_config.xml.j2", dest: "pammy-compile-test-service/config.xml" }
+    - { src: "pammy_start_application_config.xml.j2", dest: "pammy-start-application/config.xml" }
+    - { src: "pammy_start_test_service_config.xml.j2", dest: "pammy-start-test-service/config.xml" }
+    - { src: "pammy_publish_application_config.xml.j2", dest: "pammy-publish-application/config.xml" }
+
+- name: Configure PAMM seed run tests Build job
+  template:
+    src: pammy_run_tests_config.xml.j2
+    dest:  "{{ jenkins_home }}/jobs/pammy-run-tests/config.xml"
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+  vars:
+    pamm_app_ip_address:  "{{ hostvars['localhost']['pamm_dit_ip_address'] }}"
+    testsetup_ip_address: "{{ hostvars['localhost']['pamm_dit_ip_address'] }}"
+
+- name: Restart Jenkins to read new PAMMY build pipeline
+  service:
+    name: jenkins
+    state: restarted

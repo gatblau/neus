@@ -1,0 +1,6 @@
+---
+containers:
+  ci-a:
+    ports: "{{ jenkins_port }}, {{ nexus_port }}, {{ gogs_port }}, {{ sonar_port }}, {{ selenium_port }}"
+  ci-dit-pamm:
+    ports: "{{ pamm_app_port }}, {{ pamm_test_port }}"

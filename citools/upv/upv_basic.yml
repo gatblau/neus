@@ -1,0 +1,51 @@
+#
+# Copyright (c) 2016 GATBLAU - www.gatblau.org
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+#
+#  For use when VMs have already been provisioned in order to capture IP addresses of
+#  VMs that need to be connected with each other.
+#
+---
+- set_fact:
+    database_ip_address: "127.0.0.1"
+    jenkins_ip_address: "{{ ci_a_int_dns_name }}"
+    jenkins_location:   "{{ ci_a_ext_dns_name }}"
+    jenkins_url:        "{{ ci_a_ext_dns_name }}"
+    nexus_ip_address:   "{{ ci_a_int_dns_name }}"
+    gogs_ip_address:    "{{ ci_a_int_dns_name }}"
+    sonar_ip_address:   "{{ ci_a_int_dns_name }}"
+
+- set_fact:
+    pamm_dit_ip_address: "{{ ci_dit_pamm_int_dns_name }}"
+  when: pamm == "yes"
+
+- set_fact:
+    jamm_dit_ip_address: "{{ ci_dit_pamm_int_dns_name }}"
+  when: jamm == "yes"
+
+# Add hosts and set variables
+- name: Add managed nodes
+  add_host:
+    groups: citools
+    hostname: "{{ item.name }}"
+    ansible_host: "{{ item.host }}"
+    ansible_user: "root"
+    ansible_port: 22
+    become: "yes"
+    connection: "ssh"
+  with_items:
+    - { name: "ci-a",   host: "{{ ci_a_ip }}" }
+    - { name: "ci-dit-pamm", host: "{{ ci_dit_pamm_ip }}" }
+    - { name: "ci-dit-jamm", host: "{{ ci_dit_jamm_ip }}" }

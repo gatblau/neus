@@ -1,0 +1,2 @@
+---
+nexus_url: "http://{{ nexus_ip_address }}:{{ nexus_port }}"

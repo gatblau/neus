@@ -44,7 +44,7 @@
 
   - name: Change Nexus content root
     lineinfile:
-      dest: //usr/local/nexus/default/conf/nexus.properties
+      dest: /usr/local/nexus/default/conf/nexus.properties
       regexp: "nexus-webapp-context-path="
       line: "nexus-webapp-context-path=*"
       backrefs: yes
