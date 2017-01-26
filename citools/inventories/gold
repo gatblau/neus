@@ -24,19 +24,22 @@ ci-e
 [source]
 ci-e
 
-[build-slaves:children]
+[build-slaves-pamm:children]
 build-slave1
 build-slave2
 
+[build-slaves-jamm:children]
+
 [build-slave1]
-ci-b
+ci-c
 
 [build-slave2]
-ci-c
+ci-d
 
 [build:children]
 build-master
-build-slaves
+build-slaves-pamm
+build-slaves-jamm
 
 [ci-dit]
 ci-dit-pamm
