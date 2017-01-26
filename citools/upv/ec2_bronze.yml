@@ -185,7 +185,6 @@
       database_ip_address: "127.0.0.1"
       gogs_ip_address:    "{{ ec2_ci_b.instances[0].public_dns_name }}"
       jenkins_ip_address: "{{ ec2_ci_a.instances[0].public_dns_name }}"
-      jenkins_location:   "{{ ec2_ci_a.instances[0].public_dns_name }}"
       jenkins_url:        "{{ ec2_ci_a.instances[0].public_dns_name }}:{{ jenkins_port }}"
       nexus_ip_address:   "{{ ec2_ci_a.instances[0].public_dns_name }}"
       sonar_ip_address:   "{{ ec2_ci_b.instances[0].public_dns_name }}"

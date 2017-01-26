@@ -22,7 +22,6 @@
     become: "yes"
     connection: "ssh"
     jenkins_ip_address:  "{{ ci_a_int_dns_name }}"
-    jenkins_location:    "{{ jenkins_url }}"
     nexus_ip_address:    "{{ ci_a_int_dns_name }}"
     slave1_ip_address:   "{{ ci_b_int_dns_name }}"
     slave2_ip_address:   "{{ ci_c_int_dns_name }}"

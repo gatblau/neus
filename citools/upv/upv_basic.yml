@@ -23,7 +23,6 @@
     connection: "ssh"
     database_ip_address: "127.0.0.1"
     jenkins_ip_address: "{{ ci_a_int_dns_name }}"
-    jenkins_location:   "{{ jenkins_url }}"
     nexus_ip_address:   "{{ ci_a_int_dns_name }}"
     gogs_ip_address:    "{{ ci_a_int_dns_name }}"
     sonar_ip_address:   "{{ ci_a_int_dns_name }}"
