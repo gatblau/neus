@@ -27,7 +27,7 @@
 #
 
 # if no blueprint tag is provided warn the user, show usage and exit the script
-if [[ -z $1 ]]; then
+if [[ "$#" -ne 2 ]]; then
    echo 'Missing tag and blueprint.'
    echo 'Usage is:'
    echo '   sh up.sh [tag] [blueprint]'
