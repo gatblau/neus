@@ -10,7 +10,7 @@
     - jenkins_user
     - jenkins_install
     - jenkins_master
-  tags: always
+  tags: [ build, always ]
 
 - name: Provisioning build server (build tools and PAMM seed)
   hosts: build-master
@@ -21,7 +21,7 @@
     - { role: jenkins_browsers, when: pamm == "yes" }
     - { role: jenkins_pammy_dependencies, when: pamm == "yes" }
     - { role: jenkins_pammy_pipeline, when: pamm == "yes" }
-  tags: [ basic, bronze, silver, gold ]
+  tags: [ build, basic, bronze, silver, gold ]
 
 - name: Provisioning PAMM build server slave(s)
   hosts: build-slaves-pamm
@@ -35,7 +35,7 @@
     - jenkins_build_tools
     - { role: jenkins_browsers, when: pamm == "yes" }
     - { role: jenkins_pammy_dependencies, when: pamm == "yes" }
-  tags: [ silver, gold ]
+  tags: [ pamm-slaves, silver, gold ]
 
 - name: Provisioning JAMM build server slave(s)
   hosts: build-slaves-jamm
@@ -48,7 +48,7 @@
     - jenkins_configure_slave
     - jenkins_build_tools
 #    - { role: jamm, when: jamm == "yes" }
-  tags: [ silver, gold ]
+  tags: [ jamm-slaves, silver, gold ]
 
 - name: Provisioning artefact repository server
   hosts: repo
@@ -57,7 +57,7 @@
   roles:
     - nexus_install
     - nexus
-  tags: always
+  tags: [ repo, always ]
 
 - name: Provisioning database for source and quality servers
   hosts: database
@@ -66,7 +66,7 @@
   roles:
     - mariadb_install
     - mariadb
-  tags: always
+  tags: [ database, always ]
 
 - name: Provisioning quality server
   hosts: quality
@@ -75,7 +75,7 @@
   roles:
     - sonar_install
     - sonar
-  tags: always
+  tags: [ quality, always ]
 
 - name: Provisioning PAMM DIT host
   hosts: ci-dit-pamm
@@ -86,7 +86,7 @@
     - jenkins_copy_ssh_key
     - { role: jdk, when: connection == 'docker' }
     - { role: mariadb, db_user: 'pamm', db_pwd: 'n3us', when: connection == 'docker' }
-  tags: [ basic, bronze, silver, gold ]
+  tags: [ pamm-dit, basic, bronze, silver, gold ]
 
 - name: Provisioning JAMM DIT host
   hosts: ci-dit-pamm
@@ -96,7 +96,7 @@
     - jenkins_user
     - jenkins_copy_ssh_key
     - { role: jdk, when: connection == 'docker' }
-  tags: [ basic, bronze, silver, gold ]
+  tags: [ jamm-dit, basic, bronze, silver, gold ]
 
 # Provision last to allow applications to start up before webhook is triggered
 - name: Provisioning source repository server
@@ -106,7 +106,7 @@
   roles:
     - gogs_install
     - { role: gogs_import_pammy, when: pamm == "yes" }
-  tags: always
+  tags: [ source, always ]
 
 - name: Provisioning host Jenkins builder (silicon blueprint)
   hosts: ci-buildtools
