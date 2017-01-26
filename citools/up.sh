@@ -41,15 +41,7 @@ source ./fetch.sh
 # starts the deployment using the specified inventory
 startTime=$(date -u +"%s")
 
-# Check if target platform is vm
-$(grep -qs "tgt_platform: vm" blueprints/$1/host_vars/localhost)
-if [[ $? -eq 0 ]]; then
-    # Target is vm - ask for password
-    ansible-playbook -i inventories/$1 site.yml --tags=$1 --extra-vars "blueprint=$2" -k | tee citools.log
-else
-    # Target is not vm - no password required
-    ansible-playbook -i inventories/$1 site.yml --tags=$1 --extra-vars "blueprint=$2" | tee citools.log
-fi
+ansible-playbook -i inventories/$1 site.yml --tags=$1 --extra-vars "blueprint=$2" | tee citools.log
 
 endTime=$(date -u +"%s")
 diff=$(($endTime-$startTime))
