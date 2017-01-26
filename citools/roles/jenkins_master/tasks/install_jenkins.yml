@@ -52,8 +52,6 @@
       dest="{{jenkins_home}}/jenkins.model.JenkinsLocationConfiguration.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
-    vars:
-      build_ip_address: "{{hostvars['localhost']['jenkins_location']}}"
 
   - name: Set Jenkins proxy settings
     template:
