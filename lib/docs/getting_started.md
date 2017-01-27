@@ -26,15 +26,20 @@ Once the Europa environment is running, clone the Neus code as follows:
 
 ### Neus Blueprints
 
-Each toolset is divided into blueprints; *bronze*, *silver*, *gold* or *silicon*.  The bronze blueprint folder contains the following files:
+Each toolset is divided into blueprints; *basic*, *bronze*, *silver*, *gold* or *silicon*.  The `citools` folder contains the following items:
 
 | File | Description |
 |--------|--------|
-| inventory.txt | The inventory file. |
-| playbook.yml | This is the [playbook](http://docs.ansible.com/ansible/playbooks.html) that provisions the toolset.   |
-| readme.md | The readme describes the blueprint. |
+| cache | Folder to hold downloaded installation files. |
+| docs | Diagrams of each blueprint. |
+| group_vars | Ansible [group_variables](http://docs.ansible.com/ansible/playbooks_best_practices.html#group-and-host-variables). |
+| host_vars | Ansible [host_variables](http://docs.ansible.com/ansible/playbooks_best_practices.html#group-and-host-variables). |
+| inventories | A folder containing [inventory](http://docs.ansible.com/ansible/intro_inventory.html) files named after each blueprint. |
+| roles | This folder contains [roles](http://docs.ansible.com/ansible/playbooks_roles.html) specific to CI Tools. |
+| site.yml | This is the [playbook](http://docs.ansible.com/ansible/playbooks.html) that provisions the toolset.   |
+| readme.md | The CI Tools readme file. |
 | upc.yml | This playbook provisions the Docker containers used when testing the build. |
-| upv.yml | This playbook is used to add the VM hosts when deploying to VMs. |
+| upv.yml | This playbook is used to add the VM hosts to the inventory, dynamically, when deploying to VMs. |
 | upv_ec2.yml | This playbook is used to provision the AWS EC2 instances when deploying to AWS EC2.  In order to provision to AWS EC2, an [AWS account](aws-ec2.md) is required. |
 
 ### Update Build Parameters
@@ -45,11 +50,41 @@ Before building the toolset, update the build parameters in the blueprint host_v
 2. If target platform is vm then update the IP Addresses
 3. If the target platform is AWS EC2 then update the CI DIT public DNS name.
 
+### Build Tags
+
+CI Tools is tagged so that provisioning of the tools can be controlled.  Tags specified in [site.yml](site.yml) are:
+
+| Blueprint Tag | Description |
+| ----------|----------|
+| basic | Used to build the `basic` blueprint. |
+| bronze | Used to build the `bronze` blueprint. |
+| silver | Used to build the `silver` blueprint. |
+| gold | Used to build the `gold` blueprint. |
+| silicon | Used to build the `silicon` blueprint. |
+
+| Tool Tag | Description |
+| ----------|----------|
+| build | Used to exclude the build tool (Jenkins) from the build. |
+| database | Used to exclude the database tool (MariaDB) from the build.  Note: this is required for GOGS and SonarQube, so do not exclude if provisioning either of these tools. |
+| repo | Used to exclude the repository tool (Nexus) from the build. |
+| quality | Used to exclude the quality tool (SonarQube) from the build. |
+| source | Used to exclude the build tool (GOGS) from the build. |
+| pamm-slaves | Used to exclude provisioning of the PAMM slaves. |
+| jamm-slaves | Used to exclude provisioning of the JAMM slaves. |
+| pamm-dit | Used to exclude provisioning of the PAMM DIT. |
+| jamm-dit | Used to exclude provisioning of the JAMM DIT. |
+| pamm | Used to exclude provsioning of the PAMM slaves and DIT. |
+| jamm | Used to exclude provsioning of the JAMM slaves and DIT. |
+
+For example, if you just want to provision a single VM with GOGS on it, you would use the following command:
+
+`sh up.sh basic basic build,quality,repo,pamm,jamm`
+
 ### Building the Toolset
 
-Open a terminal and cd into the toolset directory.  To build the toolset, run `up.sh` with the blueprint as an argument:
+Open a terminal and cd into the toolset directory.  To build the toolset, run `up.sh` with a tag and blueprint as arguments (note a third argument can be used to skip parts of the build):
 
-e.g. `up.sh bronze`
+e.g. `up.sh bronze bronze`
 
 If the target platform is `vm` and ssh keys have not been set up, then edit `ansible.cfg` and and set `ask_pass` to `true` so that Ansible will prompt for a password.  Note: if there is more than one VM, then they must all have the same password.
 
