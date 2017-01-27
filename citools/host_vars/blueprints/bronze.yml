@@ -4,9 +4,4 @@ containers:
     ports: "{{ jenkins_port }}, {{ nexus_port }}, {{ selenium_port }}"
   ci-b:
     ports: "{{ gogs_port }}, {{ sonar_port }}"
-  ci-dit-pamm:
-    ports: "{{ pamm_app_port }}, {{ pamm_test_port }}"
 
-
-#    - { name: "ci-dit-pamm", ports: "{{ pamm_app_port }}, {{ pamm_test_port }}", when: pamm == "yes" }
-#    - { name: "ci-dit-jamm", ports: "{{ jamm_app_port }}, {{ jamm_test_port }}", when: jamm == "yes" }
