@@ -28,6 +28,7 @@
   connection: "{{ connection }}"
   become: "{{ become }}"
   roles:
+    - baseline
     - jdk
     - jenkins_user
     - jenkins_copy_ssh_key
@@ -42,6 +43,7 @@
   connection: "{{ connection }}"
   become: "{{ become }}"
   roles:
+    - baseline
     - jdk
     - jenkins_user
     - jenkins_copy_ssh_key
