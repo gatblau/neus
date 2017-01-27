@@ -36,7 +36,7 @@
     - jenkins_build_tools
     - { role: jenkins_browsers, when: pamm == "yes" }
     - { role: jenkins_pammy_dependencies, when: pamm == "yes" }
-  tags: [ pamm-slaves, silver, gold ]
+  tags: [ pamm, pamm-slaves, silver, gold ]
 
 - name: Provisioning JAMM build server slave(s)
   hosts: build-slaves-jamm
@@ -50,7 +50,7 @@
     - jenkins_configure_slave
     - jenkins_build_tools
 #    - { role: jamm, when: jamm == "yes" }
-  tags: [ jamm-slaves, silver, gold ]
+  tags: [ jamm, jamm-slaves, silver, gold ]
 
 - name: Provisioning artefact repository server
   hosts: repo
@@ -88,7 +88,7 @@
     - jenkins_copy_ssh_key
     - { role: jdk, when: connection == 'docker' }
     - { role: mariadb, db_user: 'pamm', db_pwd: 'n3us', when: connection == 'docker' }
-  tags: [ pamm-dit, basic, bronze, silver, gold ]
+  tags: [ pamm, pamm-dit, basic, bronze, silver, gold ]
 
 - name: Provisioning JAMM DIT host
   hosts: ci-dit-pamm
@@ -98,7 +98,7 @@
     - jenkins_user
     - jenkins_copy_ssh_key
     - { role: jdk, when: connection == 'docker' }
-  tags: [ jamm-dit, basic, bronze, silver, gold ]
+  tags: [ jamm, jamm-dit, basic, bronze, silver, gold ]
 
 # Provision last to allow applications to start up before webhook is triggered
 - name: Provisioning source repository server
