@@ -23,7 +23,7 @@ Running CentOS or RHEL 7, via the following blueprints:
 - [Bronze](blueprints/bronze/readme.md): the minimum configuration running on two virtual machines.
 - [Silver](blueprints/silver/readme.md): a relatively small configuration for cases where more performant builds are required. Runs on three virtual machines configuration.
 - [Gold](blueprints/gold/readme.md): a larger and scalable configuration using five virtual machines.
-- [Silicon](blueprints/silicon/readme.md): a set of Docker containers for use with an orchestration engine (e.g. OpenShift).
+- [Silicon](blueprints/silicon/readme.md): a set of Docker images for use with an orchestration engine (e.g. OpenShift).
 
 ### Container Management Platforms
 
@@ -45,7 +45,10 @@ The following table describes the content of the main folders in the CITOOLS pro
 
 | Folder | Content |
 |:--------|:--------|
-| blueprints |The files required to build each blueprint configuration - i.e. playbook, inventory and container creation files. |
-| cache |The cached packages for deployment in offline mode. These packages are downloaded from the internet by the [fetch.sh](fetch.sh) file. |
+| cache | The cached packages for deployment in offline mode. These packages are downloaded from the internet by the [fetch.sh](fetch.sh) file. |
+| docs | Images of each blueprint. |
+| group_vars | Group variables files.  Groups are defined in the inventory and group variables declared in this folder. |
+| host_vars | Host variables files.  Hosts are defined in the inventory and group variables declared in this folder. |
+| inventories | Inventory files required to build each blueprint configuration. |
 | roles | The roles used by the blueprints to deploy the CITOOLS. |
 | scripts | The generic shell library scripts used by other scripts in the solution. |
