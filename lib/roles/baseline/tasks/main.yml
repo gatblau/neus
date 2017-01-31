@@ -1,19 +1,21 @@
 ---
 - name: Set yum cache to "keep"
   replace:
-    dest=/etc/yum.conf
-    regexp='keepcache=(.*)'
-    replace='keepcache=1'
+    dest: /etc/yum.conf
+    regexp:  'keepcache=(.*)'
+    replace: 'keepcache=1'
   when: connection == "docker"
 
 - name: Installing the Unzip command
   include: plays/install_rpm.yml
   vars:
-    rpm_app_name: "EPEL YUM Repository"
-    rpm_filename : "{{unzip_rpm}}"
+    rpm_app_name: "unzip"
+    rpm_filename: "{{ item | basename }}"
+  with_fileglob: "cache/{{ unzip_rpm }}"
 
 - name: Installing EPEL Yum Repository
   include: plays/install_rpm.yml
   vars:
     rpm_app_name: "EPEL YUM Repository"
-    rpm_filename : "{{epel_rpm}}"
+    rpm_filename: "{{ item | basename }}"
+  with_fileglob: "cache/{{ epel_rpm }}"
