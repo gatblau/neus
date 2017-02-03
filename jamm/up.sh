@@ -42,7 +42,7 @@ source ./fetch.sh
 # starts the deployment using the specified inventory
 startTime=$(date -u +"%s")
 
-ansible-playbook -i inventories/$1 site.yml --extra-vars "blueprint=$1" | tee jamm.log
+ansible-playbook -i inventories/$1 site.yml --tags=$1 --extra-vars "blueprint=$2" --skip-tags=$3 | tee jamm.log
 
 endTime=$(date -u +"%s")
 diff=$(($endTime-$startTime))
