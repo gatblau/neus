@@ -1,0 +1,6 @@
+---
+# Variables for the broker group
+
+# JDK variables
+java_sdk_name: "Java JDK 8u121-x64"
+java_sdk_rpm:  "jdk-8u121-linux-x64.rpm"

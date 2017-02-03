@@ -1,0 +1,72 @@
+#
+# Copyright (c) 2017 GATBLAU - www.gatblau.org
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Manages the execution of roles on a docker container.
+# The only part of this playbook that needs changing is the list of roles as described below.
+# The name of the playbook should be updated to reflect the host name - e.g. database.yml
+#
+#
+# Provides the containers required to deploy CI Tools
+#
+---
+#- name: Set variables for {{ blueprint }}
+#  include_vars:
+#    file: "./host_vars/blueprints/{{ blueprint }}.yml"
+
+# Set base images for test containers here
+- name: Define base image for Docker containers (not silicon)
+  set_fact:
+    jamm_image: "gatblau.org/centos:7ds"
+  when: blueprint != "silicon"
+
+- name: Define base image for Docker containers (silicon)
+  set_fact:
+    jamm_image: "centos:7"
+  when: blueprint == "silicon"
+
+- name: Restart Docker daemon to delete containers
+  become: yes
+  service:
+    name: docker
+    state: restarted
+
+- name: Delete existing Docker containers
+  become: yes
+  docker_container:
+    name:  "{{ item }}"
+    image: "{{ jamm_image }}"
+    state: absent
+    force_kill: true
+  with_items: "{{ groups['jamm'] }}"
+
+- name: Start up JAMM Docker container(s)
+  docker_container:
+    image: "{{ jamm_image }}"
+    name: "{{ item.key }}"
+    hostname: "{{ item.key }}"
+    detach: yes
+    tty: yes
+    exposed_ports: "[ {{ item.value.ports }} ]"
+    command: "/usr/sbin/init"
+    state: started
+    privileged: yes
+    volumes:
+      - /var/cache/yum/neus:/var/cache/yum:rw
+  with_dict: "{{ containers }}"
+
+- name: Set variables for Docker build
+  set_fact:
+    become:     "no"
+    connection: "docker"

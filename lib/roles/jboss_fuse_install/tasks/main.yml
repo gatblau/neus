@@ -1,0 +1,99 @@
+---
+- name: Create JBoss Fuse group {{ fuse_group }}
+  group:
+    name: "{{ fuse_group }}"
+    state: present
+
+- name: Create JBoss fuse user {{ fuse_user }}
+  user:
+    name: "{{ fuse_user }}"
+
+- name: Install JBoss Fuse from archive
+  include: ./lib/plays/install_tool.yml
+  vars:
+    tool_name : "jboss-fuse"
+    folder_name : "{{ fuse_folder }}"
+    zip_filename: "{{ fuse_zip }}"
+    add_version_to_folder: false
+    zip_has_folder: true
+    has_bin_folder: true
+    user: "{{ fuse_user }}"
+
+- name: Add remote console user
+  lineinfile:
+    dest: "{{ fuse_install_dir }}/default/etc/users.properties"
+    regexp: "#admin=admin,admin"
+    line: "{{ fuse_user }}={{ fuse_user_pwd }},admin"
+    owner: "{{ fuse_user }}"
+    group: "{{ fuse_group }}"
+
+- name: Set Active MQ user details
+  lineinfile:
+    dest: "{{ fuse_install_dir }}/default/etc/system.properties"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    owner: "{{ fuse_user }}"
+    group: "{{ fuse_group }}"
+  no_log: true
+  with_items:
+    - { regexp: "#activemq.jmx.user=admin",     line: "activemq.jmx.user={{ fuse_user }}" }
+    - { regexp: "#activemq.jmx.password=admin", line: "activemq.jmx.password={{ fuse_user_pwd }}" }
+
+- name: Copy wrapper files to {{ ansible_hostname }}
+  copy:
+    src:  "{{ item.file }}"
+    dest: "{{ fuse_install_dir }}/default/{{ item.dest }}/{{ item.file }}"
+    owner: "{{ fuse_user }}"
+    group: "{{ fuse_group }}"
+    mode: 0755
+  with_items:
+    - { file: "fusefabric-service",     dest: "bin" }
+    - { file: "fusefabric-wrapper",     dest: "bin" }
+    - { file: "karaf-wrapper.jar",      dest: "lib" }
+    - { file: "karaf-wrapper-main.jar", dest: "lib" }
+    - { file: "libwrapper.so",          dest: "lib" }
+
+- name: Setup wrapper config
+  template:
+    src:  "fusefabric-wrapper.conf.j2"
+    dest: "{{ fuse_install_dir }}/default/etc/fusefabric-wrapper.conf"
+    owner: "{{ fuse_user }}"
+    group: "{{ fuse_group }}"
+    mode: 0755
+
+# TODO - set user to run Fuse
+#- name: Set user to run Fuse
+#  lineinfile:
+#    dest: "{{ fuse_install_dir }}/default/bin/fusefabric-service"
+#    regexp: "#RUN_AS_USER="
+#    line:   "RUN_AS_USER={{ fuse_user }}"
+#    owner: "{{ fuse_user }}"
+#    group: "{{ fuse_group }}"
+
+- name: Create log folder
+  file:
+    path: "{{ fuse_install_dir }}/default/data/log"
+    state: directory
+    owner: "{{ fuse_user }}"
+    group: "{{ fuse_group }}"
+    mode: 0777
+
+- name: Create link to service
+  file:
+    src:  "{{ fuse_install_dir }}/default/bin/fusefabric-service"
+    path: "/etc/init.d/fusefabric-service"
+    state: link
+    owner: root
+
+- name: Start Fuse Fabric service
+  command: "service fusefabric-service start warn=no"
+
+- name: Wait for Fuse to start (takes about 60 seconds)
+  pause: minutes=1
+
+- name: Create Fuse Fabric
+  command: './client "fabric:create --clean --global-resolver manualip --resolver manualip --manual-ip {{ ansible_default_ipv4.address }}"'
+  args:
+    chdir: "{{ fuse_install_dir }}/default/bin"
+  environment:
+    JAVA_HOME: /usr/java/default

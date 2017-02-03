@@ -1,0 +1,7 @@
+---
+
+containers:
+  jamm-a:
+    ports: "8080, 9999"
+  jamm-b:
+    ports: "3306"

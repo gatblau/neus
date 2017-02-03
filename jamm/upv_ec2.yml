@@ -1,0 +1,4 @@
+---
+- debug:
+    msg: "AWS EC2 provisioning is not yet implemented."
+...
