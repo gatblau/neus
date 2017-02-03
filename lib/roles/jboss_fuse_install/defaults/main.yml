@@ -6,5 +6,7 @@ fuse_user:     "fuseadmin"
 fuse_group:    "fuseadmin"
 fuse_user_pwd: "fuseadmin123!!!"
 
+fuse_port: 8181
+
 fuse_zip:    "jboss-fuse-6.2.1.redhat-084.zip"
 fuse_folder: "jboss-fuse-6.2.1.redhat-084"

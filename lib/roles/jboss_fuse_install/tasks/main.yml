@@ -85,6 +85,13 @@
     state: link
     owner: root
 
+- name: Open port for Fuse Fabric
+  include:
+    plays/open_port.yml
+  vars:
+    port_number: "{{ fuse_port }}"
+  when: connection == "ssh"
+
 - name: Start Fuse Fabric service
   command: "service fusefabric-service start warn=no"
 
