@@ -21,7 +21,7 @@
       dest="{{jenkins_home}}/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml"
       owner="{{jenkins_user}}"
       group="{{jenkins_group}}"
-    when: blueprint != "silicon"
+    when: blueprint != "silicon" and pamm == "yes"
 
   - name: Change Jenkins folder permissions
     file:
