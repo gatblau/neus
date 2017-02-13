@@ -11,7 +11,7 @@
   # Git variables
   git_perl_rpm: perl-Git-2.4.1-1.WANdisco.259.noarch.rpm
   git_scm_rpm: git-2.4.1-1.WANdisco.259.x86_64.rpm
-  perl_rpm: perl-5.16.3-286.el7.x86_64.rpm
+  perl_rpm: perl-5.16.3-291.el7.x86_64.rpm
   git_wandisco_rpm: wandisco-git-release-7-1.noarch.rpm
 
 
