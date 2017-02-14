@@ -48,5 +48,29 @@
   with_items:
     - { name: "ci-a",   host: "{{ ci_a_ip }}" }
     - { name: "ci-b",   host: "{{ ci_b_ip }}" }
+
+- name: Add CI DIT PAMM managed node
+  add_host:
+    groups: ci-dit
+    hostname: "{{ item.name }}"
+    ansible_host: "{{ item.host }}"
+    ansible_user: "root"
+    ansible_port: 22
+    become: "{{ become }}"
+    connection: "{{ connection }}"
+  with_items:
     - { name: "ci-dit-pamm", host: "{{ ci_dit_pamm_ip }}" }
+  when: pamm == "yes"
+
+- name: Add CI DIT JAMM managed node
+  add_host:
+    groups: ci-dit
+    hostname: "{{ item.name }}"
+    ansible_host: "{{ item.host }}"
+    ansible_user: "root"
+    ansible_port: 22
+    become: "{{ become }}"
+    connection: "{{ connection }}"
+  with_items:
     - { name: "ci-dit-jamm", host: "{{ ci_dit_jamm_ip }}" }
+  when: jamm == "yes"

@@ -29,3 +29,8 @@
 - name: Set parameters for silver blueprint
   include: upv/upv_silver.yml
   when: blueprint == "silver"
+
+- name: Set parameters for gold blueprint
+  include: upv/upv_gold.yml
+  when: blueprint == "gold"
+
