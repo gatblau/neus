@@ -2,7 +2,7 @@
 ### Open Port for Jenkins
   - include: "plays/open_port.yml"
     vars:
-      - port_number: "{{jenkins_port}}"
+      - port_number: "{{ jenkins_port }}"
     when: connection == "ssh"
 
 ### Install Jenkins
@@ -11,24 +11,24 @@
     register: jenkins_exists
 
   - include: install_jenkins.yml
-    become: "{{become}}"
+    become: "{{ become }}"
     when: jenkins_exists.stat.exists == false
 
 ### Setup Jenkins ssh connectivity plugin
   - name: Jenkins publish over ssh settings
     template:
-      src=jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml.j2
-      dest="{{jenkins_home}}/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml"
-      owner="{{jenkins_user}}"
-      group="{{jenkins_group}}"
+      src: jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml.j2
+      dest:  "{{ jenkins_home }}/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml"
+      owner: "{{ jenkins_user }}"
+      group: "{{ jenkins_group }}"
     when: blueprint != "silicon" and pamm == "yes"
 
   - name: Change Jenkins folder permissions
     file:
-      name="{{item.folder}}"
-      recurse="yes"
-      mode="0777"
+      name: "{{ item.folder }}"
+      recurse: "yes"
+      mode: "0777"
     with_items:
-      - { folder: '{{jenkins_user_home}}'}
+      - { folder: '{{ jenkins_user_home }}'}
       - { folder: 'var/log/jenkins'}
     when: blueprint == "silicon"

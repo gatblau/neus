@@ -1,8 +1,8 @@
 ---
 - name: Creating the NGINX user
   user:
-    name={{nginx_user}}
-    password={{nginx_password}}
+    name:     "{{ nginx_user }}"
+    password: "{{ nginx_password }}"
     state=present
 
 - include: "plays/open_port.yml"
@@ -13,29 +13,29 @@
 - include: plays/install_rpm.yml
   vars:
     rpm_app_name: NGINX File System
-    rpm_filename: "{{nginx_filesystem_rpm}}"
+    rpm_filename: "{{ nginx_filesystem_rpm }}"
 
 - include: plays/install_rpm.yml
   vars:
     rpm_app_name: NGINX
-    rpm_filename: "{{nginx_rpm}}"
+    rpm_filename: "{{ nginx_rpm }}"
 
 - name: Configuring the NGINX proxy settings
   copy:
-    src=nginx.conf
-    dest=/etc/nginx
-    owner={{nginx_user}}
+    src: nginx.conf
+    dest: /etc/nginx
+    owner: "{{ nginx_user }}"
 
 - name: Customising the proxy settings for the {{blueprint}} blueprint
   copy:
-    src={{blueprint}}/{{inventory_hostname}}/v.hosts
-    dest=/etc/nginx
+    src: "{{ blueprint }}/{{ inventory_hostname }}/v.hosts"
+    dest: /etc/nginx
 
 - name: Starting the NGINX Service
   service:
-    name=nginx
-    state=started
-    enabled=yes
+    name: nginx
+    state: started
+    enabled: yes
   when: blueprint != "silicon"
 
 - name: Start NGINX
