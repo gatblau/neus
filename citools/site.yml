@@ -87,7 +87,7 @@
     - jenkins_user
     - jenkins_copy_ssh_key
     - { role: jdk, when: connection == 'docker' }
-    - { role: mariadb, db_user: 'pamm', db_pwd: 'n3us', when: connection == 'docker' }
+    - { role: mariadb_install, db_user: 'pamm', db_pwd: 'n3us', when: connection == 'docker' }
   tags: [ pamm, pamm-dit, basic, bronze, silver, gold ]
 
 - name: Provisioning JAMM DIT host
