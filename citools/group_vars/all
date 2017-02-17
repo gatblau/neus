@@ -4,7 +4,7 @@
 # PAMM / JAMM Seeds
 # Set to yes to include PAMM or JAMM seeds in CI Tools environment
 pamm: "yes"
-jamm: "yes"
+jamm: "no"
 
 # Port numbers
 ansible_port:  22

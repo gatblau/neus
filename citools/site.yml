@@ -79,6 +79,16 @@
     - sonar
   tags: [ quality, always ]
 
+- name: Provisioning chat server
+  hosts: chat
+  connection: "{{connection}}"
+  become: "{{become}}"
+  roles:
+    - baseline
+    - mongodb_install
+    - lets_chat
+  tags: [chat, basic, bronze, silver, gold ]
+
 - name: Provisioning PAMM DIT host
   hosts: ci-dit-pamm
   connection: "{{connection}}"

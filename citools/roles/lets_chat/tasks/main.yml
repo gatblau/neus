@@ -1,0 +1,43 @@
+---
+- name: Install Git
+  yum:
+    name: git
+    state: present
+
+- name: Installing npm
+  include: "plays/install_rpm.yml"
+  vars:
+    rpm_app_name: npm
+    rpm_filename: "{{ npm_rpm }}"
+
+- name: Installing NodeJS
+  include: "plays/install_rpm.yml"
+  vars:
+    rpm_app_name: NodeJS
+    rpm_filename: "{{ nodejs_rpm }}"
+
+- name: Install forever (to run lets-chat app).
+  npm:
+    name: "{{ item }}"
+    state: present
+    global: yes
+  with_items:
+    - forever
+
+- name: Clone Let's Chat repository
+  git:
+    repo: "https://github.com/sdelements/lets-chat.git"
+    dest: "/usr/local/lets-chat"
+
+- name: Install Let's Chat
+  npm:
+    path: "/usr/local/lets-chat"
+    production: yes
+#  command: "npm install"
+#  args:
+#    chdir: "/usr/local/lets-chat"
+
+- name: Start Let's Chat using forever
+  command: "forever start app.js"
+  args:
+    chdir: "/usr/local/lets-chat"
