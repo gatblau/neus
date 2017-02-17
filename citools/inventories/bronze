@@ -7,7 +7,6 @@ citools
 [citools]
 ci-a
 ci-b
-ci-dit
 
 [build-master]
 ci-a

@@ -3,7 +3,6 @@ localhost
 
 [citools]
 ci-a
-ci-dit
 
 [build-master]
 ci-a
