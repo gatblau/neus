@@ -1,6 +1,8 @@
 ---
 ### Check if local SBT cache exits - if so copy to managed node
   - name: Check for local SBT cache
+    become: yes
+    become_user: "{{ local_user }}"
     local_action: "stat path=cache/{{sbt_cache}}"
     register: sbt_dependencies
 

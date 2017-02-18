@@ -32,6 +32,8 @@
     shell: "cd {{ jenkins_user_home }}/pamm.seed && npm run webdriver-update"
 
   - name: Check for local SBT cache
+    become: yes
+    become_user: "{{ local_user }}"
     local_action: "stat path=cache/{{ sbt_cache }}"
     register: sbt_dependencies
 
