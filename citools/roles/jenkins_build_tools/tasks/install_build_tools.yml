@@ -46,18 +46,12 @@
 
   # Install NodeJS
   - name: Installing NodeJS
-    include: "plays/install_rpm.yml"
-    vars:
-      rpm_app_name: NodeJS
-      rpm_filename: "{{nodejs_rpm}}"
+    include: "plays/install_rpms.yml"
+    with_dict: "{{ nodejs_packages }}"
+    loop_control:
+      loop_var: package
 
-  # Install Bower (npm)
-  - name: Installing npm
-    include: "plays/install_rpm.yml"
-    vars:
-      rpm_app_name: npm
-      rpm_filename: "{{npm_rpm}}"
-
+  # Install Bower
   - name: Installing Bower
     command: "npm install -g bower"
 
