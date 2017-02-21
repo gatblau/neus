@@ -23,7 +23,7 @@
 # Fetches all required packages and copies them to the ROOT folder
 # Usage:
 #    sh fetch.sh
-#    sh fetch.sh clean (to clean the chache)
+#    sh fetch.sh clean (to clean the cache)
 #
 
 source ./scripts/download.sh
@@ -62,7 +62,9 @@ download "https://dl.bintray.com/sbt/native-packages/sbt/0.13.11/" "sbt-0.13.11.
 download "http://mirrors.ukfast.co.uk/sites/ftp.apache.org/maven/maven-3/3.3.9/binaries/" "apache-maven-3.3.9-bin.zip"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/e/" "epel-release-7-9.noarch.rpm"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nodejs-6.9.4-2.el7.x86_64.rpm"
-download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "npm-1.3.6-5.el7.noarch.rpm"
+download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "npm-3.10.10-1.6.9.4.2.el7.x86_64.rpm"
+download "http://dl.fedoraproject.org/pub/epel/7/x86_64/l/" "libuv-1.10.2-1.el7.x86_64.rpm"
+download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "libicu-50.1.2-15.el7.x86_64.rpm"
 download "https://bintray.com/artifact/download/groovy/maven/" "apache-groovy-binary-2.4.4.zip"
 #download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-1.6.3-9.el7.x86_64.rpm"
 #download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-filesystem-1.6.3-9.el7.noarch.rpm"
