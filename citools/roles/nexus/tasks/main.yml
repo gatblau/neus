@@ -1,4 +1,19 @@
 ---
+- name: Configure proxy settings (if set)
+  lineinfile:
+    dest: "/usr/local/nexus/sonatype-work/nexus/conf/nexus.xml"
+    insertafter: "</globalConnectionSettings>"
+    owner: "{{ nexus_user }}"
+    line: |
+      <--! Proxy settings --->
+        <remoteProxySettings>
+          <httpProxySettings>
+            <proxyHostname>{{ proxy_ip_address }}</proxyHostname>
+            <proxyPort>{{ proxy_port }}</proxyPort>
+          </httpProxySettings>
+        </remoteProxySettings>
+  when: proxy_ip_address != ""
+
 - name: Copy entrypoint script for Nexus Docker container
   copy:
     src: entrypoint.sh
