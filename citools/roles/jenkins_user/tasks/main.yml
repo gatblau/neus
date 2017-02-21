@@ -11,6 +11,13 @@
       group:    "{{ jenkins_group }}"
       state:    present
 
+  - name: Add Jenkins user to local_ssh group (if exists)
+    user:
+      name: "{{ jenkins_user }}"
+      append: yes
+      group: local_ssh
+    ignore_errors: yes
+
   - name: Add Jenkins to sudoers list
     copy:
       src:  "sudoers.jenkins"
