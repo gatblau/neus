@@ -12,7 +12,7 @@
 
   - name: Check for local SBT cache
     become: yes
-    become_user: "{{ local_user }}"
+    become_user: "{{ group_localhost_user }}"
     local_action: "stat path=cache/{{sbt_cache}}"
     register: sbt_dependencies
 
