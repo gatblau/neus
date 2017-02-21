@@ -27,3 +27,6 @@ no_proxy_host:    ""
 # The following variables are set by the control node when the target platform is provisioned:
 become:     "{{ hostvars['localhost']['become'] }}"
 connection: "{{ hostvars['localhost']['connection'] }}"
+
+# Username to use for delegating tasks to localhost (control node)
+group_localhost_user: root

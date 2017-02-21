@@ -35,5 +35,3 @@ nexus_url:   ""
 # e.g. http://my-gogs-url:3000"
 gogs_url:    ""
 
-# Username to use for checking SBT cache exists on localhost (control node)
-local_user: root
