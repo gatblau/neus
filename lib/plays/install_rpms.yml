@@ -18,19 +18,19 @@
 #        - package3.rpm
 #
 
-- name: Copying {{ package.key |capitalize }} to the host
+- name: Copying {{ package.key | capitalize }} to the host
   copy:
     src: "cache/{{ item }}"
     dest: "/tmp/{{ item }}"
   with_items:
     - "{{ package.value.packages }}"
 
-- name: Installing {{ package.value.packages }} file
+- name: Installing {{ package.key | capitalize }} packages
   command: 'yum install -y {{ package.value.packages | join(" ") }} warn=no'
   args:
     chdir: "/tmp"
 
-- name: Removing the {{ package.value.packages }} files after installation
+- name: Removing the {{ package.key | capitalize }} files after installation
   file:
     name: "/tmp/{{ item }}"
     state: absent
