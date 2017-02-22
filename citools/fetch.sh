@@ -57,6 +57,7 @@ download "https://dl.google.com/linux/direct/" "google-chrome-stable_current_x86
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "firefox-45.4.0-1.el7.centos.x86_64.rpm"
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "libexif-devel-0.6.21-6.el7.x86_64.rpm"
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "xorg-x11-server-Xvfb-1.17.2-22.el7.x86_64.rpm"
+download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "net-tools-2.0-0.17.20131004git.el7.x86_64.rpm"
 download "https://services.gradle.org/distributions/" "gradle-3.2.1-bin.zip"
 download "https://dl.bintray.com/sbt/native-packages/sbt/0.13.11/" "sbt-0.13.11.zip"
 download "http://mirrors.ukfast.co.uk/sites/ftp.apache.org/maven/maven-3/3.3.9/binaries/" "apache-maven-3.3.9-bin.zip"
