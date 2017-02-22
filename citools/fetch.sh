@@ -75,6 +75,9 @@ download "http://opensource.wandisco.com/centos/7/git/x86_64/" "perl-Git-2.4.1-1
 download_mysql_connector $ROOT mysql-connector-java-5.1.36
 download "http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/2.4/" "sonar-runner-dist-2.4.zip"
 
+# Packages for MariaDB
+source ./scripts/mariadb.sh
+
 # Ansible plugins
 download "http://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/2.0/" "swarm-client-2.0-jar-with-dependencies.jar"
 download "http://updates.jenkins-ci.org/latest/" "ace-editor.hpi"
