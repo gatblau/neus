@@ -1,0 +1,6 @@
+---
+[local]
+localhost
+
+[repo]
+nexus.repo

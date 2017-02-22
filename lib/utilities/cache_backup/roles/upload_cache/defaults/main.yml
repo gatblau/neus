@@ -1,0 +1,7 @@
+---
+role_cache_folder:  "../../citools/cache"
+
+role_nexus_user:     deployment
+role_nexus_user_pwd: deployment123
+
+role_nexus_repo_url: "http://nexus.repo:8081/content/repositories/ci-tools"

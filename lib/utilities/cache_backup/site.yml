@@ -1,0 +1,6 @@
+---
+- name: Archive cache folder to Nexus
+  hosts: localhost
+  connection: local
+  roles:
+    - upload_cache

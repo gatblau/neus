@@ -1,0 +1,6 @@
+---
+- name: List files in {{ role_cache_folder }}
+  command: "curl -v -u {{ role_nexus_user }}:{{ role_nexus_user_pwd }} --upload-file {{ item | basename }} {{ role_nexus_repo_url }}/cache/{{ item | basename }} warn=no"
+  args:
+    chdir: "{{ role_cache_folder }}"
+  with_fileglob: "{{ role_cache_folder }}/*"
