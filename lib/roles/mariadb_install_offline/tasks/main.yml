@@ -1,0 +1,52 @@
+---
+- name: Create user for MariaDB
+  user:
+    name: "{{ role_mariadb_user }}"
+    password: "{{ role_mariadb_password }}"
+    state: present
+
+- include: "plays/open_port.yml"
+  vars:
+    - port_number: "{{ database_port }}"
+  when: connection == "ssh"
+
+- name: Install MariaDB
+  include: plays/install_rpms.yml
+  with_dict: "{{ role_mariadb_packages }}"
+  loop_control:
+    loop_var: package
+
+- name: Install
+  include: plays/install_rpm.yml
+  vars:
+    rpm_app_name: MySQL-python
+    rpm_filename: "{{ role_mysql_python }}"
+
+- name: Setting MariaDB port number to {{database_port}}
+  template:
+    src: server.cnf.j2
+    dest: /etc/my.cnf.d/server.cnf
+    owner: "{{ role_mariadb_user }}"
+
+- name: Starting the MariaDB Server
+  service:
+    name: mariadb
+    state: started
+  when: blueprint != "silicon"
+
+- block: # Start MariaDB for silicon blueprint
+  - name: Change MariaDB home folder permissions
+    file:
+      name: "/var/lib/mysql"
+      recurse: "yes"
+      mode: "0777"
+
+  - name: Copy entrypoint script for MariaDB Docker container
+    copy:
+      src: entrypoint.sh
+      dest: /entrypoint.sh
+      mode: 0755
+
+  - name: Start MariaDB (silicon blueprint)
+    shell: "/entrypoint.sh &"
+  when: blueprint == "silicon"  # end of block
