@@ -1,22 +1,4 @@
 ---
-  - name: Starting the MariaDB Server
-    service:
-      name: mysql
-      state: started
-      enabled: yes
-    when: blueprint != "silicon"
-
-  - name: Copy entrypoint script for MariaDB Docker container
-    copy:
-      src: entrypoint.sh
-      dest: /entrypoint.sh
-      mode: 0755
-    when: blueprint == "silicon"
-
-  - name: Start MariaDB
-    shell: "/entrypoint.sh &"
-    when: blueprint == "silicon"
-
   - name: Creating a read and write user to access the server remotely
     mysql_user:
       name: "{{ db_user }}"
@@ -38,12 +20,12 @@
       name: test
       state: absent
 
-  - name: Initialise GOGS database
-    include: initialise_gogs_database.yml
-    when: inventory_hostname != "ci-dit"
+  - block: # Initialise databases for GOGS and SonarQube
+    - name: Initialise GOGS database
+      include: initialise_gogs_database.yml
 
-  - name: Initialise Sonar database
-    include: initialise_sonar_database.yml
+    - name: Initialise Sonar database
+      include: initialise_sonar_database.yml
     when: inventory_hostname != "ci-dit"
 
   - name: Initialise DIT PAMM application database
