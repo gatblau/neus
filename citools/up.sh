@@ -28,7 +28,7 @@
 
 # if no blueprint tag is provided warn the user, show usage and exit the script
 if [[ "$#" -ne 2  && "$#" -ne 3 ]]; then
-   echo 'Missing tag and/or blueprint.' $#
+   echo 'Missing tag and/or blueprint.'
    echo 'Usage is:'
    echo '   sh up.sh [tag] [blueprint] [skipped tags - optional]'
    echo '   e.g.: sh up.sh silver silver'

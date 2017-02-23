@@ -18,7 +18,8 @@
 #  VMs that need to be connected with each other.
 #
 ---
-- set_fact:
+- name: Set values (silver)
+  set_fact:
     become: "yes"
     connection: "ssh"
     database_ip_address: "127.0.0.1"
@@ -27,11 +28,13 @@
     gogs_ip_address:    "{{ ci_b_int_dns_name }}"
     sonar_ip_address:   "{{ ci_b_int_dns_name }}"
 
-- set_fact:
+- name: Set PAMM DIT IP address (silver)
+  set_fact:
     pamm_dit_ip_address: "{{ ci_dit_pamm_int_dns_name }}"
   when: pamm == "yes"
 
-- set_fact:
+- name: Set JAMM DIT IP address (silver)
+  set_fact:
     jamm_dit_ip_address: "{{ ci_dit_pamm_int_dns_name }}"
   when: jamm == "yes"
 
@@ -41,7 +44,7 @@
     groups: citools
     hostname: "{{ item.name }}"
     ansible_host: "{{ item.host }}"
-    ansible_user: "root"
+    ansible_user: "{{ group_remote_user }}"
     ansible_port: 22
     become: "{{ become }}"
     connection: "{{ connection }}"
@@ -56,7 +59,7 @@
     groups: ci-dit
     hostname: "{{ item.name }}"
     ansible_host: "{{ item.host }}"
-    ansible_user: "root"
+    ansible_user: "{{ group_remote_user }}"
     ansible_port: 22
     become: "{{ become }}"
     connection: "{{ connection }}"
@@ -69,7 +72,7 @@
     groups: ci-dit
     hostname: "{{ item.name }}"
     ansible_host: "{{ item.host }}"
-    ansible_user: "root"
+    ansible_user: "{{ group_remote_user }}"
     ansible_port: 22
     become: "{{ become }}"
     connection: "{{ connection }}"
