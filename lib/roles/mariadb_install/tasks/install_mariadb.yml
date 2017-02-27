@@ -31,7 +31,7 @@
 
   - name: Starting the MariaDB Server
     service:
-      name: mariadb
+      name: mysql
       state: started
     when: blueprint != "silicon"
 
