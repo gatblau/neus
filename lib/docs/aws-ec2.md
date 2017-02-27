@@ -38,7 +38,7 @@ This guide assumes that the prerequisites below are carried out using a [Europa]
 
 #### Running the neus scripts
 
-| column | column |
+| Step | Description |
 |--------|--------|
 | 1. Clone the neus code | `git clone http://github.com/gatblau/neus` |
 | 2. Edit the pamm inventory file | Edit the `pamm/inventory.txt` file and change `tgt_platform` to `ec2` |
@@ -47,7 +47,7 @@ This guide assumes that the prerequisites below are carried out using a [Europa]
 | 5. Edit the citools inventory file | Edit the `citools/blueprint/[bronze|silver|gold]/localhost` file and change:</br> `tgt_platform` to `ec2`</br> `ci_dit_public_dns_name` to the `pamm-a` public dns name</br> `ci_b_instance_type` to `c3.large` |
 | 6. Run the citools script | In a terminal window `cd` to the `citools` folder and enter: `up.sh bronze` |
 
-The scripts may take a few hours to complete.  Once they have finished, the tolls can be accessed by using the EC2 instance public dns name and port number:
+The scripts may take a few hours to complete.  Once they have finished, the tools can be accessed by using the EC2 instance public dns name and port number:
 e.g. for Jenkins: `ec2-54-171-145-237.eu-west-1.compute.amazonaws.com:8080`
 
 
