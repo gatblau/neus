@@ -32,6 +32,7 @@
   service:
     name: mariadb
     state: started
+    enabled: yes
   when: blueprint != "silicon"
 
 - block: # Start MariaDB for silicon blueprint
