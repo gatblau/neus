@@ -21,11 +21,25 @@
     include: "plays/install_tool.yml"
     vars:
       tool_name : SBT
-      folder_name : "{{ sbt_folder }}"
+      folder_name : "sbt-{{ sbt_version }}"
       zip_filename: "{{ sbt_zip }}"
       add_version_to_folder : true
       zip_has_folder : true
       has_bin_folder : true
+      user: jenkins
+    when: sbt_version != "0.13.13"
+
+  - name: Install Simple Build Tool (SBT)
+    include: "plays/install_tool.yml"
+    vars:
+      tool_name : SBT
+      folder_name : "sbt-launcher-packaging-{{ sbt_version }}"
+      zip_filename: "{{ sbt_zip }}"
+      add_version_to_folder : false
+      zip_has_folder : true
+      has_bin_folder : true
+      user: jenkins
+    when: sbt_version == "0.13.13"
 
   - name: Put link to SBT in /usr/bin
     file:

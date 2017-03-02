@@ -1,15 +1,15 @@
 ---
   - name: Clone PAMM seed repository
     git:
-      repo=http://github.com/gatblau/pamm.seed
-      dest=/pamm.seed
-      update=yes
+      repo: "{{ group_pamm_seed_repo }}"
+      dest: /pamm.seed
+      update: yes
 
   - name: Create link to Node Manager
     file:
-      src=/node_modules
-      dest=/pamm.seed/node_modules
-      state=link
+      src: /node_modules
+      dest: /pamm.seed/node_modules
+      state: link
 
   - name: Install required dependencies
     npm: path=/pamm.seed
@@ -22,5 +22,5 @@
 
   - name: Remove PAMM seed
     file:
-      path=/pamm.seed/
-      state=absent
+      path: /pamm.seed/
+      state: absent

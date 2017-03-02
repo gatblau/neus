@@ -1,22 +1,22 @@
 ---
   - name: Clone PAMM seed repository
     git:
-      repo=http://github.com/gatblau/pamm.seed
-      dest=/home/{{gogs_user}}/gogs-repositories/pamm.seed
-      update=yes
+      repo: "{{ group_pamm_seed_repo }}"
+      dest: /home/{{gogs_user}}/gogs-repositories/pamm.seed
+      update: yes
 
   - name: Change owner of PAMM seed repository
     file:
-      path=/home/{{gogs_user}}/gogs-repositories/pamm.seed
-      owner="{{gogs_user}}"
-      group="{{gogs_group}}"
-      recurse=yes
+      path: "/home/{{gogs_user}}/gogs-repositories/pamm.seed"
+      owner: "{{gogs_user}}"
+      group: "{{gogs_group}}"
+      recurse: yes
 
   - name: Copy PAMM seed import script
     copy:
-      src=import_pamm_seed.sh
-      dest=/import_pamm_seed.sh
-      mode=0755
+      src: import_pamm_seed.sh
+      dest: /import_pamm_seed.sh
+      mode: 0755
 
   - name: Import PAMM seed into GOGS
     shell: /import_pamm_seed.sh

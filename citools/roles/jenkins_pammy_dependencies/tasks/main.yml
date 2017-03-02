@@ -10,7 +10,7 @@
 
   - name: Clone PAMM seed repository
     git:
-      repo: http://github.com/gatblau/pamm.seed
+      repo: "{{ group_pamm_seed_repo }}"
       dest: "{{ jenkins_user_home }}/pamm.seed"
       update: yes
 
@@ -52,3 +52,8 @@
 
   - name: Set Protractor timeout
     command: 'sed -i "s/allScriptsTimeout: 11000,/allScriptsTimeout: 30000,/" /home/jenkins/node_modules/protractor/lib/configParser.js warn=no'
+    when: sbt_version != "0.13.13"
+
+  - name: Set Protractor timeout
+    command: 'sed -i "s/allScriptsTimeout: 11000,/allScriptsTimeout: 30000,/" /home/jenkins/node_modules/protractor/built/configParser.js warn=no'
+    when: sbt_version == "0.13.13"

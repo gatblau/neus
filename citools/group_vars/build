@@ -7,9 +7,9 @@ jenkins_master_executors: 2
 jenkins_rpm:  jenkins-2.32.3-1.1.noarch.rpm
 
 # SBT variables
-sbt_folder: sbt-0.13.11
-sbt_zip: sbt-0.13.11.zip
-sbt_cache: sbt-cache-0.13.zip
+sbt_version: 0.13.11
+sbt_zip:     "sbt-{{ sbt_version }}.zip"
+sbt_cache:   "sbt-cache-{{ sbt_version }}.zip"
 
 nodejs_packages: # Requires npm
   nodejs:
