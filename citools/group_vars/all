@@ -9,6 +9,7 @@ jamm: "no"
 # PAMM Seed repository url
 # Note: also set the sbt_version in group_vars/build
 group_pamm_seed_repo: "https://github.com/gatblau/pamm.seed"
+pamm_seed_tag: "PAMM-1.3.2"
 # Port numbers
 ansible_port:  22
 jenkins_port:  8080

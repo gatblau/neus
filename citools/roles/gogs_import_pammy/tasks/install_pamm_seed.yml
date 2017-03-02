@@ -3,6 +3,7 @@
     git:
       repo: "{{ group_pamm_seed_repo }}"
       dest: /home/{{gogs_user}}/gogs-repositories/pamm.seed
+      version: "{{ pamm_seed_tag }}"
       update: yes
 
   - name: Change owner of PAMM seed repository
