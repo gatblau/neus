@@ -8,11 +8,11 @@
   - name: Create karma.cmd symbolic link
     command: "su -c \"cd node_modules/.bin && ln -s ../karma/bin/karma karma.cmd\" - jenkins warn=no"
 
-  - name: Clone PAMM seed repository
+  - name: Clone PAMM seed repository version {{ pamm_seed_tag }}
     git:
       repo: "{{ group_pamm_seed_repo }}"
       dest: "{{ jenkins_user_home }}/pamm.seed"
-      update: yes
+      version: "{{ pamm_seed_tag }}"
 
   - name: Install bzip2
     yum:

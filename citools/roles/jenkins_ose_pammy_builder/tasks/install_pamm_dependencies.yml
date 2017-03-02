@@ -1,9 +1,9 @@
 ---
-  - name: Clone PAMM seed repository
+  - name: Clone PAMM seed repository version {{ pamm_seed_tag }}
     git:
       repo: "{{ group_pamm_seed_repo }}"
       dest: /pamm.seed
-      update: yes
+      version: "{{ pamm_seed_tag }}"
 
   - name: Create link to Node Manager
     file:
