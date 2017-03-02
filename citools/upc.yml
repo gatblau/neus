@@ -115,38 +115,38 @@
 
 # Obtain IP addresses of containers
 - name: Get ci-a IP address
-  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-a"
+  command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-a"
   register: ci_a_ip
 
 - name: Get ci-b IP address
-  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-b"
+  command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-b"
   register: ci_b_ip
   when:
     - blueprint != "basic"
 
 - name: Get ci-c IP address
-  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-c"
+  command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-c"
   register: ci_c_ip
   when: blueprint == "silver" or blueprint == "gold"
 
 - name: Get ci-d IP address
-  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-d"
+  command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-d"
   register: ci_d_ip
   when: blueprint == "silver" or blueprint == "gold"
 
 - name: Get ci-e IP address
-  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-e"
+  command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-e"
   register: ci_e_ip
   when:
     - blueprint == "gold"
 
 - name: Get ci-dit-pamm IP address
-  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-dit-pamm"
+  command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-dit-pamm"
   register: ci_dit_pamm_ip
   when: pamm == "yes"
 
 - name: Get ci-dit-jamm IP address
-  shell: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-dit-jamm"
+  command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-dit-jamm"
   register: ci_dit_jamm_ip
   when: jamm == "yes"
 
