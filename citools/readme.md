@@ -19,17 +19,17 @@ The CITOOLS solution is available for deployment on the following infrastructure
  
 Running CentOS or RHEL 7, via the following blueprints:
 
-- [Basic](blueprints/basic/readme.md): the minimum configuration running on one virtual machine.
-- [Bronze](blueprints/bronze/readme.md): the minimum configuration running on two virtual machines.
-- [Silver](blueprints/silver/readme.md): a relatively small configuration for cases where more performant builds are required. Runs on three virtual machines configuration.
-- [Gold](blueprints/gold/readme.md): a larger and scalable configuration using five virtual machines.
-- [Silicon](blueprints/silicon/readme.md): a set of Docker images for use with an orchestration engine (e.g. OpenShift).
+- [Basic](docs/ci-basic.png): the minimum configuration running on one virtual machine.
+- [Bronze](docs/ci-bronze.png): the minimum configuration running on two virtual machines.
+- [Silver](docs/ci-silver.png): a relatively small configuration for cases where more performant builds are required. Runs on four virtual machines.
+- [Gold](docs/ci-gold.png): a larger and scalable configuration using five virtual machines.
+- [Silicon](docs/silicon.png): a set of Docker images for use with an orchestration engine (e.g. OpenShift).
 
 ### Container Management Platforms
 
 Running CentOS or RHEL 7 based Docker containers.
 
-This is supported via the [Silicon](blueprints/silicon/readme.md) blueprint.
+This is supported via the [Silicon](docs/silicon.png) blueprint.
 In contrast to the Virtual Machine blueprints, the silicon blueprint is used to create Docker Images for each of the services within the CITOOLS solution.
 The images can then be uploaded into a Docker registry, where Container Management platforms can deploy them as needed.
 
