@@ -55,16 +55,13 @@ Note: see the `upv_ec2.yml` file for AWS EC2 options.
 | ci_a_ext_dns_name | when tgt_platform is *vm* | ci_a_ip | | If using external DNS names, holds the ci-a DNS name. |
 
 
-
-
-
 ### Inventory Variables
 
 Although variables are not normally defined in the inventory, the following variable is specific to the inventory of each blueprint.
 
 | parameter | required | default | choices | comments |
 |--------|--------|--------|--------|--------|
-| blueprint | yes | | <li>bronze</li><li>silver</li><li>gold</li><li>silicon</li> | Set to blueprint, do not change the value. |
+| blueprint | yes | | <li>basic</li><li>bronze</li><li>silver</li><li>gold</li><li>silicon</li> | Set to blueprint, do not change the value. |
 
 
 #### PAMM
@@ -81,7 +78,4 @@ The following variables are held in the PAMM inventory.txt file but will be refa
 | vpc_subnet_id | when tgt_platform is *ec2* | | | Set to AWS account vpc subnet. |
 | zone | when tgt_platform is *ec2* | eu-west-1b | | AWS zone. |
 | blueprint | yes | | | Set to blueprint, do not change the value. |
-
-
-
 
