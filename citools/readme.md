@@ -19,19 +19,18 @@ The CITOOLS solution is available for deployment on the following infrastructure
  
 Running CentOS or RHEL 7, via the following blueprints:
 
-- [Basic](docs/ci-basic.png): the minimum configuration running on one virtual machine.
-- [Bronze](docs/ci-bronze.png): the minimum configuration running on two virtual machines.
-- [Silver](docs/ci-silver.png): a relatively small configuration for cases where more performant builds are required. Runs on four virtual machines.
-- [Gold](docs/ci-gold.png): a larger and scalable configuration using five virtual machines.
-- [Silicon](docs/silicon.png): a set of Docker images for use with an orchestration engine (e.g. OpenShift).
+- [Basic](docs/images/ci-basic.png): the minimum configuration running on one virtual machine.
+- [Bronze](docs/images/ci-bronze.png): a small configuration running on two virtual machines.
+- [Silver](docs/images/ci-silver.png): a medium configuration for cases where more performant builds are required running on four virtual machines.
+- [Gold](docs/images/ci-gold.png): a larger and scalable configuration running on five virtual machines.
 
 ### Container Management Platforms
 
-Running CentOS or RHEL 7 based Docker containers.
+Running CentOS or RHEL 7 based Docker containers:
 
-This is supported via the [Silicon](docs/silicon.png) blueprint.
-In contrast to the Virtual Machine blueprints, the silicon blueprint is used to create Docker Images for each of the services within the CITOOLS solution.
-The images can then be uploaded into a Docker registry, where Container Management platforms can deploy them as needed.
+- [Silicon](docs/images/silicon.png): a set of Docker images for use with an orchestration engine (e.g. OpenShift).
+
+In contrast to the Virtual Machine blueprints, the silicon blueprint is used to create Docker Images for each of the services within the CITOOLS solution.  The images can then be uploaded into a Docker registry, where Container Management platforms can deploy them as needed.
 
 Bootstraps files for deployment are provided for the following Container Management platforms:
 
@@ -52,3 +51,9 @@ The following table describes the content of the main folders in the CITOOLS pro
 | inventories | Inventory files required to build each blueprint configuration. |
 | roles | The roles used by the blueprints to deploy the CITOOLS. |
 | scripts | The generic shell library scripts used by other scripts in the solution. |
+
+## Getting Started
+
+See the [Getting Started](docs/getting_started.md) guide for details of how to build and use the CI Tools environment.
+
+See the [bootstrap](docs/bootstrap.md) guide for details of how the CI Tools are provisioned.
