@@ -26,10 +26,10 @@
       state: link
 
   - name: Install dependencies
-    shell: "cd {{ jenkins_user_home }}/pamm.seed && npm install"
+    command: "cd {{ jenkins_user_home }}/pamm.seed && npm install"
 
   - name: Update webdriver
-    shell: "cd {{ jenkins_user_home }}/pamm.seed && npm run webdriver-update"
+    command: "cd {{ jenkins_user_home }}/pamm.seed && npm run webdriver-update"
 
   - name: Check for local SBT cache
     become: yes
@@ -38,7 +38,7 @@
     register: sbt_dependencies
 
   - name: Build PAMM seed to create SBT cache
-    shell: 'su -c "cd {{ jenkins_user_home }}/pamm.seed && /usr/local/sbt/default/bin/sbt svc/assembly testsetup/assembly -Dsbt.log.noformat=true" - jenkins warn=no'
+    command: 'su -c "cd {{ jenkins_user_home }}/pamm.seed && /usr/local/sbt/default/bin/sbt svc/assembly testsetup/assembly -Dsbt.log.noformat=true" - jenkins warn=no'
     when: sbt_dependencies.stat.exists == false
 
   - name: Create local SBT cache
@@ -50,10 +50,20 @@
       path: "{{ jenkins_user_home }}/pamm.seed"
       state: absent
 
+  - name: Determine location of configParser.js
+    stat:
+      path: "/home/jenkins/node_modules/protractor/lib/configParser.js"
+    register: file_exists
+
   - name: Set Protractor timeout
     command: 'sed -i "s/allScriptsTimeout: 11000,/allScriptsTimeout: 30000,/" /home/jenkins/node_modules/protractor/lib/configParser.js warn=no'
-    when: sbt_version != "0.13.13"
+    when: file_exists.stat.exists == true
+
+  - name: Determine location of configParser.js
+    stat:
+      path: "/home/jenkins/node_modules/protractor/built/configParser.js"
+    register: file_exists
 
   - name: Set Protractor timeout
     command: 'sed -i "s/allScriptsTimeout: 11000,/allScriptsTimeout: 30000,/" /home/jenkins/node_modules/protractor/built/configParser.js warn=no'
-    when: sbt_version == "0.13.13"
+    when: file_exists.stat.exists  == true
