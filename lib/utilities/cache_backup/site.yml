@@ -4,3 +4,11 @@
   connection: local
   roles:
     - upload_cache
+  tags: upload
+
+- name: Download cache folder from Nexus
+  hosts: localhost
+  connection: local
+  roles:
+    - download_cache
+  tags: download

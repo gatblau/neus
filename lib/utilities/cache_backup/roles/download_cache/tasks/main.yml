@@ -1,0 +1,9 @@
+---
+- name: Download files from Nexus
+  get_url:
+    url:  "{{ nexus_url }}/{{ item }}"
+    dest: "{{ cache_folder }}"
+    url_username: "{{ nexus_user }}"
+    url_password: "{{ nexus_user_pw }}"
+  with_items:
+    - "{{ cache_files }}"

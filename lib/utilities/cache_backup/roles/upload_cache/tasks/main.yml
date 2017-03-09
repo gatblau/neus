@@ -1,6 +1,6 @@
 ---
-- name: Upload files in {{ role_cache_folder }}
-  command: "curl -v -u {{ role_nexus_user }}:{{ role_nexus_user_pwd }} --upload-file {{ item | basename }} {{ role_nexus_repo_url }}/{{ item | basename }} warn=no"
+- name: Upload files in {{ cache_folder }}
+  command: "curl -v -u {{ nexus_user }}:{{ nexus_user_pwd }} --upload-file {{ item | basename }} {{ nexus_repo_url }}/{{ item | basename }} warn=no"
   args:
-    chdir: "{{ role_cache_folder }}"
-  with_fileglob: "{{ role_cache_folder }}/*"
+    chdir: "{{ cache_folder }}"
+  with_fileglob: "{{ cache_folder }}/*"

@@ -1,16 +1,28 @@
 Cache Backup
 ============
 
-This folder contains the files to upload a Neus cache folder to a Nexus repository.
+This folder contains the files to upload and download the files in a Neus cache folder to or from a Nexus repository.
  
- Before running this playbook, the following variables, in [roles/upload_cache/defaults/main.yml](roles/upload_cache/defaults/main.yml) should be updated:
+Before uploading files, the following variables, in [roles/upload_cache/defaults/main.yml](roles/upload_cache/defaults/main.yml) should be updated:
  
- | Variable | Description |
- |----------|----------|
- | role_cache_folder | Cache folder - default is for CI Tools. |
- | role_nexus_user | Nexus deployment user. |
- | role_nexus_user_pwd | Nexus deployment user password. |
- | role_nexus_repo_url | Path to Nexus repository where files will be uploaded.  Default is `citools`. |
+| Variable | Description |
+|----------|----------|
+| tool_name | Which tool folder to upload: `cdtools`, `citools`, `pamm` or `jamm`. |
+| nexus_user | Nexus deployment user. |
+| nexus_user_pwd | Nexus deployment user password. |
+| nexus_repo_url | Path to Nexus repository where files will be uploaded.  Default is `citools`. |
  
- Once updated, execute the `run.sh` script.
+Once updated, execute the `run.sh` script with `upload` as an argument.
+
+Before downloading files, the following variables, in [roles/download_cache/defaults/main.yml](roles/download_cache/defaults/main.yml) should be updated:
+  
+| Variable | Description |
+|----------|----------|
+| tool_name | Which tool folder to upload: `cdtools`, `citools`, `pamm` or `jamm`. |
+| nexus_user | Nexus deployment user. |
+| nexus_user_pwd | Nexus deployment user password. |
+| nexus_repo_url | Path to Nexus repository where files will be uploaded.  Default is `citools`. |
+| cache_files | List of cache files to download. |
+  
+Once updated, execute the `run.sh` script with `download` as an argument.
  
