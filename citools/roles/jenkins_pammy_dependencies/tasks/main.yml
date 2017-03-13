@@ -26,10 +26,17 @@
       state: link
 
   - name: Install dependencies
-    command: "cd {{ jenkins_user_home }}/pamm.seed && npm install"
+    command: "npm install"
+    args:
+      chdir: "{{ jenkins_user_home }}/pamm.seed"
 
   - name: Update webdriver
     command: "cd {{ jenkins_user_home }}/pamm.seed && npm run webdriver-update"
+
+  - name: Update webdriver standalone
+    command: "npm run webdriver-update --standalone"
+    args:
+      chdir: "{{ jenkins_user_home }}/pamm.seed"
 
   - name: Check for local SBT cache
     become: yes
