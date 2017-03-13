@@ -12,16 +12,28 @@
       group: "{{gogs_group}}"
       recurse: yes
 
-  - name: Copy PAMM seed import script
+  - name: Copy PAMM seed import scripts
     copy:
-      src: import_pamm_seed.sh
-      dest: /import_pamm_seed.sh
+      src: "{{ item }}"
+      dest: "/{{ item }}"
       mode: 0755
+    with_items:
+      - import_pamm_seed.sh
+      - import_pamm_seed_no_history.sh
 
   - name: Import PAMM seed into GOGS
     shell: /import_pamm_seed.sh
+    ignore_errors: yes
+    register: result
 
-  - name: Remove PAMM seed import script
+  - name: Import PAMM seed into GOGS (no history)
+    shell: /import_pamm_seed_no_history.sh
+    when: result.rc != 0
+
+  - name: Remove PAMM seed import scripts
     file:
-      path=/import_pamm_seed.sh
-      state=absent
+      path: "{{ item }}"
+      state: absent
+    with_items:
+      - import_pamm_seed.sh
+      - import_pamm_seed_no_history.sh
