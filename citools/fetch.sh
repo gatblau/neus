@@ -47,7 +47,7 @@ find $ROOT. -size 0c -delete
 # download the following files to the root folder if they do not exist
 download "http://pkg.jenkins-ci.org/redhat-stable/" "jenkins-2.32.3-1.1.noarch.rpm"
 download "https://sonatype-download.global.ssl.fastly.net/nexus/oss/" "nexus-2.14.3-02-bundle.zip"
-download "https://github.com/gogits/gogs/releases/download/v0.9.113/" "linux_386.zip"
+download "https://github.com/gogits/gogs/releases/download/v0.10.8/" "linux_386.zip"
 download_as "https://sourceforge.net/projects/sonar-pkg/files/rpm/noarch/sonar-5.6.4-1.noarch.rpm/download" "sonar-5.6.4-1.noarch.rpm"
 download_as "https://sourceforge.net/projects/sonar-pkg/files/rpm/noarch/sonar-5.4-1.noarch.rpm/download" "sonar-5.4-1.noarch.rpm"
 
