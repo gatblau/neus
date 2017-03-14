@@ -61,14 +61,13 @@
     group: "{{ fuse_group }}"
     mode: 0755
 
-# TODO - set user to run Fuse
-#- name: Set user to run Fuse
-#  lineinfile:
-#    dest: "{{ fuse_install_dir }}/default/bin/fusefabric-service"
-#    regexp: "#RUN_AS_USER="
-#    line:   "RUN_AS_USER={{ fuse_user }}"
-#    owner: "{{ fuse_user }}"
-#    group: "{{ fuse_group }}"
+- name: Set user to run Fuse
+  lineinfile:
+    dest: "{{ fuse_install_dir }}/default/bin/fusefabric-service"
+    regexp: "#RUN_AS_USER="
+    line:   "RUN_AS_USER={{ fuse_user }}"
+    owner: "{{ fuse_user }}"
+    group: "{{ fuse_group }}"
 
 - name: Create log folder
   file:
@@ -91,6 +90,14 @@
   vars:
     port_number: "{{ fuse_port }}"
   when: connection == "ssh"
+
+- name: Set owner of Fuse home folder
+  file:
+    path: "{{ fuse_install_dir }}/default/"
+    owner: "{{ fuse_user }}"
+    group: "{{ fuse_group }}"
+    state: directory
+    recurse: yes
 
 - name: Start Fuse Fabric service
   command: "service fusefabric-service start warn=no"
