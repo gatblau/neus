@@ -2,7 +2,7 @@
 # Enter the tool name: e.g. citools cdtools pamm jamm
 tool_name: citools
 
-cache_folder:  "../../../{{ role_tool_name }}/cache/"
+cache_folder:  "../../../{{ tool_name }}/cache/"
 
 nexus_user:     deployment
 nexus_user_pwd: deployment123
