@@ -6,6 +6,14 @@
     replace: 'keepcache=1'
   when: connection == "docker"
 
+- name: Installing the firewalld command
+  include: plays/install_rpm.yml
+  vars:
+    rpm_app_name: "firewalld"
+    rpm_filename: "{{ item | basename }}"
+  with_fileglob: "cache/{{ firewalld_rpm }}"
+  when: connection == "ssh"
+
 - name: Installing the Unzip command
   include: plays/install_rpm.yml
   vars:
