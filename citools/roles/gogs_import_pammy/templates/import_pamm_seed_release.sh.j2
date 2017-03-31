@@ -5,7 +5,11 @@ git config --global user.email gogs@devops.net
 
 # Import cloned PAMM seed into GOGS
 cd /home/gogs/gogs-repositories/pamm.seed
-git remote set-url origin http://gogs:gogs@localhost:3000/gogs/pamm.seed.git
+rm -rf .git
+git init
+git add .
+git commit -m "Initial commit release {{ pamm_seed_tag }}."
+git remote add origin http://gogs:gogs@localhost:3000/gogs/pamm.seed.git
 git push -u origin master
 
 chown -R gogs:gogs /home/gogs/gogs-repositories/pamm.seed
