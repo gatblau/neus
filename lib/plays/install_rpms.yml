@@ -17,22 +17,31 @@
 #        - package2.rpm
 #        - package3.rpm
 #
+- name: Check if {{ package.key }} installed
+  command: "yum list installed {{ package.key }} warn=no"
+  failed_when: false
+  no_log: true
+  register: result
 
-- name: Copying {{ package.key | capitalize }} to the host
-  copy:
-    src: "cache/{{ item }}"
-    dest: "/tmp/{{ item }}"
-  with_items:
-    - "{{ package.value.packages }}"
+- block:
+  - name: Copying {{ package.key | capitalize }} to the host
+    copy:
+      src: "cache/{{ item }}"
+      dest: "/tmp/{{ item }}"
+    with_items:
+      - "{{ package.value.packages }}"
 
-- name: Installing {{ package.key | capitalize }} packages
-  command: 'yum install -y {{ package.value.packages | join(" ") }} warn=no'
-  args:
-    chdir: "/tmp"
+  - name: Installing {{ package.key | capitalize }} packages
+    command: 'yum install -y {{ package.value.packages | join(" ") }} warn=no'
+    args:
+      chdir: "/tmp"
+#    command: 'yum install -y {{ package.value.packages | join(" ") }} --disablerepo="*" warn=no'
 
-- name: Removing the {{ package.key | capitalize }} files after installation
-  file:
-    name: "/tmp/{{ item }}"
-    state: absent
-  with_items:
-    - "{{ package.value.packages }}"
+  - name: Removing the {{ package.key | capitalize }} files after installation
+    file:
+      name: "/tmp/{{ item }}"
+      state: absent
+    with_items:
+      - "{{ package.value.packages }}"
+
+  when: result.rc != 0
