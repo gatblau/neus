@@ -56,7 +56,7 @@
     state: absent
     force_kill: true
   with_items:
-    - "{{ groups['citools'] }}"
+    - [ ci-a, ci-b, ci-c, ci-d, ci-e ]
     - "{{ groups['ci-dit'] }}"
 
 - name: Start up CI Tools Docker containers
