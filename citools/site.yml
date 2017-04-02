@@ -29,6 +29,7 @@
   connection: "{{ connection }}"
   become: "{{ become }}"
   roles:
+    - baseline
     - jenkins_user
     - jenkins_install
     - jenkins_master
@@ -88,6 +89,7 @@
   connection: "{{ connection }}"
   become: "{{ become }}"
   roles:
+    - baseline
     - mariadb_install
     - mariadb
   tags: [ database, always ]
