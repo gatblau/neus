@@ -6,11 +6,18 @@
     replace: 'keepcache=1'
   when: connection == "docker"
 
-- name: Installing the firewalld command
-  include: plays/install_rpms.yml
-  with_dict: "{{ firewalld_packages }}"
-  loop_control:
-    loop_var: package
+- block: # Install firewalld and start service
+  - name: Installing the firewalld command
+    include: plays/install_rpms.yml
+    with_dict: "{{ firewalld_packages }}"
+    loop_control:
+      loop_var: package
+
+  - name: Starting firewalld Service
+    service:
+      name: firewalld
+      state: started
+      enabled: yes
   when: connection == "ssh"
 
 - name: Installing the Unzip command
