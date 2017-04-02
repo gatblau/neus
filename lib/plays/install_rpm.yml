@@ -18,17 +18,31 @@
 # The name of the playbook should be updated to reflect the host name - e.g. database.yml
 #
 ---
-- name: Copying {{rpm_app_name|capitalize}} to the host
-  copy:
-    src=cache/{{rpm_filename}}
-    dest=/tmp/{{rpm_filename}}
+- name: Get {{ rpm_app_name | capitalize }} package name
+  set_fact:
+    rpm_package: "{{ rpm_filename | replace('.rpm', '') }}"
 
-- name: Installing {{rpm_filename}} file
-  yum:
-    name=/tmp/{{rpm_filename}}
-    state=present
+- name: Check if {{ rpm_app_name | capitalize }} installed
+  command: "yum list installed {{ rpm_package }} warn=no"
+  failed_when: false
+  no_log: true
+  register: result
 
-- name: Removing the {{rpm_filename}} file after installation
-  file:
-    name=/tmp/{{rpm_filename}}
-    state=absent
+- block:
+  - name: Copying {{rpm_app_name|capitalize}} to the host
+    copy:
+      src: "cache/{{rpm_filename}}"
+      dest: "/tmp/{{rpm_filename}}"
+
+  - name: Installing {{rpm_filename}} file
+    yum:
+      name: "/tmp/{{rpm_filename}}"
+      state: present
+
+
+  - name: Removing the {{rpm_filename}} file after installation
+    file:
+      name: "/tmp/{{rpm_filename}}"
+      state: absent
+
+  when: result.rc != 0
