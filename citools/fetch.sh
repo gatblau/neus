@@ -80,6 +80,7 @@ download "https://bintray.com/artifact/download/groovy/maven/" "apache-groovy-bi
 #download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-1.6.3-9.el7.x86_64.rpm"
 #download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-filesystem-1.6.3-9.el7.noarch.rpm"
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "perl-5.16.3-291.el7.x86_64.rpm"
+download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "perl-libs-5.16.3-291.el7.x86_64.rpm"
 download "http://opensource.wandisco.com/centos/7/git/x86_64/" "wandisco-git-release-7-1.noarch.rpm"
 download "http://opensource.wandisco.com/centos/7/git/x86_64/" "git-2.4.1-1.WANdisco.259.x86_64.rpm"
 download "http://opensource.wandisco.com/centos/7/git/x86_64/" "perl-Git-2.4.1-1.WANdisco.259.noarch.rpm"
