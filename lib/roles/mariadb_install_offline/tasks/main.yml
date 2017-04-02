@@ -1,8 +1,8 @@
 ---
 - name: Create user for MariaDB
   user:
-    name: "{{ role_mariadb_user }}"
-    password: "{{ role_mariadb_password }}"
+    name: "{{ mariadb_user }}"
+    password: "{{ mariadb_password }}"
     state: present
 
 - include: "plays/open_port.yml"
@@ -12,7 +12,7 @@
 
 - name: Install MariaDB
   include: plays/install_rpms.yml
-  with_dict: "{{ role_mariadb_packages }}"
+  with_dict: "{{ mariadb_packages }}"
   loop_control:
     loop_var: package
 
@@ -20,13 +20,13 @@
   include: plays/install_rpm.yml
   vars:
     rpm_app_name: MySQL-python
-    rpm_filename: "{{ role_mysql_python }}"
+    rpm_filename: "{{ mysql_python }}"
 
 - name: Setting MariaDB port number to {{database_port}}
   template:
     src: server.cnf.j2
     dest: /etc/my.cnf.d/server.cnf
-    owner: "{{ role_mariadb_user }}"
+    owner: "{{ mariadb_user }}"
 
 - name: Starting the MariaDB Server
   service:

@@ -1,11 +1,11 @@
 ---
-role_mariadb_user: mariadb
-role_mariadb_password: $6$rounds=656000$D9KRZoam0U6pf5YB$hcSY8ILhucJ/u4I3oa/B/9GVX290ORueMw1D./TFlT.ldmKTo1KI6/LvB44DVvXYf5lx0tV/JzGYWAQGjCb64.
+mariadb_user: mariadb
+mariadb_password: $6$rounds=656000$D9KRZoam0U6pf5YB$hcSY8ILhucJ/u4I3oa/B/9GVX290ORueMw1D./TFlT.ldmKTo1KI6/LvB44DVvXYf5lx0tV/JzGYWAQGjCb64.
 
-role_mysql_python: MySQL-python-1.2.5-1.el7.x86_64.rpm
+mysql_python: MySQL-python-1.2.5-1.el7.x86_64.rpm
 
-role_mariadb_packages:
-  mariadb:
+mariadb_packages:
+  mariadb-server:
     packages:
       - "mariadb-server-5.5.52-1.el7.x86_64.rpm"
       - "groff-base-1.22.2-8.el7.x86_64.rpm"
