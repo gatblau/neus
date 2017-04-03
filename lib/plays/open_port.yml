@@ -16,17 +16,6 @@
 # Manages the opening of ports on the target.
 #
 ---
-- name: Ensure that the firewall Service is installed
-  yum:
-    name=firewalld
-    state=present
-
-- name: Starting the firewall Service
-  service:
-    name=firewalld
-    state=started
-    enabled=yes
-
 - name: Opening port "{{port_number}}"
   command: 'firewall-cmd --permanent --add-port={{port_number}}/tcp'
 
