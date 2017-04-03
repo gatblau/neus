@@ -14,6 +14,7 @@
   - name: Get list of groups on managed host
     command: "cut -d: -f1 /etc/group"
     register: group_list
+    changed_when: false
 
   - name: Add Jenkins user to local_ssh group (if exists)
     user:

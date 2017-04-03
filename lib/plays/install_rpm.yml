@@ -25,6 +25,7 @@
 - name: Check if {{ rpm_app_name | capitalize }} installed
   command: "yum list installed {{ rpm_package }} warn=no"
   failed_when: false
+  changed_when: false
   no_log: true
   register: result
 

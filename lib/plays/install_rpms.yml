@@ -20,6 +20,7 @@
 - name: Check if {{ package.key }} installed
   command: "yum list installed {{ package.key }} warn=no"
   failed_when: false
+  changed_when: false
   no_log: true
   register: result
 
@@ -35,7 +36,6 @@
     command: 'yum install -y {{ package.value.packages | join(" ") }} warn=no'
     args:
       chdir: "/tmp"
-#    command: 'yum install -y {{ package.value.packages | join(" ") }} --disablerepo="*" warn=no'
 
   - name: Removing the {{ package.key | capitalize }} files after installation
     file:
