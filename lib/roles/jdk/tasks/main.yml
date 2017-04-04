@@ -1,6 +1,4 @@
 ---
-  - command: "echo Installing Java"
-
   # Install JDK
   - include: "plays/install_rpm.yml"
     vars:
