@@ -38,19 +38,27 @@
     args:
       chdir: "{{ jenkins_user_home }}/pamm.seed"
 
-  - name: Check for local SBT cache
-    become: yes
-    become_user: "{{ group_localhost_user }}"
-    local_action: "stat path=cache/{{ sbt_cache }}"
-    register: sbt_dependencies
+  - name: Copy SBT {{ sbt_version }} cache zip file
+    copy:
+      src: "cache/{{ sbt_cache }}"
+      dest: "/tmp/{{ sbt_cache }}"
+      owner: root
+    failed_when: false
+    no_log: true
 
-  - name: Build PAMM seed to create SBT cache
-    command: 'su -c "cd {{ jenkins_user_home }}/pamm.seed && /usr/local/sbt/default/bin/sbt svc/assembly testsetup/assembly -Dsbt.log.noformat=true" - jenkins warn=no'
-    when: sbt_dependencies.stat.exists == false
+  - name: Check for SBT cache
+    stat: path=/tmp/{{ sbt_cache }}
+    register: sbt_cache
 
-  - name: Create local SBT cache
-    local_action: "shell docker cp ci-a:/home/jenkins/.ivy2 cache && cd cache && zip -r {{ sbt_cache }} .ivy2 && rm -rf .ivy2"
-    when: sbt_dependencies.stat.exists == false and connection == "docker"
+  - block:
+    - name: Build PAMM seed to create SBT cache
+      command: 'su -c "cd {{ jenkins_user_home }}/pamm.seed && /usr/local/sbt/default/bin/sbt svc/assembly testsetup/assembly -Dsbt.log.noformat=true" - jenkins warn=no'
+
+    - name: Create local SBT cache
+      local_action: "shell docker cp ci-a:/home/jenkins/.ivy2 cache && cd cache && zip -r {{ sbt_cache }} .ivy2 && rm -rf .ivy2"
+      when: connection == "docker"
+
+    when: sbt_cache.stat.exists == false
 
   - name: Remove PAMM seed repository
     file:

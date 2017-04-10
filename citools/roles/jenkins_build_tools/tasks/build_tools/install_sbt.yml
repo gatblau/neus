@@ -23,30 +23,29 @@
       user: jenkins
     when: sbt_version == "0.13.13"
 
-  - name: Check for local SBT cache
-    become: yes
-    become_user: "{{ group_localhost_user }}"
-    local_action: "stat path=cache/{{ sbt_cache }}"
-    register: sbt_dependencies
-
   - name: Copy SBT {{ sbt_version }} cache zip file
     copy:
       src: "cache/{{ sbt_cache }}"
       dest: "/tmp/{{ sbt_cache }}"
       owner: root
-    when: sbt_dependencies.stat.exists == true
+    failed_when: false
+    no_log: true
 
-  - name: Unzip SBT cache zip file
-    unarchive:
-      src: "/tmp/{{ sbt_cache }}"
-      dest: /home/jenkins
-      copy: no
-      owner: jenkins
-      group: jenkins
-    when: sbt_dependencies.stat.exists == true
+  - name: Check for SBT cache
+    stat: path=/tmp/{{ sbt_cache }}
+    register: sbt_dependencies
 
-  - name: Delete SBT cache zip file
-    file:
-      path: "/tmp/{{ sbt_cache }}"
-      state: absent
+  - block:
+    - name: Unzip SBT cache zip file
+      unarchive:
+        src: "/tmp/{{ sbt_cache }}"
+        dest: /home/jenkins
+        copy: no
+        owner: jenkins
+        group: jenkins
+
+    - name: Delete SBT cache zip file
+      file:
+        path: "/tmp/{{ sbt_cache }}"
+        state: absent
     when: sbt_dependencies.stat.exists == true
