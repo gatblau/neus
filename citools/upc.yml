@@ -42,12 +42,6 @@
     ci_base: "centos:7"
   when: blueprint == "silicon"
 
-- name: Restart Docker daemon to delete containers
-  become: yes
-  service:
-    name: docker
-    state: restarted
-
 - name: Delete existing Docker containers
   become: yes
   docker_container:
@@ -71,6 +65,7 @@
     state: started
     privileged: yes
     volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /var/cache/yum/neus:/var/cache/yum:rw
   with_dict: "{{ containers }}"
 
@@ -86,6 +81,7 @@
     state: started
     privileged: yes
     volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /var/cache/yum/neus:/var/cache/yum:rw
   with_items:
     - { name: "ci-dit-pamm", ports: "{{ pamm_app_port }}, {{ pamm_test_port }}" }
@@ -103,6 +99,7 @@
     state: started
     privileged: yes
     volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /var/cache/yum/neus:/var/cache/yum:rw
   with_items:
     - { name: "ci-dit-jamm", ports: "{{ jamm_app_port }}" }
