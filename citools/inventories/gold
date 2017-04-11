@@ -2,11 +2,7 @@
 localhost
 
 [citools]
-ci-a
-ci-b
-ci-c
-ci-d
-ci-e
+ci-[a:e]
 
 [build-master]
 ci-a

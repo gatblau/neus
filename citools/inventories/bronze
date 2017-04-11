@@ -5,8 +5,7 @@ localhost
 citools
 
 [citools]
-ci-a
-ci-b
+ci-[a:b]
 
 [build-master]
 ci-a
