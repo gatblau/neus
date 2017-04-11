@@ -14,8 +14,8 @@ sbt_cache:   "sbt-cache-{{ sbt_version }}.zip"
 nodejs_packages: # Requires npm
   nodejs:
     packages:
-      - nodejs-6.9.4-2.el7.x86_64.rpm
-      - npm-3.10.10-1.6.9.4.2.el7.x86_64.rpm
+      - nodejs-6.10.1-2.el7.x86_64.rpm
+      - npm-3.10.10-1.6.10.1.2.el7.x86_64.rpm
       - libuv-1.10.2-1.el7.x86_64.rpm
       - libicu-50.1.2-15.el7.x86_64.rpm
 
