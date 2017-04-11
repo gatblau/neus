@@ -35,10 +35,16 @@ if [[ ! -e $ROOT ]]; then
     mkdir -p $ROOT
 fi
 
-# removes rpms, zips and gz files from the root folder if 'clean' is passed as parameter to the shell script
+# removes rpms, zips, gz and hpi files from the root folder if 'clean' is passed as parameter to the shell script
 if [[ $1 == "clean" ]]; then
     echo "Refreshing cache in progress...\n"
     rm $ROOT*.rpm && rm $ROOT*.zip && rm $ROOT*.gz && rm $ROOT*.jar && rm $ROOT*.hpi
+fi
+
+# removes Jenkins plugin files from the root folder if 'hpi' is passed as parameter to the shell script
+if [[ $1 == "hpi" ]]; then
+    echo "Refreshing Jenkins plugins in progress...\n"
+    rm $ROOT*.hpi
 fi
 
 # removes all files with zero length size which were the result of previous failed downloads
