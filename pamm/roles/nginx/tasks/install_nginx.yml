@@ -10,10 +10,10 @@
     rpm_app_name: NGINX File System
     rpm_filename: "{{nginx_filesystem_rpm}}"
 
-- include: plays/install_rpm.yml
-  vars:
-    rpm_app_name: NGINX
-    rpm_filename: "{{nginx_rpm}}"
+- include: plays/install_rpms.yml
+  with_dict: "{{ nginx_packages }}"
+  loop_control:
+    loop_var: package
 
 - name: Configuring the NGINX proxy settings
   copy:

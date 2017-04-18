@@ -45,7 +45,14 @@ fi
 find $ROOT. -size 0c -delete
 
 # download the following files to the root folder if they do not exist
-download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "unzip-6.0-15.el7.x86_64.rpm"
-download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-1.6.3-8.el7.x86_64.rpm"
-download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-filesystem-1.6.3-8.el7.noarch.rpm"
+download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "unzip-6.0-16.el7.x86_64.rpm"
+download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-1.10.2-1.el7.x86_64.rpm"
+download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-all-modules-1.10.2-1.el7.noarch.rpm"
+download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-mod-stream-1.10.2-1.el7.x86_64.rpm"
+download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-mod-http-geoip-1.10.2-1.el7.x86_64.rpm"
+download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-mod-http-perl-1.10.2-1.el7.x86_64.rpm"
+download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-mod-http-xslt-filter-1.10.2-1.el7.x86_64.rpm"
+download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-mod-mail-1.10.2-1.el7.x86_64.rpm"
+download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-mod-http-image-filter-1.10.2-1.el7.x86_64.rpm"
+download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-filesystem-1.10.2-1.el7.noarch.rpm"
 download "http://download.oracle.com/otn-pub/java/jdk/8u111-b14/" "jdk-8u111-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"

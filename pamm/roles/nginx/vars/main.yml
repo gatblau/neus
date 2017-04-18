@@ -1,7 +1,19 @@
 ---
 nginx_user: nginx
 nginx_password: $6$rounds=656000$ICkIO6tKirLGiZex$w4HVQvwgGTl79je1eGG69z2VLKAochBeiPjMQ5F4x4Jq/0Jru3GAKm7/TWmZaRFHkpELCDAnass9ami/NQzfT.
-nginx_rpm: nginx-1.6.3-8.el7.x86_64.rpm
-nginx_filesystem_rpm: nginx-filesystem-1.6.3-8.el7.noarch.rpm
+
+nginx_packages:
+  nginx:
+    packages:
+      - nginx-1.10.2-1.el7.x86_64.rpm
+      - nginx-all-modules-1.10.2-1.el7.noarch.rpm
+      - nginx-mod-stream-1.10.2-1.el7.x86_64.rpm
+      - nginx-mod-http-geoip-1.10.2-1.el7.x86_64.rpm
+      - nginx-mod-http-perl-1.10.2-1.el7.x86_64.rpm
+      - nginx-mod-http-xslt-filter-1.10.2-1.el7.x86_64.rpm
+      - nginx-mod-mail-1.10.2-1.el7.x86_64.rpm
+      - nginx-mod-http-image-filter-1.10.2-1.el7.x86_64.rpm
+
+nginx_filesystem_rpm: nginx-filesystem-1.10.2-1.el7.noarch.rpm
 
 proxy_port: 80
