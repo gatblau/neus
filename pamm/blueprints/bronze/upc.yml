@@ -28,7 +28,7 @@
 
 - name: Build Docker image with sudo, ssh and systemd
   become: yes
-  command: docker build --rm -t gatblau.org/centos:7ds ../lib/images/centos7ds
+  command: docker build --rm -t gatblau.org/centos:7ds ../../lib/images/centos7ds
 
 - name: Delete existing Docker containers
   become: yes
