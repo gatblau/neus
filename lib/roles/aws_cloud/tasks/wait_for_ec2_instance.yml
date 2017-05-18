@@ -1,0 +1,18 @@
+# This play waits for an AWS EC2 instance to initialise.
+#
+# Usage:
+#
+# - include_role:
+#     name: aws_cloud
+#     tasks_from: wait_for_ec2_instance
+#     vars:
+#       ec2_public_ip: <instance_public_ip>
+#
+---
+- name: Wait for EC2 host to initialise
+  local_action: wait_for
+                host: "{{ ec2_public_ip }}"
+                port: 22
+                delay: 30
+                timeout: 360
+                state: started

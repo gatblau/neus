@@ -1,0 +1,52 @@
+# This play creates a security group
+#
+# Usage:
+#
+# - include_role:
+#     name: aws_cloud
+#     tasks_from: create_security_group
+#     vars:
+#       group_module:      <module>
+#       group_name:        <name>
+#       group_description: <description>
+#       group_region:      <region>
+#
+---
+- name: Create a security group
+  local_action:
+    module: "{{ group_module }}"
+    name:   "{{ group_name }}"
+    description: "{{ group_description }}"
+    region: "{{ group_region }}"
+    rules:
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 80
+        to_port: 80
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 3000
+        to_port: 3000
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 8080
+        to_port: 8080
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 8081
+        to_port: 8081
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 3306
+        to_port: 3306
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 9000
+        to_port: 9000
+        cidr_ip: 0.0.0.0/0
+    rules_egress:
+      - proto: all
+        cidr_ip: 0.0.0.0/0

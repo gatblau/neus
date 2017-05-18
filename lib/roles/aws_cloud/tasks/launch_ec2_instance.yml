@@ -1,0 +1,39 @@
+# This play starts an AWS EC2 instance.
+#
+# Usage:
+#
+# - include_role:
+#     name: aws_cloud
+#     tasks_from: launch_ec2_instance
+#     vars:
+#       ec2_module:     <module>
+#       ec2_user:       <user>
+#       ec2_group:      <group>
+#       ec2_instance:   <instance>
+#       ec2_image:      <image>
+#       ec2_region:     <region>
+#       ec2_zone:       <zone>
+#       ec2_vpc_subnet: <vpc_subnet>
+#       ec2_tag:        <tag>
+#
+# Returns:
+#   ec2_instance
+#
+---
+- name: Launch EC2 host
+  local_action:
+    module: "{{ ec2_module}}"
+    key_name: "{{ ec2_user }}"
+    group: "{{ ec2_group }}"
+    instance_type: "{{ ec2_instance }}"
+    image: "{{ ec2_image }}"
+    wait: true
+    region: "{{ ec2_region }}"
+    zone: "{{ ec2_zone }}"
+    vpc_subnet_id: "{{ ec2_vpc_subnet }}"
+    exact_count: 1
+    count_tag:
+      Name: "{{ ec2_tag }}"
+    instance_tags:
+      Name: "{{ ec2_tag }}"
+  register: ec2_instance

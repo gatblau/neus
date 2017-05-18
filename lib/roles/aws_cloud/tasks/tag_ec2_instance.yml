@@ -1,0 +1,19 @@
+# This play tags an AWS EC2 instance.
+#
+# Usage:
+#
+# - include_role:
+#     name: aws_cloud
+#     tasks_from: tag_ec2_instance
+#     vars:
+#       ec2_instance: <instance>   # returned from launch_ec2_instance task
+#       ec2_region:   <region>
+#       ec2_tag:      <tag>
+#
+---
+- name: Tag an EC2 host
+  local_action: ec2_tag resource={{ item.id }} region={{ ec2_region }} state=present
+  with_items: ec2_instance.instances
+  args:
+    tags:
+      Name: "{{ ec2_tag }}"

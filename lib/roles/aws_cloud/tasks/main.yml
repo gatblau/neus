@@ -1,0 +1,3 @@
+---
+- debug:
+    msg: "This role is designed to be used as a set of tasks for creating an AWS EC2 instance."
