@@ -26,9 +26,20 @@
     file: "./host_vars/blueprints/{{ blueprint }}.yml"
 
 - block:
-  - name: Define base image for Docker test containers (not silicon)
+  - name: Define facts for Docker containers (not silicon)
     set_fact:
       ci_base: "gatblau.org/centos:7ds"
+      dkr_containers:
+        - ci-a
+        - ci-b
+        - ci-c
+        - ci-d
+        - ci-e
+        - ci-dit-pamm
+        - ci-dit-jamm
+      dkr_volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+        - /var/cache/yum/neus:/var/cache/yum:rw
 
   - name: Building the base Docker image for test containers
     docker_image:
@@ -37,9 +48,18 @@
       path: "../../lib/images/centos7ds"
   when: blueprint != "silicon"
 
-- name: Define base image for Docker containers (silicon)
+- name: Define facts for Silicon blueprint Docker containers
   set_fact:
     ci_base: "centos:7"
+    dkr_containers:
+      - ci-jenkins
+      - ci-buildtools
+      - ci-nexus
+      - ci-mariadb
+      - ci-gogs
+      - ci-nexus
+    dkr_volumes:
+      - /var/cache/yum/neus:/var/cache/yum:rw
   when: blueprint == "silicon"
 
 - name: Delete existing Docker containers
@@ -50,8 +70,7 @@
     state: absent
     force_kill: true
   with_items:
-    - [ ci-a, ci-b, ci-c, ci-d, ci-e ]
-    - "{{ groups['ci-dit'] }}"
+    - "{{ dkr_containers }}"
 
 - name: Start up CI Tools Docker containers
   docker_container:
@@ -64,9 +83,7 @@
     command: "/usr/sbin/init"
     state: started
     privileged: yes
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      - /var/cache/yum/neus:/var/cache/yum:rw
+    volumes: "{{ dkr_volumes }}"
   with_dict: "{{ containers }}"
 
 - name: Start up PAMM DIT Docker containers
@@ -80,9 +97,7 @@
     command: "/usr/sbin/init"
     state: started
     privileged: yes
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      - /var/cache/yum/neus:/var/cache/yum:rw
+    volumes: "{{ dkr_volumes }}"
   with_items:
     - { name: "ci-dit-pamm", ports: "{{ pamm_app_port }}, {{ pamm_test_port }}" }
   when: pamm == "yes" and blueprint != "silicon"
@@ -98,9 +113,7 @@
     command: "/usr/sbin/init"
     state: started
     privileged: yes
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      - /var/cache/yum/neus:/var/cache/yum:rw
+    volumes: "{{ dkr_volumes }}"
   with_items:
     - { name: "ci-dit-jamm", ports: "{{ jamm_app_port }}" }
   when: jamm == "yes" and blueprint != "silicon"
@@ -110,104 +123,112 @@
     become:     "no"
     connection: "docker"
 
-# Obtain IP addresses of containers
-- name: Get ci-a IP address
-  command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-a"
-  register: ci_a_ip
+- block: # Not Silicon blueprint
+  # Obtain IP addresses of containers
+  - name: Get ci-a IP address
+    command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-a"
+    register: ci_a_ip
 
-- name: Get ci-b IP address
-  command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-b"
-  register: ci_b_ip
-  when:
-    - blueprint != "basic"
+  - name: Get ci-b IP address
+    command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-b"
+    register: ci_b_ip
+    when:
+      - blueprint != "basic"
 
-- name: Get ci-c IP address
-  command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-c"
-  register: ci_c_ip
-  when: blueprint == "silver" or blueprint == "gold"
+  - name: Get ci-c IP address
+    command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-c"
+    register: ci_c_ip
+    when: blueprint == "silver" or blueprint == "gold"
 
-- name: Get ci-d IP address
-  command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-d"
-  register: ci_d_ip
-  when: blueprint == "silver" or blueprint == "gold"
+  - name: Get ci-d IP address
+    command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-d"
+    register: ci_d_ip
+    when: blueprint == "silver" or blueprint == "gold"
 
-- name: Get ci-e IP address
-  command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-e"
-  register: ci_e_ip
-  when:
-    - blueprint == "gold"
+  - name: Get ci-e IP address
+    command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-e"
+    register: ci_e_ip
+    when:
+      - blueprint == "gold"
 
-- name: Get ci-dit-pamm IP address
-  command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-dit-pamm"
-  register: ci_dit_pamm_ip
-  when: pamm == "yes"
+  - name: Get ci-dit-pamm IP address
+    command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-dit-pamm"
+    register: ci_dit_pamm_ip
+    when: pamm == "yes"
 
-- name: Get ci-dit-jamm IP address
-  command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-dit-jamm"
-  register: ci_dit_jamm_ip
-  when: jamm == "yes"
+  - name: Get ci-dit-jamm IP address
+    command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-dit-jamm"
+    register: ci_dit_jamm_ip
+    when: jamm == "yes"
 
-# Set variables for Docker builds
-- name: Set Jenkins and Nexus IP addresses
-  set_fact:
-    jenkins_ip_address:  "{{ ci_a_ip.stdout }}"
-    nexus_ip_address:    "{{ ci_a_ip.stdout }}"
-  when: blueprint != "silicon"
+  # Set variables for Docker builds
+  - name: Set Jenkins and Nexus IP addresses
+    set_fact:
+      jenkins_ip_address:  "{{ ci_a_ip.stdout }}"
+      nexus_ip_address:    "{{ ci_a_ip.stdout }}"
 
-- name: Set GOGS, Sonar and database IP addresses (basic)
-  set_fact:
-    database_ip_address: "127.0.0.1"
-    gogs_ip_address:     "{{ ci_a_ip.stdout }}"
-    sonar_ip_address:    "{{ ci_a_ip.stdout }}"
-  when: blueprint == "basic"
+  - name: Set GOGS, Sonar and database IP addresses (basic)
+    set_fact:
+      database_ip_address: "127.0.0.1"
+      gogs_ip_address:     "{{ ci_a_ip.stdout }}"
+      sonar_ip_address:    "{{ ci_a_ip.stdout }}"
+    when: blueprint == "basic"
 
-- name: Set GOGS, Sonar and database IP addresses (bronze or silver)
-  set_fact:
-    database_ip_address: "127.0.0.1"
-    gogs_ip_address:     "{{ ci_b_ip.stdout }}"
-    sonar_ip_address:    "{{ ci_b_ip.stdout }}"
-  when: blueprint == "bronze" or blueprint == "silver"
+  - name: Set GOGS, Sonar and database IP addresses (bronze or silver)
+    set_fact:
+      database_ip_address: "127.0.0.1"
+      gogs_ip_address:     "{{ ci_b_ip.stdout }}"
+      sonar_ip_address:    "{{ ci_b_ip.stdout }}"
+    when: blueprint == "bronze" or blueprint == "silver"
 
-- name: Set GOGS, Sonar and database IP addresses (gold)
-  set_fact:
-    database_ip_address: "{{ ci_d_ip.stdout }}"
-    gogs_ip_address:     "{{ ci_e_ip.stdout }}"
-    sonar_ip_address:    "{{ ci_e_ip.stdout }}"
-  when: blueprint == "gold"
+  - name: Set GOGS, Sonar and database IP addresses (gold)
+    set_fact:
+      database_ip_address: "{{ ci_d_ip.stdout }}"
+      gogs_ip_address:     "{{ ci_e_ip.stdout }}"
+      sonar_ip_address:    "{{ ci_e_ip.stdout }}"
+    when: blueprint == "gold"
 
-- name: Set URLs for CI Tools
-  set_fact:
-    jenkins_url: "{{ jenkins_ip_address }}:{{ jenkins_port }}"
-    nexus_url:   "{{ nexus_ip_address }}"
-    gogs_url:    "http://{{ gogs_ip_address }}:{{ gogs_port }}"
-    sonar_url:   "{{ sonar_ip_address }}"
+  - name: Set URLs for CI Tools
+    set_fact:
+      jenkins_url: "{{ jenkins_ip_address }}:{{ jenkins_port }}"
+      nexus_url:   "{{ nexus_ip_address }}"
+      gogs_url:    "http://{{ gogs_ip_address }}:{{ gogs_port }}"
+      sonar_url:   "{{ sonar_ip_address }}"
 
-- name: Set PAMM DIT IP address
-  set_fact:
-    pamm_dit_ip_address: "{{ ci_dit_pamm_ip.stdout }}"
-  when: pamm == "yes"
+  - name: Set PAMM DIT IP address
+    set_fact:
+      pamm_dit_ip_address: "{{ ci_dit_pamm_ip.stdout }}"
+    when: pamm == "yes"
 
-- name: Set JAMM DIT IP Address
-  set_fact:
-    jamm_dit_ip_address: "{{ ci_dit_jamm_ip.stdout }}"
-  when: jamm == "yes"
+  - name: Set JAMM DIT IP Address
+    set_fact:
+      jamm_dit_ip_address: "{{ ci_dit_jamm_ip.stdout }}"
+    when: jamm == "yes"
 
-- name: Set variables for Silicon blueprint
-  set_fact:
-    database_container: "{{ ci_mariadb_ip.stdout }}"
-    database_ip_address: "${DB_IP_ADDRESS}"
-    gogs_ip_address:     "${GOGS_IP_ADDRESS}"
-    jenkins_ip_address:  "${JENKINS_IP_ADDRESS}"
-    nexus_ip_address:    "${NEXUS_IP_ADDRESS}"
-    sonar_ip_address:    "${SONAR_IP_ADDRESS}"
-    remote_ip_address:   "${DIT_IP_ADDRESS}"
-    jenkins_url:         "${JENKINS_IP_ADDRESS}"
-    gogs_url:            "http://${GOGS_IP_ADDRESS}:${GOGS_PORT}"
-    nexus_url:           "${NEXUS_IP_ADDRESS}"
-    sonar_url:           "${SONAR_IP_ADDRESS}"
-    jenkins_port: "${JENKINS_PORT}"
-    nexus_port:   "${NEXUS_PORT}"
-    gogs_port:    "${GOGS_PORT}"
-    sonar_port:   "${SONAR_PORT}"
-    image_version: "latest"
-  when: blueprint == "silicon"
+  when: blueprint != "silicon" # end block: Not Silicon blueprint
+
+- block: # Silicon blueprint only
+  - name: Get ci_mariadb IP address
+    command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-mariadb"
+    register: ci_mariadb_ip
+
+  - name: Set variables for Silicon blueprint
+    set_fact:
+      database_container: "{{ ci_mariadb_ip.stdout }}"
+      database_ip_address: "${DB_IP_ADDRESS}"
+      gogs_ip_address:     "${GOGS_IP_ADDRESS}"
+      jenkins_ip_address:  "${JENKINS_IP_ADDRESS}"
+      nexus_ip_address:    "${NEXUS_IP_ADDRESS}"
+      sonar_ip_address:    "${SONAR_IP_ADDRESS}"
+      remote_ip_address:   "${DIT_IP_ADDRESS}"
+      jenkins_url:         "${JENKINS_IP_ADDRESS}"
+      gogs_url:            "http://${GOGS_IP_ADDRESS}:${GOGS_PORT}"
+      nexus_url:           "${NEXUS_IP_ADDRESS}"
+      sonar_url:           "${SONAR_IP_ADDRESS}"
+      jenkins_port: "${JENKINS_PORT}"
+      nexus_port:   "${NEXUS_PORT}"
+      gogs_port:    "${GOGS_PORT}"
+      sonar_port:   "${SONAR_PORT}"
+      image_version: "latest"
+
+  when: blueprint == "silicon" # end block: Silicon blueprint only
