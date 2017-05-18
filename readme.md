@@ -8,3 +8,10 @@ The NEUS project is an environment automation library aimed at defining, standar
 - [PAMM](pamm/readme.md): provides the automation scripts to deploy different  environments to run applications built on the PAMM stack for web development (Play/AngularJS/MariaDB/MongoDB).
 - [JAMM](jamm/readme.md): provides the automation scripts to deploy different  environments to run applications built on the JAMM stack for enterprise integration (JBoss Fuse/ActiveMQ/MariaDB/MongoDB).
 
+### Prerequisites
+
+These scripts have been tested using the following:
+
+- Ansible 2.2.0.0
+- Docker CE 17.03.1
+
