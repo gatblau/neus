@@ -9,7 +9,7 @@ ci-gogs
 ci-sonar
 ci-buildtools
 
-[build]
+[build-master]
 ci-jenkins
 
 [repo]
@@ -26,6 +26,10 @@ ci-gogs
 
 [build-tools]
 ci-buildtools
+
+[build:children]
+build-master
+build-tools
 
 [ci-dit]
 ci-dit-pamm
