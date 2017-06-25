@@ -7,4 +7,4 @@ cache_folder:  "../../../{{ tool_name }}/cache/"
 nexus_user:     deployment
 nexus_user_pwd: deployment123
 
-nexus_repo_url: "http://nexus.repo:8081/content/repositories/ci-tools/cache/1.0.7"
+nexus_repo_url: "http://nexus.repo:8081/content/repositories/{{ tool_name }}/cache/0.0.1"
