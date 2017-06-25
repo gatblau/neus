@@ -2,8 +2,8 @@
 # Variables for citools group
 
 # JDK variables
-java_sdk_name: "Java JDK 8u121-x64"
-java_sdk_rpm:  "jdk-8u121-linux-x64.rpm"
+java_sdk_name: "Java JDK 8u131-x64"
+java_sdk_rpm:  "jdk-8u131-linux-x64.rpm"
 
 
 # IP Addresses for the CI Tools
