@@ -1,4 +1,5 @@
 ---
-  - name: Install Xvfb, Chrome and Firefox
-    include: install_browsers.yml
-    when: pamm == "yes"
+- name: Install Xvfb, Chrome and Firefox
+  include: install_browsers.yml
+  when: pamm == "yes"
+...

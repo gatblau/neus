@@ -1,28 +1,31 @@
 ---
-  - name: Open port {{ jenkins_port}} for Jenkins
-    include: "plays/open_port.yml"
-    vars:
-      - port_number: "{{ jenkins_port }}"
-    when: connection == "ssh"
+- name: Open port {{ jenkins_port}} for Jenkins
+  include_role:
+    name: "common_tasks"
+    tasks_from: "open_port.yml"
+  vars:
+    - port_number: "{{ jenkins_port }}"
+  when: connection == "ssh"
 
-  - name: Install Jenkins
-    include: install_jenkins.yml
-    become: "{{ become }}"
+- name: Configure Jenkins
+  include: configure_jenkins.yml
+  become: "{{ become }}"
 
-  - name: Jenkins publish over ssh settings
-    template:
-      src: jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml.j2
-      dest:  "{{ jenkins_home }}/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml"
-      owner: "{{ jenkins_user }}"
-      group: "{{ jenkins_group }}"
-    when: blueprint != "silicon" and pamm == "yes"
+- name: Jenkins publish over ssh settings
+  template:
+    src: jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml.j2
+    dest:  "{{ jenkins_home }}/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml"
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+  when: blueprint != "silicon" and pamm == "yes"
 
-  - name: Change Jenkins folder permissions
-    file:
-      name: "{{ item.folder }}"
-      recurse: "yes"
-      mode: "0777"
-    with_items:
-      - { folder: '{{ jenkins_user_home }}'}
-      - { folder: 'var/log/jenkins'}
-    when: blueprint == "silicon"
+- name: Change Jenkins folder permissions
+  file:
+    name: "{{ item.folder }}"
+    recurse: "yes"
+    mode: "0777"
+  with_items:
+    - { folder: '{{ jenkins_user_home }}'}
+    - { folder: 'var/log/jenkins'}
+  when: blueprint == "silicon"
+...

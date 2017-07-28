@@ -1,7 +1,9 @@
 ---
-  - name: Install Jenkins rpm
-    include: "plays/install_rpm.yml"
-    vars:
-      rpm_app_name: Jenkins
-      rpm_filename: "{{ item | basename }}"
-    with_fileglob: "{{ cache_folder }}/{{ jenkins_rpm }}"
+- name: Install Jenkins rpm
+  include_role:
+    name: "common_tasks"
+    tasks_from: "install_rpm.yml"
+  vars:
+    rpm_app_name: Jenkins
+    rpm_filename: "{{ item | basename }}"
+  with_fileglob: "{{ cache_folder }}/{{ jenkins_rpm }}"

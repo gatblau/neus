@@ -1,67 +1,70 @@
 ---
-  - name: Create group for Nexus user
-    group:
-      name: "{{nexus_group}}"
-      state: present
+- name: Create group for Nexus user
+  group:
+    name: "{{nexus_group}}"
+    state: present
 
-  - name: Create user for Nexus
-    user:
-      name: "{{nexus_user}}"
-      password: "{{nexus_password}}"
-      state: present
+- name: Create user for Nexus
+  user:
+    name: "{{nexus_user}}"
+    password: "{{nexus_password}}"
+    state: present
 
-  - name: Install Nexus OSS
-    include: "plays/install_tool.yml"
-    vars:
-      tool_name : nexus
-      folder_name : "{{ nexus_folder }}"
-      zip_filename: "{{ nexus_zip }}"
-      add_version_to_folder : false
-      zip_has_folder : true
-      has_bin_folder : true
-      user: "{{nexus_user}}"
+- name: Install Nexus OSS
+  include_role:
+    name: "common_tasks"
+    tasks_from: "install_tool.yml"
+  vars:
+    tool_name : nexus
+    folder_name : "{{ nexus_folder }}"
+    zip_filename: "{{ nexus_zip }}"
+    add_version_to_folder : false
+    zip_has_folder : true
+    has_bin_folder : true
+    user: "{{nexus_user}}"
 
-  - name: Set Nexus folder owner
-    file:
-      path: /usr/local/nexus
-      owner: "{{nexus_user}}"
-      group: "{{nexus_group}}"
-      state: directory
-      recurse: yes
+- name: Set Nexus folder owner
+  file:
+    path: /usr/local/nexus
+    owner: "{{nexus_user}}"
+    group: "{{nexus_group}}"
+    state: directory
+    recurse: yes
 
-  - name: Open port {{ nexus_port }} for Nexus
-    include: "plays/open_port.yml"
-    vars:
-      - port_number: "{{ nexus_port }}"
-    when: connection == "ssh"
+- name: Open port {{ nexus_port }} for Nexus
+  include: "plays/open_port.yml"
+  vars:
+    - port_number: "{{ nexus_port }}"
+  when: connection == "ssh"
 
-  - name: Copy Nexus script
-    copy:
-      src: nexus
-      dest: /etc/init.d/nexus
-      mode: 0755
-      owner: root
+- name: Copy Nexus script
+  copy:
+    src: nexus
+    dest: /etc/init.d/nexus
+    mode: 0755
+    owner: root
 
-  - name: Change Nexus content root
-    lineinfile:
-      dest: /usr/local/nexus/default/conf/nexus.properties
-      regexp: "nexus-webapp-context-path="
-      line: "nexus-webapp-context-path=*"
-      backrefs: yes
+- name: Change Nexus content root
+  lineinfile:
+    dest: /usr/local/nexus/default/conf/nexus.properties
+    regexp: "nexus-webapp-context-path="
+    line: "nexus-webapp-context-path=*"
+    backrefs: yes
 
-  - name: Adding Nexus as a Service
-    command: "chkconfig --add nexus"
-    args:
-       chdir: "/etc/init.d"
+- name: Adding Nexus as a Service
+  command: "chkconfig --add nexus"
+  args:
+     chdir: "/etc/init.d"
 
-  - name: Setting Nexus run level
-    command: "chkconfig --levels 345 nexus on"
-    args:
-       chdir: "/etc/init.d"
+- name: Setting Nexus run level
+  command: "chkconfig --levels 345 nexus on"
+  args:
+     chdir: "/etc/init.d"
 
-  - name: Starting the NEXUS service
-    service:
-      name: nexus
-      state: started
-      enabled: yes
-    when: blueprint != "silicon"
+- name: Starting the NEXUS service
+  service:
+    name: nexus
+    state: started
+    enabled: yes
+  when: blueprint != "silicon"
+...

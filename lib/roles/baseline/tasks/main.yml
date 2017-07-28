@@ -8,7 +8,9 @@
 
 - block: # Install firewalld and start service
   - name: Installing the firewalld command
-    include: plays/install_rpms.yml
+    include_role:
+      name: "common_tasks"
+      tasks_from: "install_rpms.yml"
     with_dict: "{{ firewalld_packages }}"
     loop_control:
       loop_var: package
@@ -21,14 +23,18 @@
   when: connection == "ssh"
 
 - name: Installing the Unzip command
-  include: plays/install_rpm.yml
+  include_role:
+    name: "common_tasks"
+    tasks_from: "install_rpm.yml"
   vars:
     rpm_app_name: "unzip"
     rpm_filename: "{{ item | basename }}"
   with_fileglob: "{{ cache_folder }}/{{ unzip_rpm }}"
 
 - name: Installing EPEL Yum Repository
-  include: plays/install_rpm.yml
+  include_role:
+    name: "common_tasks"
+    tasks_from: "install_rpm.yml"
   vars:
     rpm_app_name: "EPEL YUM Repository"
     rpm_filename: "{{ item | basename }}"
