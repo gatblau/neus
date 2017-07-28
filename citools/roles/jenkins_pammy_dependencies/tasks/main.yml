@@ -1,29 +1,29 @@
 ---
-  - name: Install Karma
-    command: "su -c \"npm install karma --save-dev\" - jenkins warn=no"
+- name: Install Karma
+  command: "su -c \"npm install karma --save-dev\" - jenkins warn=no"
 
-  - name: Install Karma plugins
-    command: "su -c \"npm install karma-jasmine karma-chrome-launcher --save-dev\" - jenkins warn=no"
+- name: Install Karma plugins
+  command: "su -c \"npm install karma-jasmine karma-chrome-launcher --save-dev\" - jenkins warn=no"
 
-  - name: Create karma.cmd symbolic link
-    command: "su -c \"cd node_modules/.bin && ln -s ../karma/bin/karma karma.cmd\" - jenkins warn=no"
+- name: Create karma.cmd symbolic link
+  command: "su -c \"cd node_modules/.bin && ln -s ../karma/bin/karma karma.cmd\" - jenkins warn=no"
 
-  - name: Clone PAMM seed repository version {{ pamm_seed_tag }}
-    git:
-      repo: "{{ group_pamm_seed_repo }}"
-      dest: "{{ jenkins_user_home }}/pamm.seed"
-      version: "{{ pamm_seed_tag }}"
+- name: Clone PAMM seed repository version {{ pamm_seed_tag }}
+  git:
+    repo: "{{ group_pamm_seed_repo }}"
+    dest: "{{ jenkins_user_home }}/pamm.seed"
+    version: "{{ pamm_seed_tag }}"
 
-  - name: Install bzip2
-    yum:
-      name: bzip2
-      state: installed
+- name: Install bzip2
+  yum:
+    name: bzip2
+    state: installed
 
-  - name: Create node_modules symbolic link in PAMM seed
-    file:
-      src:  "{{ jenkins_user_home }}/node_modules"
-      dest: "{{ jenkins_user_home }}/pamm.seed/node_modules"
-      state: link
+- name: Create node_modules symbolic link in PAMM seed
+  file:
+    src:  "{{ jenkins_user_home }}/node_modules"
+    dest: "{{ jenkins_user_home }}/pamm.seed/node_modules"
+    state: link
 
   - name: Install dependencies
     command: "npm install"
@@ -38,47 +38,48 @@
     args:
       chdir: "{{ jenkins_user_home }}/pamm.seed"
 
-  - name: Copy SBT {{ sbt_version }} cache zip file
-    copy:
-      src: "cache/{{ sbt_cache }}"
-      dest: "/tmp/{{ sbt_cache }}"
-      owner: root
-    failed_when: false
-    no_log: true
+- name: Copy SBT {{ sbt_version }} cache zip file
+  copy:
+    src: "{{ cache_folder }}/{{ sbt_cache }}"
+    dest: "/tmp/{{ sbt_cache }}"
+    owner: root
+  failed_when: false
+  no_log: true
 
-  - name: Check for SBT cache
-    stat: path=/tmp/{{ sbt_cache }}
-    register: sbt_cache
+- name: Check for SBT cache
+  stat: path=/tmp/{{ sbt_cache }}
+  register: sbt_cache
 
-  - block:
-    - name: Build PAMM seed to create SBT cache
-      command: 'su -c "cd {{ jenkins_user_home }}/pamm.seed && /usr/local/sbt/default/bin/sbt svc/assembly testsetup/assembly -Dsbt.log.noformat=true" - jenkins warn=no'
+- block:
+  - name: Build PAMM seed to create SBT cache
+    command: 'su -c "cd {{ jenkins_user_home }}/pamm.seed && /usr/local/sbt/default/bin/sbt svc/assembly testsetup/assembly -Dsbt.log.noformat=true" - jenkins warn=no'
 
-    - name: Create local SBT cache
-      local_action: "shell docker cp ci-a:/home/jenkins/.ivy2 cache && cd cache && zip -r {{ sbt_cache }} .ivy2 && rm -rf .ivy2"
-      when: connection == "docker"
+  - name: Create local SBT cache
+    local_action: "shell docker cp ci-a:/home/jenkins/.ivy2 cache && cd cache && zip -r {{ sbt_cache }} .ivy2 && rm -rf .ivy2"
+    when: connection == "docker"
 
-    when: sbt_cache.stat.exists == false
+  when: sbt_cache.stat.exists == false
 
-  - name: Remove PAMM seed repository
-    file:
-      path: "{{ jenkins_user_home }}/pamm.seed"
-      state: absent
+- name: Remove PAMM seed repository
+  file:
+    path: "{{ jenkins_user_home }}/pamm.seed"
+    state: absent
 
-  - name: Determine location of configParser.js
-    stat:
-      path: "/home/jenkins/node_modules/protractor/lib/configParser.js"
-    register: file_exists
+- name: Determine location of configParser.js
+  stat:
+    path: "/home/jenkins/node_modules/protractor/lib/configParser.js"
+  register: file_exists
 
-  - name: Set Protractor timeout
-    command: 'sed -i "s/allScriptsTimeout: 11000,/allScriptsTimeout: 30000,/" /home/jenkins/node_modules/protractor/lib/configParser.js warn=no'
-    when: file_exists.stat.exists == true
+- name: Set Protractor timeout
+  command: 'sed -i "s/allScriptsTimeout: 11000,/allScriptsTimeout: 30000,/" /home/jenkins/node_modules/protractor/lib/configParser.js warn=no'
+  when: file_exists.stat.exists == true
 
-  - name: Determine location of configParser.js
-    stat:
-      path: "/home/jenkins/node_modules/protractor/built/configParser.js"
-    register: file_exists
+- name: Determine location of configParser.js
+  stat:
+    path: "/home/jenkins/node_modules/protractor/built/configParser.js"
+  register: file_exists
 
-  - name: Set Protractor timeout
-    command: 'sed -i "s/allScriptsTimeout: 11000,/allScriptsTimeout: 30000,/" /home/jenkins/node_modules/protractor/built/configParser.js warn=no'
-    when: file_exists.stat.exists  == true
+- name: Set Protractor timeout
+  command: 'sed -i "s/allScriptsTimeout: 11000,/allScriptsTimeout: 30000,/" /home/jenkins/node_modules/protractor/built/configParser.js warn=no'
+  when: file_exists.stat.exists  == true
+...

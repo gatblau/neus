@@ -36,3 +36,7 @@ connection: "{{ hostvars['localhost']['connection'] }}"
 group_localhost_user: "root"
 # Username to use for access to managed nodes
 group_remote_user:    "root"
+
+# Location of cache folder
+cache_folder: "/var/cache/neus"
+...

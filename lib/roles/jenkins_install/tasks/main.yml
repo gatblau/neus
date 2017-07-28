@@ -4,4 +4,4 @@
     vars:
       rpm_app_name: Jenkins
       rpm_filename: "{{ item | basename }}"
-    with_fileglob: "cache/{{ jenkins_rpm }}"
+    with_fileglob: "{{ cache_folder }}/{{ jenkins_rpm }}"

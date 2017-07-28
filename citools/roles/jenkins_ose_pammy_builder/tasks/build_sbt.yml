@@ -1,38 +1,39 @@
 ---
 ### Check if local SBT cache exits - if so copy to managed node
-  - name: Check for local SBT cache
-    become: yes
-    become_user: "{{ group_localhost_user }}"
-    local_action: "stat path=cache/{{sbt_cache}}"
-    register: sbt_dependencies
+- name: Check for local SBT cache
+  become: yes
+  become_user: "{{ group_localhost_user }}"
+  local_action: "stat path=cache/{{sbt_cache}}"
+  register: sbt_dependencies
 
-  - name: Copy SBT cache zip file
-    copy:
-      src: "cache/{{sbt_cache}}"
-      dest: "/tmp/{{sbt_cache}}"
-      owner: root
-    when: sbt_dependencies.stat.exists == true
+- name: Copy SBT cache zip file
+  copy:
+    src: "{{ cache_folder }}/{{sbt_cache}}"
+    dest: "/tmp/{{sbt_cache}}"
+    owner: root
+  when: sbt_dependencies.stat.exists == true
 
-  - name: Unzip SBT cache zip file
-    unarchive:
-      src: "/tmp/{{sbt_cache}}"
-      dest: /home/jenkins
-      copy: no
-      owner: jenkins
-      group: jenkins
-    when: sbt_dependencies.stat.exists == true
+- name: Unzip SBT cache zip file
+  unarchive:
+    src: "/tmp/{{sbt_cache}}"
+    dest: /home/jenkins
+    copy: no
+    owner: jenkins
+    group: jenkins
+  when: sbt_dependencies.stat.exists == true
 
-  - name: Delete SBT cache zip file
-    file:
-      path: "/tmp/{{sbt_cache}}"
-      state: absent
-    when: sbt_dependencies.stat.exists == true
+- name: Delete SBT cache zip file
+  file:
+    path: "/tmp/{{sbt_cache}}"
+    state: absent
+  when: sbt_dependencies.stat.exists == true
 
 ### If no local SBT cache, then build SBT and create local SBT cache
-  - name: Build PAMM seed to create SBT cache
-    shell: 'su -c "cd /pamm.seed && sbt svc/assembly testsetup/assembly -Dsbt.log.noformat=true" - jenkins'
-    when: sbt_dependencies.stat.exists == false
+- name: Build PAMM seed to create SBT cache
+  shell: 'su -c "cd /pamm.seed && sbt svc/assembly testsetup/assembly -Dsbt.log.noformat=true" - jenkins'
+  when: sbt_dependencies.stat.exists == false
 
-  - name: Create local SBT cache
-    local_action: "shell docker cp ci-builder:/home/jenkins/.ivy2 cache && cd cache && zip -r {{sbt_cache}} .ivy2 && rm -rf .ivy2"
-    when: sbt_dependencies.stat.exists == false and connection == "docker"
+- name: Create local SBT cache
+  local_action: "shell docker cp ci-builder:/home/jenkins/.ivy2 cache && cd cache && zip -r {{sbt_cache}} .ivy2 && rm -rf .ivy2"
+  when: sbt_dependencies.stat.exists == false and connection == "docker"
+...

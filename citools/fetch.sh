@@ -24,27 +24,29 @@
 # Usage:
 #    sh fetch.sh
 #    sh fetch.sh clean (to clean the cache)
+#    sh fetch.sh hpi   (to update Jenkins plugins)
 #
 
-source ./scripts/download.sh
+source ../lib/scripts/download.sh
 
-ROOT='cache/'
+ROOT='/var/cache/neus/'
 
 # creates the root folder if it does not exist
 if [[ ! -e $ROOT ]]; then
-    mkdir -p $ROOT
+    sudo mkdir -p $ROOT
+    sudo chmod 0777 $ROOT
 fi
 
 # removes rpms, zips, gz and hpi files from the root folder if 'clean' is passed as parameter to the shell script
 if [[ $1 == "clean" ]]; then
     echo "Refreshing cache in progress...\n"
-    rm $ROOT*.rpm && rm $ROOT*.zip && rm $ROOT*.gz && rm $ROOT*.jar && rm $ROOT*.hpi
+    rm -f $ROOT*.rpm && rm -f $ROOT*.zip && rm -f $ROOT*.gz && rm -f $ROOT*.jar && rm -f $ROOT*.hpi
 fi
 
 # removes Jenkins plugin files from the root folder if 'hpi' is passed as parameter to the shell script
 if [[ $1 == "hpi" ]]; then
     echo "Refreshing Jenkins plugins in progress...\n"
-    rm $ROOT*.hpi
+    rm -f $ROOT*.hpi
 fi
 
 # removes all files with zero length size which were the result of previous failed downloads
@@ -93,7 +95,7 @@ download_mysql_connector $ROOT mysql-connector-java-5.1.36
 download "http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/2.4/" "sonar-runner-dist-2.4.zip"
 
 # Packages for MariaDB
-source ./scripts/mariadb.sh
+source ../lib/scripts/mariadb.sh
 
 # Ansible plugins
 download "http://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/2.0/" "swarm-client-2.0-jar-with-dependencies.jar"
