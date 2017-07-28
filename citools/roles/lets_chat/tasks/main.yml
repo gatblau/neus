@@ -5,13 +5,17 @@
     state: present
 
 - name: Installing npm
-  include: "plays/install_rpm.yml"
+  include_role:
+    name: common_tasks
+    tasks_from: "install_rpm"
   vars:
     rpm_app_name: npm
     rpm_filename: "{{ npm_rpm }}"
 
 - name: Installing NodeJS
-  include: "plays/install_rpm.yml"
+  include_role:
+    name: common_tasks
+    tasks_from: "install_rpm"
   vars:
     rpm_app_name: NodeJS
     rpm_filename: "{{ nodejs_rpm }}"
@@ -41,3 +45,4 @@
   command: "forever start app.js"
   args:
     chdir: "/usr/local/lets-chat"
+...
