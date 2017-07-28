@@ -45,7 +45,7 @@
     docker_image:
       name: "gatblau.org/centos"
       tag:  "7ds"
-      path: "../../lib/images/centos7ds"
+      path: "{{ playbook_dir }}/../lib/images/centos7ds"
   when: blueprint != "silicon"
 
 - name: Define facts for Silicon blueprint Docker containers
@@ -127,37 +127,44 @@
   # Obtain IP addresses of containers
   - name: Get ci-a IP address
     command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-a"
+    changed_when: false
     register: ci_a_ip
 
   - name: Get ci-b IP address
     command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-b"
+    changed_when: false
     register: ci_b_ip
     when:
       - blueprint != "basic"
 
   - name: Get ci-c IP address
     command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-c"
+    changed_when: false
     register: ci_c_ip
     when: blueprint == "silver" or blueprint == "gold"
 
   - name: Get ci-d IP address
     command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-d"
+    changed_when: false
     register: ci_d_ip
     when: blueprint == "silver" or blueprint == "gold"
 
   - name: Get ci-e IP address
     command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-e"
+    changed_when: false
     register: ci_e_ip
     when:
       - blueprint == "gold"
 
   - name: Get ci-dit-pamm IP address
     command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-dit-pamm"
+    changed_when: false
     register: ci_dit_pamm_ip
     when: pamm == "yes"
 
   - name: Get ci-dit-jamm IP address
     command: "docker inspect --format {% raw %}'{{ .NetworkSettings.IPAddress }}' {% endraw %} ci-dit-jamm"
+    changed_when: false
     register: ci_dit_jamm_ip
     when: jamm == "yes"
 
@@ -232,3 +239,4 @@
       image_version: "latest"
 
   when: blueprint == "silicon" # end block: Silicon blueprint only
+...
