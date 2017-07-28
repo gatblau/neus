@@ -28,10 +28,10 @@ ci_dit_pamm_int_dns_name: "{{ ci_dit_pamm_ip }}"
 ci_dit_jamm_int_dns_name: "{{ ci_dit_jamm_ip }}"
 
 # URLs for CI Tools (just the URL)
-jenkins_url: ""
-sonar_url:   ""
-nexus_url:   ""
+jenkins_url: "{{ ci_a_ip }}"
+sonar_url:   "{{ ci_b_ip }}"
+nexus_url:   "{{ ci_a_ip }}"
 # GOGS should include "http://" or "https://" with the URL and the port number:
 # e.g. http://my-gogs-url:3000"
-gogs_url:    ""
-
+gogs_url:    "http://{{ ci_b_ip }}:3000"
+...
