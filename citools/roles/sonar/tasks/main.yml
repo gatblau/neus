@@ -1,22 +1,26 @@
 ---
 ### Open Port for Sonar
-  - include: "plays/open_port.yml"
-    vars:
-      - port_number: "{{sonar_port}}"
-    when: connection == "ssh"
+- name: Open port {{ sonar_port }} for Sonar
+  include_role:
+    name: "common_tasks"
+    tasks_from: "open_port"
+  vars:
+    - port_number: "{{ sonar_port }}"
+  when: connection == "ssh"
 
 ### Install SonarQube
-  - name: Check Sonar installed
-    stat: path=/opt/sonar
-    register: sonar_exists
+- name: Check Sonar installed
+  stat: path=/opt/sonar
+  register: sonar_exists
 
-  - include: install_sonar.yml
-    become: "{{become}}"
-    when: sonar_exists.stat.exists == false
+- include: install_sonar.yml
+  become: "{{ become }}"
+  when: sonar_exists.stat.exists == false
 
-  - name: Change Sonar home folder permissions
-    file:
-      name: "/opt/sonar"
-      recurse: "yes"
-      mode: "0777"
-    when: blueprint == "silicon"
+- name: Change Sonar home folder permissions
+  file:
+    name: "/opt/sonar"
+    recurse: "yes"
+    mode: "0777"
+  when: blueprint == "silicon"
+...
