@@ -59,7 +59,7 @@ download "https://github.com/gogits/gogs/releases/download/v0.9.113/" "linux_386
 download_as "https://sourceforge.net/projects/sonar-pkg/files/rpm/noarch/sonar-5.4-1.noarch.rpm/download" "sonar-5.4-1.noarch.rpm"
 
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "unzip-6.0-16.el7.x86_64.rpm"
-download "http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/" "jdk-8u131-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"
+download "http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/" "jdk-8u141-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"
 download "https://dl.google.com/linux/direct/" "google-chrome-stable_current_x86_64.rpm"
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "firefox-45.4.0-1.el7.centos.x86_64.rpm"
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "libexif-devel-0.6.21-6.el7.x86_64.rpm"

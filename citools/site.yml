@@ -21,7 +21,12 @@
 # The playbook to deploy the Continuous Integrations Tools
 #
 ---
-- include: "plays/up_host.yml"
+- name: Initialise Managed Hosts
+  hosts: local
+  connection: local
+  become: no
+  roles:
+    - up_host
   tags: always
 
 - name: Provisioning build server (Jenkins)
