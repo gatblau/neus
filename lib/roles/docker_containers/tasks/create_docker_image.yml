@@ -1,0 +1,20 @@
+# This play creates a Docker image from a container
+#
+# Usage:
+#
+# - include_role:
+#     name: library/docker_containers
+#     tasks_from: create_docker_image
+#     vars:
+#       container_name:  <container name>
+#       image_name:      <image name>
+---
+- name: "Getting the Docker container {{ container_name }} ID"
+  command: >
+    docker inspect --format \{\{' 'index' '.ID' '\}\} {{ container_name }}
+  register: container_id
+
+- name: "Creating Docker Image: {{ image_name }}"
+  command: >
+    docker commit --change='CMD ["/entrypoint.sh"]' {{ container_id.stdout }} {{ image_name }}
+...

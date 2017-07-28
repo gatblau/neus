@@ -1,0 +1,28 @@
+# This play starts a privileged Docker container
+#
+# Usage:
+#
+# - include_role:
+#     name: library/docker_containers
+#     tasks_from: start_privileged_container
+#     vars:
+#       container_name:     <name>
+#       container_image:    <image>
+#       container_hostname: <hostname>
+#       container_ports:    <ports>
+---
+- name: Start up privileged Docker container {{ container_name }}
+  docker_container:
+    name:     "{{ container_name }}"
+    image:    "{{ container_image }}"
+    hostname: "{{ container_hostname }}"
+    detach: yes
+    tty: yes
+    command: "/usr/sbin/init"
+    state: started
+    exposed_ports: "[ {{ container_ports }} ]"
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /var/cache/yum:/var/cache/yum:rw
+...

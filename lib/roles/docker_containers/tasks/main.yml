@@ -1,0 +1,5 @@
+# This role is for use with the "include_role" Ansible module
+---
+- debug:
+    msg: "This role is for use with the 'include_role' Ansible module."
+...

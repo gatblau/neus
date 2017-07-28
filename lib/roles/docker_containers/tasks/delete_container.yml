@@ -1,0 +1,19 @@
+# This play deletes a Docker container
+#
+# Usage:
+#
+# - include_role:
+#     name: library/docker_containers
+#     tasks_from: delete_container
+#     vars:
+#       container_name:      <name>
+#       container_image:     <image>
+---
+- name: Delete Docker container {{ container_name }}
+  become: yes
+  docker_container:
+    name:  "{{ container_name }}"
+    image: "{{ container_image }}"
+    state: absent
+    force_kill: true
+...
