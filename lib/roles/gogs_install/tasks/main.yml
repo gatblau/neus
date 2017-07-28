@@ -2,51 +2,54 @@
 # This play installs GOGS - source code repository tool
 #
 ### Open Port for GOGS
-  - include: "plays/open_port.yml"
-    vars:
-      - port_number: "{{gogs_port}}"
-    when: connection == "ssh"
+- name: Open port {{ gogs_port }} for GOGS
+  include_role:
+    name: "common_tasks"
+    tasks_from: "open_port"
+  vars:
+    - port_number: "{{ gogs_port }}"
+  when: connection == "ssh"
 
 ### Install Git (GOGS)
-  # Check if GIT has been installed
-  - name: Check if Git installed
-    stat: path=/bin/git
-    register: git_exists
+# Check if GIT has been installed
+- name: Check if Git installed
+  stat: path=/bin/git
+  register: git_exists
 
-  - name: Install Git
-    include: install_git.yml
-    when: git_exists.stat.exists == false
+- name: Install Git
+  include: install_git.yml
+  when: git_exists.stat.exists == false
 
 ### Install GOGS
-  - name: Check GOGS installed
-    stat: path=/usr/local/gogs
-    register: gogs_exists
-    changed_when: no
+- name: Check GOGS installed
+  stat: path=/usr/local/gogs
+  register: gogs_exists
+  changed_when: no
 
-  - include: install_gogs.yml
-    become: "{{become}}"
-    when: gogs_exists.stat.exists == false
+- include: install_gogs.yml
+  become: "{{become}}"
+  when: gogs_exists.stat.exists == false
 
+- block: # Silicon blueprint
   - name: Create data folder (silicon blueprint)
     file:
-      name="{{gogs_path}}/data/application"
-      state=directory
-      recurse="yes"
-      mode="0777"
-      owner={{gogs_user}}
-      group={{gogs_group}}
-    when: blueprint == "silicon"
+      name: "{{gogs_path}}/data/application"
+      state: directory
+      recurse: "yes"
+      mode: "0777"
+      owner: "{{ gogs_user }}"
+      group: "{{ gogs_group }}"
 
   - name: Change GOGS home folder permissions (silicon blueprint)
     file:
-      name="{{gogs_path}}"
-      recurse="yes"
-      mode="0777"
-    when: blueprint == "silicon"
+      name: "{{ gogs_path }}"
+      recurse: "yes"
+      mode: "0777"
 
   - name: Change GOGS user folder permissions
     file:
-      name="/home/{{gogs_user}}"
-      recurse="yes"
-      mode="0777"
-    when: blueprint == "silicon"
+      name: "/home/{{ gogs_user }}"
+      recurse: "yes"
+      mode: "0777"
+  when: blueprint == "silicon" # end block
+...
