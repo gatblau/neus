@@ -5,5 +5,5 @@
     tasks_from: "install_rpm.yml"
   vars:
     rpm_app_name: Jenkins
-    rpm_filename: "{{ item | basename }}"
-  with_fileglob: "{{ cache_folder }}/{{ jenkins_rpm }}"
+    rpm_filename: "{{ jenkins_rpm }}"
+...
