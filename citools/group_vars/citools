@@ -5,7 +5,14 @@
 java_sdk_name: "Java JDK 8u141-x64"
 java_sdk_rpm:  "jdk-8u141-linux-x64.rpm"
 
+# Set install mode:
+#  offline - no internet connection
+#  online - internet connection
+install_mode: offline
 
+############################################################################
+# Do not change the following variables - they are set by the Control Node #
+############################################################################
 # IP Addresses for the CI Tools
 database_ip_address: "{{ hostvars['localhost']['database_ip_address'] }}"
 gogs_ip_address:     "{{ hostvars['localhost']['gogs_ip_address'] }}"
@@ -15,7 +22,9 @@ sonar_ip_address:    "{{ hostvars['localhost']['sonar_ip_address'] }}"
 pamm_dit_ip_address: "{{ hostvars['localhost']['pamm_dit_ip_address'] }}"
 jamm_dit_ip_address: "{{ hostvars['localhost']['jamm_dit_ip_address'] }}"
 
+# URLs for the tools
 gogs_url:    "{{ hostvars['localhost']['gogs_url'] }}"
 jenkins_url: "{{ hostvars['localhost']['jenkins_url'] }}"
 nexus_url:   "{{ hostvars['localhost']['nexus_url'] }}"
 sonar_url:   "{{ hostvars['localhost']['sonar_url'] }}"
+...
