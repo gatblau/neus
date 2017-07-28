@@ -12,6 +12,6 @@ The NEUS project is an environment automation library aimed at defining, standar
 
 These scripts have been tested using the following:
 
-- Ansible 2.2.0.0
+- Ansible 2.3.0.0
 - Docker CE 17.03.1
 
