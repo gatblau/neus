@@ -1,0 +1,47 @@
+---
+#  This playbook uses a loop to copy rpms to the managed node.
+#  For this to work, this playbook must be called using a loop control
+#  variable called "package".  See example below:
+#
+#  - include: "plays/install_rpms.yml"
+#    with_dict: "{{ package_dictionary }}"
+#    loop_control:
+#      loop_var: package
+#
+#  dictionary variable package_dictionary is structured as follows:
+#
+#  <app_packages>:
+#    <app_name>:
+#      packages:
+#        - package1.rpm
+#        - package2.rpm
+#        - package3.rpm
+#
+- name: Check if {{ package.key }} installed
+  command: "yum list installed {{ package.key }} warn=no"
+  failed_when: false
+  changed_when: false
+  no_log: true
+  register: result
+
+- block:
+  - name: Copying {{ package.key | capitalize }} to the host
+    copy:
+      src: "{{ cache_folder }}/{{ item }}"
+      dest: "/tmp/{{ item }}"
+    with_items:
+      - "{{ package.value.packages }}"
+
+  - name: Installing {{ package.key | capitalize }} packages
+    command: 'yum install -y {{ package.value.packages | join(" ") }} warn=no'
+    args:
+      chdir: "/tmp"
+
+  - name: Removing the {{ package.key | capitalize }} files after installation
+    file:
+      name: "/tmp/{{ item }}"
+      state: absent
+    with_items:
+      - "{{ package.value.packages }}"
+
+  when: result.rc != 0
