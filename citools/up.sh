@@ -36,6 +36,9 @@ if [[ "$#" -ne 2  && "$#" -ne 3 ]]; then
    exit
 fi
 
+# Define Ansible roles path
+export ANSIBLE_ROLES_PATH="./roles:$PWD/../lib/roles"
+
 # fetches any required packages
 source ./fetch.sh
 
