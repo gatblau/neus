@@ -1,4 +1,0 @@
----
-  dependencies:
-    - { role: baseline }
-    - { role: jenkins_user }
