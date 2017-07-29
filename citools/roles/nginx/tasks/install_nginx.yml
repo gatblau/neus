@@ -5,17 +5,26 @@
     password: "{{ nginx_password }}"
     state=present
 
-- include: "plays/open_port.yml"
+- name: Open port {{ proxy_port }} for Nginx
+  include_role:
+    name: "common_tasks"
+    tasks_from: "open_port"
   vars:
-    - port_number: "{{proxy_port}}"
+    - port_number: "{{ proxy_port }}"
   when: connection == "ssh"
 
-- include: plays/install_rpm.yml
+- name: Install Nginx filesystem
+  include_role:
+    name: "common_tasks"
+    tasks_from: "install_rpm"
   vars:
     rpm_app_name: NGINX File System
     rpm_filename: "{{ nginx_filesystem_rpm }}"
 
-- include: plays/install_rpm.yml
+- name: Install Nginx
+  include_role:
+    name: "common_tasks"
+    tasks_from: "install_rpm"
   vars:
     rpm_app_name: NGINX
     rpm_filename: "{{ nginx_rpm }}"
