@@ -10,7 +10,7 @@
   - name: Installing the firewalld command
     include_role:
       name: "common_tasks"
-      tasks_from: "install_rpms.yml"
+      tasks_from: "install_rpms"
     with_dict: "{{ firewalld_packages }}"
     loop_control:
       loop_var: package
@@ -25,7 +25,7 @@
 - name: Installing the Unzip command
   include_role:
     name: "common_tasks"
-    tasks_from: "install_rpm.yml"
+    tasks_from: "install_rpm"
   vars:
     rpm_app_name: "unzip"
     rpm_filename: "{{ item | basename }}"
@@ -34,7 +34,7 @@
 - name: Installing EPEL Yum Repository
   include_role:
     name: "common_tasks"
-    tasks_from: "install_rpm.yml"
+    tasks_from: "install_rpm"
   vars:
     rpm_app_name: "EPEL YUM Repository"
     rpm_filename: "{{ item | basename }}"
