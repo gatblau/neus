@@ -19,7 +19,7 @@ The [site.yml](site.yml) is the main playbook for provisioning tools.  It provis
 
 | Step | Tag(s) | Description |
 |------------|------------|------------|
-| Call [up_host.yml](../lib/plays/up_host.yml) | always | The playbook determines the target platform (Docker, VM or cloud) and sets up the hosts for provisioning. |
+| Initialise hosts: [up_host](../lib/roles/up_host/main.yml) | always | The playbook determines the target platform (Docker, VM or cloud) and sets up the hosts for provisioning. |
 | Provision Build Server | build, always | This step sets up the user for Jenkins, installs Jenkins and then configures Jenkins. |
 | Provision Build Tools | build, basic, bronze, silver, gold | This step installs the build tools for Jenkins and, optionally, installs the PAMM seed dependencies and build pipeline. |
 | Provision PAMM Jenkins slaves | pamm, pamm-slaves, silver, gold | This step sets up one or more hosts as a Jenkins slave with, optionally, PAMM seed dependencies. |
