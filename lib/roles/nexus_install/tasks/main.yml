@@ -13,7 +13,7 @@
 - name: Install Nexus OSS
   include_role:
     name: "common_tasks"
-    tasks_from: "install_tool.yml"
+    tasks_from: "install_tool"
   vars:
     tool_name : nexus
     folder_name : "{{ nexus_folder }}"
@@ -32,7 +32,9 @@
     recurse: yes
 
 - name: Open port {{ nexus_port }} for Nexus
-  include: "plays/open_port.yml"
+  include_role:
+    name: "common_tasks"
+    tasks_from: "open_port"
   vars:
     - port_number: "{{ nexus_port }}"
   when: connection == "ssh"
