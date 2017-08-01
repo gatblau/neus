@@ -1,54 +1,58 @@
 ---
-  - name: Create user for MariaDB
-    user:
-      name: "{{ mariadb_user }}"
-      password: "{{ mariadb_password }}"
-      state: present
+- name: Create user for MariaDB
+  user:
+    name: "{{ mariadb_user }}"
+    password: "{{ mariadb_password }}"
+    state: present
 
-  - include: "plays/open_port.yml"
-    vars:
-      - port_number: "{{ database_port }}"
-    when: connection == "ssh"
+- name: Open port {{ database_port }} for MariaDB
+  include_role:
+    name: "common_tasks"
+    tasks_from: "open_port"
+  vars:
+    - port_number: "{{ database_port }}"
+  when: connection == "ssh"
 
-  - name: Installing the MariaDB YUM repository file
+- name: Installing the MariaDB YUM repository file
+  copy:
+    src: "{{ mariadb_repo }}"
+    dest: "/etc/yum.repos.d/{{ mariadb_repo }}"
+
+- name: Installing MariaDB
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - MariaDB-server
+    - MySQL-python
+
+- name: Setting MariaDB port number to {{database_port}}
+  template:
+    src: server.cnf.j2
+    dest: /etc/my.cnf.d/server.cnf
+    owner: "{{ mariadb_user }}"
+
+- name: Starting the MariaDB Server
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+  when: blueprint != "silicon"
+
+- block: # Start MariaDB for silicon blueprint
+  - name: Change MariaDB home folder permissions
+    file:
+      name: "/var/lib/mysql"
+      recurse: "yes"
+      mode: "0777"
+
+  - name: Copy entrypoint script for MariaDB Docker container
     copy:
-      src: "{{ mariadb_repo }}"
-      dest: "/etc/yum.repos.d/{{ mariadb_repo }}"
+      src: entrypoint.sh
+      dest: /entrypoint.sh
+      mode: 0755
 
-  - name: Installing MariaDB
-    yum:
-      name: "{{ item }}"
-      state: present
-    with_items:
-      - MariaDB-server
-      - MySQL-python
-
-  - name: Setting MariaDB port number to {{database_port}}
-    template:
-      src: server.cnf.j2
-      dest: /etc/my.cnf.d/server.cnf
-      owner: "{{ mariadb_user }}"
-
-  - name: Starting the MariaDB Server
-    service:
-      name: mysql
-      state: started
-      enabled: yes
-    when: blueprint != "silicon"
-
-  - block: # Start MariaDB for silicon blueprint
-    - name: Change MariaDB home folder permissions
-      file:
-        name: "/var/lib/mysql"
-        recurse: "yes"
-        mode: "0777"
-
-    - name: Copy entrypoint script for MariaDB Docker container
-      copy:
-        src: entrypoint.sh
-        dest: /entrypoint.sh
-        mode: 0755
-
-    - name: Start MariaDB
-      shell: "/entrypoint.sh &"
-    when: blueprint == "silicon"  # end of block
+  - name: Start MariaDB
+    shell: "/entrypoint.sh &"
+  when: blueprint == "silicon"  # end of block
+...
