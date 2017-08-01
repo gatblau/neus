@@ -10,13 +10,13 @@ tgt_platform: docker
 
 # For vm target platform:
 # Enter IP addresses, for Ansible script provisioning:
-ci_a_ip: 192.168.110.100
-ci_b_ip: 192.168.110.101
-ci_c_ip: 192.168.110.102
-ci_d_ip: 192.168.110.103
-ci_e_ip: 192.168.110.104
-ci_dit_pamm_ip: 192.168.110.105
-ci_dit_jamm_ip: 192.168.110.106
+ci_a_ip: 192.168.56.130
+ci_b_ip: 192.168.56.131
+ci_c_ip: 192.168.56.132
+ci_d_ip: 192.168.56.133
+ci_e_ip: 192.168.56.134
+ci_dit_jamm_ip: 192.168.56.135
+ci_dit_pamm_ip: 192.168.56.136
 
 # Enter internal DNS names (if required) for CI workflow connectivity (Jenkins to GOGS etc):
 ci_a_int_dns_name:   "{{ ci_a_ip }}"
