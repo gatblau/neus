@@ -29,12 +29,19 @@
     - up_host
   tags: always
 
+- name: Install baseline requirements
+  hosts: citools
+  connection: "{{ connection }}"
+  become: "{{ become }}"
+  roles:
+    - baseline
+  tags: always
+
 - name: Provisioning build server (Jenkins)
   hosts: build-master
   connection: "{{ connection }}"
   become: "{{ become }}"
   roles:
-    - baseline
     - jdk
     - jenkins_user
     - jenkins_install
@@ -96,7 +103,6 @@
   connection: "{{ connection }}"
   become: "{{ become }}"
   roles:
-    - baseline
     - mariadb_install
     - mariadb
   tags: [ database, always ]
@@ -115,7 +121,6 @@
   connection: "{{connection}}"
   become: "{{become}}"
   roles:
-    - baseline
     - mongodb_install
     - lets_chat
   tags: [chat, basic, bronze, silver, gold ]
