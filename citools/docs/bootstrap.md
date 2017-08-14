@@ -1,7 +1,16 @@
 CI Tools
 ========
 
-The CI Tools Ansible script uses a single playbook called [site.yml](site.yml) for all blueprints.  Provisioning of the tools is controlled by inventory files, one for each blueprint, with each tool provisioned on a specified host as shown below:
+CI Tools can be built as a complete set of CI tools using the `site.yml` file or each tool can be deployed individually using the following playbooks:
+
+| Site File | Provisions |
+|----------|----------|
+| site_build.yml | Jenkins build server |
+| site_quality.yml | SonarQube code quality using MariaDB database |
+| site_repo.yml | Nexus repository |
+| site_source.yml | GOGS server using MariaDB database |
+
+The [site.yml](site.yml) playbook is used for provisioning a complete CI environment. Provisioning of the tools is controlled by inventory files, one for each blueprint, with each tool provisioned on a specified host as shown below:
 
 | Blueprint | Build | Repo | Database | Source | Quality | Chat | Build Slave(s) |
 |----------|----------|----------|----------|----------|----------|----------|----------|
