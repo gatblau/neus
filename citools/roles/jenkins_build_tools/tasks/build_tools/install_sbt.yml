@@ -2,7 +2,7 @@
 - name: Install Simple Build Tool (SBT)
   include_role:
     name: "common_tasks"
-    tasks_from: "install_tool.yml"
+    tasks_from: "install_tool"
   vars:
     tool_name : SBT
     folder_name : "sbt-{{ sbt_version }}"
@@ -16,7 +16,7 @@
 - name: Install Simple Build Tool (SBT)
   include_role:
     name: "common_tasks"
-    tasks_from: "install_tool.yml"
+    tasks_from: "install_tool"
   vars:
     tool_name : SBT
     folder_name : "sbt-launcher-packaging-{{ sbt_version }}"

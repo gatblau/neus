@@ -2,7 +2,7 @@
 - name: Install Sonar Runner
   include_role:
     name: "common_tasks"
-    tasks_from: "install_tool.yml"
+    tasks_from: "install_tool"
   vars:
     tool_name : sonar-runner
     folder_name : "{{ sonar_runner_folder }}"

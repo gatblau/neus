@@ -2,7 +2,7 @@
 - name: Open port {{ jenkins_port}} for Jenkins
   include_role:
     name: "common_tasks"
-    tasks_from: "open_port.yml"
+    tasks_from: "open_port"
   vars:
     - port_number: "{{ jenkins_port }}"
   when: connection == "ssh"

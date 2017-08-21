@@ -2,7 +2,7 @@
 - name: Install Gradle
   include_role:
     name: "common_tasks"
-    tasks_from: "install_tool.yml"
+    tasks_from: "install_tool"
   vars:
     tool_name : Gradle
     folder_name : "{{ gradle_folder }}"
