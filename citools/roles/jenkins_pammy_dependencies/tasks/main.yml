@@ -55,7 +55,7 @@
     command: 'su -c "cd {{ jenkins_user_home }}/pamm.seed && /usr/local/sbt/default/bin/sbt svc/assembly testsetup/assembly -Dsbt.log.noformat=true" - jenkins warn=no'
 
   - name: Create local SBT cache
-    local_action: "shell docker cp ci-a:/home/jenkins/.ivy2 cache && cd cache && zip -r {{ sbt_cache }} .ivy2 && rm -rf .ivy2"
+    local_action: "shell docker cp ci-a:/home/jenkins/.ivy2 {{ cache_folder }} && cd {{ cache_folder }} && zip -r {{ sbt_cache }} .ivy2 && rm -rf .ivy2"
     when: connection == "docker"
 
   when: sbt_cache.stat.exists == false
