@@ -1,0 +1,36 @@
+---
+# Update Jenkins war file
+- block:
+  - name: Stop the Jenkins Service
+    service:
+      name: jenkins
+      state: stopped
+      enabled: yes
+
+  - name: Backup the existing Jenkins war file
+    command: "mv {{ jenkins_war_home }}/jenkins.war {{ jenkins_war_home }}/jenkins.war.bak"
+
+  - name: Fetch the {{ jenkins_version }} Jenkins war file
+    get_url:
+      url: "http://mirrors.jenkins-ci.org/war/{{ jenkins_version }}/jenkins.war"
+      dest: "{{ jenkins_war_home }}/jenkins.war"
+      mode: 0644
+
+# Error occurred - roll back Jenkins update
+- rescue:
+  - name: Remove the {{ jenkins_version }} Jenkins war file
+    file:
+      path: "{{ jenkins_war_home }}/jenkins.war"
+      state: absent
+
+  - name: Restore the original Jenkins war file
+    command: "mv {{ jenkins_war_home }}/jenkins.war.bak {{ jenkins_war_home }}/jenkins.war"
+
+# Restart Jenkins service
+- always:
+  - name: Starting the Jenkins Service
+    service:
+      name: jenkins
+      state: started
+      enabled: yes
+...

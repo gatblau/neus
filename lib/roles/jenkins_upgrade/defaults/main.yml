@@ -1,0 +1,5 @@
+---
+jenkins_war_home: "/usr/lib/jenkins"
+
+jenkins_version: "latest"
+...
