@@ -1,17 +1,16 @@
 ---
 # This play contains variables for the gogs role
 
-  # GOGS variables
-  gogs_path: /usr/local/gogs
-  gogs_user: gogs
-  gogs_group: gogs
-  gogs_password: $6$rounds=656000$/zfzOaTk0fdU73Mk$Iy36e.eY2nOjLfIwX7ocCrhHvbxKz5wARnJoHnoJcjKoS.iobDp0SDWWKNbbUmoQ6i2A1UxI59LkImbLG9wwJ/
-  gogs_zipfile: linux_386.zip
+# GOGS variables
+gogs_path: /usr/local/gogs
+gogs_user: gogs
+gogs_group: gogs
+gogs_password: $6$rounds=656000$/zfzOaTk0fdU73Mk$Iy36e.eY2nOjLfIwX7ocCrhHvbxKz5wARnJoHnoJcjKoS.iobDp0SDWWKNbbUmoQ6i2A1UxI59LkImbLG9wwJ/
+gogs_zipfile: linux_386.zip
 
-  # Git variables
-  git_perl_rpm: perl-Git-2.4.1-1.WANdisco.259.noarch.rpm
-  git_scm_rpm: git-2.4.1-1.WANdisco.259.x86_64.rpm
-  perl_rpm: perl-5.16.3-291.el7.x86_64.rpm
-  git_wandisco_rpm: wandisco-git-release-7-1.noarch.rpm
-
-
+# Git variables
+git_perl_rpm: perl-Git-2.11.1-1.WANdisco.346.noarch.rpm
+git_scm_rpm: git-2.11.1-1.WANdisco.346.x86_64.rpm
+perl_rpm: perl-5.16.3-291.el7.x86_64.rpm
+git_wandisco_rpm: wandisco-git-release-7-2.noarch.rpm
+...
