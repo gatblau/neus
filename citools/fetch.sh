@@ -59,13 +59,13 @@ download "https://github.com/gogits/gogs/releases/download/v0.9.113/" "linux_386
 download_as "https://sourceforge.net/projects/sonar-pkg/files/rpm/noarch/sonar-5.4-1.noarch.rpm/download" "sonar-5.4-1.noarch.rpm"
 
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "unzip-6.0-16.el7.x86_64.rpm"
-download "http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/" "jdk-8u141-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"
+download "http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/" "jdk-8u144-linux-x64.rpm" "Cookie: oraclelicense=accept-securebackup-cookie"
 download "https://dl.google.com/linux/direct/" "google-chrome-stable_current_x86_64.rpm"
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "firefox-45.4.0-1.el7.centos.x86_64.rpm"
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "libexif-devel-0.6.21-6.el7.x86_64.rpm"
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "xorg-x11-server-Xvfb-1.17.2-22.el7.x86_64.rpm"
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "net-tools-2.0-0.17.20131004git.el7.x86_64.rpm"
-download "https://services.gradle.org/distributions/" "gradle-3.2.1-bin.zip"
+download "https://services.gradle.org/distributions/" "gradle-4.0.2-bin.zip"
 download "https://dl.bintray.com/sbt/native-packages/sbt/0.13.11/" "sbt-0.13.11.zip"
 download "https://dl.bintray.com/sbt/native-packages/sbt/0.13.13/" "sbt-0.13.13.zip"
 download "http://mirrors.ukfast.co.uk/sites/ftp.apache.org/maven/maven-3/3.3.9/binaries/" "apache-maven-3.3.9-bin.zip"
@@ -88,9 +88,9 @@ download "https://bintray.com/artifact/download/groovy/maven/" "apache-groovy-bi
 #download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nginx-filesystem-1.10.2-1.el7.noarch.rpm"
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "perl-5.16.3-291.el7.x86_64.rpm"
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "perl-libs-5.16.3-291.el7.x86_64.rpm"
-download "http://opensource.wandisco.com/centos/7/git/x86_64/" "wandisco-git-release-7-1.noarch.rpm"
-download "http://opensource.wandisco.com/centos/7/git/x86_64/" "git-2.4.1-1.WANdisco.259.x86_64.rpm"
-download "http://opensource.wandisco.com/centos/7/git/x86_64/" "perl-Git-2.4.1-1.WANdisco.259.noarch.rpm"
+download "http://opensource.wandisco.com/centos/7/git/x86_64/" "wandisco-git-release-7-2.noarch.rpm"
+download "http://opensource.wandisco.com/centos/7/git/x86_64/" "git-2.11.1-1.WANdisco.346.x86_64.rpm"
+download "http://opensource.wandisco.com/centos/7/git/x86_64/" "perl-Git-2.11.1-1.WANdisco.346.noarch.rpm"
 download_mysql_connector $ROOT mysql-connector-java-5.1.36
 download "http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/2.4/" "sonar-runner-dist-2.4.zip"
 

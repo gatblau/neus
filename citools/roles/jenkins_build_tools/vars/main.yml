@@ -1,33 +1,37 @@
 ---
 # This play contains variables for the jenkins build tools role
 
-  # Jenkins username and group
-  jenkins_user: jenkins
-  jenkins_group: jenkins
+# Jenkins username and group
+jenkins_user: jenkins
+jenkins_group: jenkins
 
 ### Build tools variables
-  git_perl_rpm: perl-Git-2.4.1-1.WANdisco.259.noarch.rpm
-  git_scm_rpm: git-2.4.1-1.WANdisco.259.x86_64.rpm
-  git_wandisco_rpm: wandisco-git-release-7-1.noarch.rpm
+git_perl_rpm: perl-Git-2.11.1-1.WANdisco.346.noarch.rpm
+git_scm_rpm: git-2.11.1-1.WANdisco.346.x86_64.rpm
+git_wandisco_rpm: wandisco-git-release-7-2.noarch.rpm
 
-  gradle_folder: gradle-3.2
-  gradle_zip: gradle-3.2.1-bin.zip
+gradle_folder: gradle-4.0
+gradle_zip: gradle-4.0.2-bin.zip
 
-  groovy_folder: groovy-2.4.4
-  groovy_zip: apache-groovy-binary-2.4.4.zip
+groovy_folder: groovy-2.4.4
+groovy_zip: apache-groovy-binary-2.4.4.zip
 
-  maven_folder: apache-maven-3.3.9
-  maven_zip: apache-maven-3.3.9-bin.zip
+maven_folder: apache-maven-3.3.9
+maven_zip: apache-maven-3.3.9-bin.zip
 
-  nodejs_rpm: nodejs-6.9.4-2.el7.x86_64.rpm
-  # npm_rpm:    set in blueprint host_vars managed node file
+nodejs_rpm: nodejs-6.11.1-1.el7.x86_64.rpm
+# npm_rpm:    set in blueprint host_vars managed node file
 
-  perl_rpm: perl-5.16.3-291.el7.x86_64.rpm
+perl_packages:
+  perl:
+    packages:
+      - perl-5.16.3-291.el7.x86_64.rpm
+      - perl-libs-5.16.3-291.el7.x86_64.rpm
 
-  # sbt_folder: set in blueprint host_vars managed node file
-  # sbt_zip:    set in blueprint host_vars managed node file
-  # sbt_cache:  set in blueprint host_vars managed node file
+# sbt_folder: set in blueprint host_vars managed node file
+# sbt_zip:    set in blueprint host_vars managed node file
+# sbt_cache:  set in blueprint host_vars managed node file
 
-  sonar_runner_folder: sonar-runner-2.4
-  sonar_runner_zipfile: sonar-runner-dist-2.4.zip
-
+sonar_runner_folder: sonar-runner-2.4
+sonar_runner_zipfile: sonar-runner-dist-2.4.zip
+...
