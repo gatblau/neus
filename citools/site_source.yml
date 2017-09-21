@@ -40,11 +40,10 @@
   connection: "{{ connection }}"
   become: "{{ become }}"
   roles:
-    - { role: mariadb_install,         when: install_mode != "offline" }
-    - { role: mariadb_install_offline, when: install_mode == "offline" }
+    - { role: mariadb_install,         pamm: "no", when: install_mode != "offline" }
+    - { role: mariadb_install_offline, pamm: "no", when: install_mode == "offline" }
     - mariadb
 
-# Provision last to allow applications to start up before webhook is triggered
 - name: Provisioning source repository server
   hosts: source
   connection: "{{ connection }}"
