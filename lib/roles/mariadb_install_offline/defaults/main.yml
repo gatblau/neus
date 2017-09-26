@@ -7,7 +7,7 @@ mysql_python: MySQL-python-1.2.5-1.el7.x86_64.rpm
 mariadb_packages:
   mariadb-server:
     packages:
-      - "mariadb-server-5.5.52-1.el7.x86_64.rpm"
+      - "mariadb-server-5.5.56-2.el7.x86_64.rpm"
       - "groff-base-1.22.2-8.el7.x86_64.rpm"
       - "libaio-0.3.109-13.el7.x86_64.rpm"
       - "mariadb-5.5.52-1.el7.x86_64.rpm"
@@ -19,6 +19,7 @@ mariadb_packages:
       - "perl-DBD-MySQL-4.023-5.el7.x86_64.rpm"
       - "perl-DBI-1.627-4.el7.x86_64.rpm"
       - "perl-Data-Dumper-2.145-3.el7.x86_64.rpm"
+      - "perl-devel-5.16.3-292.el7.x86_64.rpm"
       - "perl-Encode-2.51-7.el7.x86_64.rpm"
       - "perl-Exporter-5.68-3.el7.noarch.rpm"
       - "perl-File-Path-2.09-2.el7.noarch.rpm"
@@ -41,8 +42,8 @@ mariadb_packages:
       - "perl-Time-HiRes-1.9725-3.el7.x86_64.rpm"
       - "perl-Time-Local-1.2300-2.el7.noarch.rpm"
       - "perl-constant-1.27-2.el7.noarch.rpm"
-      - "perl-libs-5.16.3-291.el7.x86_64.rpm"
-      - "perl-macros-5.16.3-291.el7.x86_64.rpm"
+      - "perl-libs-5.16.3-292.el7.x86_64.rpm"
+      - "perl-macros-5.16.3-292.el7.x86_64.rpm"
       - "perl-parent-0.225-244.el7.noarch.rpm"
       - "perl-podlators-2.5.1-3.el7.noarch.rpm"
       - "perl-threads-1.87-4.el7.x86_64.rpm"

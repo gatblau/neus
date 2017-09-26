@@ -2,8 +2,8 @@
 # Variables for citools group
 
 # JDK variables
-java_sdk_name: "Java JDK 8u141-x64"
-java_sdk_rpm:  "jdk-8u141-linux-x64.rpm"
+java_sdk_name: "Java JDK 8u144-x64"
+java_sdk_rpm:  "jdk-8u144-linux-x64.rpm"
 
 # Set install mode:
 #  offline - no internet connection

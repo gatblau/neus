@@ -25,8 +25,8 @@ nodejs_rpm: nodejs-6.11.1-1.el7.x86_64.rpm
 perl_packages:
   perl:
     packages:
-      - perl-5.16.3-291.el7.x86_64.rpm
-      - perl-libs-5.16.3-291.el7.x86_64.rpm
+      - perl-5.16.3-292.el7.x86_64.rpm
+      - perl-libs-5.16.3-292.el7.x86_64.rpm
 
 # sbt_folder: set in blueprint host_vars managed node file
 # sbt_zip:    set in blueprint host_vars managed node file

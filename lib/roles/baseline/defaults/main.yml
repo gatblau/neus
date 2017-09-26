@@ -6,11 +6,12 @@ unzip_rpm: unzip-6.0-*.el7.x86_64.rpm
 firewalld_packages:
   firewalld:
     packages:
-      - "firewalld-0.4.3.2-8.el7.noarch.rpm"
-      - "python-firewall-0.4.3.2-8.el7.noarch.rpm"
-      - "firewalld-filesystem-0.4.3.2-8.el7.noarch.rpm"
+      - "firewalld-0.4.4.4-6.el7.noarch.rpm"
+      - "python-firewall-0.4.4.4-6.el7.noarch.rpm"
+      - "firewalld-filesystem-0.4.4.4-6.el7.noarch.rpm"
       - "ebtables-2.0.10-15.el7.x86_64.rpm"
-      - "ipset-6.19-6.el7.x86_64.rpm"
-      - "ipset-libs-6.19-6.el7.x86_64.rpm"
+      - "ipset-6.29-1.el7.x86_64.rpm"
+      - "ipset-libs-6.29-1.el7.x86_64.rpm"
       - "python-slip-0.4.0-2.el7.noarch.rpm"
       - "python-slip-dbus-0.4.0-2.el7.noarch.rpm"
+...

@@ -11,6 +11,6 @@ gogs_zipfile: linux_386.zip
 # Git variables
 git_perl_rpm: perl-Git-2.11.1-1.WANdisco.346.noarch.rpm
 git_scm_rpm: git-2.11.1-1.WANdisco.346.x86_64.rpm
-perl_rpm: perl-5.16.3-291.el7.x86_64.rpm
+perl_rpm: perl-5.16.3-292.el7.x86_64.rpm
 git_wandisco_rpm: wandisco-git-release-7-2.noarch.rpm
 ...

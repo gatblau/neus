@@ -4,7 +4,7 @@ jenkins_user_home: "/home/jenkins"
 jenkins_home:      "/var/lib/jenkins"
 
 jenkins_master_executors: 2
-jenkins_rpm:  jenkins-2.60.2-1.1.noarch.rpm
+jenkins_rpm:  jenkins-2.73.1-1.1.noarch.rpm
 
 # SBT variables
 sbt_version: 0.13.11

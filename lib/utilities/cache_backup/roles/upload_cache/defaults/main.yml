@@ -1,10 +1,11 @@
 ---
-# Enter the tool name: e.g. citools cdtools pamm jamm
-tool_name: citools
+# Enter the tool name: e.g. neus
+tool_name: neus
 
-cache_folder:  "../../../{{ tool_name }}/cache/"
+cache_folder:  "/var/cache/{{ tool_name }}"
 
 nexus_user:     deployment
 nexus_user_pwd: deployment123
 
 nexus_repo_url: "http://nexus.repo:8081/content/repositories/{{ tool_name }}/cache/0.0.1"
+...
