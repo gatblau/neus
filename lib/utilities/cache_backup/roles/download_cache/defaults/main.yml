@@ -6,11 +6,11 @@ nexus_user_pw: deployment123
 
 nexus_url: "http://nexus.repo:8081/content/repositories/ci-tools/cache/1.0.7"
 
-cache_folder:  "../../../{{ tool_name }}/cache/"
+cache_folder:  "/var/cache/{{ tool_name }}/"
 
 # TODO - replace fixed list of artefacts with dynamic query of repository contents
 cache_files:
-  - "jenkins-2.73.1-1.1.noarch.rpm"
+  - "jenkins-2.73.2-1.1.noarch.rpm"
   - "nexus-2.14.3-02-bundle.zip"
   - "linux_386.zip"
   - "sonar-5.4-1.noarch.rpm"
@@ -21,14 +21,14 @@ cache_files:
   - "libexif-devel-0.6.21-6.el7.x86_64.rpm"
   - "xorg-x11-server-Xvfb-1.19.3-11.el7.x86_64.rpm"
   - "net-tools-2.0-0.22.20131004git.el7.x86_64.rpm"
-  - "gradle-3.2.1-bin.zip"
+  - "gradle-4.0.2-bin.zip"
   - "sbt-0.13.11.zip"
   - "sbt-0.13.13.zip"
   - "apache-maven-3.3.9-bin.zip"
   - "epel-release-7-9.noarch.rpm"
   - "nodejs-6.9.4-2.el7.x86_64.rpm"
   - "npm-1.3.6-5.el7.noarch.rpm"
-  - "npm-3.10.10-1.6.9.4.2.el7.x86_64.rpm"
+  - "npm-3.10.10-1.6.11.3.1.el7.x86_64.rpm"
   - "libuv-1.10.2-1.el7.x86_64.rpm"
   - "libicu-50.1.2-15.el7.x86_64.rpm"
   - "apache-groovy-binary-2.4.4.zip"

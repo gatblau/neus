@@ -4,7 +4,7 @@ jenkins_user_home: "/home/jenkins"
 jenkins_home:      "/var/lib/jenkins"
 
 jenkins_master_executors: 2
-jenkins_rpm:  jenkins-2.73.1-1.1.noarch.rpm
+jenkins_rpm:  jenkins-2.73.2-1.1.noarch.rpm
 
 # SBT variables
 sbt_version: 0.13.11
@@ -14,8 +14,8 @@ sbt_cache:   "sbt-cache-{{ sbt_version }}.zip"
 nodejs_packages: # Requires npm
   nodejs:
     packages:
-      - nodejs-6.11.1-1.el7.x86_64.rpm
-      - npm-3.10.10-1.6.11.1.1.el7.x86_64.rpm
+      - nodejs-6.11.3-1.el7.x86_64.rpm
+      - npm-3.10.10-1.6.11.3.1.el7.x86_64.rpm
       - libuv-1.10.2-1.el7.x86_64.rpm
       - libicu-50.1.2-15.el7.x86_64.rpm
 

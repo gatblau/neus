@@ -19,7 +19,7 @@ groovy_zip: apache-groovy-binary-2.4.4.zip
 maven_folder: apache-maven-3.3.9
 maven_zip: apache-maven-3.3.9-bin.zip
 
-nodejs_rpm: nodejs-6.11.1-1.el7.x86_64.rpm
+nodejs_rpm: nodejs-6.11.3-1.el7.x86_64.rpm
 # npm_rpm:    set in blueprint host_vars managed node file
 
 perl_packages:
