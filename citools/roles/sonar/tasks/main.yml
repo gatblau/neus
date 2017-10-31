@@ -13,7 +13,7 @@
   stat: path=/opt/sonar
   register: sonar_exists
 
-- include: install_sonar.yml
+- include_tasks: install_sonar.yml
   become: "{{ become }}"
   when: sonar_exists.stat.exists == false
 

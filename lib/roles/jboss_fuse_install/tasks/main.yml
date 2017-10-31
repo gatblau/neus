@@ -9,7 +9,7 @@
     name: "{{ fuse_user }}"
 
 - name: Install JBoss Fuse from archive
-  include: ./lib/plays/install_tool.yml
+  include_tasks: ./lib/plays/install_tool.yml
   vars:
     tool_name : "jboss-fuse"
     folder_name : "{{ fuse_folder }}"
@@ -85,7 +85,7 @@
     owner: root
 
 - name: Open port for Fuse Fabric
-  include:
+  include_tasks:
     plays/open_port.yml
   vars:
     port_number: "{{ fuse_port }}"

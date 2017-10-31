@@ -18,7 +18,7 @@
     shell: "cd /pamm.seed && npm run webdriver-update"
 
   - name: Install or build SBT cache
-    include: build_sbt.yml
+    include_tasks: build_sbt.yml
 
   - name: Remove PAMM seed
     file:

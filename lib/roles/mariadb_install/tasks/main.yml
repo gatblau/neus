@@ -5,6 +5,6 @@
   register: mariadb_exists
 
 - name: Install MariaDB
-  include: install_mariadb.yml
+  include_tasks: install_mariadb.yml
   when: mariadb_exists.stat.exists == false
 ...

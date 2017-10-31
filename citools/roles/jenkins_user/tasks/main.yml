@@ -66,5 +66,5 @@ export PATH=$PATH:$JAVA_HOME/bin
     when: connection == "docker"
 
   - name: Generate ssh keys for jenkins user
-    include: generate_ssh_keys.yml
+    include_tasks: generate_ssh_keys.yml
     when: blueprint != "silicon"

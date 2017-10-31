@@ -47,7 +47,7 @@
     when: blueprint == "silicon" # end block
 
   - name: Import PAMM seed repository
-    include: install_pamm_seed.yml
+    include_tasks: install_pamm_seed.yml
 
   - block:
     - name: Stop GOGS (silicon blueprint)

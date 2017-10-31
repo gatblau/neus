@@ -1,12 +1,12 @@
 ---
   - name: Create jenkins user
-    include: jenkins_user.yml
+    include_tasks: jenkins_user.yml
 
   - name: Create builder
-    include: install_build_tools.yml
+    include_tasks: install_build_tools.yml
 
   - name: Install PAMM seed dependencies
-    include: install_pamm_dependencies.yml
+    include_tasks: install_pamm_dependencies.yml
 
   - name: Install swarm client
     copy:

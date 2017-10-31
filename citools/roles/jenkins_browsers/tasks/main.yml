@@ -1,5 +1,5 @@
 ---
 - name: Install Xvfb, Chrome and Firefox
-  include: install_browsers.yml
+  include_tasks: install_browsers.yml
   when: pamm == "yes"
 ...

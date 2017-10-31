@@ -1,13 +1,13 @@
 ---
 - name: Initialise Docker Containers
-  include: "{{ playbook_dir }}/upc.yml"
+  include_tasks: "{{ playbook_dir }}/upc.yml"
   when: tgt_platform == "docker"
 
 - name: Initialise Virtual Machines
-  include: "{{ playbook_dir }}/upv.yml"
+  include_tasks: "{{ playbook_dir }}/upv.yml"
   when: tgt_platform == "vm"
 
 - name: Initialise AWS EC2 Instances
-  include: "{{ playbook_dir }}/upv_ec2.yml"
+  include_tasks: "{{ playbook_dir }}/upv_ec2.yml"
   when: tgt_platform == "ec2"
 ...

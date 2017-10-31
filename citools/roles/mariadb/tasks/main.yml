@@ -22,14 +22,14 @@
 
   - block: # Initialise databases for GOGS and SonarQube
     - name: Initialise GOGS database
-      include: initialise_gogs_database.yml
+      include_tasks: initialise_gogs_database.yml
 
     - name: Initialise Sonar database
-      include: initialise_sonar_database.yml
+      include_tasks: initialise_sonar_database.yml
     when: inventory_hostname != "ci-dit"
 
   - name: Initialise DIT PAMM application database
-    include: initialise_pamm_database.yml
+    include_tasks: initialise_pamm_database.yml
     when: inventory_hostname == "ci-dit"
 
   - name: Change MariaDB home folder permissions

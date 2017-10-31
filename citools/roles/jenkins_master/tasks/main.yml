@@ -8,7 +8,7 @@
   when: connection == "ssh"
 
 - name: Configure Jenkins
-  include: configure_jenkins.yml
+  include_tasks: configure_jenkins.yml
   become: "{{ become }}"
 
 - name: Jenkins publish over ssh settings

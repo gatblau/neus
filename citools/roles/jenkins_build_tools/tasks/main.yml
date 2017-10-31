@@ -1,18 +1,18 @@
 ---
 - name: Install Groovy
-  include: build_tools/install_groovy.yml
+  include_tasks: build_tools/install_groovy.yml
 
 - name: Install SBT
-  include: build_tools/install_sbt.yml
+  include_tasks: build_tools/install_sbt.yml
 
 - name: Install Gradle
-  include: build_tools/install_gradle.yml
+  include_tasks: build_tools/install_gradle.yml
 
 - name: Install Maven
-  include: build_tools/install_maven.yml
+  include_tasks: build_tools/install_maven.yml
 
 - name: Install Git
-  include: build_tools/install_git.yml
+  include_tasks: build_tools/install_git.yml
 
 - name: Installing NodeJS
   include_role:
@@ -26,5 +26,5 @@
   command: "npm install -g bower"
 
 - name: Install Sonar Runner
-  include: build_tools/install_sonar_runner.yml
+  include_tasks: build_tools/install_sonar_runner.yml
 ...

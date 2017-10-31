@@ -3,7 +3,7 @@
 #  For this to work, this playbook must be called using a loop control
 #  variable called "package".  See example below:
 #
-#  - include: "plays/install_rpms.yml"
+#  - include_tasks: "plays/install_rpms.yml"
 #    with_dict: "{{ package_dictionary }}"
 #    loop_control:
 #      loop_var: package

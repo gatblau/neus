@@ -1,6 +1,6 @@
 ---
 - name: Install Plugins
-  include: install_plugins.yml
+  include_tasks: install_plugins.yml
 
 - name: Create Jenkins users
   copy:
