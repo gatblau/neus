@@ -3,7 +3,7 @@
 - name: Check for local SBT cache
   become: yes
   become_user: "{{ group_localhost_user }}"
-  local_action: "stat path=cache/{{sbt_cache}}"
+  local_action: "stat path={{ cache_folder }}/{{sbt_cache}}"
   register: sbt_dependencies
 
 - name: Copy SBT cache zip file
