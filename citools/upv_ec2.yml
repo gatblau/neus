@@ -19,6 +19,6 @@
 #
 ---
 - name: Set parameters for bronze blueprint
-  include: upv/upv_ec2_bronze.yml
+  include_task: upv/upv_ec2_bronze.yml
   when: blueprint == "bronze"
 

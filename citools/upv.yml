@@ -19,18 +19,18 @@
 #
 ---
 - name: Set parameters for basic blueprint
-  include: upv/upv_basic.yml
+  include_task: upv/upv_basic.yml
   when: blueprint == "basic"
 
 - name: Set parameters for bronze blueprint
-  include: upv/upv_bronze.yml
+  include_task: upv/upv_bronze.yml
   when: blueprint == "bronze"
 
 - name: Set parameters for silver blueprint
-  include: upv/upv_silver.yml
+  include_task: upv/upv_silver.yml
   when: blueprint == "silver"
 
 - name: Set parameters for gold blueprint
-  include: upv/upv_gold.yml
+  include_task: upv/upv_gold.yml
   when: blueprint == "gold"
 
