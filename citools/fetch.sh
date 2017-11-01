@@ -79,7 +79,6 @@ download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "ipset-libs-6.2
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "python-slip-0.4.0-2.el7.noarch.rpm"
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "python-slip-dbus-0.4.0-2.el7.noarch.rpm"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "nodejs-6.11.3-1.el7.x86_64.rpm"
-#download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "npm-1.3.6-5.el7.noarch.rpm"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/n/" "npm-3.10.10-1.6.11.3.1.el7.x86_64.rpm"
 download "http://dl.fedoraproject.org/pub/epel/7/x86_64/l/" "libuv-1.10.2-1.el7.x86_64.rpm"
 download "http://mirror.centos.org/centos/7/os/x86_64/Packages/" "libicu-50.1.2-15.el7.x86_64.rpm"
