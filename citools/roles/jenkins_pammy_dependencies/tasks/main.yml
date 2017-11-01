@@ -26,17 +26,25 @@
     state: link
 
 - name: Install dependencies
-  command: "npm install"
+  command: "npm install warn=no"
   args:
     chdir: "{{ jenkins_user_home }}/pamm.seed"
+  become: yes
+  become_user: "{{ jenkins_user }}"
 
 - name: Update webdriver
-  command: "cd {{ jenkins_user_home }}/pamm.seed && npm run webdriver-update"
+  command: "npm run webdriver-update"
+  args:
+    chdir: "{{ jenkins_user_home }}/pamm.seed"
+  become: yes
+  become_user: "{{ jenkins_user }}"
 
 - name: Update webdriver standalone
   command: "npm run webdriver-update --standalone"
   args:
     chdir: "{{ jenkins_user_home }}/pamm.seed"
+  become: yes
+  become_user: "{{ jenkins_user }}"
 
 - name: Copy SBT {{ sbt_version }} cache zip file
   copy:
