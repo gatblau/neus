@@ -6,7 +6,12 @@
   command: "su -c \"npm install karma-jasmine karma-chrome-launcher --save-dev\" - jenkins warn=no"
 
 - name: Create karma.cmd symbolic link
-  command: "su -c \"cd node_modules/.bin && ln -s ../karma/bin/karma karma.cmd\" - jenkins warn=no"
+  file:
+    src:  "{{ jenkins_user_home }}/node_modules/karma/bin/karma"
+    dest: "{{ jenkins_user_home }}/node_modules/.bin/karma.cmd"
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+    state: link
 
 - name: Clone PAMM seed repository version {{ pamm_seed_tag }}
   git:
