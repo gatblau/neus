@@ -39,9 +39,11 @@
   hosts: database
   connection: "{{ connection }}"
   become: "{{ become }}"
+  vars:
+    pamm: "no"
   roles:
-    - { role: mariadb_install,         pamm: "no", when: install_mode != "offline" }
-    - { role: mariadb_install_offline, pamm: "no", when: install_mode == "offline" }
+    - { role: mariadb_install,         when: install_mode != "offline" }
+    - { role: mariadb_install_offline, when: install_mode == "offline" }
     - mariadb
 
 - name: Provisioning source repository server
