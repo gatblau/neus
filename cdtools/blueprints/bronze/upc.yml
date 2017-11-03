@@ -37,12 +37,6 @@
       name=docker
       state=restarted
 
-  - name: Set Docker daemon permissions
-    become: yes
-    file:
-      path=/var/run/docker.sock
-      mode=0666
-
   - name: Delete existing Docker containers
     become: yes
     docker:
