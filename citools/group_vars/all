@@ -34,9 +34,9 @@ become:     "{{ hostvars['localhost']['become'] }}"
 connection: "{{ hostvars['localhost']['connection'] }}"
 
 # Username to use for delegating tasks to localhost (control node)
-group_localhost_user: "root"
+group_localhost_user: "europa"
 # Username to use for access to managed nodes
-group_remote_user:    "root"
+group_remote_user: "vagrant"
 
 # Location of cache folder
 cache_folder: "/var/cache/neus"
