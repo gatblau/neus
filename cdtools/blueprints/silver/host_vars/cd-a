@@ -5,7 +5,7 @@
 java_sdk_name: "Java JDK 8u111-x64"
 java_sdk_rpm: jdk-8u111-linux-x64.rpm
 
-# Docker registry vriables
+# Docker registry variables
 registry_name:  registry
 registry_image: registry:2
 registry_port:  5000
