@@ -123,6 +123,7 @@
     become:     "no"
     connection: "docker"
 
+
 - block: # Not Silicon blueprint
   # Obtain IP addresses of containers
   - name: Get ci-a IP address
