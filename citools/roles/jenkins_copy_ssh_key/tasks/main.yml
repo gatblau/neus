@@ -18,8 +18,9 @@
       group: "{{ jenkins_group }}"
       mode: 0600
 
-#  - name: Remove temporary ssh key file
-#    local_action: file
-#      path: "{{ cache_folder }}/authorized_keys"
-#      state: absent
+  - name: Remove temporary ssh key file
+    file:
+      path: "{{ cache_folder }}/authorized_keys"
+      state: absent
+    delegate_to: localhost
 ...
