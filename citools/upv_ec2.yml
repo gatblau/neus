@@ -18,6 +18,10 @@
 #  VMs that need to be connected with each other.
 #
 ---
+- name: Set parameters for AWS EC2 build
+  set_fact:
+    remote_user: "ec2user"
+
 - name: Set parameters for bronze blueprint
   include_tasks: upv/upv_ec2_bronze.yml
   when: blueprint == "bronze"

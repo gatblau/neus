@@ -74,8 +74,8 @@
 
 - name: Start up CI Tools Docker containers
   docker_container:
-    image: "{{ ci_base }}"
     name: "{{ item.key }}"
+    image: "{{ ci_base }}"
     hostname: "{{ item.key }}"
     detach: yes
     tty: yes
@@ -122,7 +122,7 @@
   set_fact:
     become:     "no"
     connection: "docker"
-
+    remote_user: "root"
 
 - block: # Not Silicon blueprint
   # Obtain IP addresses of containers

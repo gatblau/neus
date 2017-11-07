@@ -18,6 +18,10 @@
 #  VMs that need to be connected with each other.
 #
 ---
+- name: Set parameters for Virtual Machine build
+  set_fact:
+    remote_user: "vagrant"
+
 - name: Set parameters for basic blueprint
   include_tasks: upv/upv_basic.yml
   when: blueprint == "basic"
@@ -33,4 +37,4 @@
 - name: Set parameters for gold blueprint
   include_tasks: upv/upv_gold.yml
   when: blueprint == "gold"
-
+...

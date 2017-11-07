@@ -36,7 +36,7 @@ connection: "{{ hostvars['localhost']['connection'] }}"
 # Username to use for delegating tasks to localhost (control node)
 group_localhost_user: "europa"
 # Username to use for access to managed nodes
-group_remote_user: "vagrant"
+group_remote_user: "{{ hostvars['localhost']['remote_user'] }}"
 
 # Location of cache folder
 cache_folder: "/var/cache/neus"
