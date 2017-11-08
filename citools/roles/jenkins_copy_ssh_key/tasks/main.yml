@@ -1,14 +1,12 @@
 ---
 - block:
   - name: Fetch Jenkins public key and save in cache folder
-    become: yes
-    become_user: "{{ group_remote_user }}"
     fetch:
       src:  "{{ jenkins_user_home }}/.ssh/id_rsa.pub"
       dest: "{{ cache_folder }}/authorized_keys"
       flat: yes
     delegate_to: "{{ item }}"
-    with_items: "{{ groups['build-master'] | first }}"
+    with_items: "{{ groups['build-master'] }}"
 
   - name: Copy ssh key file to host
     copy:
