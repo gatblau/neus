@@ -1,0 +1,69 @@
+---
+configs:
+  use: 'system'
+
+  system:
+    vagrant_box: 'centos/7'
+    shell_script: 'centos7.sh'
+    gui: 'true'
+
+    # Change the list of hosts to match the required blueprint:
+    #
+    # Bronze: ci-a and ci-b
+    # Silver: ci-a to ci-d
+    # Gold:   ci-a to ci-e
+    #
+    # Add ci-dit-pamm and/or ci-dit-jamm as required
+    #
+    hosts: [
+      # "ci-a",
+      # "ci-b"
+      "ci-c",
+      # "ci-d",
+      # "ci-e",
+      # "ci-dit-jamm",
+      "ci-dit-pamm"
+      ]
+
+    ci-a:
+      hostname: 'ci-a'
+      vm_name: 'ci-a'
+      public_ip: '192.168.56.120'
+      vm_memory: '4096'
+
+    ci-b:
+      hostname: 'ci-b'
+      vm_name: 'ci-b'
+      public_ip: '192.168.56.121'
+      vm_memory: '4096'
+
+    ci-c:
+      hostname: 'ci-c'
+      vm_name: 'ci-c'
+      public_ip: '192.168.56.122'
+      vm_memory: '4096'
+
+    ci-d:
+      hostname: 'ci-d'
+      vm_name: 'ci-d'
+      public_ip: '192.168.56.123'
+      vm_memory: '4096'
+
+    ci-e:
+      hostname: 'ci-e'
+      vm_name: 'ci-e'
+      public_ip: '192.168.56.124'
+      vm_memory: '4096'
+
+    ci-dit-jamm:
+      hostname: 'ci-dit-jamm'
+      vm_name: 'ci-dit-jamm'
+      public_ip: '192.168.56.125'
+      vm_memory: '4096'
+
+    ci-dit-pamm:
+      hostname: 'ci-dit-pamm'
+      vm_name: 'ci-dit-pamm'
+      public_ip: '192.168.56.126'
+      vm_memory: '4096'
+...

@@ -1,0 +1,57 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require 'yaml'
+
+current_dir    = File.dirname(File.expand_path(__FILE__))
+configs        = YAML.load_file("#{current_dir}/config.yml")
+vagrant_config = configs['configs'][configs['configs']['use']]
+
+HOSTS = vagrant_config['hosts']
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure("2") do |config|
+  config.vm.box = vagrant_config['vagrant_box']
+  
+  # Disable sync'd folder
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  # Copy ssh authorised key file
+  config.vm.provision "file", source: "~/Vagrant/keys/vagrant.key", destination: "/tmp/vagrant.key"
+
+  HOSTS.each do |host|
+    config.vm.define "#{vagrant_config[host]['hostname']}" do |node|
+
+	  # Set host name
+      node.vm.hostname = vagrant_config[host]['hostname']
+
+      # Specify public network
+      node.vm.network "public_network"
+      # Specify ip address
+      node.vm.network "private_network", ip: vagrant_config[host]['public_ip'], type: "static"
+
+      # Specifying the provider as VirtualBox and naming the VM's
+      node.vm.provider "virtualbox" do |vb|
+        vb.name = "#{vagrant_config[host]['vm_name']}"
+
+        # Display the VirtualBox GUI when booting the machine
+        vb.gui = "#{vagrant_config['gui']}"
+
+        # Customize the amount of memory on the VM:
+        vb.memory = vagrant_config[host]['vm_memory']
+
+        vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+        vb.customize ["modifyvm", :id, "--ioapic", "on"]
+        vb.customize ["modifyvm", :id, "--vram", "12"]
+        vb.customize ["modifyvm", :id, "--vrde", "off"]
+	  end
+	end
+  end
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  script = "../scripts/#{vagrant_config['shell_script']}"
+  config.vm.provision "shell", path: script
+end
