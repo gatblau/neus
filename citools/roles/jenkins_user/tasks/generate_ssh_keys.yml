@@ -13,7 +13,10 @@
       group="{{jenkins_group}}"
 
   - name: Generate Jenkins ssh key
-    command: "su -c \"echo /n/n/n | ssh-keygen -f {{ jenkins_user_home }}/.ssh/id_rsa\" - {{ jenkins_user }} warn=no"
+    user:
+      name: "{{ jenkins_user }}"
+      generate_ssh_key: yes
 
   # end block
   when: key_exists.stat.exists == false
+...
