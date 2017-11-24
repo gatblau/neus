@@ -2,25 +2,26 @@
 - name: Set yum cache to "keep"
   replace:
     dest: /etc/yum.conf
-    regexp:  'keepcache=(.*)'
+    regexp: 'keepcache=(.*)'
     replace: 'keepcache=1'
-  when: connection == "docker"
+  when: ansible_virtualization_type == "docker"
 
-- block: # Install firewalld and start service
-  - name: Installing the firewalld command
-    include_role:
-      name: "common_tasks"
-      tasks_from: "install_rpms"
-    with_dict: "{{ firewalld_packages }}"
-    loop_control:
-      loop_var: package
+- name: Install firewalld and start service
+  block:
+    - name: Installing the firewalld command
+      include_role:
+        name: "common_tasks"
+        tasks_from: "install_rpms"
+      with_dict: "{{ firewalld_packages }}"
+      loop_control:
+        loop_var: package
 
-  - name: Starting firewalld Service
-    service:
-      name: firewalld
-      state: started
-      enabled: yes
-  when: connection == "ssh"
+    - name: Starting firewalld Service
+      service:
+        name: firewalld
+        state: started
+        enabled: true
+  when: ansible_virtualization_type == "ssh"
 
 - name: Installing the Unzip command
   include_role:

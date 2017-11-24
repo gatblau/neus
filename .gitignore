@@ -2,3 +2,4 @@
 *.iml
 citools/cache/*
 pamm/cache/*
+**/.molecule
