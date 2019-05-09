@@ -4,18 +4,19 @@ tool_name: citools
 nexus_user:    deployment
 nexus_user_pw: deployment123
 
-nexus_url: "http://nexus.repo:8081/content/repositories/ci-tools/cache/1.0.7"
+#nexus_url: "http://nexus.repo:8081/content/repositories/ci-tools/cache/1.0.7"
+nexus_url: "http://nexus.repo:8081/service/local/repositories/neus/content/cache/0.0.2"
 
 cache_folder:  "/var/cache/{{ tool_name }}/"
 
 # TODO - replace fixed list of artefacts with dynamic query of repository contents
 cache_files:
-  - "jenkins-2.73.2-1.1.noarch.rpm"
+  - "jenkins-2.73.1-1.1.noarch.rpm"
   - "nexus-2.14.3-02-bundle.zip"
   - "linux_386.zip"
   - "sonar-5.4-1.noarch.rpm"
   - "unzip-6.0-16.el7.x86_64.rpm"
-  - "jdk-8u121-linux-x64.rpm"
+  - "jdk-8u144-linux-x64.rpm"
   - "google-chrome-stable_current_x86_64.rpm"
   - "firefox-52.2.0-2.el7.centos.x86_64.rpm"
   - "libexif-devel-0.6.21-6.el7.x86_64.rpm"
@@ -25,8 +26,8 @@ cache_files:
   - "sbt-0.13.11.zip"
   - "sbt-0.13.13.zip"
   - "apache-maven-3.3.9-bin.zip"
-  - "epel-release-7-9.noarch.rpm"
-  - "nodejs-6.9.4-2.el7.x86_64.rpm"
+  - "epel-release-7-10.noarch.rpm"
+  - "nodejs-6.11.3-1.el7.x86_64.rpm"
   - "npm-1.3.6-5.el7.noarch.rpm"
   - "npm-3.10.10-1.6.11.3.1.el7.x86_64.rpm"
   - "libuv-1.10.2-1.el7.x86_64.rpm"
@@ -35,9 +36,9 @@ cache_files:
 #  - "nginx-1.6.3-9.el7.x86_64.rpm"
 #  - "nginx-filesystem-1.6.3-9.el7.noarch.rpm"
   - "perl-5.16.3-292.el7.x86_64.rpm"
-  - "wandisco-git-release-7-1.noarch.rpm"
-  - "git-2.4.1-1.WANdisco.259.x86_64.rpm"
-  - "perl-Git-2.4.1-1.WANdisco.259.noarch.rpm"
+  - "wandisco-git-release-7-2.noarch.rpm"
+  - "git-2.11.1-1.WANdisco.346.x86_64.rpm"
+  - "perl-Git-2.11.1-1.WANdisco.346.noarch.rpm"
   - "sonar-runner-dist-2.4.zip"
   - "mysql-connector-java-5.1.36-bin.jar"
   - "swarm-client-2.0-jar-with-dependencies.jar"
