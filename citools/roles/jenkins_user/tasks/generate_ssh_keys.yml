@@ -7,10 +7,10 @@
 - block:
   - name: Create key folder
     file:
-      path="{{jenkins_user_home}}/.ssh"
-      state=directory
-      owner="{{jenkins_user}}"
-      group="{{jenkins_group}}"
+      path: "{{jenkins_user_home}}/.ssh"
+      state: directory
+      owner: "{{jenkins_user}}"
+      group: "{{jenkins_group}}"
 
   - name: Generate Jenkins ssh key
     user:
