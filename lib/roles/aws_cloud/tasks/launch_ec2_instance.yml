@@ -6,7 +6,6 @@
 #     name: aws_cloud
 #     tasks_from: launch_ec2_instance
 #     vars:
-#       ec2_module:     <module>
 #       ec2_user:       <user>
 #       ec2_group:      <group>
 #       ec2_instance:   <instance>
@@ -22,7 +21,7 @@
 ---
 - name: Launch EC2 host
   local_action:
-    module: "{{ ec2_module}}"
+    module: "ec2"
     key_name: "{{ ec2_user }}"
     group: "{{ ec2_group }}"
     instance_type: "{{ ec2_instance }}"
