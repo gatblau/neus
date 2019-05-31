@@ -81,7 +81,7 @@
     hostname: "{{ item.key }}"
     detach: yes
     tty: yes
-    exposed_ports: "[ {{ item.value.ports }} ]"
+    exposed_ports: "[ {{ item.value.ports | quote }} ]"
     command: "/usr/sbin/init"
     state: started
     privileged: yes
@@ -95,7 +95,7 @@
     hostname: "{{ item.name }}"
     detach: yes
     tty: yes
-    exposed_ports: "[ {{ item.ports }} ]"
+    exposed_ports: "[ {{ item.ports | quote }} ]"
     command: "/usr/sbin/init"
     state: started
     privileged: yes
@@ -111,7 +111,7 @@
     hostname: "{{ item.name }}"
     detach: yes
     tty: yes
-    exposed_ports: "[ {{ item.ports }} ]"
+    exposed_ports: "[ {{ item.ports | quote }} ]"
     command: "/usr/sbin/init"
     state: started
     privileged: yes
