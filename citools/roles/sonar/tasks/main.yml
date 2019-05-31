@@ -14,7 +14,6 @@
   register: sonar_exists
 
 - include_tasks: install_sonar.yml
-  become: "{{ become }}"
   when: sonar_exists.stat.exists == false
 
 - name: Change Sonar home folder permissions

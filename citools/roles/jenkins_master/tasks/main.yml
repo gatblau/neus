@@ -9,7 +9,6 @@
 
 - name: Configure Jenkins
   include_tasks: configure_jenkins.yml
-  become: "{{ become }}"
 
 - name: Jenkins publish over ssh settings
   template:

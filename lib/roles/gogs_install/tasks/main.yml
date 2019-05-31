@@ -27,7 +27,6 @@
   changed_when: no
 
 - include_tasks: install_gogs.yml
-  become: "{{become}}"
   when: gogs_exists.stat.exists == false
 
 - block: # Silicon blueprint
