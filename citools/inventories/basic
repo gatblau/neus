@@ -4,7 +4,7 @@ localhost
 [citools]
 ci-a
 
-[build-master]
+[build_master]
 ci-a
 
 [repo]
@@ -23,8 +23,8 @@ ci-a
 ci-a
 
 [build:children]
-build-master
+build_master
 
-[ci-dit]
+[ci_dit]
 ci-dit-pamm
 ci-dit-jamm

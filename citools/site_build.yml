@@ -36,7 +36,7 @@
     - baseline
 
 - name: Provisioning build server (Jenkins)
-  hosts: build-master
+  hosts: build_master
   connection: "{{ connection }}"
   become: "{{ become }}"
   roles:
@@ -46,7 +46,7 @@
     - jenkins_master
 
 - name: Provisioning build server (build tools and PAMM seed)
-  hosts: build-master
+  hosts: build_master
   connection: "{{ connection }}"
   become: "{{ become }}"
   roles:

@@ -4,7 +4,7 @@ localhost
 [citools]
 ci-[a:e]
 
-[build-master]
+[build_master]
 ci-a
 
 [repo]
@@ -22,23 +22,23 @@ ci-e
 [source]
 ci-e
 
-[build-slaves-pamm:children]
-build-slave1
-build-slave2
+[build_slaves_pamm:children]
+build_slave1
+build_slave2
 
-[build-slaves-jamm:children]
+[build_slaves_jamm:children]
 
-[build-slave1]
+[build_slave1]
 ci-c
 
-[build-slave2]
+[build_slave2]
 ci-d
 
 [build:children]
-build-master
-build-slaves-pamm
-build-slaves-jamm
+build_master
+build_slaves_pamm
+build_slaves_jamm
 
-[ci-dit]
+[ci_dit]
 ci-dit-pamm
 ci-dit-jamm
