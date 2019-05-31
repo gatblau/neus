@@ -45,7 +45,9 @@
     docker_image:
       name: "gatblau.org/centos"
       tag:  "7ds"
-      path: "{{ playbook_dir }}/../lib/images/centos7ds"
+      build:
+        path: "{{ playbook_dir }}/../lib/images/centos7ds"
+      source: pull
   when: blueprint != "silicon"
 
 - name: Define facts for Silicon blueprint Docker containers
