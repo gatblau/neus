@@ -40,4 +40,8 @@ group_remote_user: "{{ hostvars['localhost']['remote_user'] }}"
 
 # Location of cache folder
 cache_folder: "/var/cache/neus"
+
+# JDK variables
+java_sdk_name: "Java JDK 8u144-x64"
+java_sdk_rpm:  "jdk-8u144-linux-x64.rpm"
 ...
